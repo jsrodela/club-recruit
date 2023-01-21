@@ -28,23 +28,31 @@ cd club-recruit
 ```
 
 ### 3. 개발 환경 준비
+
+> Pycharm 사용 시, 이 설정을 완료한 뒤 우측 하단 `<No Interpreter>` -> Add Interpreter -> OK 눌러주면 더 간편하게 가상 환경을 사용할 수 있습니다.
+
 ```commandline
 python -m venv .venv
 .venv/Scripts/activate
-pip install -r requirements.txt
 ```
 > Linux에서는 두번째 명령어를 `. .venv/bin/activate`로 입력해야 합니다.
 
-> Pycharm 사용 시, 이 설정을 완료한 뒤 File -> Settings -> Project -> Python Interpreter 메뉴에서 Python Interpreter -> Show All -> Add를 누르고 .venv 폴더로 설정한 후 완료 버튼을 눌러주면 더 간편하게 가상 환경을 사용할 수 있습니다.
+가상 환경을 생성한 후, 아래 명령어를 입력하여 필요한 모듈을 설치해줍니다.
+> Pycharm의 경우 하단의 Terminal 메뉴에서 입력해보세요.
+```commandline
+pip install -r requirements.txt
+```
 
 ### 4. 장고 서버 설정
+
 `settings-example.json`을 복사하여 `settings.json`로 이름을 바꾸고, 내용을 알맞게 수정해주세요.
 ```json
 {
   "asdf": "asdf"
 }
 ```
-
+그리고 아래 명령어를 통해 서버 DB를 동기화한 후, 서버를 열어줍니다.
+> Pycharm 사용 시, 대신 우측 위의 실행 메뉴를 사용할 수도 있습니다.
 ```commandline
 python manage.py makemigrations
 python manage.py migrate
