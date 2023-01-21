@@ -1,0 +1,52 @@
+# 개발환경 준비
+
+`이렇게 생긴 박스` 안에 있는 명령어는 명령 프롬프트(cmd)에 입력해야 합니다. 명령 프롬프트는 Win+S로 검색창을 열어 cmd를 입력하면 실행할 수 있습니다.
+```
+이렇게 생긴 박스의 명령어도 명령 프롬프트에서 실행해주세요.
+```
+> 가끔 `python` 명령어가 작동하지 않으면, 대신 `python3`를 입력해보세요.
+
+### 1. 필요 프로그램
+
+* Python 3.9 이상 (필수)
+  * https://www.python.org/downloads/
+  * `python --version` 입력하여 버전 확인 가능
+* Pip (필수)
+  * `python -m ensurepip --upgrade`로 설치
+* Pycharm Community
+  * 파이썬 코딩을 도와주는 프로그램. 무료인 Community 버전으로 다운받기
+  * https://www.jetbrains.com/ko-kr/pycharm/download/#section=windows
+* Git
+  * Github와 연동하여 버전 관리 및 코드 공유를 도와주는 프로그램
+  * https://git-scm.com/download/win 에서 'Click here to download' 눌러서 설치
+  * `git --version`으로 설치 확인 가능
+
+### 2. 소스코드 복제
+```commandline
+git clone https://github.com/RoDeLa6/club-recruit
+cd club-recruit
+```
+
+### 3. 개발 환경 준비
+```commandline
+python -m venv .venv
+.venv/Scripts/activate.bat
+pip install -r requirements.txt
+```
+> Linux에서는 두번째 명령어를 `. .venv/bin/activate`로 입력해야 합니다.
+
+> Pycharm 사용 시, 이 설정을 완료한 뒤 File -> Settings -> Project -> Python Interpreter 메뉴에서 Python Interpreter -> Show All -> Add를 누르고 .venv 폴더로 설정한 후 완료 버튼을 눌러주면 더 간편하게 가상 환경을 사용할 수 있습니다.
+
+### 4. 장고 서버 설정
+`settings-example.json`을 복사하여 `settings.json`로 이름을 바꾸고, 내용을 알맞게 수정해주세요.
+```json
+{
+  "asdf": "asdf"
+}
+```
+
+```commandline
+python manage.py makemigrations
+python manage.py migrate
+python manage.py runserver
+```
