@@ -30,7 +30,7 @@ cd club-recruit
 ### 3. 개발 환경 준비
 ```commandline
 python -m venv .venv
-.venv/Scripts/activate.bat
+.venv/Scripts/activate
 pip install -r requirements.txt
 ```
 > Linux에서는 두번째 명령어를 `. .venv/bin/activate`로 입력해야 합니다.
