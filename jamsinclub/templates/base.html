@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+{% load static %}
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    {% block meta %}
+        <title>{% block title %}{% endblock %} - 잠신고</title>
+        <meta name="description" content="2023 잠신고 상설동아리 지원 플랫폼 - by RoDeLa" />
+    {% endblock %}
+    <link rel="icon" type="image/x-icon" href="{% static '/favicon.svg' %}" />
+    {% block style %}
+        <!--<link rel="stylesheet" href="{% static 'sementic.css' %}">-->
+        <link rel="stylesheet" href="{% static 'base.css' %}">
+    {% endblock %}
+    {% block module %}
+    {% endblock %}
+</head>
+<body>
+    {% block content %}
+    {% endblock %}
+</body>
