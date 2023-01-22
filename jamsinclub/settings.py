@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    'phonenumber_field'
 ]
 
 MIDDLEWARE = [
@@ -94,6 +95,15 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",},
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
 ]
+
+AUTH_USER_MODEL = 'account.User'
+ACCOUNT_AUTHENTICATION_METHOD = "id"
+ACCOUNT_USERNAME_REQUIRED = False
+
+# PhoneNumberField - https://django-phonenumber-field.readthedocs.io/
+PHONENUMBER_DB_FORMAT = 'NATIONAL'
+PHONENUMBER_DEFAULT_REGION = 'KR'
+PHONENUMBER_DEFAULT_FORMAT = 'NATIONAL'
 
 
 # Internationalization
