@@ -2,21 +2,24 @@
 {% load static %}
 
 {% block style %}
-    <link rel="stylesheet" href="{% static 'account/login.css' %}">0
+    <link rel="stylesheet" href="{% static 'account/login.css' %}">
 {% endblock %}
 
 {% block content %}
      <div class="wrap">
+        {% if invalid %}
+         <p>일치하는 회원이 없습니다.</p>
+        {% endif %}
         <form class="login" method="post" action="">
             {% csrf_token %}
             <h2>로그인</h2>
             <div class="login_id">
                 <h4>학번</h4>
-                <input type="email" name="" id="id" placeholder="ex) 10001">
+                <input type="number" name="id" id="id" placeholder="ex) 10001" min="10101" max="21040" required>
             </div>
             <div class="login_pw">
                 <h4>비밀번호</h4>
-                <input type="password" name="" id="pw" placeholder="***">
+                <input type="password" name="pw" id="pw" placeholder="********" required>
             </div>
             <div class="login_etc">
                 <div class="forgot_pw">

@@ -16,6 +16,13 @@
     {% endblock %}
 </head>
 <body>
+    <nav>
+        <ul>
+            {% if user %}
+                <li>{{ user.name }}</li>
+            {% endif %}
+        </ul>
+    </nav>
     {% block content %}
     {% endblock %}
 </body>
