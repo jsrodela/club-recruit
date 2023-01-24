@@ -7,28 +7,30 @@
 
 {% block content %}
      <div class="wrap">
-        {% if invalid %}
-         <p>일치하는 회원이 없습니다.</p>
-        {% endif %}
         <form class="login" method="post" action="">
             {% csrf_token %}
-            <h2>로그인</h2>
+            <h2>회원가입</h2>
             <div class="input_wrapper">
                 <h4>학번</h4>
                 <input type="number" name="id" id="id" placeholder="ex) 10001" min="10101" max="21040" required>
+            </div>
+            <div class="input_wrapper">
+                <h4>이름</h4>
+                <input type="text" name="name" id="name" placeholder="이름을 입력하세요" required>
+            </div>
+            <div class="input_wrapper">
+                <h4>전화번호</h4>
+                <input type="tel" name="phone" id="phone" placeholder="ex) 010-1234-5678" required>
             </div>
             <div class="input_wrapper">
                 <h4>비밀번호</h4>
                 <input type="password" name="pw" id="pw" placeholder="********" required>
             </div>
             <div class="login_etc">
-                <div class="forgot_pw">
-                    <a href="/account/register">회원가입</a> |
-                    <a href="">비밀번호 찾기</a>
-                </div>
+                계속하면 잠신고등학교 상설동아리 지원 플랫폼에 가입하게 됩니다. 기입한 정보는 동아리 부원 선발 이외의 목적으로 사용되지 않습니다.
             </div>
             <div class="submit">
-                <input type="submit" value="로그인">
+                <input type="submit" value="회원가입">
             </div>
         </form>
     </div>
