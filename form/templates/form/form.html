@@ -3,9 +3,92 @@
 
 {% block style %}
     {{ block.super }}
-    <link rel="stylesheet" href="{% static 'index/index.css' %}">
+    <link rel="stylesheet" href="{% static 'form/form.css' %}">
+{% endblock %}
+
+{% block module %}
+    {{ block.super }}
+    <script src="{% static 'form/form.js' %}" ></script>
 {% endblock %}
 
 {% block content %}
-    <a href="/account/login">로그인</a>
+    <h1>
+        로델라(RODELA)설문조사 페이지
+    </h1>
+    <p>
+        &nbsp&nbsp본 설문조사에 작성한 내용은 면접에 반영될 수 있습니다.
+    </p>
+    <br>
+    <hr style="border: solid px black;">
+    <br>
+
+	<div>
+		<strong>
+            1. 사용 가능한 프로그래밍 언어는 무엇인가요?(중복 선택 가능)
+        </strong>
+        <br>
+        <br>
+		<input type = "checkbox" name = "c-language" value = "none"> 없음
+        <br>
+		<input type = "checkbox" name = "c-language" value = "Python"> 파이썬
+        <br>
+		<input type = "checkbox" name = "c-language" value = "Java"> 자바
+        <br>
+		<input type = "checkbox" name = "c-language" value = "Javascript"> 자바스크립트
+        <br>
+        <input type = "checkbox" name = "c-language" value = "C++"> C++
+        <br>
+		<input type = "checkbox" name = "c-language" value = "C"> C
+        <br>
+		<input type = "checkbox" name = "c-language" value = "etc"> 기타
+		<br>
+        <input type = "text" name = "c-language-etc" placeholder = "기타사항을 입력해주세요." hidden>
+    </div>
+    <br><br>
+    <div>
+		<strong>
+            1-1. 위에서 선택한 언어 중 가장 자신 있는 프로그래밍 언어를 선택해주세요
+        </strong>
+        <br>
+        <br>
+        <input type = "radio" name = "c-language-best" value = "none"> 없음
+        <br>
+		<input type = "radio" name = "c-language-best" value = "Python"> 파이썬
+        <br>
+		<input type = "radio" name = "c-language-best" value = "Java"> 자바
+        <br>
+		<input type = "radio" name = "c-language-best" value = "Javascript"> 자바스크립트
+        <br>
+        <input type = "radio" name = "c-language-best" value = "C++"> C++
+        <br>
+		<input type = "radio" name = "c-language-best" value = "C"> C
+        <br>
+		<input  type = "radio" name = "c-language-best" value = "etc"> 기타
+        <br>
+        <input type = "text" name = "c-language-best-etc" placeholder = "기타사항을 입력해주세요." hidden>
+    </div>
+    <br><br>
+    <div>
+        <strong> 2. 공학에 관련해서 진로와 연관되었거나 관심이 있는 분야는 무엇인가요? </strong>
+		<br><br>
+        <input type = "text" name = "field" value = "" >
+    </div>
+    <br><br>
+    <div>
+        <strong> 2-2. 위에서 언급한 분야와 관련해서 진행한 활동이 있으면 적어주세요. </strong>
+		<br>
+        <input type = "text" name = "field" value = "">
+    </div>
+    <br><br>
+    <div>
+        <strong> 3. 로델라에 지원한 동기에 대해 적어주세요. </strong>
+		<br>
+        <input type = "text" name = "field" value = "">
+    </div>
+    <br><br>
+    <button onclick="location.href='survey_fin.html'" class="w-btn w-btn-green" type="button">
+        제출하기
+    </button>
+
+    <br><br>
 {% endblock %}

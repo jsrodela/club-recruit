@@ -31,7 +31,9 @@ ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 # Application definition
 
 INSTALLED_APPS = [
+    'about',
     'account',
+    'form',
     'index',
     'jamsinclub',
     "django.contrib.admin",
