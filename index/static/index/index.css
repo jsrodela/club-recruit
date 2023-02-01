@@ -1,0 +1,7 @@
+.main {
+    display: flex;
+}
+
+.main > * {
+    padding: 15px;
+}

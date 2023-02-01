@@ -5,24 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     {% block meta %}
         <title>{% block title %}{% endblock %} - 잠신고</title>
-        <meta name="description" content="2023 잠신고 상설동아리 지원 플랫폼 - by RoDeLa" />
+        <meta name="description" content="2023 잠신고등학교 상설동아리 지원 웹사이트" />
     {% endblock %}
     <link rel="icon" type="image/x-icon" href="{% static '/favicon.svg' %}" />
     {% block style %}
-        <!--<link rel="stylesheet" href="{% static 'sementic.css' %}">-->
+<!--        <link rel="stylesheet" href="https://kit.fontawesome.com/a82d1de6b4.css" crossorigin="anonymous">-->
+<!--        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
         <link rel="stylesheet" href="{% static 'base.css' %}">
     {% endblock %}
     {% block module %}
+        <script src="https://kit.fontawesome.com/a82d1de6b4.js" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+        <script src="{% static 'base.js' %}"></script>
     {% endblock %}
 </head>
 <body>
-    <nav>
-        <ul>
+    <header>
+        <!--<ul>
             {% if user %}
                 <li>{{ user.name }}</li>
             {% endif %}
-        </ul>
-    </nav>
-    {% block content %}
-    {% endblock %}
+        </ul>-->
+        <h2>잠신고 상설동아리 지원 플랫폼</h2>
+    </header>
+
+    <main>
+        <div class="mainwrap">
+            <nav>
+                <ul>
+                    <li class="selected" onclick="changeNav(this);"><i class="fa-solid fa-house"></i> <h4>홈</h4></li>
+                </ul>
+                <ul>
+                    {% for i in '....................'|make_list %}
+                        <li onclick="changeNav(this);"><img src="{% static 'rodela.png' %}" width="25"> RoDeLa (공학)</li>
+                    {% endfor %}
+                </ul>
+            </nav>
+            <div class="wrapper">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <h5>2023 ⓒRoDeLa 6.0</h5>
+    </footer>
 </body>

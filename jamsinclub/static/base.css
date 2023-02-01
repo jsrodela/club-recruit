@@ -1,0 +1,149 @@
+/* Font: Pretendard | https://github.com/orioncactus/pretendard */
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard-dynamic-subset.css");
+
+html, body {
+    /* 화면 꽉 채우기 */
+    width: 100%;
+    height: 100%;
+    margin: 0;
+
+    /* 폰트 설정 */
+    font-family: 'Pretendard';
+}
+
+body {
+    /* 레이아웃 뼈대 */
+    display: flex;
+    flex-direction: column;
+}
+
+header, main, footer {
+    /* 전체적인 여백의 미 */
+    padding: 0.4rem;
+}
+
+header {
+    /* 전체 레이아웃 */
+    height: 7%;
+
+    /* 가운데 정렬 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* 아래 회색줄 */
+    border-bottom: solid 0.05rem rgba(0, 0, 0, 0.3);
+
+    font-size: 1.2rem;
+}
+
+footer {
+    /* 전체 레이아웃 */
+    height: 3%;
+    text-align: center;
+    color: grey;
+}
+
+header *, footer * {
+    /* 영역 밖으로 나가지 않게 */
+    margin: 0;
+}
+
+
+
+
+main {
+    /* 전체 레이아웃 */
+    flex-grow: 1;
+
+    display: block;
+    overflow: auto;
+}
+
+.mainwrap {
+    /* main 레이아웃: 메뉴 왼쪽, 화면 오른쪽 */
+    display: flex;
+}
+
+nav, .wrapper {
+    /* main 내 요소들의 여백의 미 */
+    padding: 0.5rem;
+
+    /* 넘치면 스크롤바 표시 */
+    display: block;
+    overflow: auto;
+}
+
+/* 왼쪽 메뉴 */
+nav {
+    /* main 레이아웃 */
+    width: 15%;
+
+    /* 연한 회색 배경 */
+    background-color: rgba(0, 0, 0, 0.01);
+}
+
+nav ul {
+    /* 점 없애기 */
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+}
+
+nav ul li {
+    /* 여백의 미 */
+    padding: 0.8rem;
+    margin: 0.3rem 0;
+
+    /* 둥근 모서리 */
+    border-radius: 0.5rem;
+
+    /* 세로 가운데 정렬 */
+    display: flex;
+    align-items: center;
+
+    /* 글씨 약간 굵게 */
+    font-weight: 500;
+
+    /* 단어 기준 줄바꿈 */
+    word-break: keep-all;
+}
+
+nav ul li i, nav ul li img  {
+    /* 글자 사이에 여백 */
+    margin-right: 1rem;
+}
+
+nav ul li img {
+    /* 원 모양 */
+    border-radius: 100px;
+    border: solid 0.1rem rgba(0, 0, 0, 0.5);
+}
+
+/* 선택 시 */
+li.selected {
+    /* 배경색 녹색 */
+    background-color: #cffde1;
+
+    /* 왼쪽 선 */
+    border: solid rgba(0, 100, 0, 0.5);
+    border-width: 0 0 0 0.2rem;
+}
+
+/* 마우스 올라가면 */
+li:hover {
+    /* 약간 불투명 */
+    opacity: 75%;
+
+    /* 왼쪽 선 */
+    border: solid rgba(0, 0, 0, 0.3);
+    border-width: 0 0 0 0.2rem;
+
+    /* 마우스 커서 변경 */
+    cursor: pointer;
+}
+
+main .mainwrap .wrapper {
+    /* main 레이아웃 */
+    flex-grow: 1;
+}
