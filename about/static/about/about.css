@@ -1,7 +1,10 @@
-.main {
+.top {
     display: flex;
-}
-
-.main > * {
-    padding: 15px;
-}
+    background-color:lightblue;
+    height:100px;
+  }
+  .mid {
+    display: flex;
+    background-color:lightpink;
+    height:700px;
+  }
