@@ -3,9 +3,20 @@
 
 {% block style %}
     {{ block.super }}
-    <link rel="stylesheet" href="{% static 'index/index.css' %}">
+    <link rel="stylesheet" href="{% static 'about/about.css' %}">
 {% endblock %}
 
 {% block content %}
-    <a href="/account/login">로그인</a>
+    <div class="top">
+      <div style="margin:auto;" name="club_name">
+        <h1>로델라 동아리 소개</h1>
+      </div>
+    </div>
+
+
+    <div class="mid">
+      <div style="margin:auto;" name="content">
+        내용
+      </div>
+    </div>
 {% endblock %}
