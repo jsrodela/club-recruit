@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'account',
     'form',
     'index',
+    'form',
     'jamsinclub',
     "django.contrib.admin",
     "django.contrib.auth",
