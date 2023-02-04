@@ -8,16 +8,14 @@
         <meta name="description" content="2023 잠신고등학교 상설동아리 지원 웹사이트" />
     {% endblock %}
     <link rel="icon" type="image/x-icon" href="{% static '/favicon.svg' %}" />
-    {% block style %}
-<!--        <link rel="stylesheet" href="https://kit.fontawesome.com/a82d1de6b4.css" crossorigin="anonymous">-->
-<!--        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
-        <link rel="stylesheet" href="{% static 'base.css' %}">
-    {% endblock %}
-    {% block module %}
-        <script src="https://kit.fontawesome.com/a82d1de6b4.js" crossorigin="anonymous"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-        <script src="{% static 'base.js' %}"></script>
-    {% endblock %}
+
+    <script src="https://kit.fontawesome.com/a82d1de6b4.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+
+    <link rel="stylesheet" href="{% static 'base.css' %}">
+    <script src="{% static 'base.js' %}"></script>
+
 </head>
 <body>
     <header>
@@ -33,17 +31,21 @@
         <div class="mainwrap">
             <nav>
                 <ul>
-                    <li class="selected" onclick="changeNav(this);"><i class="fa-solid fa-house"></i> <h4>홈</h4></li>
+                    <li class="selected" onclick="changeNav(this, '/');"><i class="fa-solid fa-house"></i> <h4>홈</h4></li>
                 </ul>
                 <ul>
                     {% for i in '....................'|make_list %}
-                        <li onclick="changeNav(this);"><img src="{% static 'rodela.png' %}" width="25"> RoDeLa (공학)</li>
+                        <li onclick="changeNav(this, '/about');"><img src="{% static 'rodela.png' %}" width="25"> RoDeLa (공학)</li>
                     {% endfor %}
                 </ul>
             </nav>
             <div class="wrapper">
-                {% block content %}
-                {% endblock %}
+                <div class="wrapper2">
+                    {% block style %}{% endblock %}
+                    {% block module %}{% endblock %}
+                    {% block content %}
+                    {% endblock %}
+                </div>
             </div>
         </div>
     </main>
