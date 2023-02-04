@@ -15,6 +15,8 @@ body {
     /* 레이아웃 뼈대 */
     display: flex;
     flex-direction: column;
+    width: 100%;
+    height: 100%;
 }
 
 header, main, footer {
@@ -24,7 +26,7 @@ header, main, footer {
 
 header {
     /* 전체 레이아웃 */
-    height: 7%;
+    flex-grow: 7;
 
     /* 가운데 정렬 */
     display: flex;
@@ -34,12 +36,13 @@ header {
     /* 아래 회색줄 */
     border-bottom: solid 0.05rem rgba(0, 0, 0, 0.3);
 
+    /* 제목 크기 */
     font-size: 1.2rem;
 }
 
 footer {
     /* 전체 레이아웃 */
-    height: 3%;
+    flex-grow 3;
     text-align: center;
     color: grey;
 }
@@ -54,8 +57,10 @@ header *, footer * {
 
 main {
     /* 전체 레이아웃 */
-    flex-grow: 1;
+    flex-grow: 90;
+    height: 100%;
 
+    /* 화면 고정 */
     display: block;
     overflow: auto;
 }
@@ -63,11 +68,13 @@ main {
 .mainwrap {
     /* main 레이아웃: 메뉴 왼쪽, 화면 오른쪽 */
     display: flex;
+    width: 100%;
+    height: 100%;
 }
 
 nav, .wrapper {
-    /* main 내 요소들의 여백의 미 */
-    padding: 0.5rem;
+    /* main 내 요소들의 좌우 여백의 미 */
+    padding: 0 0.5rem 0 0.5rem;
 
     /* 넘치면 스크롤바 표시 */
     display: block;
@@ -81,6 +88,15 @@ nav {
 
     /* 연한 회색 배경 */
     background-color: rgba(0, 0, 0, 0.01);
+
+    /* FireFox 스크롤바 숨기기 */
+    scrollbar-width: none;
+}
+
+/* 왼쪽메뉴 스크롤바 */
+nav::-webkit-scrollbar {
+    /* Chrome, Opera, Safari에서 숨기기 */
+    display: none;
 }
 
 nav ul {
@@ -143,7 +159,40 @@ li:hover {
     cursor: pointer;
 }
 
-main .mainwrap .wrapper {
-    /* main 레이아웃 */
-    flex-grow: 1;
+/* 표시되는 화면 */
+.wrapper {
+    /* 높이 꽉차게 */
+    width: 100%;
+    height: 100%;
+
+    /* 페이지 로드 끝나면 나타나는 애니메이션 */
+    animation: fadeIn 0.3s linear forwards;
+}
+
+.wrapper.fade {
+    /* 페이지 로드 시 사라지는 애니메이션 */
+    animation: fadeOut 0.3s linear forwards;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* 모바일 레이아웃 */
+@media screen and (min-width: 768px) {
+
 }
