@@ -36,8 +36,3 @@ def register(request):
         return redirect('/account/login')
 
     return render(request, 'account/register.html', data)
-
-
-def forgot(request):
-    data = get_data(request)
-    return render(request, 'account/forgot.html', data)
