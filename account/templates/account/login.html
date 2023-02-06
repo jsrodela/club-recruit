@@ -12,7 +12,7 @@
         {% endif %}
         <form class="login" method="post" action="">
             {% csrf_token %}
-            <h2>로그인</h2>
+            <h2 class="login_title">로그인</h2>
             <div class="input_wrapper">
                 <h4>학번</h4>
                 <input type="number" name="id" id="id" placeholder="ex) 10001" min="10101" max="21040" required>
