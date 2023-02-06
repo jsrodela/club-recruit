@@ -41,10 +41,9 @@
             </nav>
             <div class="wrapper">
                 <div class="wrapper2">
+                    {% block content %}{% endblock %}
                     {% block style %}{% endblock %}
                     {% block module %}{% endblock %}
-                    {% block content %}
-                    {% endblock %}
                 </div>
             </div>
         </div>
