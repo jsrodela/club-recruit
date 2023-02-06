@@ -8,3 +8,9 @@ def form(request):
     data = get_data(request)
     data['form_data'] = form_data
     return render(request, 'form/form.html', data)
+
+
+def example_form(request):
+    data = get_data(request)
+    data['form_data'] = form_data
+    return render(request, 'form/example_form.html', data)
