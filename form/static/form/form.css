@@ -1,17 +1,11 @@
 @import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap");
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 
-body {
+
+aa {
     text-align: center;
-    width: 100vw;
+    width: 100;
 
-    padding: 100px;
-    background: whitesmoke;
     display: table-cell;
 }
 
@@ -68,7 +62,7 @@ input[type=text] {
     border-radius: 15px;
     outline: none;
     padding-left: 10px;
-    background-color: #ffffff;
+    background-color: rgba(0,0,0,0.05);
   }
 
 .fin_h1{
