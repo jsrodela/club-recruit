@@ -125,6 +125,28 @@ nav ul li {
     word-break: keep-all;
 }
 
+/* 홈 버튼 */
+nav ul li.home {
+    /* 글씨 크게 */
+    font-size: 1.25rem;
+
+    /* 밝은 파란 배경 */
+    background-color: var(--main-color-bright);
+
+    /* 연한 회색 글씨 */
+    color: rgba(0, 0, 0, 0.5);
+
+    /* 가운데 정렬 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+nav ul li.home h4 {
+    /* 위아래 공백 줄이기 */
+    margin: 1rem 0;
+}
+
 nav ul li i, nav ul li img  {
     /* 글자 사이에 여백 */
     margin-right: 1rem;
@@ -137,23 +159,24 @@ nav ul li img {
 }
 
 /* 선택 시 */
-li.selected {
-    /* 배경색 녹색 */
-    background-color: #cffde1;
-
+nav ul li.selected {
     /* 왼쪽 선 */
-    border: solid rgba(0, 100, 0, 0.5);
-    border-width: 0 0 0 0.2rem;
+    border: solid var(--main-color-accent);
+    border-width: 0 0 0 0.3rem;
+
+    /* 글자 파랑 + 굵게 */
+    color: var(--main-color);
+    font-weight: 700;
 }
 
 /* 마우스 올라가면 */
-li:hover {
+nav ul li:hover {
     /* 약간 불투명 */
     opacity: 75%;
 
     /* 왼쪽 선 */
     border: solid rgba(0, 0, 0, 0.3);
-    border-width: 0 0 0 0.2rem;
+    border-width: 0 0 0 0.3rem;
 
     /* 마우스 커서 변경 */
     cursor: pointer;
