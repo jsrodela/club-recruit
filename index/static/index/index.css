@@ -1,3 +1,9 @@
+
+.outer-container {
+    display: flex;
+    padding-left: 40px;
+}
+
 .container {
     justify-content: left;
     height: 100px;
@@ -24,8 +30,8 @@ button {
 .boxmodel {
     border: 5px inset rgb(0, 255, 200);
     padding: 20px;
-    margin-left: 350px;
-    margin-top: 15px;
+    /*margin-left: 350px;
+    margin-top: 15px;*/
     height: 150px;
     width: 350px;
 
@@ -33,5 +39,5 @@ button {
     display: flex;
 }
 .info{
-    margin-top:-100px;
+    /*margin-top:-100px;*/
 }
