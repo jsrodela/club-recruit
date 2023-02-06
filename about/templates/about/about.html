@@ -3,9 +3,34 @@
 
 {% block style %}
     {{ block.super }}
-    <link rel="stylesheet" href="{% static 'index/index.css' %}">
+    <link rel="stylesheet" href="{% static 'about/about.css' %}">
 {% endblock %}
 
 {% block content %}
-    <a href="/account/login">로그인</a>
+    <div class="entire">
+        <div class="left">
+            <div class="photo">
+
+                <div class="leftarea">
+                    <button name="이전사진" class="leftbutton">
+                        <i class="arrow leftarrow"></i>
+                    </button>
+                </div>
+                <div style="flex-grow:8;"></div>
+                <div class="rightarea">
+                    <button name="다음사진" class="rightbutton">
+                        <i class="arrow rightarrow"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <button name="tosubmitpage" class="submitpage">
+                로델라 동아리 신청하기
+            </button>
+            <div class="text">
+                동아리 설명
+            </div>
+        </div>
+    </div>
 {% endblock %}
