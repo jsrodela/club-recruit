@@ -2,10 +2,10 @@ let rad = document.querySelectorAll('input[name=c-language]')
 let etcText = document.querySelector('input[name=c-language-etc]')
 for (let i of rad) {
     i.addEventListener('change', function() {
-        if (i.value == 'etc') {
-            etcText.style = ''
+        if (document.querySelector('input[name=c-language][value=etc]').checked) {
+            etcText.hidden = false;
         } else {
-            etcText.style = 'display: none;'
+            etcText.hidden = true;
         }
     })
 }
