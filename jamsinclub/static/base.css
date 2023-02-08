@@ -36,12 +36,17 @@ header {
     /* 아래 회색줄 */
     border-bottom: solid 0.05rem rgba(0, 0, 0, 0.3);
 
-    /* 제목 크기 */
+    /* 제목 크게 + 하양 */
     font-size: 1.2rem;
-
-    /*background-color: rgba(134, 130, 250, 1);*/
-    background-color: var(--main-color);
     color: white;
+
+    /* 배경 진파랑 */
+    background-color: var(--main-color);
+}
+
+header img {
+    /* 이미지 작게 */
+    height: 50%;
 }
 
 footer {
@@ -49,12 +54,16 @@ footer {
     flex-grow 3;
     text-align: center;
 
+    /* 글씨 회색 */
     color: grey;
 }
 
 header *, footer * {
     /* 영역 밖으로 나가지 않게 */
     margin: 0;
+
+    /* 좌우 여백의 미 */
+    padding: 0 0.3rem;
 }
 
 
@@ -99,13 +108,13 @@ nav {
     padding: 0.3rem;
 
     /* FireFox 스크롤바 숨기기 */
-    scrollbar-width: none;
+    /*scrollbar-width: none;*/
 }
 
 /* 왼쪽메뉴 스크롤바 */
 nav::-webkit-scrollbar {
     /* Chrome, Opera, Safari에서 숨기기 */
-    display: none;
+    /*display: none;*/
 }
 
 nav ul {
@@ -196,8 +205,8 @@ nav ul li:hover {
 
 /* 클릭했을 때 */
 nav ul li:active {
-    /* 투명 없애기 */
-    opacity: 100%;
+    /* 약간 더 투명 */
+    opacity: 50%;
 }
 
 /* 표시되는 화면 */
@@ -209,13 +218,15 @@ nav ul li:active {
     /* 페이지 로드 끝나면 나타나는 애니메이션 */
     animation: fadeIn 0.3s linear forwards;
 
-    padding: 1rem;
 }
 
 .wrapper2 {
     /* 높이 꽉차게 */
     width: 100%;
     height: 100%;
+
+    /* 안쪽 여백의 미 */
+    padding: 1rem;
 }
 
 .wrapper.fade {
