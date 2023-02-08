@@ -38,12 +38,17 @@ header {
 
     /* 제목 크기 */
     font-size: 1.2rem;
+
+    /*background-color: rgba(134, 130, 250, 1);*/
+    background-color: var(--main-color);
+    color: white;
 }
 
 footer {
     /* 전체 레이아웃 */
     flex-grow 3;
     text-align: center;
+
     color: grey;
 }
 
@@ -63,6 +68,7 @@ main {
     /* 화면 고정 */
     display: block;
     overflow: auto;
+    padding: 0;
 }
 
 .mainwrap {
@@ -74,7 +80,7 @@ main {
 
 nav, .wrapper {
     /* main 내 요소들의 좌우 여백의 미 */
-    padding: 0 0.5rem 0 0.5rem;
+    margin: 0;
 
     /* 넘치면 스크롤바 표시 */
     display: block;
@@ -87,7 +93,10 @@ nav {
     width: 15%;
 
     /* 연한 회색 배경 */
-    background-color: rgba(0, 0, 0, 0.01);
+    background-color: var(--main-color-extrabright);
+
+    /* 안쪽 여백의 미 */
+    padding: 0.3rem;
 
     /* FireFox 스크롤바 숨기기 */
     scrollbar-width: none;
@@ -103,7 +112,10 @@ nav ul {
     /* 점 없애기 */
     list-style: none;
     padding: 0;
-    margin: 1.5rem 0;
+
+    /* 위아래 여백의 미 */
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
 }
 
 nav ul li {
@@ -131,10 +143,10 @@ nav ul li.home {
     font-size: 1.25rem;
 
     /* 밝은 파란 배경 */
-    background-color: var(--main-color-bright);
+    /*background-color: var(--main-color-bright);*/
 
     /* 연한 회색 글씨 */
-    color: rgba(0, 0, 0, 0.5);
+    color: var(--main-color);
 
     /* 가운데 정렬 */
     display: flex;
@@ -171,15 +183,21 @@ nav ul li.selected {
 
 /* 마우스 올라가면 */
 nav ul li:hover {
-    /* 약간 불투명 */
+    /* 약간 투명 */
     opacity: 75%;
 
     /* 왼쪽 선 */
-    border: solid rgba(0, 0, 0, 0.3);
+    border: solid var(--main-color);
     border-width: 0 0 0 0.3rem;
 
     /* 마우스 커서 변경 */
     cursor: pointer;
+}
+
+/* 클릭했을 때 */
+nav ul li:active {
+    /* 투명 없애기 */
+    opacity: 100%;
 }
 
 /* 표시되는 화면 */
@@ -190,6 +208,8 @@ nav ul li:hover {
 
     /* 페이지 로드 끝나면 나타나는 애니메이션 */
     animation: fadeIn 0.3s linear forwards;
+
+    padding: 1rem;
 }
 
 .wrapper2 {
