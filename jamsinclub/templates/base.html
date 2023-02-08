@@ -13,6 +13,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
 
+    <link rel="stylesheet" href="{% static 'var.css' %}">
     <link rel="stylesheet" href="{% static 'base.css' %}">
     <script src="{% static 'base.js' %}"></script>
 
@@ -31,7 +32,7 @@
         <div class="mainwrap">
             <nav>
                 <ul>
-                    <li class="selected" onclick="changeNav(this, '/');"><i class="fa-solid fa-house"></i> <h4>홈</h4></li>
+                    <li class="home selected" onclick="changeNav(this, '/');"><i class="fa-solid fa-house"></i> <h4>홈</h4></li>
                 </ul>
                 <ul>
                     {% for i in '....................'|make_list %}
