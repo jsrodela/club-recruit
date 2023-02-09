@@ -182,13 +182,7 @@ form_data = {
         "required": True
       }
     },
-    {
-      "title": "ㅁㄴㅇㄹ",
-      "helpText": "ㅁㄴㅇㄹ",
-      "id": 1362699492,
-      "type": "SECTION_HEADER",
-      "extra": {}
-    },
+
     {
       "title": "이미지",
       "helpText": "",

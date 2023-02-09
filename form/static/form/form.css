@@ -25,15 +25,15 @@ button {
     transition: 0.25s;
 }
 .w-btn-green {
-    background-color: #77af9c;
+    background-color: rgb(95, 119, 219, 0.8);
     color: #d7fff1;
 }
 .w-btn-green-outline {
-    border: 3px solid #77af9c;
+    border: 3px solid rgb(95, 119, 219, 0.8);
     color: darkgray;
 }
 .w-btn-green-outline:hover {
-    background-color: #77af9c;
+    background-color: rgb(95, 119, 219, 0.8);
     color: #d7fff1;
 }
 .w-btn:hover {
@@ -68,5 +68,22 @@ input[type=text] {
     color: #77af9c;
     align-items: center;
 }
+.sectionheader{
+    font-size: 25px;
+    padding: 0.7rem;
+    border-left: 5px solid #848484;
+    background: #F2F2F2;
+    border-radius: 10px;
+    height: 25px;
 
+}
+.quesion{
+  font-size: 20px;
+}
 
+h1 {
+  font-size: 40px;
+  color: rgb(95, 119, 219,0.8);
+  border-top: 3px solid rgb(95, 119, 219,0.8);
+  border-bottom: 3px solid rgb(95, 119, 219,0.8);
+}
