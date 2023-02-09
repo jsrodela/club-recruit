@@ -36,20 +36,34 @@ header {
     /* 아래 회색줄 */
     border-bottom: solid 0.05rem rgba(0, 0, 0, 0.3);
 
-    /* 제목 크기 */
+    /* 제목 크게 + 하양 */
     font-size: 1.2rem;
+    color: white;
+
+    /* 배경 진파랑 */
+    background-color: var(--main-color);
+}
+
+header img {
+    /* 이미지 작게 */
+    height: 50%;
 }
 
 footer {
     /* 전체 레이아웃 */
     flex-grow 3;
     text-align: center;
+
+    /* 글씨 회색 */
     color: grey;
 }
 
 header *, footer * {
     /* 영역 밖으로 나가지 않게 */
     margin: 0;
+
+    /* 좌우 여백의 미 */
+    padding: 0 0.3rem;
 }
 
 
@@ -63,6 +77,7 @@ main {
     /* 화면 고정 */
     display: block;
     overflow: auto;
+    padding: 0;
 }
 
 .mainwrap {
@@ -74,7 +89,7 @@ main {
 
 nav, .wrapper {
     /* main 내 요소들의 좌우 여백의 미 */
-    padding: 0 0.5rem 0 0.5rem;
+    margin: 0;
 
     /* 넘치면 스크롤바 표시 */
     display: block;
@@ -87,23 +102,29 @@ nav {
     width: 15%;
 
     /* 연한 회색 배경 */
-    background-color: rgba(0, 0, 0, 0.01);
+    background-color: var(--main-color-extrabright);
+
+    /* 안쪽 여백의 미 */
+    padding: 0.3rem;
 
     /* FireFox 스크롤바 숨기기 */
-    scrollbar-width: none;
+    /*scrollbar-width: none;*/
 }
 
 /* 왼쪽메뉴 스크롤바 */
 nav::-webkit-scrollbar {
     /* Chrome, Opera, Safari에서 숨기기 */
-    display: none;
+    /*display: none;*/
 }
 
 nav ul {
     /* 점 없애기 */
     list-style: none;
     padding: 0;
-    margin: 1.5rem 0;
+
+    /* 위아래 여백의 미 */
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
 }
 
 nav ul li {
@@ -125,6 +146,28 @@ nav ul li {
     word-break: keep-all;
 }
 
+/* 홈 버튼 */
+nav ul li.home {
+    /* 글씨 크게 */
+    font-size: 1.25rem;
+
+    /* 밝은 파란 배경 */
+    /*background-color: var(--main-color-bright);*/
+
+    /* 연한 회색 글씨 */
+    color: var(--main-color);
+
+    /* 가운데 정렬 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+nav ul li.home h4 {
+    /* 위아래 공백 줄이기 */
+    margin: 1rem 0;
+}
+
 nav ul li i, nav ul li img  {
     /* 글자 사이에 여백 */
     margin-right: 1rem;
@@ -137,26 +180,33 @@ nav ul li img {
 }
 
 /* 선택 시 */
-li.selected {
-    /* 배경색 녹색 */
-    background-color: #cffde1;
-
+nav ul li.selected {
     /* 왼쪽 선 */
-    border: solid rgba(0, 100, 0, 0.5);
-    border-width: 0 0 0 0.2rem;
+    border: solid var(--main-color-accent);
+    border-width: 0 0 0 0.3rem;
+
+    /* 글자 파랑 + 굵게 */
+    color: var(--main-color);
+    font-weight: 700;
 }
 
 /* 마우스 올라가면 */
-li:hover {
-    /* 약간 불투명 */
+nav ul li:hover {
+    /* 약간 투명 */
     opacity: 75%;
 
     /* 왼쪽 선 */
-    border: solid rgba(0, 0, 0, 0.3);
-    border-width: 0 0 0 0.2rem;
+    border: solid var(--main-color);
+    border-width: 0 0 0 0.3rem;
 
     /* 마우스 커서 변경 */
     cursor: pointer;
+}
+
+/* 클릭했을 때 */
+nav ul li:active {
+    /* 약간 더 투명 */
+    opacity: 50%;
 }
 
 /* 표시되는 화면 */
@@ -167,12 +217,16 @@ li:hover {
 
     /* 페이지 로드 끝나면 나타나는 애니메이션 */
     animation: fadeIn 0.3s linear forwards;
+
 }
 
 .wrapper2 {
     /* 높이 꽉차게 */
     width: 100%;
     height: 100%;
+
+    /* 안쪽 여백의 미 */
+    padding: 1rem;
 }
 
 .wrapper.fade {
