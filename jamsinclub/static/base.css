@@ -253,6 +253,38 @@ nav ul li:active {
 }
 
 /* 모바일 레이아웃 */
-@media screen and (min-width: 768px) {
+@media screen and (max-width: 768px) {
+    .mainwrap {
+        flex-direction: column;
+        flex-basis: 1;
+    }
+    nav {
+        width: 100%;
+        display: flex;
+    }
+    nav ul {
+        display: flex;
+        margin-bottom: 0;
+        margin-top: 0;
+    }
 
+    nav ul li {
+        display; flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    nav ul li.home {
+        padding-top: 1rem;
+    }
+
+    nav ul li i, nav ul li img {
+        margin-right: 0;
+    }
+
+    nav ul li.selected {
+        border-width: 0.3rem 0 0 0;
+    }
 }
