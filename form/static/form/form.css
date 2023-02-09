@@ -25,15 +25,15 @@ button {
     transition: 0.25s;
 }
 .w-btn-green {
-    background-color: rgb(95, 119, 219, 0.8);
+    background-color: rgb(95, 119, 219, 0.9);
     color: #d7fff1;
 }
 .w-btn-green-outline {
-    border: 3px solid rgb(95, 119, 219, 0.8);
+    border: 3px solid rgb(95, 119, 219, 0.9);
     color: darkgray;
 }
 .w-btn-green-outline:hover {
-    background-color: rgb(95, 119, 219, 0.8);
+    background-color: rgb(95, 119, 219, 0.9);
     color: #d7fff1;
 }
 .w-btn:hover {
@@ -83,7 +83,7 @@ input[type=text] {
 
 h1 {
   font-size: 40px;
-  color: rgb(95, 119, 219,0.8);
-  border-top: 3px solid rgb(95, 119, 219,0.8);
-  border-bottom: 3px solid rgb(95, 119, 219,0.8);
+  color: rgb(95, 119, 219,2);
+  border-top: 3px solid rgb(95, 119, 219,2);
+  border-bottom: 3px solid rgb(95, 119, 219,2);
 }

@@ -24,6 +24,8 @@
         </p>
     </div>
 
+    <hr>
+
     <br>
         <div class="sectionheader">
             {% for question in form_data.items %}
@@ -84,6 +86,20 @@
                 {% endfor %}
 
         </div>
+    <br><br>
+
+        <div>
+            {% for question in form_data.items %}
+            {% if question.type == "LIST" %}
+                <strong class="quesion">
+                    {{ question.title }}
+                </strong>
+                <br><br>
+
+            {% endif %}
+            {% endfor %}
+        </div>
+
     <br><br>
 
         <div>
