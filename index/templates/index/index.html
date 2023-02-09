@@ -8,29 +8,35 @@
 
 {% block content %}
     <a href="/account/login">로그인</a>
-    <h1 style = 'margin-left: 50px;'>메인 페이지</h1> <br>
+    <div id="banner">
+        <img src = "{% static 'index/북극여우.jpg' %}" class = 'northfox'>
+    </div>
+    <div class="outer-container">
         <div class = 'container'>
             <div class = 'dongari'>
-                <h2 style = 'padding-left: 60px; height: 32px; width: 150px'>지원 동아리</h2>
+                <h2 style = ' width: 150px'>지원 동아리</h2>
 
-                <p style = 'padding-left: 40px;'><b>·</b> AMAS <button type = 'button'>지원서 보기</button> <br> <br>
+                <p style = ''><b>·</b> AMAS <button type = 'button'>지원서 보기</button> <br> <br>
                 <b>·</b> CSG <button type = 'button' onclick =>지원서 보기</button> <br> <br>
                 <b>·</b> Rodela <button type = 'button'>지원서 보기</button> </p>
             </div>
         <br> <br>
             <div class = 'test'>
-                <h2 style = 'padding-left: 60px;'>면접 시간</h2>
+                <h2 style = ''>면접 시간</h2>
 
-                <p style = 'padding-left: 40px;'> <b>·</b> AMAS: 3/14 08:00 ~ 3/15 21:00 <br> <br>
+                <p style = ''> <b>·</b> AMAS: 3/14 08:00 ~ 3/15 21:00 <br> <br>
                 <b>·</b> CSG: 3/14 07:00 ~ 3/15 15:00<br> <br>
                 <b>·</b> Rodela: 3/15 8:00 </p>
             </div>
         </div>
 
-        <h2 style = 'padding-left: 360px; margin-top: -100px'>내 정보</h2>
-        <p class = 'boxmodel'>ID: 10101 <br>
-        PW: 1234 <br>
-        Phonenum: 010-1234-5678 <br>
-        Name: OOO</p>
+        <div>
+            <h2 style = ''>내 정보</h2>
+            <p class = 'boxmodel'>ID: 10101 <br>
+            PW: 1234 <br>
+            Phonenum: 010-1234-5678 <br>
+            Name: OOO</p>
+        </div>
+    </div>
 
 {% endblock %}
