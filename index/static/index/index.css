@@ -3,13 +3,6 @@
     display: flex;
     padding-left: 40px;
 }
-
-.container {
-    justify-content: left;
-    height: 100px;
-    width: 500px;
-    /* display: flex; */
-  }
 button {
     /* 생략 */
     margin: 0;
@@ -27,17 +20,7 @@ button {
     border: none;
     border-radius: 4px;
 }
-.boxmodel {
-    border: 5px inset rgb(0, 255, 200);
-    padding: 20px;
-    /*margin-left: 350px;
-    margin-top: 15px;*/
-    height: 150px;
-    width: 350px;
 
-    justify-content:center;
-    display: flex;
-}
 .info{
     /*margin-top:-100px;*/
 }
