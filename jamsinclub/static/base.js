@@ -23,9 +23,11 @@ function changeNav(element, link) {
 }
 
 function register_onclick() {
+    // for every <a>
     links = document.getElementsByTagName('a')
     for (let link of links) {
-        if (link.onclick == null) {
+
+        if (link.onclick == null && link.href == null) { // if onclick or href is not defined
             link.onclick = function(event) {
                 return changeNav(event.target, link.href);
             }
