@@ -8,6 +8,9 @@ def get_form_data(url):
     pass
 
 
+get_form_data('https://script.google.com/macros/s/AKfycbz0xDE1DSaDKKl6AvzP6qLoEUFolnYlgo_tEpBb-LVVwYqoHXy2pDe-weEF7dSYeJb4/exec?type=getform&form=kr')
+
+
 form_data = {
     "title": "한국어 예시 설문지",
     "description": "이건 설명이에요! / Extform by HURDOO",
