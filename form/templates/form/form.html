@@ -29,19 +29,17 @@
     <br>
 
     {% for question in form_data.items %}
+
+        {% if question.type == "SECTION_HEADER" %}
         <div class="sectionheader">
-            {% if question.type ==
-            {% for question in form_data.items %} "SECTION_HEADER" %}
                 <strong>
                     {{ question.title }}
                 </strong>
-                <br><br>
-            {% endif %}
         </div>
-        <br><br>
+        {% endif %}
 
+        {% if question.type == "CHECKBOX" %}
         <div>
-            {% if question.type == "CHECKBOX" %}
             <strong class="quesion">
                 {{ question.title }}
             </strong>
@@ -55,14 +53,14 @@
                     <br>
                     <input type = "text" name = "527425354-etc" placeholder = "기타사항을 입력해주세요." hidden>
                 {% endif %}
-            {% endif %}
-
-
         </div>
-    <br><br>
+        <br><br>
+        {% endif %}
 
-        <div>
-            {% if question.type == "MULTIPLE_CHOICE" %}
+
+
+        {% if question.type == "MULTIPLE_CHOICE" %}
+            <div>
                 <strong class="quesion">
                     {{ question.title }}
                 </strong>
@@ -76,45 +74,42 @@
                         <br>
                         <input type = "text" name = "984420844-etc" placeholder = "기타사항을 입력해주세요." hidden>
                     {% endif %}
-                {% endif %}
+            </div>
+            <br><br>
+        {% endif %}
 
-
-        </div>
-    <br><br>
-
-        <div>
-            {% if question.type == "LIST" %}
+        {% if question.type == "LIST" %}
+            <div>
                 <strong class="quesion">
                     {{ question.title }}
                 </strong>
                 <br><br>
 
-            {% endif %}
-        </div>
+            </div>
+            <br><br>
+        {% endif %}
 
-    <br><br>
-
-        <div>
-            {% if question.type == "TEXT" %}
+        {% if question.type == "TEXT" %}
+            <div>
                 <strong class="quesion">
                     {{ question.title }}
                 </strong>
                 <br><br>
             <input type = "text" name = "2042360110" value = "" >
-            {% endif %}
-        </div>
+            </div>
+            <br><br>
+        {% endif %}
 
-    <br><br>
-
-        <div>
-            {% if question.type == "PARAGRAPH_TEXT" %}
+        {% if question.type == "PARAGRAPH_TEXT" %}
+            <div>
                 <strong class="quesion">
                     {{ question.title }}
                 </strong>
                 <br><br>
             <input type = "text" name = "40010923" value = "" >
-            {% endif %}
-        </div>
+            </div>
+            <br><br>
+        {% endif %}
 
     {% endfor %}
 
