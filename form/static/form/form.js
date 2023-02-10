@@ -10,11 +10,11 @@ for (let i of rad) {
     })
 }
 
-let rad2 = document.querySelectorAll('input[name=c-language-best]')
-let etcText2 = document.querySelector('input[name=c-language-best-etc]')
+let rad2 = document.querySelectorAll('input[name=984420844]')
+let etcText2 = document.querySelector('input[name=984420844-etc]')
 for (let i of rad2) {
     i.addEventListener('change', function() {
-        if (i.value == 'etc') {
+        if (i.value == '{{choice.value}}') {
             etcText2.hidden = false;
         } else {
             etcText2.hidden = true;
