@@ -72,7 +72,7 @@ header *, footer * {
 main {
     /* 전체 레이아웃 */
     flex-grow: 90;
-    width: 100%
+    width: 100%;
     height: 100%;
 
     /* 화면 고정 */
