@@ -63,6 +63,19 @@ input[type=text] {
     padding-left: 10px;
     background-color: rgba(0,0,0,0.05);
   }
+.long{
+    width: 500px;
+    height: 32px;
+    font-size: 15px;
+    border: 0;
+    border-radius: 15px;
+    outline: none;
+    padding-left: 10px;
+    background-color: rgba(0,0,0,0.05);
+    font-family: inherit;
+    font-size: inherit;
+
+}
 
 .fin_h1{
     color: #77af9c;
