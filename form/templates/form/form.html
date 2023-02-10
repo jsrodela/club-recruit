@@ -23,6 +23,9 @@
                 {{ form_data.description }}
             </p>
         </div>
+        
+        <br><br>
+        {% endif %}
 
         <hr>
 
@@ -98,7 +101,10 @@
                 <input type = "text" name = "2042360110" value = "" >
                 </div>
                 <br><br>
-            {% endif %}
+            <textarea class="long" rows="5"  name="40010923"></textarea>
+            </div>
+            <br><br>
+        {% endif %}
 
             {% if question.type == "PARAGRAPH_TEXT" %}
                 <div>
