@@ -226,7 +226,7 @@ nav ul li:active {
     height: 100%;
 
     /* 안쪽 여백의 미 */
-    padding: 1rem;
+    /*padding: 1rem;*/
 }
 
 .wrapper.fade {
