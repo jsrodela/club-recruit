@@ -14,112 +14,116 @@
 {% block content %}
 
 <div class="aa">
-    <form>
-    <div class="T">
-        <h1>
-            {{ form_data.title }}
-        </h1>
-        <p>
-            {{ form_data.description }}
-        </p>
-    </div>
-
-    <hr>
-
-    <br>
-
-    {% for question in form_data.items %}
-
-        {% if question.type == "SECTION_HEADER" %}
-        <div class="sectionheader">
-                <strong>
-                    {{ question.title }}
-                </strong>
+    <form method="post">
+        <div class="T">
+            <h1>
+                {{ form_data.title }}
+            </h1>
+            <p>
+                {{ form_data.description }}
+            </p>
         </div>
+        
         <br><br>
         {% endif %}
 
-        {% if question.type == "CHECKBOX" %}
-        <div>
-            <strong class="quesion">
-                {{ question.title }}
-            </strong>
-                <br><br>
-                {% for choice in question.extra.choices %}
-                    <input type="checkbox" name = "527425354" value="{{choice.value}}"> {{choice.value}}
-                    <br><br>
-                {% endfor %}
-                {% if question.extra.hasOtherOption == True %}
-                    <input type = "checkbox" name = "527425354" value = "{{choice.value}}"> 기타
-                    <br>
-                    <input type = "text" name = "527425354-etc" placeholder = "기타사항을 입력해주세요." hidden>
-                {% endif %}
-        </div>
-        <br><br>
-        {% endif %}
+        <hr>
 
+        <br>
 
+        {% for question in form_data.items %}
 
-        {% if question.type == "MULTIPLE_CHOICE" %}
+            {% if question.type == "SECTION_HEADER" %}
+            <div class="sectionheader">
+                    <strong>
+                        {{ question.title }}
+                    </strong>
+            </div>
+            {% endif %}
+
+            {% if question.type == "CHECKBOX" %}
             <div>
                 <strong class="quesion">
                     {{ question.title }}
                 </strong>
-                <br><br>
+                    <br><br>
                     {% for choice in question.extra.choices %}
-                        <input type="radio" name = "984420844" value="{{choice.value}}"> {{choice.value}}
+                        <input type="checkbox" name = "527425354" value="{{choice.value}}"> {{choice.value}}
                         <br><br>
                     {% endfor %}
                     {% if question.extra.hasOtherOption == True %}
-                        <input type = "radio" name = "984420844" value = "{{choice.value}}"> 기타
+                        <input type = "checkbox" name = "527425354" value = "{{choice.value}}"> 기타
                         <br>
-                        <input type = "text" name = "984420844-etc" placeholder = "기타사항을 입력해주세요." hidden>
+                        <input type = "text" name = "527425354-etc" placeholder = "기타사항을 입력해주세요." hidden>
                     {% endif %}
             </div>
             <br><br>
-        {% endif %}
+            {% endif %}
 
-        {% if question.type == "LIST" %}
-            <div>
-                <strong class="quesion">
-                    {{ question.title }}
-                </strong>
+
+
+            {% if question.type == "MULTIPLE_CHOICE" %}
+                <div>
+                    <strong class="quesion">
+                        {{ question.title }}
+                    </strong>
+                    <br><br>
+                        {% for choice in question.extra.choices %}
+                            <input type="radio" name = "984420844" value="{{choice.value}}"> {{choice.value}}
+                            <br><br>
+                        {% endfor %}
+                        {% if question.extra.hasOtherOption == True %}
+                            <input type = "radio" name = "984420844" value = "{{choice.value}}"> 기타
+                            <br>
+                            <input type = "text" name = "984420844-etc" placeholder = "기타사항을 입력해주세요." hidden>
+                        {% endif %}
+                </div>
                 <br><br>
+            {% endif %}
 
-            </div>
-            <br><br>
-        {% endif %}
+            {% if question.type == "LIST" %}
+                <div>
+                    <strong class="quesion">
+                        {{ question.title }}
+                    </strong>
+                    <br><br>
 
-        {% if question.type == "TEXT" %}
-            <div>
-                <strong class="quesion">
-                    {{ question.title }}
-                </strong>
+                </div>
                 <br><br>
-            <input type = "text" name = "2042360110" value = "" >
-            </div>
-            <br><br>
-        {% endif %}
+            {% endif %}
 
-        {% if question.type == "PARAGRAPH_TEXT" %}
-            <div>
-                <strong class="quesion">
-                    {{ question.title }}
-                </strong>
+            {% if question.type == "TEXT" %}
+                <div>
+                    <strong class="quesion">
+                        {{ question.title }}
+                    </strong>
+                    <br><br>
+                <input type = "text" name = "2042360110" value = "" >
+                </div>
                 <br><br>
             <textarea class="long" rows="5"  name="40010923"></textarea>
             </div>
             <br><br>
         {% endif %}
 
-    {% endfor %}
+            {% if question.type == "PARAGRAPH_TEXT" %}
+                <div>
+                    <strong class="quesion">
+                        {{ question.title }}
+                    </strong>
+                    <br><br>
+                <input type = "text" name = "40010923" value = "" >
+                </div>
+                <br><br>
+            {% endif %}
 
-    <br><br>
-    <button onclick="location.href='survey_fin.html'" class="w-btn w-btn-green" type="button">
-        제출하기
-    </button>
+        {% endfor %}
 
-    <br><br>
+        <br><br>
+        <input type="submit" onclick="location.href='survey_fin.html'" class="w-btn w-btn-green" value="지원하기">
+
+        <br><br>
+        {% csrf_token %}
     </form>
     </div>
 
