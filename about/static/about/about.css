@@ -18,23 +18,24 @@
     background-color: white;
     margin-top: 5%;
     display: flex;
+    justify-content: space-between;
 }
 
-.leftarea {
+.left_area {
     flex-grow: 1;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.rightarea {
+.right_area {
     flex-grow: 1;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.leftbutton, .rightbutton {
+.left_button, .right_button {
     opacity:50%;
     display: table-cell;
     vertical-align:middle;
@@ -71,16 +72,6 @@
   border-width: 0 3px 3px 0;
   display: inline-block;
   padding: 3px;
-}
-
-.rightarrow {
-  transform: rotate(-45deg);
-  -webkit-transform: rotate(-45deg);
-}
-
-.leftarrow {
-  transform: rotate(135deg);
-  -webkit-transform: rotate(135deg);
 }
 
 
