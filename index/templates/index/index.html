@@ -12,20 +12,16 @@
         <img src = "{% static 'index/북극여우.jpg' %}" class = 'north_fox'>
     </div>
     <div class="outer-container">
-        <div class = 'container'>
             <div class = 'dongari'>
                 <h2 style = ' width: 150px'>지원 동아리</h2>
 
 
                 {% for clubname in club_names %}
-                    <p style = ''><b>·</b>
-                        {{clubname}}
-                        <br>
-                    </p>
+                    <p style = ''><b>·</b> {{clubname}}
                         <button type = "button" onclick="location.href='form/views/{{clubname}}';">
                             지원서 보기
-                        </button>
-                        <br> <br>
+                        </button></p>
+
 
                 {% endfor %}
 
@@ -39,7 +35,6 @@
                 <b>·</b> CSG: 3/14 07:00 ~ 3/15 15:00<br> <br>
                 <b>·</b> Rodela: 3/15 8:00 </p>
             </div>
-        </div>
         <div>
             <h2 style = ''>내 정보</h2>
             <p>ID: 10101 <br> <br>
