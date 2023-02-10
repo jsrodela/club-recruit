@@ -1,7 +1,7 @@
 
 .outer-container {
     display: flex;
-    padding-left: 40px;
+    justify-content: space-around;
 }
 button {
     /* 생략 */
@@ -28,5 +28,5 @@ button {
 #banner { width: 40%; aspect-ratio: 16 / 9;
 }
 
-.northfox { width: 100%; height: 100%;
+.north_fox { width: 100%; height: 100%; padding: 1rem;
 }
