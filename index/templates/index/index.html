@@ -16,9 +16,20 @@
             <div class = 'dongari'>
                 <h2 style = ' width: 150px'>지원 동아리</h2>
 
-                <p style = ''><b>·</b> AMAS <button type = 'button'>지원서 보기</button> <br> <br>
-                <b>·</b> CSG <button type = 'button' onclick =>지원서 보기</button> <br> <br>
-                <b>·</b> Rodela <button type = 'button'>지원서 보기</button> </p>
+
+                {% for clubname in club_names %}
+                    <p style = ''><b>·</b>
+                        {{clubname}}
+                        <br>
+                    </p>
+                        <button type = "button" onclick="location.href='form/views/{{clubname}}';">
+                            지원서 보기
+                        </button>
+                        <br> <br>
+
+                {% endfor %}
+
+
             </div>
         <br> <br>
             <div class = 'test'>
