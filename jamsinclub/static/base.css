@@ -72,6 +72,7 @@ header *, footer * {
 main {
     /* 전체 레이아웃 */
     flex-grow: 90;
+    width: 100%
     height: 100%;
 
     /* 화면 고정 */
@@ -217,6 +218,8 @@ nav ul li:active {
 
     /* 페이지 로드 끝나면 나타나는 애니메이션 */
     animation: fadeIn 0.3s linear forwards;
+
+    overflow-x: hidden;
 
 }
 
