@@ -12,18 +12,33 @@
         <img src = "{% static 'index/북극여우.jpg' %}" class = 'north_fox'>
     </div>
     <div class="outer-container">
+        <div class = 'container'>
+            <div class = 'dongari'>
+                <h2 style = ' width: 150px'>지원 동아리</h2>
 
-        <div class = 'dongari'>
-            <h2 style = ' width: 150px'>지원 동아리</h2>
-            <p style = ''><b>·</b> AMAS <button type = 'button'>지원서 보기</button> <br> <br>
-            <b>·</b> CSG <button type = 'button' onclick =>지원서 보기</button> <br> <br>
-            <b>·</b> Rodela <button type = 'button'>지원서 보기</button> </p>
-        </div>
-        <div class = 'test'>
-            <h2 style = ''>면접 시간</h2>
-            <p style = ''> <b>·</b> AMAS: 3/14 08:00 ~ 3/15 21:00 <br> <br>
-            <b>·</b> CSG: 3/14 07:00 ~ 3/15 15:00<br> <br>
-            <b>·</b> Rodela: 3/15 8:00 </p>
+
+                {% for clubname in club_names %}
+                    <p style = ''><b>·</b>
+                        {{clubname}}
+                        <br>
+                    </p>
+                        <button type = "button" onclick="location.href='form/views/{{clubname}}';">
+                            지원서 보기
+                        </button>
+                        <br> <br>
+
+                {% endfor %}
+
+
+            </div>
+        <br> <br>
+            <div class = 'test'>
+                <h2 style = ''>면접 시간</h2>
+
+                <p style = ''> <b>·</b> AMAS: 3/14 08:00 ~ 3/15 21:00 <br> <br>
+                <b>·</b> CSG: 3/14 07:00 ~ 3/15 15:00<br> <br>
+                <b>·</b> Rodela: 3/15 8:00 </p>
+            </div>
         </div>
         <div>
             <h2 style = ''>내 정보</h2>
