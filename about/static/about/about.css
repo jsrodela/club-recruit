@@ -5,6 +5,8 @@
     align-items: center;
     justify-content: center;
     background-image: var(--background-image-url);
+    background-repeat : no-repeat;
+    background-size : cover;
 }
 
 .entire {
@@ -32,9 +34,12 @@
     background-color: white;
     display: flex;
     justify-content: space-between;
-    border: solid rgba(0, 0, 0, 0.2);
-    border-width: 0.1rem;
-    border-radius: 3rem;
+    border: solid var(--main-color-accent);
+    border-width: 0.3rem;
+    border-radius: 2rem;
+    background-image: var(--photo-url);
+    background-repeat : no-repeat;
+    background-size : cover;
 }
 
 .left_area {
