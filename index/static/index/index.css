@@ -21,12 +21,51 @@ button {
     border-radius: 4px;
 }
 
-.info{
-    /*margin-top:-100px;*/
+#banner {
+    width: 100%;
+    background-color: #ddd;
+    padding: 150px 0;
+    /* width: 40%;
+    aspect-ratio: 16 / 9; */
+}
+#banner strong {
+    font-size: 60px;
+    letter-spacing: -2px;
+}
+#banner p {
+    margin-top: 20px;
+    font-size: 20px;
 }
 
-#banner { width: 40%; aspect-ratio: 16 / 9;
+.north_fox {
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
 }
 
-.north_fox { width: 100%; height: 100%; padding: 1rem;
+h2 {
+    color: var(--main-color);
+    text-align: center;
 }
+
+.dongari {
+    width: 25%;
+    border: 0.1rem solid rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+    padding: 10px;
+}
+
+.interview {
+    width: 25%;
+    border: 0.1rem solid rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+    padding: 10px;
+}
+
+.my_info {
+    width: 25%;
+    border: 0.1rem solid rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+    padding: 10px;
+}
+
