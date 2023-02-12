@@ -34,11 +34,11 @@
         <div class="mainwrap">
             <nav>
                 <ul>
-                    <li class="home selected" onclick="changeNav(this, '/');"><i class="fa-solid fa-house"></i> <h4>홈</h4></li>
+                    <li class="home selected" onclick="changeNav(this, '/');"><i class="fa-solid fa-house"></i> <p>홈</p></li>
                 </ul>
                 <ul>
                     {% for i in '....................'|make_list %}
-                        <li onclick="changeNav(this, '/about');"><img src="{% static 'rodela.png' %}" width="25"> RoDeLa (공학)</li>
+                        <li class="club" onclick="changeNav(this, '/about');"><img src="{% static 'rodela.png' %}" width="25"> <p>RoDeLa</p></li>
                     {% endfor %}
                 </ul>
             </nav>
