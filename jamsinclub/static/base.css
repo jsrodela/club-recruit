@@ -9,6 +9,9 @@ html, body {
 
     /* 폰트 설정 */
     font-family: 'Pretendard';
+
+    /* 줄바꿈 단어 단위로 */
+    word-break: keep-all;
 }
 
 body {
