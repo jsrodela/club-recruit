@@ -12,6 +12,12 @@
 {% endblock %}
 
 {% block content %}
+    <script>
+        let answers = {{submit}};
+    </script>
+
+
+
 
     <div class="aa">
         <form method="post">
@@ -43,7 +49,7 @@
 
                 {% if question.type == "CHECKBOX" %}
                 <div>
-                    <strong class="quesion">
+                    <strong class="question">
                         {{ question.title }}
                     </strong>
                         <br><br>
@@ -56,15 +62,17 @@
                             <br>
                             <input type = "text" name = "527425354-etc" placeholder = "기타사항을 입력해주세요." hidden>
                         {% endif %}
+                    <br><hr>
+                    <br><br>
                 </div>
-                <br><br>
+
                 {% endif %}
 
 
 
                 {% if question.type == "MULTIPLE_CHOICE" %}
                     <div>
-                        <strong class="quesion">
+                        <strong class="question">
                             {{ question.title }}
                         </strong>
                         <br><br>
@@ -77,43 +85,37 @@
                                 <br>
                                 <input type = "text" name = "984420844-etc" placeholder = "기타사항을 입력해주세요." hidden>
                             {% endif %}
-                    </div>
-                    <br><br>
-                {% endif %}
-
-                {% if question.type == "LIST" %}
-                    <div>
-                        <strong class="quesion">
-                            {{ question.title }}
-                        </strong>
+                        <br><hr>
                         <br><br>
-
                     </div>
-                    <br><br>
+
                 {% endif %}
 
                 {% if question.type == "TEXT" %}
                     <div>
-                        <strong class="quesion">
+                        <strong class="question">
                             {{ question.title }}
                         </strong>
                         <br><br>
-                    <input type = "text" name = "2042360110" value = "" >
+                        <input type = "text" name = "2042360110" value = "" >
+                        <br><br><hr>
+                        <br><br>
                     </div>
-                    <br><br>
-                <textarea class="long" rows="5"  name="40010923"></textarea>
-                <br><br>
-            {% endif %}
+
+
+                {% endif %}
 
                 {% if question.type == "PARAGRAPH_TEXT" %}
                     <div>
-                        <strong class="quesion">
+                        <strong class="question">
                             {{ question.title }}
                         </strong>
                         <br><br>
-                    <input type = "text" name = "40010923" value = "" >
+                        <textarea class="long" rows="5"  name="40010923"></textarea>
+                        <br><br><hr>
+                        <br><br>
                     </div>
-                    <br><br>
+
                 {% endif %}
 
             {% endfor %}
@@ -125,5 +127,8 @@
             {% csrf_token %}
         </form>
         </div>
+
+
+
 
 {% endblock %}

@@ -2,11 +2,10 @@
 
 
 
-aa {
-    text-align: center;
-    width: 100;
+.aa {
+    padding: 30px 50px 40px 40px;
 
-    display: table-cell;
+
 }
 
 button {
@@ -90,7 +89,7 @@ input[type=text] {
     height: 25px;
 
 }
-.quesion{
+.question{
   font-size: 20px;
 }
 
