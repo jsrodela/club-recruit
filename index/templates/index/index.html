@@ -10,11 +10,18 @@
     <a href="/account/login">로그인</a>
     <div id="banner">
         <!--<img src = "{% static 'index/북극여우.jpg' %}" class = 'north_fox'>-->
-        <strong>RoDeLa 6.0</strong>
-        <p>A Site Made by Rodela</p>
+        <style>
+            #banner {
+                --background-image-url: url("{% static 'index/로델라 배너 이미지.jpg' %}")
+            }
+        </style>
+        <div class = 'inner_banner'>
+            <strong>RoDeLa 6.0</strong>
+            <p><span>A</span> <span>S</span>ite <span>M</span>ade by <span>R</span>odela</p>
+        </div>
     </div>
     <div class="outer-container">
-            <div class = 'dongari'>
+            <div class = 'dong_ari'>
                 <h2>지원 동아리</h2>
 
 
