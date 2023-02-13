@@ -1,3 +1,5 @@
+import json
+
 from django.shortcuts import render, redirect
 
 from account.base import get_data
@@ -56,7 +58,7 @@ def club(request, clubname):
     data['form_data'] = form_data
     form_submit = FormModel.objects.filter(number=data['user'].id, club=clubname).first()
 
-    data['submit'] = form_submit.section
+    data['submit'] = json.dumps(form_submit.section)
 
     data['clubname'] = clubname
     return render(request, 'form/form.html', data)

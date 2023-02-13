@@ -8,16 +8,25 @@
 
 {% block module %}
     {{ block.super }}
+
     <script src="{% static 'form/form.js' %}" ></script>
 {% endblock %}
 
 {% block content %}
-    <script>
-        let answers = {{submit}};
-    </script>
+    {% if submit %}
+        {{ submit|escape }}
+        <script>
+            // Use 'var' instead of 'let': global variables have to be redefined
 
-
-
+            var is_submit = true;
+            var answers = JSON.parse("{{ submit|escapejs }}");
+            console.log(answers);
+        </script>
+    {% else %}
+        <script>
+            var is_submit = false;
+        </script>
+    {% endif %}
 
     <div class="aa">
         <form method="post">

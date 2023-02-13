@@ -15,6 +15,20 @@ function changeNav(code, link) {
                 // get wrapper
                 let temp = new DOMParser().parseFromString(text, "text/html");
                 let fetched_wrapper = temp.querySelector('.wrapper2');
+                let wrapper2 = document.querySelector('.wrapper2')
+                wrapper.innerHTML = "";
+                wrapper.appendChild(fetched_wrapper);
+
+                console.log(fetched_wrapper)
+
+                for (let script of fetched_wrapper.querySelectorAll("script:not([type='text/markdown'])")) {
+                    let newscript = document.createElement('script');
+                    if (script.hasAttribute('src')) newscript.setAttribute('src', script.src);  // <script src=...></script>
+                    else newscript.innerHTML = script.innerHTML;  // <script>...</script>
+                    wrapper.appendChild(newscript);
+                    console.log(newscript);
+                }
+                /*
                 document.querySelector('.wrapper2').innerHTML = fetched_wrapper.innerHTML;
 
                 // run scripts manually
@@ -24,16 +38,21 @@ function changeNav(code, link) {
                         eval(script.innerHTML);
                     }
                     catch (err) {
+                        console.log(script);
                         console.error(err)
                     }
-                }
+                }*/
 
                 // change location.href without reload (뒤로가기 제외)
-                if (code != '__popstate__')
+                if (code != '__popstate__') {
                     history.pushState({page_id: 1}, '', link)
+                }
 
                 // register smooth reload on every <a>
                 register_onclick();
+
+                // scroll to top
+                wrapper.scrollTo(0, 0)
 
                 // show element after 0.1s
                 setTimeout(function() {
@@ -46,7 +65,7 @@ function changeNav(code, link) {
 }
 
 function selectNav(code) {
-    console.log(code)
+//    console.log(code)
     if (code == '' || code == '__popstate__') return;
     for (let element of document.querySelectorAll('nav > ul > li.selected')) {
         element.classList.remove('selected');

@@ -1,3 +1,4 @@
+/*
 let rad = document.querySelectorAll('input[name=c-language]')
 let etcText = document.querySelector('input[name=c-language-etc]')
 for (let i of rad) {
@@ -21,9 +22,8 @@ for (let i of rad2) {
         }
     })
 }
+*/
 
-//타고 들어온 링크가 지원서 보기라면 빈칸 채우기
-if(Document.referrer==){
-
+if (is_submit) {
+    console.log(is_submit)
 }
-else{}
