@@ -37,6 +37,9 @@
                     <li class="home selected" onclick="changeNav(this, '/');"><i class="fa-solid fa-house"></i> <p>홈</p></li>
                 </ul>
                 <ul>
+                    {% for club in clubs %}
+                        <li class="club" onclick="changeNav(this, '/about/{{ club.code }}');"><img src="{% static '{{ club.logo_url }}' %}"> <p>{{ club.name }}</p></li>
+                    {% endfor %}
                     {% for i in '....................'|make_list %}
                         <li class="club" onclick="changeNav(this, '/about');"><img src="{% static 'rodela.png' %}" width="25"> <p>RoDeLa</p></li>
                     {% endfor %}
