@@ -13,7 +13,7 @@ def index(request):
 
     for i in array:
         club_names.append(i.club)  # club_names라는 리스트에 amas.club rodela.club 처럼 신청한 동아리.club만 추가
-    print(club_names)
+
 
     data['club_names'] = club_names
 
