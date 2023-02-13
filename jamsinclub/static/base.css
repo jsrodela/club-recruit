@@ -100,7 +100,7 @@ nav, .wrapper {
 /* 왼쪽 메뉴 */
 nav {
     /* main 레이아웃 */
-    width: 15%;
+    width: 15rem;
 
     /* 연한 회색 배경 */
     background-color: var(--main-color-extrabright);
@@ -131,7 +131,7 @@ nav ul {
 nav ul li {
     /* 여백의 미 */
     padding: 0.8rem;
-    margin: 0.3rem 0;
+    margin: 0.3rem 0.1rem;
 
     /* 둥근 모서리 */
     border-radius: 0.5rem;
@@ -149,8 +149,9 @@ nav ul li {
 
 /* 홈 버튼 */
 nav ul li.home {
-    /* 글씨 크게 */
-    font-size: 1.25rem;
+    /* 글씨 크고 굵게 */
+    font-size: 1.5rem;
+    font-weight: 700;
 
     /* 밝은 파란 배경 */
     /*background-color: var(--main-color-bright);*/
@@ -162,11 +163,9 @@ nav ul li.home {
     display: flex;
     justify-content: center;
     align-items: center;
-}
 
-nav ul li.home h4 {
-    /* 위아래 공백 줄이기 */
-    margin: 1rem 0;
+    /* 홈버튼은 다른버튼보다 조금 더 크게 */
+    padding: 2rem 0rem;
 }
 
 nav ul li i, nav ul li img  {
@@ -178,6 +177,18 @@ nav ul li img {
     /* 원 모양 */
     border-radius: 100px;
     border: solid 0.1rem rgba(0, 0, 0, 0.5);
+}
+
+nav ul li p {
+    /* 여백 너무 큼 */
+    margin: 0;
+}
+
+nav ul li.club p {
+    /* 여백의 미 */
+    padding: 0.5rem 0;
+    font-size: 1.1rem;
+    font-weight: 500;
 }
 
 /* 선택 시 */
@@ -258,8 +269,9 @@ nav ul li:active {
 /* 모바일 레이아웃 */
 @media screen and (max-width: 768px) {
     .mainwrap {
-        flex-direction: column;
+        flex-direction: column-reverse;
         flex-basis: 1;
+        overflow-x: hidden;
     }
     nav {
         width: 100%;
@@ -277,17 +289,34 @@ nav ul li:active {
         justify-content: center;
         align-items: center;
         text-align: center;
+
+        padding-top: 1rem;
+        padding-bottom: 1rem;
     }
 
     nav ul li.home {
-        padding-top: 1rem;
+        /* 동아리 버튼이랑 높이 맞추고, 넓이 더 넓게 */
+        padding: 0.9rem 1rem;
+    }
+
+    nav ul li p {
+        margin: 0;
+        padding: 0.5rem;
     }
 
     nav ul li i, nav ul li img {
         margin-right: 0;
     }
 
-    nav ul li.selected {
+    nav ul li:hover, nav ul li.selected {
         border-width: 0.3rem 0 0 0;
+    }
+
+    nav ul li:hover {
+        opacity: 100%;
+    }
+
+    nav ul li:active {
+        opacity: 100%;
     }
 }
