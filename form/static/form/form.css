@@ -99,3 +99,8 @@ h1 {
   border-top: 3px solid rgb(95, 119, 219,2);
   border-bottom: 3px solid rgb(95, 119, 219,2);
 }
+
+/* 모바일 레이아웃 */
+@media screen and (max-width: 768px) {
+
+}
