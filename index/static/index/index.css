@@ -57,7 +57,7 @@ button {
     justify-content: center;
     align-items: center;
     height: 250px;
-    backdrop-filter: blur(2.5px);
+    backdrop-filter: blur(2px);
 
 }
 .north_fox {
@@ -67,6 +67,7 @@ button {
 }
 
 h2 {
+    color: rgba(95, 119, 219, 1);
     text-align: center;
 }
 
@@ -91,3 +92,8 @@ h2 {
     padding: 10px;
 }
 
+
+/* 모바일 레이아웃 */
+@media screen and (max-width: 768px) {
+
+}
