@@ -41,9 +41,15 @@ button {
     color: #fff;
     margin-top: 20px;
     font-size: 20px;
+
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 2rem;
+    padding: 0.5rem 1rem;
+    color: white;
 }
 .inner_banner p span {
-    color: rgba(95, 119, 219, 1);
+    /* color: rgba(95, 119, 219, 1);*/
+    font-weight: 700;
 }
 .inner_banner {
     display: flex;
@@ -52,6 +58,7 @@ button {
     align-items: center;
     height: 250px;
     backdrop-filter: blur(2.5px);
+
 }
 .north_fox {
     width: 100%;
