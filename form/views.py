@@ -10,8 +10,8 @@ def form(request, clubname):
     data['form_data'] = form_data
 
     if 'user' in data:
-        data['error']="로그인 이후 신청하세요."
-    elif FormModel.objects.filter(number=data['user'].id,club=clubname):   #유저 네임, 클럽네임을 가진 유저가 존재한다면
+        data['error'] = "로그인 이후 신청하세요."
+    elif FormModel.objects.filter(number=data['user'].id, club=clubname):  # 유저 네임, 클럽네임을 가진 유저가 존재한다면
         data['error'] = "이미 지원서를 제출했습니다."
     else:
         pass
@@ -52,7 +52,9 @@ def form(request, clubname):
 def club(request, clubname):
     data = get_data(request)
     data['form_data'] = form_data
+    form_submit = FormModel.objects.filter(number=data['user'].id, club=clubname).first()
 
+    data['submit'] = form_submit.section
 
     data['form_data'] = form_data
-    return render(request, 'form/club', data)
+    return render(request, 'form/form.html', data)
