@@ -6,7 +6,7 @@ from django.db import models
 
 class ImageModel(models.Model):
     club = models.CharField(max_length=10)
-    image = models.FileField(null=True, upload_to="media/")
+    image = models.FileField(null=True, upload_to="")
 
 
 class ClubModel(models.Model):
