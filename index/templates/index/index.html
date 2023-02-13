@@ -9,11 +9,13 @@
 {% block content %}
     <a href="/account/login">로그인</a>
     <div id="banner">
-        <img src = "{% static 'index/북극여우.jpg' %}" class = 'north_fox'>
+        <!--<img src = "{% static 'index/북극여우.jpg' %}" class = 'north_fox'>-->
+        <strong>RoDeLa 6.0</strong>
+        <p>A Site Made by Rodela</p>
     </div>
     <div class="outer-container">
             <div class = 'dongari'>
-                <h2 style = ' width: 150px'>지원 동아리</h2>
+                <h2>지원 동아리</h2>
 
 
                 {% for clubname in club_names %}
@@ -27,15 +29,15 @@
 
 
             </div>
-            <div class = 'test'>
-                <h2 style = ''>면접 시간</h2>
+            <div class = 'interview'>
+                <h2>면접 시간</h2>
 
-                <p style = ''> <b>·</b> AMAS: 3/14 08:00 ~ 3/15 21:00 <br> <br>
+                <p> <b>·</b> AMAS: 3/14 08:00 ~ 3/15 21:00 <br> <br>
                 <b>·</b> CSG: 3/14 07:00 ~ 3/15 15:00<br> <br>
                 <b>·</b> Rodela: 3/15 8:00 </p>
             </div>
-        <div>
-            <h2 style = ''>내 정보</h2>
+        <div class = 'my_info'>
+            <h2>내 정보</h2>
             <p>ID: 10101 <br> <br>
             PW: 1234 <br> <br>
             Phonenum: 010-1234-5678 <br> <br>
