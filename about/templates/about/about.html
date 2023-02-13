@@ -6,6 +6,12 @@
     <link rel="stylesheet" href="{% static 'about/about.css' %}">
 {% endblock %}
 
+{% block module %}
+    {{ block.super }}
+    <!-- Zero-md (https://github.com/zerodevx/zero-md) -->
+    <script type="module" src="https://cdn.jsdelivr.net/gh/zerodevx/zero-md@2/dist/zero-md.min.js"></script>
+{% endblock %}
+
 {% block content %}
     <div class="background">
 
@@ -39,10 +45,17 @@
                 </div>
             </div>
             <div class="right">
-                <button name="tosubmitpage" class="submitpage">
+                <button onclick="changeNav(this, '/form/submit/{{ club.code }}');" class="submitpage">
                     지원하기
                 </button>
-                <div class="text"></div>
+                <div class="text">
+                    <zero-md>
+                        <template>
+                            <link rel="stylesheet" href="{% static 'about/markdown.css' %}">
+                        </template>
+                        <script type="text/markdown">{{ club.about_text }}</script>
+                    </zero-md>
+                </div>
             </div>
         </div>
     </div>

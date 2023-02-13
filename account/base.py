@@ -19,7 +19,7 @@ def get_data(request):
             'code': club.code,
         }
         if club.logo_image is not None:
-            obj['club_logo'] = club.logo_image.image.url
+            obj['logo_url'] = club.logo_image.image.url
         clubs.append(obj)
     data['clubs'] = clubs
 
