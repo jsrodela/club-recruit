@@ -23,8 +23,12 @@ button {
 
 #banner {
     width: 100%;
+    height: 200px;
+    padding-top: 75px;
+    margin-top: 15px;
+    margin-bottom: 60px;
     background-color: #ddd;
-    padding: 150px 0;
+    text-align: center;
     /* width: 40%;
     aspect-ratio: 16 / 9; */
 }
@@ -36,7 +40,6 @@ button {
     margin-top: 20px;
     font-size: 20px;
 }
-
 .north_fox {
     width: 100%;
     height: 100%;
