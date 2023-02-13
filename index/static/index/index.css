@@ -91,3 +91,8 @@ h2 {
     padding: 10px;
 }
 
+
+/* 모바일 레이아웃 */
+@media screen and (max-width: 768px) {
+
+}
