@@ -27,7 +27,7 @@
 
                 {% for clubname in club_names %}
                     <p style = ''><b>·</b> {{clubname}}
-                        <button type = "button" onclick="location.href='form/views/{{clubname}}';">
+                        <button type = "button" onclick="return changeNav('club_{{ clubname }}', '/form/views/{{ clubname }}');">
                             지원서 보기
                         </button></p>
 
@@ -52,4 +52,7 @@
         </div>
     </div>
 
+    <script>
+        selectNav('home');
+    </script>
 {% endblock %}

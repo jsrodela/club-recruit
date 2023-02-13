@@ -16,6 +16,8 @@ def form(request, clubname):
     else:
         pass
 
+    data['clubname'] = clubname
+
     if request.POST:
         submit = []
         user_id = data['user'].id
@@ -56,5 +58,5 @@ def club(request, clubname):
 
     data['submit'] = form_submit.section
 
-    data['form_data'] = form_data
+    data['clubname'] = clubname
     return render(request, 'form/form.html', data)
