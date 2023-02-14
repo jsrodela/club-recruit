@@ -2,6 +2,7 @@ import json
 
 from django.shortcuts import render, redirect
 
+from about.models import ClubModel
 from account.base import get_data
 from .form_data import form_data
 from .models import FormModel
@@ -9,7 +10,6 @@ from .models import FormModel
 
 def form(request, clubname):
     data = get_data(request)
-    data['form_data'] = form_data
 
     if 'user' in data:
         data['error'] = "로그인 이후 신청하세요."
@@ -17,8 +17,6 @@ def form(request, clubname):
         data['error'] = "이미 지원서를 제출했습니다."
     else:
         pass
-
-    data['clubname'] = clubname
 
     if request.POST:
         submit = []
@@ -50,15 +48,19 @@ def form(request, clubname):
         FormModel(number=user_id, club=clubname, section=submit).save()
         return redirect('/')
 
+    club_model = ClubModel.objects.get(code=clubname)
+    data['clubname'] = clubname
+    data['form_data'] = club_model.form_data
     return render(request, 'form/form.html', data)
 
 
 def club(request, clubname):
     data = get_data(request)
-    data['form_data'] = form_data
-    form_submit = FormModel.objects.filter(number=data['user'].id, club=clubname).first()
+    form_submit = FormModel.objects.get(number=data['user'].id, club=clubname)
 
     data['submit'] = json.dumps(form_submit.section)
 
+    club_model = ClubModel.objects.get(code=clubname)
     data['clubname'] = clubname
+    data['form_data'] = club_model.form_data
     return render(request, 'form/form.html', data)

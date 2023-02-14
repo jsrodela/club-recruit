@@ -5,6 +5,7 @@ from django.utils import timezone
 
 from about.models import ClubModel, ImageModel
 from account.base import get_data
+from form import form_data
 
 
 def about(request, clubname):
@@ -46,6 +47,7 @@ def leader(request):
             club.about_text = submit.get('about_text')
         if 'form_change' in submit:
             # ExtForm과 연동하여 reload하고 getitem 하기
+            club.form_data = form_data.reload_form(club.code)
             pass
         if 'form_start' in submit:
             club.form_start = datetime.fromisoformat(submit.get('form_start')+"+09:00")

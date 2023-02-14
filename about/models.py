@@ -1,9 +1,17 @@
+import json
 from datetime import datetime
 
 from django.db import models
 
 
 # Create your models here.
+
+def form_data_default():
+    return {
+        "title": "지원서 정보 없음",
+        "description": "아직 동아리에서 지원서 양식을 제공하지 않았습니다.",
+        "items": []
+    }
 
 
 class ImageModel(models.Model):
@@ -36,3 +44,9 @@ class ClubModel(models.Model):
     # 동아리 로고 (왼쪽 메뉴)
     logo_image = models.ForeignKey(ImageModel, related_name='logo_image+',
                                    on_delete=models.SET_NULL, null=True, blank=True)
+
+    # 설문지 양식 (구글폼과 동기화하려면 leader 페이지에서 적용)
+    form_data = models.JSONField(encoder=json.JSONEncoder, decoder=json.JSONDecoder, default=form_data_default)
+
+    # 설문지 수정 링크
+    form_edit_url = models.URLField(null=True, blank=True)

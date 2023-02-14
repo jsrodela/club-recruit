@@ -73,8 +73,8 @@
 
         <form method="post">
             <h4>1차 서류 지원 양식</h4>
-            <p>아래 링크에서 변경 후, 적용 버튼을 눌러주세요.</p>
-            <a href="#" target="_blank">[ 양식 변경하기 ]</a>
+            <p>아래 링크에서 변경 후, 적용 버튼을 눌러주세요. (최대 30초 소요)</p>
+            <a href="{{ club.form_edit_url }}" target="_blank">[ 양식 변경하기 ]</a>
             <input type="hidden" name="form_change">
             <input type="submit" value="적용">
             {% csrf_token %}
