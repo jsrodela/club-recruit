@@ -95,5 +95,17 @@ h2 {
 
 /* 모바일 레이아웃 */
 @media screen and (max-width: 768px) {
-
+    .outer-container {
+        flex-direction: column;
+        overflow-x: hidden;
+        align-items: center;
+    }
+    .dong_ari, .interview, .my_info {
+        width: 50%;
+        margin-bottom: 50px;
+    }
+    /* 사이사이 마진 넣으려고 했는데 밑에도 넣는 게 이쁨
+    .dong_ari, .interview {
+        margin-bottom: 50px;
+    } */
 }
