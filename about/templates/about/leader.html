@@ -19,6 +19,7 @@
 
         <form method="post">
             <h4>동아리 이름</h4>
+            <p>적용 누르고 새로고침 한번 해주면 적용됩니다.</p>
             <input type="text" name="club_name" value="{{ club.name }}">
             <input type="submit" value="적용">
             {% csrf_token %}
@@ -31,7 +32,7 @@
             <input type="submit" value="적용">
             {% csrf_token %}
         </form>
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <h4>메인 화면 배너 배경이미지</h4>
             <input type="file" name="index_banner_image" accept="image/*">
             <input type="submit" value="적용">
@@ -39,22 +40,22 @@
         </form>
         <hr>
 
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <h4>소개 화면 배경이미지</h4>
-            <input type="file" name="about_background_image" accept="image/*">
+            <input type="file" name="about_background" accept="image/*">
             <input type="submit" value="적용">
             {% csrf_token %}
         </form>
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <h4>소개 화면 동아리 사진 *추가*</h4>
             <input type="file" name="about_image_add" accept="image/*">
             <input type="submit" value="적용">
             {% csrf_token %}
         </form>
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <h4>소개 화면 동아리 사진 *제거*</h4>
             {% for image in club.about_images.all %}
-                <input type="checkbox" name="about_image_remove">
+                <input type="checkbox" name="about_image_remove" value="{{ image.id }}">
                 <img src="{{ image.image.url }}" width="100">
                 <br>
             {% endfor %}
