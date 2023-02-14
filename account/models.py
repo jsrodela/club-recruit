@@ -3,6 +3,8 @@ from django.contrib.auth.models import PermissionsMixin
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 
+from about.models import ClubModel
+
 
 class UserManager(BaseUserManager):
     use_in_migrations = True
@@ -45,6 +47,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     id = models.PositiveIntegerField(primary_key=True, unique=True, null=False, blank=False)
     name = models.CharField(max_length=5, null=False, blank=False)
     phone = PhoneNumberField(null=False, blank=False)
+
+    leader_of = models.ForeignKey(ClubModel, on_delete=models.SET_NULL, null=True)
 
     username = None
     first_name = None
