@@ -33,7 +33,7 @@ form_data = {
         },
         {
             "title": "객관식 질문",
-            "helpText": "",
+            "helpText": "asdfasdf",
             "id": 984420844,
             "type": "MULTIPLE_CHOICE",
             "extra": {
@@ -54,7 +54,7 @@ form_data = {
         },
         {
             "title": "체크박스",
-            "helpText": "",
+            "helpText": "asdfasdf",
             "id": 527425354,
             "type": "CHECKBOX",
             "extra": {
@@ -95,7 +95,7 @@ form_data = {
         },
         {
             "title": "단답형",
-            "helpText": "",
+            "helpText": "asdfsdaf",
             "id": 2042360110,
             "type": "TEXT",
             "extra": {
@@ -104,7 +104,7 @@ form_data = {
         },
         {
             "title": "장문형 (5글자 이상)",
-            "helpText": "",
+            "helpText": "adsfadsf",
             "id": 40010923,
             "type": "PARAGRAPH_TEXT",
             "extra": {

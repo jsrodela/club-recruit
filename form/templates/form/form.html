@@ -49,15 +49,15 @@
 
                 {% if question.type == "SECTION_HEADER" %}
                 <div class="sectionheader">
-                        <strong>
+                        <h2>
                             {{ question.title }}
-                        </strong>
+                        </h2>
                         <p>
                             {{ question.helpText }}
                         </p>
                     <!--
                         @TODO:
-                        1. helpText
+                        ~~1. helpText~~
                         2. 아이템마다 name 이상함
                         3. dropdown
                         4. 제출결과 표시
@@ -69,10 +69,9 @@
 
                 {% if question.type == "CHECKBOX" %}
                 <div>
-                    <strong class="question">
-                        {{ question.title }}
-                    </strong>
-                        <br><br>
+                    <h3 class="question">{{ question.title }}</h3>
+                    <p>{{ question.helpText }}</p>
+                    <br><br>
                         {% for choice in question.extra.choices %}
                             <input type="checkbox" name = "527425354" value="{{choice.value}}"> {{choice.value}}
                             <br><br>
@@ -92,9 +91,8 @@
 
                 {% if question.type == "MULTIPLE_CHOICE" %}
                     <div>
-                        <strong class="question">
-                            {{ question.title }}
-                        </strong>
+                        <h3 class="question">{{ question.title }}</h3>
+                        <p>{{ question.helpText }}</p>
                         <br><br>
                             {% for choice in question.extra.choices %}
                                 <input type="radio" name = "984420844" value="{{choice.value}}"> {{choice.value}}
@@ -113,9 +111,8 @@
 
                 {% if question.type == "TEXT" %}
                     <div>
-                        <strong class="question">
-                            {{ question.title }}
-                        </strong>
+                        <h3 class="question">{{ question.title }}</h3>
+                        <p>{{ question.helpText }}</p>
                         <br><br>
                         <input type = "text" name = "2042360110" value = "" >
                         <br><br><hr>
@@ -127,9 +124,8 @@
 
                 {% if question.type == "PARAGRAPH_TEXT" %}
                     <div>
-                        <strong class="question">
-                            {{ question.title }}
-                        </strong>
+                        <h3 class="question">{{ question.title }}</h3>
+                        <p>{{ question.helpText }}</p>
                         <br><br>
                         <textarea class="long" rows="5"  name="40010923"></textarea>
                         <br><br><hr>
