@@ -51,7 +51,7 @@ def form(request, clubname):
     club_model = ClubModel.objects.get(code=clubname)
     data['clubname'] = clubname
     data['form_data'] = club_model.form_data
-    data['form_data'] = form_data
+    # data['form_data'] = form_data
     return render(request, 'form/form.html', data)
 
 
