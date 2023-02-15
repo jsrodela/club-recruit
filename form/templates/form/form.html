@@ -57,9 +57,6 @@
                         </p>
                     <!--
                         @TODO:
-                        ~~1. helpText~~
-                        2. 아이템마다 name 이상함
-                        3. dropdown
                         4. 제출결과 표시
                         5. 관리자 페이지 제출결과 보기
                     -->
@@ -73,13 +70,13 @@
                     <p>{{ question.helpText }}</p>
                     <br><br>
                         {% for choice in question.extra.choices %}
-                            <input type="checkbox" name = "527425354" value="{{choice.value}}"> {{choice.value}}
+                            <input type="checkbox" name = "{{ question.id }}" value="{{choice.value}}"> {{choice.value}}
                             <br><br>
                         {% endfor %}
                         {% if question.extra.hasOtherOption == True %}
-                            <input type = "checkbox" name = "527425354" value = "{{choice.value}}"> 기타
+                            <input type = "checkbox" name = "{{ question.id }}" value = "--etc--"> 기타
                             <br>
-                            <input type = "text" name = "527425354-etc" placeholder = "기타사항을 입력해주세요." hidden>
+                            <input type = "text" name = "{{ question.id }}--etc--" placeholder = "기타사항을 입력해주세요." hidden>
                         {% endif %}
                     <br><hr>
                     <br><br>
@@ -95,13 +92,13 @@
                         <p>{{ question.helpText }}</p>
                         <br><br>
                             {% for choice in question.extra.choices %}
-                                <input type="radio" name = "984420844" value="{{choice.value}}"> {{choice.value}}
+                                <input type="radio" name = "{{ question.id }}" value="{{choice.value}}"> {{choice.value}}
                                 <br><br>
                             {% endfor %}
                             {% if question.extra.hasOtherOption == True %}
-                                <input type = "radio" name = "984420844" value = "{{choice.value}}"> 기타
+                                <input type = "radio" name = "{{ question.id }}" value = "--etc--"> 기타
                                 <br>
-                                <input type = "text" name = "984420844-etc" placeholder = "기타사항을 입력해주세요." hidden>
+                                <input type = "text" name = "{{ question.id }}--etc--" placeholder = "기타사항을 입력해주세요." hidden>
                             {% endif %}
                         <br><hr>
                         <br><br>
@@ -109,12 +106,25 @@
 
                 {% endif %}
 
+                {% if question.type == 'LIST' %}
+                    <h3 class="question">{{ question.title }}</h3>
+                    <p>{{ question.helpText }}</p>
+                    <br><br>
+                    <select name="{{ question.id }}">
+                        {% for choice in question.extra.choices %}
+                            <option value="{{choice.value}}">{{ choice.value }}</option>
+                        {% endfor %}
+                    </select>
+                    <br><hr>
+                    <br><br>
+                {% endif %}
+
                 {% if question.type == "TEXT" %}
                     <div>
                         <h3 class="question">{{ question.title }}</h3>
                         <p>{{ question.helpText }}</p>
                         <br><br>
-                        <input type = "text" name = "2042360110" value = "" >
+                        <input type = "text" name = "{{ question.id }}" value = "" >
                         <br><br><hr>
                         <br><br>
                     </div>
@@ -127,7 +137,7 @@
                         <h3 class="question">{{ question.title }}</h3>
                         <p>{{ question.helpText }}</p>
                         <br><br>
-                        <textarea class="long" rows="5"  name="40010923"></textarea>
+                        <textarea class="long" rows="5"  name="{{ question.id }}"></textarea>
                         <br><br><hr>
                         <br><br>
                     </div>
