@@ -26,4 +26,9 @@ for (let i of rad2) {
 
 if (is_submit) {
     console.log(is_submit)
+
+    for (let item of answers) {
+        console.log(item)
+
+    }
 }
