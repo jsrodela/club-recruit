@@ -4,8 +4,6 @@
 
 .aa {
     padding: 30px 50px 40px 40px;
-
-
 }
 
 button {
@@ -53,7 +51,7 @@ button {
 }
 
 input[type=text] {
-    width: 500px;
+    width: 200px;
     height: 32px;
     font-size: 15px;
     border: 0;
@@ -105,5 +103,14 @@ h2, h3, p {
 
 /* 모바일 레이아웃 */
 @media screen and (max-width: 768px) {
-
+    .aa {
+        padding: 20px 20px 20px 20px;
+        text-align: center;
+    }
+    .input[type=text]{
+        width:100vw;
+    }
+    .long{
+        width: 300px;
+    }
 }
