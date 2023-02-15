@@ -15,6 +15,7 @@
     height: 90%;
     border: 0.1rem solid rgba(0, 0, 0, 0.05);
     border-radius: 1rem;
+    padding: 0.2rem;
     /*background-color: rgba(0, 0, 0, 0.);*/
     backdrop-filter: blur(15px);
 }
