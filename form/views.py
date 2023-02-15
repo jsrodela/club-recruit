@@ -11,10 +11,12 @@ from .models import FormModel
 def form(request, clubname):
     data = get_data(request)
 
-    if 'user' in data:
+    if 'user' not in data:
         data['error'] = "로그인 이후 신청하세요."
+        return render(request, 'form/form.html', data)
     elif FormModel.objects.filter(number=data['user'].id, club=clubname):  # 유저 네임, 클럽네임을 가진 유저가 존재한다면
         data['error'] = "이미 지원서를 제출했습니다."
+        return render(request, 'form/form.html', data)
     else:
         pass
 

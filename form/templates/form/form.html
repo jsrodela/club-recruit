@@ -13,6 +13,13 @@
 {% endblock %}
 
 {% block content %}
+
+    {% if error %}
+        <script>
+            alert("{{ error }}")
+            location.href = "/";
+        </script>
+    {% endif %}
     {% if submit %}
         {{ submit|escape }}
         <script>
