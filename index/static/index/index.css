@@ -29,6 +29,7 @@ button {
     background-color: #ddd;
     text-align: center;
     background-image: var(--background-image-url);
+    background-repeat: no-repeat;
     /* width: 40%;
     aspect-ratio: 16 / 9; */
 }
@@ -57,7 +58,7 @@ button {
     justify-content: center;
     align-items: center;
     height: 250px;
-    backdrop-filter: blur(2.5px);
+    backdrop-filter: blur(2px);
 
 }
 .north_fox {
@@ -67,6 +68,7 @@ button {
 }
 
 h2 {
+    color: rgba(95, 119, 219, 1);
     text-align: center;
 }
 
@@ -91,3 +93,21 @@ h2 {
     padding: 10px;
 }
 
+
+/* 모바일 레이아웃 */
+@media screen and (max-width: 768px) {
+    .outer-container {
+        flex-direction: column;
+        overflow-x: hidden;
+        align-items: center;
+    }
+    .dong_ari, .interview, .my_info {
+        width: 75%;
+        margin-bottom: 50px;
+        /*margin: 0 100px 0 100px;*/
+    }
+    /* 사이사이 마진 넣으려고 했는데 밑에도 넣는 게 이쁨
+    .dong_ari, .interview {
+        margin-bottom: 50px;
+    } */
+}
