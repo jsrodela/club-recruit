@@ -30,6 +30,7 @@ button {
     text-align: center;
     background-image: var(--background-image-url);
     background-repeat: no-repeat;
+    background-size: cover;
     /* width: 40%;
     aspect-ratio: 16 / 9; */
 }

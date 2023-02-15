@@ -42,39 +42,38 @@
                 <b>·</b> CSG: 3/14 07:00 ~ 3/15 15:00<br> <br>
                 <b>·</b> Rodela: 3/15 8:00 </p>
             </div>
-        <div class = 'my_info'>
-            <h2>내 정보</h2>
-            <p>ID: 10101 <br> <br>
-            PW: 1234 <br> <br>
-            Phonenum: 010-1234-5678 <br> <br>
-            Name: OOO</p>
-        </div>
+            <div class = 'my_info'>
+                <h2>내 정보</h2>
+                <p>ID: 10101 <br> <br>
+                Phonenum: 010-1234-5678 <br> <br>
+                Name: OOO</p>
+            </div>
 
         <div class="wrap">
-        {% if invalid %}
-         <p>일치하는 회원이 없습니다.</p>
-        {% endif %}
-        <form class="login" method="post" action="">
-            {% csrf_token %}
-            <div class="input_wrapper">
-                <h4>학번</h4>
-                <input type="number" name="id" id="id" placeholder="ex) 10001" min="10101" max="21040" required>
-            </div>
-            <div class="input_wrapper">
-                <h4>비밀번호</h4>
-                <input type="password" name="pw" id="pw" placeholder="********" required>
-            </div>
-            <div class="login_etc">
-                <div class="forgot_pw">
-                    <a href="/account/register">회원가입</a> |
-                    <a href="/account/forgot">비밀번호를 잃어버렸나요?</a>
+            {% if invalid %}
+             <p>일치하는 회원이 없습니다.</p>
+            {% endif %}
+            <form class="login" method="post" action="">
+                {% csrf_token %}
+                <div class="input_wrapper">
+                    <h4>학번</h4>
+                    <input type="number" name="id" id="id" placeholder="ex) 10001" min="10101" max="21040" required>
                 </div>
-            </div>
-            <div class="submit">
-                <input type="submit" value="로그인">
-            </div>
-        </form>
-    </div>
+                <div class="input_wrapper">
+                    <h4>비밀번호</h4>
+                    <input type="password" name="pw" id="pw" placeholder="********" required>
+                </div>
+                <div class="login_etc">
+                    <div class="forgot_pw">
+                        <a href="/account/register">회원가입</a> |
+                        <a href="/account/forgot">비밀번호를 잃어버렸나요?</a>
+                    </div>
+                </div>
+                <div class="submit">
+                    <input type="submit" value="로그인">
+                </div>
+            </form>
+        </div>
     </div>
 
     <script>
