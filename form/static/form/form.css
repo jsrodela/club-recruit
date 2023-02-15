@@ -61,7 +61,7 @@ input[type=text] {
     outline: none;
     padding-left: 10px;
     background-color: rgba(0,0,0,0.05);
-  }
+}
 .long{
     width: 500px;
     height: 32px;
@@ -80,24 +80,27 @@ input[type=text] {
     color: #77af9c;
     align-items: center;
 }
-.sectionheader{
-    font-size: 25px;
-    padding: 0.7rem;
-    border-left: 5px solid #848484;
-    background: #F2F2F2;
-    border-radius: 10px;
-    height: 25px;
-
-}
-.question{
-  font-size: 20px;
-}
 
 h1 {
   font-size: 40px;
   color: rgb(95, 119, 219,2);
   border-top: 3px solid rgb(95, 119, 219,2);
   border-bottom: 3px solid rgb(95, 119, 219,2);
+}
+
+h2, h3, p {
+    margin: 0.3rem 0;
+}
+
+.sectionheader {
+    padding: 0.7rem;
+    border-left: 5px solid #848484;
+    background: #F2F2F2;
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+}
+.question{
+  font-size: 1.2rem;
 }
 
 /* 모바일 레이아웃 */

@@ -103,6 +103,11 @@
     opacity: 1;
 }
 
+.submitpage:hover {
+   opacity: 90%;
+   cursor: pointer;
+}
+
 .arrow {
   border: solid black;
   border-width: 0 3px 3px 0;

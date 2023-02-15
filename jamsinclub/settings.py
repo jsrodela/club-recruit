@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
+import json
 import os
 from pathlib import Path
 
@@ -16,14 +17,18 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+with open(os.path.join(BASE_DIR, 'settings.json')) as f:
+    conf = json.loads(f.read())
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-=jwym+hlrxql772fu&(*^20cyt%_8t4wu$^dw__v^ugbm*=+ha"
+SECRET_KEY = conf['secret_key']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = not conf['production']
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 

@@ -1,25 +1,85 @@
 // Nav Selection
-function changeNav(element, link) {
-    if (element.tagName == 'LI') {
-        document.querySelector('nav > ul > li.selected').classList.remove('selected')
-        element.classList.add('selected')
-    }
+// code: nav에서 .select할 class
+// link: location.href
 
-    wrapper = $('.wrapper')
-    wrapper.addClass('fade')
+function changeNav(code, link) {
+    selectNav(code);
+
+    let wrapper = document.querySelector('.wrapper');
+    wrapper.classList.add('fade');
     setTimeout(function() {
-        wrapper.load(link + ' .wrapper2', function() {
-            history.pushState({page_id: 1}, '', link)
+        fetch(link)
+            .then(response => response.text())
+            .then(text => {
 
-            register_onclick();
+                // get wrapper
+                let temp = new DOMParser().parseFromString(text, "text/html");
+                let fetched_wrapper = temp.querySelector('.wrapper2');
+                let wrapper2 = document.querySelector('.wrapper2')
+                wrapper.innerHTML = "";
+                wrapper.appendChild(fetched_wrapper);
 
-            setTimeout(function() {
-                wrapper.removeClass('fade')
-            }, 100) // 0.1s to apply style
-        })
+                console.log(fetched_wrapper)
+
+                markdown_script = fetched_wrapper.querySelector("script[type='text/markdown']");
+                if (markdown_script != undefined) {
+                    fetched_wrapper.querySelector('zero-md').appendChild(markdown_script);
+                    console.log(markdown_script)
+                }
+
+                for (let script of fetched_wrapper.querySelectorAll("script:not([type='text/markdown'])")) {
+                    let newscript = document.createElement('script');
+                    if (script.hasAttribute('src')) {
+                        newscript.setAttribute('src', script.src);  // <script src=...></script>
+                        if (script.hasAttribute('type')) newscript.setAttribute('type', script.type);
+                    }
+                    else newscript.innerHTML = script.innerHTML;  // <script>...</script>
+                    wrapper.appendChild(newscript);
+                    console.log(newscript);
+                }
+                /*
+                document.querySelector('.wrapper2').innerHTML = fetched_wrapper.innerHTML;
+
+                // run scripts manually
+                // exclude <script src=...> and <script type="text/markdown"> (already executed via innerHTML)
+                for (let script of fetched_wrapper.querySelectorAll("script:not([src],[type='text/markdown'])")) {
+                    try {
+                        eval(script.innerHTML);
+                    }
+                    catch (err) {
+                        console.log(script);
+                        console.error(err)
+                    }
+                }*/
+
+                // change location.href without reload (뒤로가기 제외)
+                if (code != '__popstate__') {
+                    history.pushState({page_id: 1}, '', link)
+                }
+
+                // register smooth reload on every <a>
+                register_onclick();
+
+                // scroll to top
+                wrapper.scrollTo(0, 0)
+
+                // show element after 0.1s
+                setTimeout(function() {
+                    wrapper.classList.remove('fade');
+                }, 100);
+            })
     }, 300) // 0.3s to fadeout
 
     return false;
+}
+
+function selectNav(code) {
+//    console.log(code)
+    if (code == '' || code == '__popstate__') return;
+    for (let element of document.querySelectorAll('nav > ul > li.selected')) {
+        element.classList.remove('selected');
+    }
+    document.querySelector('nav > ul > li.' + code).classList.add('selected')
 }
 
 function register_onclick() {
@@ -29,13 +89,17 @@ function register_onclick() {
 
         if (link.onclick == null && link.href == null) { // if onclick or href is not defined
             link.onclick = function(event) {
-                return changeNav(event.target, link.href);
+                return changeNav('', link.href);
             }
         }
     }
 }
 
 // On page loaded
-window.onload = function() {
+window.addEventListener('load', function() {
     register_onclick()
-}
+});
+
+window.addEventListener("popstate", function(event) {
+    return changeNav('__popstate__', location.href);
+});

@@ -1,5 +1,8 @@
+import json
+
 from django.shortcuts import render, redirect
 
+from about.models import ClubModel
 from account.base import get_data
 from .form_data import form_data
 from .models import FormModel
@@ -7,12 +10,13 @@ from .models import FormModel
 
 def form(request, clubname):
     data = get_data(request)
-    data['form_data'] = form_data
 
-    if 'user' in data:
+    if 'user' not in data:
         data['error'] = "로그인 이후 신청하세요."
+        return render(request, 'form/form.html', data)
     elif FormModel.objects.filter(number=data['user'].id, club=clubname):  # 유저 네임, 클럽네임을 가진 유저가 존재한다면
         data['error'] = "이미 지원서를 제출했습니다."
+        return render(request, 'form/form.html', data)
     else:
         pass
 
@@ -46,15 +50,20 @@ def form(request, clubname):
         FormModel(number=user_id, club=clubname, section=submit).save()
         return redirect('/')
 
+    club_model = ClubModel.objects.get(code=clubname)
+    data['clubname'] = clubname
+    data['form_data'] = club_model.form_data
+    # data['form_data'] = form_data
     return render(request, 'form/form.html', data)
 
 
 def club(request, clubname):
     data = get_data(request)
-    data['form_data'] = form_data
-    form_submit = FormModel.objects.filter(number=data['user'].id, club=clubname).first()
+    form_submit = FormModel.objects.get(number=data['user'].id, club=clubname)
 
-    data['submit'] = form_submit.section
+    data['submit'] = json.dumps(form_submit.section)
 
-    data['form_data'] = form_data
+    club_model = ClubModel.objects.get(code=clubname)
+    data['clubname'] = clubname
+    data['form_data'] = club_model.form_data
     return render(request, 'form/form.html', data)

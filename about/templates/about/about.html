@@ -45,7 +45,7 @@
                 </div>
             </div>
             <div class="right">
-                <button onclick="changeNav(this, '/form/submit/{{ club.code }}');" class="submitpage">
+                <button onclick="changeNav('club_{{ club.code }}', '/form/submit/{{ club.code }}');" class="submitpage">
                     지원하기
                 </button>
                 <div class="text">
@@ -59,4 +59,8 @@
             </div>
         </div>
     </div>
+
+    <script>
+        selectNav('club_{{ club.code }}');
+    </script>
 {% endblock %}

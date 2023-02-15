@@ -10,7 +10,7 @@
     <link rel="icon" type="image/x-icon" href="{% static '/favicon.svg' %}" />
 
     <script src="https://kit.fontawesome.com/a82d1de6b4.js" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>-->
 
 
     <link rel="stylesheet" href="{% static 'var.css' %}">
@@ -34,11 +34,11 @@
         <div class="mainwrap">
             <nav>
                 <ul>
-                    <li class="home selected" onclick="changeNav(this, '/');"><i class="fa-solid fa-house"></i> <p>홈</p></li>
+                    <li class="home selected" onclick="changeNav('home', '/');"><i class="fa-solid fa-house"></i> <p>홈</p></li>
                 </ul>
                 <ul>
                     {% for club in clubs %}
-                        <li class="club" onclick="changeNav(this, '/about/{{ club.code }}');"><img src="{{ club.logo_url }}" width="25"> <p>{{ club.name }}</p></li>
+                        <li class="club club_{{ club.code }}" onclick="changeNav('club_{{ club.code }}', '/about/{{ club.code }}');"><img src="{{ club.logo_url }}" width="25"> <p>{{ club.name }}</p></li>
                     {% endfor %}
                     <!--
                     {% for i in '....................'|make_list %}

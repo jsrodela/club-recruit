@@ -2,3 +2,5 @@
 .venv
 db.sqlite3
 !/.idea/runConfigurations
+media
+settings.json

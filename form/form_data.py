@@ -1,11 +1,23 @@
 # https://forms.gle/ro1Mo6yds7CSHiM19
+import json
+
 import requests
 
+from jamsinclub import settings
 
-def get_form_data(url):
-    data = requests.get('https://script.google.com/macros/s/AKfycbz0xDE1DSaDKKl6AvzP6qLoEUFolnYlgo_tEpBb-LVVwYqoHXy2pDe-weEF7dSYeJb4/exec?type=getform&form=kr')
-    print(data.content)
-    pass
+
+def reload_form(name):
+    reload_data = requests.get(settings.conf['extform_url'] + "?type=reload&form=" + name)
+    result = json.loads(reload_data.content)
+    if 'error' in result:
+        raise ConnectionError(result['error'])
+
+    getform_data = requests.get(settings.conf['extform_url'] + "?type=getform&form=" + name)
+    result = json.loads(getform_data.content)
+    if 'error' in result:
+        raise ConnectionError(result['error'])
+
+    return result
 
 
 form_data = {
@@ -21,7 +33,7 @@ form_data = {
         },
         {
             "title": "객관식 질문",
-            "helpText": "",
+            "helpText": "asdfasdf",
             "id": 984420844,
             "type": "MULTIPLE_CHOICE",
             "extra": {
@@ -42,7 +54,7 @@ form_data = {
         },
         {
             "title": "체크박스",
-            "helpText": "",
+            "helpText": "asdfasdf",
             "id": 527425354,
             "type": "CHECKBOX",
             "extra": {
@@ -83,7 +95,7 @@ form_data = {
         },
         {
             "title": "단답형",
-            "helpText": "",
+            "helpText": "asdfsdaf",
             "id": 2042360110,
             "type": "TEXT",
             "extra": {
@@ -92,7 +104,7 @@ form_data = {
         },
         {
             "title": "장문형 (5글자 이상)",
-            "helpText": "",
+            "helpText": "adsfadsf",
             "id": 40010923,
             "type": "PARAGRAPH_TEXT",
             "extra": {

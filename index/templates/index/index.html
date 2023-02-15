@@ -12,7 +12,7 @@
         <!--<img src = "{% static 'index/북극여우.jpg' %}" class = 'north_fox'>-->
         <style>
             #banner {
-                --background-image-url: url("{% static 'index/로델라 배너 이미지.jpg' %}")
+                --background-image-url: url("{{ banner_club.index_banner_image.image.url }}")
             }
         </style>
         <div class = 'inner_banner'>
@@ -27,7 +27,7 @@
 
                 {% for clubname in club_names %}
                     <p style = ''><b>·</b> {{clubname}}
-                        <button type = "button" onclick="location.href='form/views/{{clubname}}';">
+                        <button type = "button" onclick="return changeNav('club_{{ clubname }}', '/form/views/{{ clubname }}');">
                             지원서 보기
                         </button></p>
 
@@ -52,4 +52,7 @@
         </div>
     </div>
 
+    <script>
+        selectNav('home');
+    </script>
 {% endblock %}
