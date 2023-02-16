@@ -23,17 +23,20 @@
     {% if user.is_authenticated %}
         <div class="outer-container">
             <div class = 'dong_ari'>
-                <h2>지원 동아리</h2>
-                <ul>
-                {% for form in forms %}
-                    <li class="club">{{ form.club.name }}
-                        <button type = "button" onclick="return changeNav('club_{{ form.club.code }}', '/form/views/{{ form.club.code }}');">
-                            지원서 보기
-                        </button>
-                    </li>
-
-                {% endfor %}
-                </ul>
+                <h2>지원한 동아리</h2>
+                {% if forms|length > 0 %}
+                    <ul>
+                        {% for form in forms %}
+                            <li class="club">{{ form.club.name }}
+                                <button type = "button" onclick="return changeNav('club_{{ form.club.code }}', '/form/views/{{ form.club.code }}');">
+                                    지원서 보기
+                                </button>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p style="color: grey; text-align: center;">동아리에 지원해보세요!</p>
+                {% endif %}
             </div>
 
             <div class = 'interview'>
