@@ -8,5 +8,9 @@ class ClubModelAdmin(admin.ModelAdmin):
     readonly_fields = ('form_start', 'form_end')
 
 
+class ImageModelAdmin(admin.ModelAdmin):
+    readonly_fields = ('created_at', )
+
+
 admin.site.register(ClubModel, ClubModelAdmin)
-admin.site.register(ImageModel)
+admin.site.register(ImageModel, ImageModelAdmin)
