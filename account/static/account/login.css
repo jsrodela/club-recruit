@@ -88,6 +88,13 @@ form {
     text-decoration: underline solid var(--main-color);
 }
 
+.invalid {
+    background-color: rgba(255, 0, 0, 0.1);
+    padding: 1rem 2rem;
+    border: 0.01rem solid rgba(255, 0, 0, 0.3);
+    border-radius: 3rem;
+}
+
 
 /* Hide arrows (spinner) from <input type="number"> */
 /* Chrome, Safari, Edge, Opera */

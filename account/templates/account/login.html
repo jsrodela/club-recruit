@@ -5,6 +5,12 @@
 {% endblock %}
 
 {% block content %}
+    {% if invalid %}
+        <script>
+            alert("{{ invalid }}");
+            location.href=  "/";
+        </script>
+    {% endif %}
      <div class="wrap">
         {% if invalid %}
          <p>일치하는 회원이 없습니다.</p>
