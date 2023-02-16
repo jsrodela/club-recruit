@@ -30,7 +30,7 @@ SECRET_KEY = conf['secret_key']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = not conf['production']
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = conf['allowed_hosts']
 
 
 # Application definition
