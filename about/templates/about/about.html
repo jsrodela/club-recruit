@@ -8,6 +8,7 @@
 
 {% block module %}
     {{ block.super }}
+    <script src="{% static 'about/about.js' %}"></script>
     <!-- Zero-md (https://github.com/zerodevx/zero-md) -->
     <script type="module" src="https://cdn.jsdelivr.net/gh/zerodevx/zero-md@2/dist/zero-md.min.js"></script>
 {% endblock %}
@@ -25,24 +26,25 @@
             <div class="left">
                 <div class="photo">
 
-                    <!--
-                        @TODO: about photo
-                    -->
 
-                    <style>
-                        .photo {
-                            --photo-url: url("{% static 'index/북극여우.jpg' %}")
-                        }
-                    </style>
+                    <script>
+                        // 이 코드가 about.js보다 먼저 실행됨
+                        var images = [];
+                    </script>
+                    {% for image in club.about_images.all %}
+                        <script>
+                            images.push("{{ image.image.url }}");
+                        </script>
+                    {% endfor %}
 
                     <div class="left_area">
-                        <button name="이전사진" class="left_button">
+                        <button name="이전사진" class="arrow_button" onclick="change_image(-1);">
                             <i class="fa-solid fa-arrow-left"></i>
                         </button>
                     </div>
 
                     <div class="right_area">
-                        <button name="다음사진" class="right_button">
+                        <button name="다음사진" class="arrow_button" onclick="change_image(1);">
                             <i class="fa-solid fa-arrow-right"></i>
                         </button>
                     </div>
