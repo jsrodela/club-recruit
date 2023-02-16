@@ -14,9 +14,9 @@
                 --background-image-url: url("{{ banner_club.index_banner_image.image.url }}")
             }
         </style>
-        <div class = 'inner_banner'>
-            <strong>RoDeLa 6.0</strong>
-            <p><span>A</span> <span>S</span>ite <span>M</span>ade by <span>R</span>odela</p>
+        <div class = 'inner_banner' onclick="return changeNav('club_{{ banner_club.code }}', '/about/{{ banner_club.code }}');">
+            <strong>{{ banner_club.name }}</strong>
+            <p>{{ banner_club.index_banner_description }}</p>
         </div>
     </div>
 
@@ -24,28 +24,33 @@
         <div class="outer-container">
             <div class = 'dong_ari'>
                 <h2>지원 동아리</h2>
-                {% for clubname in club_names %}
-                    <p style = ''><b>·</b> {{clubname}}
-                        <button type = "button" onclick="return changeNav('club_{{ clubname }}', '/form/views/{{ clubname }}');">
+                <ul>
+                {% for form in forms %}
+                    <li class="club">{{ form.club.name }}
+                        <button type = "button" onclick="return changeNav('club_{{ form.club.code }}', '/form/views/{{ form.club.code }}');">
                             지원서 보기
-                        </button></p>
+                        </button>
+                    </li>
+
                 {% endfor %}
+                </ul>
             </div>
 
             <div class = 'interview'>
                 <h2>면접 시간</h2>
-
-                <p> <b>·</b> AMAS: 3/14 08:00 ~ 3/15 21:00 <br> <br>
-                <b>·</b> CSG: 3/14 07:00 ~ 3/15 15:00<br> <br>
-                <b>·</b> Rodela: 3/15 8:00 </p>
+                <p style="color: grey; text-align: center;">1차 지원 진행중</p>
             </div>
 
             <div class = 'my_info'>
                 <h2>내 정보</h2>
-                <p>ID: 10101 <br> <br>
-                Phonenum: 010-1234-5678 <br> <br>
-                Name: OOO</p>
+                <strong>{{ user.id }} {{ user.name }}</strong>
+                <p>{{ user.phone }}</p>
                 <a href="/account/logout">로그아웃</a>
+
+                {% if user.leader_of %}
+                    <br>
+                    <a href="/about/leader">동아리 관리</a>
+               {% endif %}
             </div>
         </div>
     {% else %}

@@ -31,6 +31,7 @@ button {
     background-image: var(--background-image-url);
     background-repeat: no-repeat;
     background-size: cover;
+    cursor: pointer;
     /* width: 40%;
     aspect-ratio: 16 / 9; */
 }
