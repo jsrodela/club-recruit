@@ -1,3 +1,5 @@
+import random
+
 from django.shortcuts import render
 
 from about.models import ClubModel
@@ -17,6 +19,7 @@ def index(request):
             club_names.append(i.club)  # club_names라는 리스트에 amas.club rodela.club 처럼 신청한 동아리.club만 추가
 
         data['club_names'] = club_names
-        data['banner_club'] = ClubModel.objects.first()
+
+    data['banner_club'] = random.choice(list(ClubModel.objects.all()))
 
     return render(request, 'index/index.html', data)
