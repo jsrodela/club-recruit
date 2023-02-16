@@ -33,6 +33,8 @@ def leader(request):
 
         if 'club_name' in submit:
             club.name = submit.get('club_name')
+        if 'logo_image' in file:
+            club.logo_image = new_image('logo_image', club, file, user)
         if 'index_banner_description' in submit:
             club.index_banner_description = submit.get('index_banner_description')
         if 'index_banner_image' in file:
