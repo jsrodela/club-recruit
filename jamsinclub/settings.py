@@ -95,13 +95,15 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
+# 비번 까먹는 경우가 많아서 비밀번호 기준은 좀 유하게 ㅠㅠ (4글자 이상, 흔한 비번 금지)
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
-    },
-    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",},
+    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+     'OPTIONS': {
+         'min_length': 4,
+     }},
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",},
-    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
+    # { "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator", }, - 이름이 없지롱
+    # {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",}, - 생년월일 비번으로 쓸수 있또록 합시당
 ]
 
 AUTH_USER_MODEL = 'account.User'

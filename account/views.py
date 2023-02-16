@@ -1,4 +1,6 @@
 from django.contrib import auth
+from django.contrib.auth.password_validation import validate_password
+from django.core.exceptions import ValidationError
 from django.shortcuts import render, redirect
 from .base import get_data
 
@@ -35,9 +37,14 @@ def register(request):
         if UserModel.objects.filter(id=_id).exists():
             data['invalid'] = f"학번이 {_id}인 계정이 이미 존재합니다."
         else:
-            user = UserModel.objects.create_user(_id, _name, _phone, _pw)
-            auth.login(request, user)
-            return redirect('/')
+            try:
+                validate_password(_pw)
+
+                user = UserModel.objects.create_user(_id, _name, _phone, _pw)
+                auth.login(request, user)
+                return redirect('/')
+            except ValidationError as err:
+                data['invalid'] = err.messages[0]
 
     return render(request, 'account/register.html', data)
 
