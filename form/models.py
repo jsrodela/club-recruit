@@ -17,3 +17,5 @@ class FormModel(models.Model):
         encoder=json.JSONEncoder,
         decoder=json.JSONDecoder
     )
+
+    submit_at = models.DateTimeField(auto_now_add=True)
