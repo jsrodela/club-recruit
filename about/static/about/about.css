@@ -16,12 +16,12 @@
     border: 0.1rem solid rgba(0, 0, 0, 0.05);
     border-radius: 1rem;
     padding: 0.2rem;
+    justify-content: space-evenly;
     /*background-color: rgba(0, 0, 0, 0.);*/
     backdrop-filter: blur(15px);
 }
 
 .left {
-    flex: auto;
     display: flex;
     align-items: center;
     width: 60%;
@@ -29,7 +29,8 @@
 }
 
 .photo {
-    width:100%;
+    max-width: 100%;
+    min-height: 100%;
     aspect-ratio: 1 / 1;
     background-color: white;
     display: flex;
@@ -40,6 +41,7 @@
     background-repeat : no-repeat;
     background-size : cover;
     animation-duration: 0.5s;
+
 }
 
 .left_area, .right_area {
@@ -71,7 +73,6 @@
 }
 
 .right {
-    flex: auto;
     width: 40%;
     text-align: center;
     display: flex;
@@ -124,7 +125,7 @@
 @media screen and (max-width: 768px) {
 
     .background{
-        width: 100vw;
+        width: 100%;
         height: 100vh;
         display: flex;
         align-items: center;
@@ -140,9 +141,8 @@
     }
 
     .photo{
-        width: 100%;
         text-align: center;
-
+        min-width:100%;
      }
     .submitpage{
         width: 100%;
@@ -154,6 +154,9 @@
     }
     .right{
         width: 100%;
+    }
+    .left, .right {
+        padding: 0.5rem 0rem
     }
 }
 
