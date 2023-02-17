@@ -25,10 +25,54 @@ for (let i of rad2) {
 */
 
 if (is_submit) {
-    console.log(is_submit)
-
     for (let item of answers) {
-        console.log(item)
+        let id = item.question.toString();
+        if (id.endsWith('--etc--')) continue;
+        let type = question_type[id];
+        let value = item.answer;
 
+        switch (type) {
+            case "MULTIPLE_CHOICE":
+            case "CHECKBOX": {
+                let elements = document.querySelectorAll(`input[name="${id}"][value="${value}"]`)
+                for (let element of elements) {
+                    element.checked = true;
+                }
+                break;
+            }
+            case "LIST": {
+                let element = document.querySelector(`select[name="${id}"] option[value="${value}"]`)
+                element.selected = true;
+                break;
+            }
+            case "TEXT": {
+                let element = document.querySelector(`input[name="${id}"]`);
+                element.value = value;
+                break;
+            }
+            case "PARAGRAPH_TEXT": {
+                let element = document.querySelector(`textarea[name="${id}"]`);
+                element.innerHTML = value;
+                break;
+            }
+            default: {
+                console.error('Unknown type: ' + type)
+                break;
+            }
+        }
+    }
+    for (let tagname of ['input', 'textarea', 'select']) {
+        for (let element of document.getElementsByTagName(tagname)) {
+            element.disabled = true;
+        }
+    }
+    for (let element of document.getElementsByTagName('input')) {
+        element.disabled = true;
+    }
+    for (let element of document.getElementsByTagName('textarea')) {
+        element.disabled = true;
+    }
+    for (let element of document.getElementsByTagName('select')) {
+        element.disabled = true;
     }
 }
