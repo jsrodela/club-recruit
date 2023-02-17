@@ -157,6 +157,7 @@
 
             <p>지원서는 추후 수정이 불가능합니다.</p>
             {% if submit %}
+            {% elif form_data.items|length == 0 %}
             {% else %}
                 <br><br>
                 <input type="submit" onclick="location.href='survey_fin.html'" class="w-btn w-btn-green" value="제출하기">
