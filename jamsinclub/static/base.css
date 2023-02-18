@@ -61,6 +61,14 @@ footer {
     color: grey;
 }
 
+footer a {
+    /* 밑줄 지우기 */
+    text-decoration: none;
+    color: grey;
+    padding: 0;
+    margin: 0;
+}
+
 header *, footer * {
     /* 영역 밖으로 나가지 않게 */
     margin: 0;
