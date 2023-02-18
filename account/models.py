@@ -48,7 +48,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     name = models.CharField(max_length=5, null=False, blank=False)
     phone = PhoneNumberField(null=False, blank=False)
 
-    leader_of = models.ForeignKey(ClubModel, on_delete=models.SET_NULL, null=True)
+    leader_of = models.ForeignKey(ClubModel, on_delete=models.SET_NULL, null=True, blank=True)
 
     username = None
     first_name = None

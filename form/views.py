@@ -47,7 +47,7 @@ def form(request, clubname):
             })
 
         print(submit)
-        FormModel(number=user_id, club=clubname, section=submit).save()
+        FormModel(number=user_id, club=ClubModel.objects.get(code=clubname), section=submit).save()
         return redirect('/')
 
     club_model = ClubModel.objects.get(code=clubname)

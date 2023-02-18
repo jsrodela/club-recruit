@@ -22,7 +22,9 @@ def leader(request):
     if 'user' not in data or data['user'].leader_of is None:
         return redirect('/')
 
-    club = data['user'].leader_of
+    user = data['user']
+    club = user.leader_of
+
     data['club'] = club
 
     if request.POST:
@@ -31,14 +33,16 @@ def leader(request):
 
         if 'club_name' in submit:
             club.name = submit.get('club_name')
+        if 'logo_image' in file:
+            club.logo_image = new_image('logo_image', club, file, user)
         if 'index_banner_description' in submit:
             club.index_banner_description = submit.get('index_banner_description')
         if 'index_banner_image' in file:
-            club.index_banner_image = new_image('index_banner_image', club, file)
+            club.index_banner_image = new_image('index_banner_image', club, file, user)
         if 'about_background' in file:
-            club.about_background = new_image('about_background', club, file)
+            club.about_background = new_image('about_background', club, file, user)
         if 'about_image_add' in file:
-            club.about_images.add(new_image('about_image_add', club, file))
+            club.about_images.add(new_image('about_image_add', club, file, user))
         if 'about_image_remove' in submit:
             for target_id in submit.getlist('about_image_remove'):
                 target = ImageModel.objects.get(id=target_id)
@@ -61,8 +65,8 @@ def leader(request):
     return render(request, 'about/leader.html', data)
 
 
-def new_image(name, club, file):
+def new_image(name, club, file, user):
     image = file.get(name)
-    image_model = ImageModel(club=club.code, image=image)
+    image_model = ImageModel(club=club.code, image=image, uploaded_by=user.id)
     image_model.save()
     return image_model

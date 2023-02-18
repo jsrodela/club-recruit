@@ -1,3 +1,8 @@
 .wrap {
     padding: 1rem;
 }
+
+textarea {
+    width: 50%;
+    height: 20%;
+}

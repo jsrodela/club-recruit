@@ -16,12 +16,12 @@
     border: 0.1rem solid rgba(0, 0, 0, 0.05);
     border-radius: 1rem;
     padding: 0.2rem;
+    justify-content: space-evenly;
     /*background-color: rgba(0, 0, 0, 0.);*/
     backdrop-filter: blur(15px);
 }
 
 .left {
-    flex: auto;
     display: flex;
     align-items: center;
     width: 60%;
@@ -29,7 +29,8 @@
 }
 
 .photo {
-    width:100%;
+    max-width: 100%;
+    min-height: 100%;
     aspect-ratio: 1 / 1;
     background-color: white;
     display: flex;
@@ -39,34 +40,40 @@
     background-image: var(--photo-url);
     background-repeat : no-repeat;
     background-size : cover;
+    animation-duration: 0.5s;
+    background-position: center;
+
+}
+
+.left_area, .right_area {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
 }
 
 .left_area {
-    flex-grow: 1;
-    display: flex;
-    align-items: center;
     justify-content: left;
-    padding-left: 0.5rem;
 }
 
 .right_area {
-    flex-grow: 1;
-    display: flex;
-    align-items: center;
     justify-content: right;
-    padding-right: 0.5rem;
 }
 
-.left_button, .right_button {
+.arrow_button {
     opacity:50%;
     display: table-cell;
     vertical-align:middle;
     border-radius: 100px;
-    height:5%;
+    height: 5%;
+    cursor: pointer;
+}
+
+.arrow_button:hover {
+    opacity: 30%;
 }
 
 .right {
-    flex: auto;
     width: 40%;
     text-align: center;
     display: flex;
@@ -115,10 +122,11 @@
   padding: 3px;
 }
 
+/* 모바일 레이아웃 */
 @media screen and (max-width: 768px) {
 
     .background{
-        width: 100vw;
+        width: 100%;
         height: 100vh;
         display: flex;
         align-items: center;
@@ -134,9 +142,8 @@
     }
 
     .photo{
-        width: 100%;
         text-align: center;
-
+        min-width:100%;
      }
     .submitpage{
         width: 100%;
@@ -149,5 +156,59 @@
     .right{
         width: 100%;
     }
+    .left, .right {
+        padding: 0.5rem 0rem
+    }
 }
 
+/* 오른쪽 버튼 누르면: 왼쪽으로 나감 */
+@keyframes right_out {
+    0% {
+        transform: translate(0, 0);
+        opacity: 100%;
+    }
+
+    100% {
+        transform: translate(-30%, 0);
+        opacity: 0%;
+    }
+}
+
+/* 오른쪽 버튼 누르면: 오른쪽에서 들어옴 */
+@keyframes right_in {
+    0% {
+        transform: translate(30%, 0);
+        opacity: 0%;
+    }
+
+    100% {
+        transform: translate(0, 0);
+        opacity: 100%;
+    }
+}
+
+/* 왼쪽 버튼 누르면: 오른쪽으로 나감 */
+@keyframes left_out {
+    0% {
+        transform: translate(0, 0);
+        opacity: 100%;
+    }
+
+    100% {
+        transform: translate(30%, 0);
+        opacity: 0%;
+    }
+}
+
+/* 왼쪽 버튼 누르면: 왼쪽에서 들어옴 */
+@keyframes left_in {
+    0% {
+        transform: translate(-30%, 0);
+        opacity: 0%;
+    }
+
+    100% {
+        transform: translate(0, 0);
+        opacity: 100%;
+    }
+}

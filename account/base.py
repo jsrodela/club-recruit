@@ -13,7 +13,7 @@ def get_data(request):
         pass
 
     clubs = []
-    for club in ClubModel.objects.all():
+    for club in ClubModel.objects.all().order_by('name'):
         obj = {
             'name': club.name,
             'code': club.code,

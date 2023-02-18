@@ -13,11 +13,14 @@ li {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.1);
+  /* background: rgba(0, 0, 0, 0.1); */
+  padding: 2rem 0;
 }
 
 form {
+  min-width: 500px;
   width: 30%;
+  height: 100%;
   background: white;
   border-radius: 20px;
   display: flex;
@@ -26,16 +29,14 @@ form {
   flex-direction: column;
 }
 
-.login {
-  height: 70%;
-}
-
 .register {
-  height: 95%;
+  height: 100%;
+  justify-content: start;
 }
 
 .login_title {
-  color: tomato;
+  /* color: tomato; */
+  color: var(--main-color);
   font-size: 2em;
 }
 
@@ -65,7 +66,7 @@ form {
 }
 
 .submit {
-  margin-top: 50px;
+  margin: 50px 0;
   width: 80%;
 }
 
@@ -75,7 +76,8 @@ form {
   border: 0;
   outline: none;
   border-radius: 40px;
-  background: linear-gradient(to left, rgb(255, 77, 46), rgb(255, 155, 47));
+  /* background: linear-gradient(to left, rgb(255, 77, 46), rgb(255, 155, 47)); */
+  background-color: var(--main-color-accent);
   color: white;
   font-size: 1.2em;
   letter-spacing: 2px;
@@ -84,7 +86,14 @@ form {
 }
 
 .privacy {
-    text-decoration: underline dotted red;
+    text-decoration: underline solid var(--main-color);
+}
+
+.invalid {
+    background-color: rgba(255, 0, 0, 0.1);
+    padding: 1rem 2rem;
+    border: 0.01rem solid rgba(255, 0, 0, 0.3);
+    border-radius: 3rem;
 }
 
 
@@ -98,4 +107,12 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
+}
+
+/* 모바일 레이아웃 */
+@media screen and (max-width: 768px) {
+    form {
+        min-width: 0;
+        width: 95%;
+    }
 }

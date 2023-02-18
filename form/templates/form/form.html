@@ -20,14 +20,14 @@
             location.href = "/";
         </script>
     {% endif %}
+
     {% if submit %}
-        {{ submit|escape }}
         <script>
             // Use 'var' instead of 'let': global variables have to be redefined
 
             var is_submit = true;
             var answers = JSON.parse("{{ submit|escapejs }}");
-            console.log(answers);
+            var question_type = {};
         </script>
     {% else %}
         <script>
@@ -61,8 +61,8 @@
                         </p>
                     <!--
                         @TODO:
-                        4. 제출결과 표시
                         5. 관리자 페이지 제출결과 보기
+                        6. required 설정
                     -->
                 </div>
                 <br><br>
@@ -148,13 +148,24 @@
 
                 {% endif %}
 
+                {% if submit %}
+                    <script>
+                        question_type['{{ question.id }}'] = "{{ question.type }}";
+                    </script>
+                {% endif %}
+
             {% endfor %}
 
-            <br><br>
-            <input type="submit" onclick="location.href='survey_fin.html'" class="w-btn w-btn-green" value="제출하기">
+            <p>지원서는 추후 수정이 불가능합니다.</p>
+            {% if submit %}
+            {% elif form_data.items|length == 0 %}
+            {% else %}
+                <br><br>
+                <input type="submit" onclick="location.href='survey_fin.html'" class="w-btn w-btn-green" value="제출하기">
 
-            <br><br>
-            {% csrf_token %}
+                <br><br>
+                {% csrf_token %}
+            {% endif %}
         </form>
         </div>
 

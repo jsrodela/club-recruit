@@ -6,10 +6,13 @@
 {% endblock %}
 
 {% block content %}
-     <div class="wrap">
-        <form class="register" method="post" action="">
+    <div class="wrap">
+        <form class="register" method="post">
             {% csrf_token %}
             <h2 class="login_title">회원가입</h2>
+            {% if invalid %}
+                <div class="invalid">{{ invalid }}</div>
+            {% endif %}
             <div class="input_wrapper">
                 <h4>학번</h4>
                 <input type="number" name="id" id="id" placeholder="ex) 10001" min="10101" max="21040" required>
@@ -27,7 +30,7 @@
                 <input type="password" name="pw" id="pw" placeholder="********" required>
             </div>
             <div class="login_etc">
-                <p>계속하면 잠신고등학교 상설동아리 지원 플랫폼에 가입하게 됩니다. <br><a href="#" class="privacy">개인정보가 처리되는 방법</a>을 알아보세요.</p>
+                <p>계속하면 잠신고등학교 상설동아리 지원 플랫폼에 가입하게 됩니다. <br><a href="https://github.com/RoDeLa6/club-recruit/blob/main/account/docs/privacy.md" class="privacy" target="_blank">개인정보가 처리되는 방법</a>을 알아보세요.</p>
             </div>
             <div class="submit">
                 <input type="submit" value="회원가입">

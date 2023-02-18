@@ -6,6 +6,7 @@ from django.db import models
 
 # Create your models here.
 
+
 def form_data_default():
     return {
         "title": "지원서 정보 없음",
@@ -17,6 +18,8 @@ def form_data_default():
 class ImageModel(models.Model):
     club = models.CharField(max_length=10)
     image = models.FileField(null=True, upload_to="")
+    created_at = models.DateTimeField(auto_now_add=True)
+    uploaded_by = models.IntegerField()
 
 
 class ClubModel(models.Model):
@@ -24,7 +27,7 @@ class ClubModel(models.Model):
     name = models.CharField(max_length=100, default='테스트_동아리')
 
     # 동아리 코드 (영문 소문자, 10자 이내)
-    code = models.CharField(max_length=10, default='test_club', unique=True)  # always english lowercase
+    code = models.CharField(max_length=10, default='test_club', unique=True, primary_key=True)  # always english lowercase
 
     # 지원 시작 ~ 종료 시간
     form_start = models.DateTimeField(default=datetime.now)

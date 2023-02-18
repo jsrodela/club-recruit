@@ -1,4 +1,3 @@
-{% extends 'base.html' %}
 {% load static %}
 
 {% block style %}
@@ -6,11 +5,17 @@
 {% endblock %}
 
 {% block content %}
+    {% if invalid %}
+        <script>
+            alert("{{ invalid }}");
+            location.href=  "/";
+        </script>
+    {% endif %}
      <div class="wrap">
         {% if invalid %}
          <p>일치하는 회원이 없습니다.</p>
         {% endif %}
-        <form class="login" method="post" action="">
+        <form class="login" method="post" action="/account/login/">
             {% csrf_token %}
             <h2 class="login_title">로그인</h2>
             <div class="input_wrapper">
@@ -24,7 +29,7 @@
             <div class="login_etc">
                 <div class="forgot_pw">
                     <a href="/account/register">회원가입</a> |
-                    <a href="/account/forgot">비밀번호를 잃어버렸나요?</a>
+                    <a href="https://github.com/RoDeLa6/club-recruit/blob/main/account/docs/forgot_password.md" target="_blank">비밀번호를 잃어버렸나요?</a>
                 </div>
             </div>
             <div class="submit">

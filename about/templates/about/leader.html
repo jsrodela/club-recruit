@@ -18,22 +18,33 @@
         <hr>
 
         <form method="post">
-            <h4>동아리 이름</h4>
+            <h3>동아리 이름</h3>
             <p>적용 누르고 새로고침 한번 해주면 적용됩니다.</p>
             <input type="text" name="club_name" value="{{ club.name }}">
+            <input type="submit" value="적용">
+            {% csrf_token %}
+        </form>
+        <form method="post" enctype="multipart/form-data">
+            <h3>동아리 로고</h3>
+            <p>이미지가 1:1 정사각형 비율이면 가장 좋아요!</p>
+            <img src="{{ club.logo_image.image.url }}" width="50">
+            <br>
+            <input type="file" name="logo_image" accept="image/*">
             <input type="submit" value="적용">
             {% csrf_token %}
         </form>
         <hr>
 
         <form method="post">
-            <h4>메인 화면 배너 한줄소개</h4>
+            <h3>메인 화면 배너 한줄소개</h3>
             <input type="text" name="index_banner_description" value="{{ club.index_banner_description }}">
             <input type="submit" value="적용">
             {% csrf_token %}
         </form>
         <form method="post" enctype="multipart/form-data">
-            <h4>메인 화면 배너 배경이미지</h4>
+            <h3>메인 화면 배너 배경이미지</h3>
+            <img src="{{ club.index_banner_image.image.url }}" width="100">
+            <br>
             <input type="file" name="index_banner_image" accept="image/*">
             <input type="submit" value="적용">
             {% csrf_token %}
@@ -41,19 +52,22 @@
         <hr>
 
         <form method="post" enctype="multipart/form-data">
-            <h4>소개 화면 배경이미지</h4>
+            <h3>소개 화면 배경이미지</h3>
+            <img src="{{ club.about_background.image.url }}" width="100">
+            <br>
             <input type="file" name="about_background" accept="image/*">
             <input type="submit" value="적용">
             {% csrf_token %}
         </form>
         <form method="post" enctype="multipart/form-data">
-            <h4>소개 화면 동아리 사진 *추가*</h4>
+            <h3>소개 화면 동아리 사진 *추가*</h3>
+            <br>
             <input type="file" name="about_image_add" accept="image/*">
             <input type="submit" value="적용">
             {% csrf_token %}
         </form>
         <form method="post" enctype="multipart/form-data">
-            <h4>소개 화면 동아리 사진 *제거*</h4>
+            <h3>소개 화면 동아리 사진 *제거*</h3>
             {% for image in club.about_images.all %}
                 <input type="checkbox" name="about_image_remove" value="{{ image.id }}">
                 <img src="{{ image.image.url }}" width="100">
@@ -63,7 +77,7 @@
             {% csrf_token %}
         </form>
         <form method="post">
-            <h4>소개 화면 소개글</h4>
+            <h3>소개 화면 소개글</h3>
             <p>마크다운 문법을 사용합니다. <a href="#" target="_blank">[설명서]</a> / <a href="#" target="_blank">[예시]</a></p>
                 <textarea name="about_text">{{ club.about_text }}</textarea>
             <input type="submit" value="적용">
@@ -72,16 +86,20 @@
         <hr>
 
         <form method="post">
-            <h4>1차 서류 지원 양식</h4>
-            <p>아래 링크에서 변경 후, 적용 버튼을 눌러주세요. (최대 30초 소요)</p>
-            <a href="{{ club.form_edit_url }}" target="_blank">[ 양식 변경하기 ]</a>
-            <input type="hidden" name="form_change">
-            <input type="submit" value="적용">
+            <h3>1차 서류 지원 양식</h3>
+            <p>아래 링크에서 변경 후, 적용 버튼을 눌러주세요. (적용까지 최대 30초 소요)</p>
+            {% if club.form_edit_url %}
+                <a href="{{ club.form_edit_url }}" target="_blank">[ 양식 변경하기 ]</a>
+                <input type="hidden" name="form_change">
+                <input type="submit" value="적용">
+            {% else %}
+                <p>[ 양식 수정 링크가 정해지지 않았어요. 로델라 부장에게 이 메세지가 보인다는 사실을 알려주세요. 로델라 일해라!!! ]</p>
+            {% endif %}
             {% csrf_token %}
         </form>
 
         <form method="post">
-            <h4>1차 서류 제출 기한</h4>
+            <h3>1차 서류 제출 기한</h3>
             <p>제출 시작:</p>
             <input type="datetime-local" name="form_start" value="{{ club_form_start }}">
             <p>제출 마감:</p>
@@ -90,4 +108,8 @@
             {% csrf_token %}
         </form>
     </div>
+
+    <script>
+        selectNav('club_{{ club.code }}');
+    </script>
 {% endblock %}
