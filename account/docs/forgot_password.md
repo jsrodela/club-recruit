@@ -10,7 +10,7 @@
 * 전화번호
 
 ### 2. 카카오톡 채널
-카카오톡을 사용할 수 있다면, [RoDeLa](http://pf.kakao.com/_xnUKNxj/chat)(@rodela) 채널로 다음 내용을 보내주세요.
+카카오톡을 사용할 수 있다면, [RoDeLa](http://pf.kakao.com/_xnUKNxj)(@rodela) 채널로 다음 내용을 보내주세요.
 * 학번
 * 이름
 * 전화번호
