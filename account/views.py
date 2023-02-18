@@ -1,7 +1,12 @@
+import json
+
 from django.contrib import auth
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from django.views.decorators.csrf import csrf_exempt
+
 from .base import get_data
 
 UserModel = auth.get_user_model()
@@ -51,4 +56,23 @@ def register(request):
 
 def logout(request):
     auth.logout(request)
+    return redirect('/')
+
+
+@csrf_exempt
+def api(request):
+    print(request.POST)
+    if request.POST:
+        _id = request.POST.get('id')
+        _pw = request.POST.get('pw')
+        user = auth.authenticate(id=_id, password=_pw)
+        if user:
+            return HttpResponse(json.dumps({
+                'number': user.id,
+            }))
+        else:
+            return HttpResponse(json.dumps({
+                'error': 'cannot find user',
+            }))
+
     return redirect('/')
