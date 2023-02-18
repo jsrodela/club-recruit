@@ -8,6 +8,7 @@
 
 {% block module %}
     {{ block.super }}
+    <script src="{% static 'about/leader.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -15,6 +16,10 @@
         <h1>동아리 설정 : {{ club.code }}</h1>
         <p>이 페이지는 동아리 부장 및 관계자만 접근 가능합니다.<br>권한 추가는 동아리 부장이 로델라 부장에게 직접 요청해주세요.</p>
         <p>한번에 하나의 설정만 변경할 수 있습니다. 하나씩 변경 후 적용 버튼을 눌러주세요.</p>
+        <hr>
+
+        <h3>홍보에 도움되는 내용</h3>
+        <p>동아리 소개 페이지 주소: <a href="/about/{{ club.code }}">https://jamsin.ga/about/{{ club.code }}</a></p>
         <hr>
 
         <form method="post">
@@ -79,7 +84,7 @@
         <form method="post">
             <h3>소개 화면 소개글</h3>
             <p>마크다운 문법을 사용합니다. <a href="#" target="_blank">[설명서]</a> / <a href="#" target="_blank">[예시]</a></p>
-                <textarea name="about_text">{{ club.about_text }}</textarea>
+                <textarea name="about_text" oninput="textarea_resize(this);">{{ club.about_text }}</textarea>
             <input type="submit" value="적용">
             {% csrf_token %}
         </form>
