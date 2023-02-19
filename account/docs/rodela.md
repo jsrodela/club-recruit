@@ -1,5 +1,7 @@
 [이 문서가 어떻게 마크다운으로 쓰였는지 보기 (클릭)](https://raw.githubusercontent.com/RoDeLa6/club-recruit/main/account/docs/rodela.md)
 
+로델라 소개 초안입니당!
+
 # 👋 RoDeLa 6.0
 로델라는 신입생 여러분을 환영합니다 :)
 
