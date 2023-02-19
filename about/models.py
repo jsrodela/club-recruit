@@ -55,4 +55,4 @@ class ClubModel(models.Model):
     form_edit_url = models.URLField(null=True, blank=True)
 
     # 설문지 미사용 시 카카오톡 링크
-    kakao_url = models.URLField(null=True, blank=True)
+    kakao_url = models.URLField(null=True, blank=True, default="")
