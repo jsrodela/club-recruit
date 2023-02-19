@@ -3,12 +3,12 @@
 
 {% block style %}
     {{ block.super }}
-    <link rel="stylesheet" href="{% static 'about/about.css' %}">
+    <link rel="stylesheet" href="{% static 'about/about.css' %}?v=1">
 {% endblock %}
 
 {% block module %}
     {{ block.super }}
-    <script src="{% static 'about/about.js' %}"></script>
+    <script src="{% static 'about/about.js' %}?v=1"></script>
     <!-- Zero-md (https://github.com/zerodevx/zero-md) -->
     <script type="module" src="https://cdn.jsdelivr.net/gh/zerodevx/zero-md@2/dist/zero-md.min.js"></script>
 {% endblock %}
@@ -63,7 +63,7 @@
                 <div class="text">
                     <zero-md>
                         <template>
-                            <link rel="stylesheet" href="{% static 'about/markdown.css' %}">
+                            <link rel="stylesheet" href="{% static 'about/markdown.css' %}?v=1">
                         </template>
                         <script type="text/markdown">{{ club.about_text }}</script>
                     </zero-md>

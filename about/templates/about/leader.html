@@ -3,12 +3,12 @@
 
 {% block style %}
     {{ block.super }}
-    <link rel="stylesheet" href="{% static 'about/leader.css' %}">
+    <link rel="stylesheet" href="{% static 'about/leader.css' %}?v=1">
 {% endblock %}
 
 {% block module %}
     {{ block.super }}
-    <script src="{% static 'about/leader.js' %}"></script>
+    <script src="{% static 'about/leader.js' %}?v=1"></script>
 {% endblock %}
 
 {% block content %}

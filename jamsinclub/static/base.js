@@ -1,3 +1,8 @@
+/*
+    사용되는 HTML:
+    - base.html
+*/
+
 // Nav Selection
 // code: nav에서 .select할 class
 // link: location.href

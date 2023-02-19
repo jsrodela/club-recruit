@@ -1,4 +1,9 @@
 /*
+    사용되는 HTML:
+    - form/form.html
+*/
+
+/*
 let rad = document.querySelectorAll('input[name=c-language]')
 let etcText = document.querySelector('input[name=c-language-etc]')
 for (let i of rad) {

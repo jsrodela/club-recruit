@@ -3,13 +3,13 @@
 
 {% block style %}
     {{ block.super }}
-    <link rel="stylesheet" href="{% static 'form/form.css' %}">
+    <link rel="stylesheet" href="{% static 'form/form.css' %}?v=1">
 {% endblock %}
 
 {% block module %}
     {{ block.super }}
 
-    <script src="{% static 'form/form.js' %}" ></script>
+    <script src="{% static 'form/form.js' %}?v=1" ></script>
 {% endblock %}
 
 {% block content %}

@@ -1,3 +1,8 @@
+/*
+    사용되는 HTML:
+    - about/about.html
+*/
+
 // 전역변수는 var
 var image_num = 0;
 
