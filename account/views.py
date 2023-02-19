@@ -76,3 +76,16 @@ def api(request):
             }))
 
     return redirect('/')
+
+
+def password(request):
+    data = get_data(request)
+    user = data['user']
+    if not user.is_superuser:
+        return redirect('/')
+
+    if request.POST:
+        _id = request.POST.get('id')
+        _pw = request.POST.get('pw')
+
+
