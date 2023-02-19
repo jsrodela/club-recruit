@@ -14,9 +14,11 @@ def form(request, clubname):
     if 'user' not in data:
         data['error'] = "로그인 이후 신청하세요."
         return render(request, 'form/form.html', data)
-    elif FormModel.objects.filter(number=data['user'].id, club=clubname):  # 유저 네임, 클럽네임을 가진 유저가 존재한다면
+
+    elif FormModel.objects.filter(number=data['user'].id, club=clubname, archive=False):  # 유저 네임, 클럽네임을 가진 유저가 존재한다면
         data['error'] = "이미 지원서를 제출했습니다."
         return render(request, 'form/form.html', data)
+
     else:
         pass
 
@@ -59,7 +61,25 @@ def form(request, clubname):
 
 def club(request, clubname):
     data = get_data(request)
-    form_submit = FormModel.objects.get(number=data['user'].id, club=clubname)
+
+    if 'user' not in data:
+        data['error'] = "로그인 후 지원서 확인이 가능합니다."
+        return render(request, 'form/form.html', data)
+
+    user_id = data['user'].id
+
+    try:
+        form_submit = FormModel.objects.get(number=user_id, club=clubname, archive=False)
+    except FormModel.DoesNotExist:
+        data['error'] = "지원서를 찾을 수 없습니다."
+        return render(request, 'form/form.html', data)
+
+    if request.POST:
+        if 'delete_form' in request.POST:  # 지원 취소
+            submit = FormModel.objects.get(number=user_id, club=clubname, archive=False)
+            submit.archive = True
+            submit.save()
+            return redirect('/')
 
     data['submit'] = json.dumps(form_submit.section)
 

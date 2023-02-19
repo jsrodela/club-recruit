@@ -63,16 +63,8 @@ if (is_submit) {
     }
     for (let tagname of ['input', 'textarea', 'select']) {
         for (let element of document.getElementsByTagName(tagname)) {
+            if (element.type == 'submit' || element.type == 'hidden') continue; // 지원 취소 버튼 & csrfmiddlewaretoken
             element.disabled = true;
         }
-    }
-    for (let element of document.getElementsByTagName('input')) {
-        element.disabled = true;
-    }
-    for (let element of document.getElementsByTagName('textarea')) {
-        element.disabled = true;
-    }
-    for (let element of document.getElementsByTagName('select')) {
-        element.disabled = true;
     }
 }

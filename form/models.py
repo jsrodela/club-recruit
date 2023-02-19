@@ -19,3 +19,5 @@ class FormModel(models.Model):
     )
 
     submit_at = models.DateTimeField(auto_now_add=True)
+
+    archive = models.BooleanField(default=False)

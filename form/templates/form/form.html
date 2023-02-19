@@ -37,6 +37,8 @@
 
     <div class="aa">
         <form method="post">
+            {% csrf_token %}
+
             <div class="T">
                 <h1>
                     {{ form_data.title }}
@@ -156,16 +158,16 @@
 
             {% endfor %}
 
-            <p>지원서는 추후 수정이 불가능합니다.</p>
             {% if submit %}
+                <input type="submit" value="지원 취소" name="delete_form" onclick="return confirm('지원서를 삭제하고 동아리 지원을 취소할까요?')" class="w-btn w-btn-green">
             {% elif form_data.items|length == 0 %}
             {% else %}
                 <br><br>
-                <input type="submit" onclick="location.href='survey_fin.html'" class="w-btn w-btn-green" value="제출하기">
+                <input type="submit" value="제출하기" onclick="location.href='survey_fin.html'" class="w-btn w-btn-green">
 
                 <br><br>
-                {% csrf_token %}
             {% endif %}
+
         </form>
         </div>
 
