@@ -98,9 +98,12 @@
                 <a href="{{ club.form_edit_url }}" target="_blank">[ 양식 변경하기 ]</a>
                 <input type="hidden" name="form_change">
                 <input type="submit" value="적용">
+                <p>지원서 미사용 시 카카오톡 오픈채팅 주소 (지원서 사용 시 비워두기)</p>
+                <input type="url" name="kakao_url" value="{{ club.kakao_url }}">
             {% else %}
                 <p>[ 양식 수정 링크가 정해지지 않았어요. 로델라 부장에게 이 메세지가 보인다는 사실을 알려주세요. 로델라 일해라!!! ]</p>
             {% endif %}
+
             {% csrf_token %}
         </form>
 

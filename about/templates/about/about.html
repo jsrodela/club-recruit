@@ -51,9 +51,15 @@
                 </div>
             </div>
             <div class="right">
-                <button onclick="changeNav('club_{{ club.code }}', '/form/submit/{{ club.code }}');" class="submitpage">
+                {% if club.kakao_url %}
+                <button onclick="window.open('{{ club.kakao_url }}', '_blank');" class="submitpage">
                     지원하기
                 </button>
+                {% else %}
+                    <button onclick="changeNav('club_{{ club.code }}', '/form/submit/{{ club.code }}');" class="submitpage">
+                        지원하기
+                    </button>
+                {% endif %}
                 <div class="text">
                     <zero-md>
                         <template>

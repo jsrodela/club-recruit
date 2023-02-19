@@ -50,12 +50,16 @@ def leader(request):
         if 'about_text' in submit:
             club.about_text = submit.get('about_text')
         if 'form_change' in submit:
-            # ExtForm과 연동하여 reload하고 getitem 하기
-            club.form_data = form_data.reload_form(club.code)
-            pass
+            if submit.get('kakao_url'):
+                club.form_data = {'items': []}
+                club.kakao_url = submit.get('kakao_url')
+            else:
+                # ExtForm과 연동하여 reload하고 getitem 하기
+                club.form_data = form_data.reload_form(club.code)
+                club.kakao_url = ""
         if 'form_start' in submit:
-            club.form_start = datetime.fromisoformat(submit.get('form_start')+"+09:00")
-            club.form_end = datetime.fromisoformat(submit.get('form_end')+"+09:00")
+            club.form_start = datetime.fromisoformat(submit.get('form_start') + "+09:00")
+            club.form_end = datetime.fromisoformat(submit.get('form_end') + "+09:00")
 
         club.save()
 
