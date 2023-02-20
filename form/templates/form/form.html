@@ -143,7 +143,7 @@
                         <h3 class="question">{{ question.title }}</h3>
                         <p>{{ question.helpText }}</p>
                         <br><br>
-                        <textarea class="long" rows="5"  name="{{ question.id }}"></textarea>
+                        <textarea class="long" rows="5" oninput="textarea_resize(this);" name="{{ question.id }}"></textarea>
                         <br><br><hr>
                         <br><br>
                     </div>
