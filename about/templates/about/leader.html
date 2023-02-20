@@ -55,6 +55,8 @@
             <input type="submit" value="적용">
             {% csrf_token %}
         </form>
+        <br>
+        <a href="/?banner_club={{ club.code }}" target="_blank">[ 동아리 배너 확인하기 ]</a>
         <hr>
 
         <form method="post" enctype="multipart/form-data">
