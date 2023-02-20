@@ -3,45 +3,36 @@
     - form/form.html
 */
 
-/*
-let rad = document.querySelectorAll('input[name=c-language]')
-let etcText = document.querySelector('input[name=c-language-etc]')
-for (let i of rad) {
-    i.addEventListener('change', function() {
-        if (document.querySelector('input[name=c-language][value=etc]').checked) {
-            etcText.hidden = false;
-        } else {
-            etcText.hidden = true;
-        }
-    })
-}
-
-let rad2 = document.querySelectorAll('input[name=984420844]')
-let etcText2 = document.querySelector('input[name=984420844-etc]')
-for (let i of rad2) {
-    i.addEventListener('change', function() {
-        if (i.value == '{{choice.value}}') {
-            etcText2.hidden = false;
-        } else {
-            etcText2.hidden = true;
-        }
-    })
-}
-*/
-
 if (is_submit) {
     for (let item of answers) {
         let id = item.question.toString();
-        if (id.endsWith('--etc--')) continue;
+        let etc = false;
+        if (id.endsWith('--etc--')) {
+            etc = true;
+            id = id.substring(0, id.length - 7);  // remove "--etc--"
+        };
         let type = question_type[id];
         let value = item.answer;
+        console.log(id, value);
 
         switch (type) {
             case "MULTIPLE_CHOICE":
             case "CHECKBOX": {
-                let elements = document.querySelectorAll(`input[name="${id}"][value="${value}"]`)
-                for (let element of elements) {
-                    element.checked = true;
+                if (etc) {
+                    let etcText = document.querySelector(`input[name="${id}--etc--"]`);
+                    etcText.value = value;
+                    etcText.hidden = false;
+                }
+                else {
+                    if (!Array.isArray(value)) {  // if not array, change to array
+                        value = [value]
+                    }
+                    for (let val of value) {
+                        let elements = document.querySelectorAll(`input[name="${id}"][value="${val}"]`)
+                        for (let element of elements) {
+                            element.checked = true;
+                        }
+                    }
                 }
                 break;
             }
@@ -70,6 +61,24 @@ if (is_submit) {
         for (let element of document.getElementsByTagName(tagname)) {
             if (element.type == 'submit' || element.type == 'hidden') continue; // 지원 취소 버튼 & csrfmiddlewaretoken
             element.disabled = true;
+        }
+    }
+}
+else {
+    // handle others
+    let etcs = document.querySelectorAll('input[value="--etc--"]')
+    for (let etc of etcs) {
+        let id = etc.name;
+        let etcText = document.querySelector(`input[name="${id}--etc--"]`);
+        let others = document.querySelectorAll(`input[name="${id}"]`);
+        for (let other of others) {
+            other.addEventListener('change', function() {
+                if (etc.checked) {
+                    etcText.hidden = false;
+                } else {
+                    etcText.hidden = true;
+                }
+            })
         }
     }
 }
