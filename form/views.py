@@ -1,6 +1,7 @@
 import json
 
 from django.shortcuts import render, redirect
+from django.utils import timezone
 
 from about.models import ClubModel
 from account.base import get_data
@@ -15,12 +16,15 @@ def form(request, clubname):
         data['error'] = "로그인 이후 신청하세요."
         return render(request, 'form/form.html', data)
 
-    elif FormModel.objects.filter(number=data['user'].id, club=clubname, archive=False):  # 유저 네임, 클럽네임을 가진 유저가 존재한다면
+    if FormModel.objects.filter(number=data['user'].id, club=clubname, archive=False):  # 유저 네임, 클럽네임을 가진 유저가 존재한다면
         data['error'] = "이미 지원서를 제출했습니다."
         return render(request, 'form/form.html', data)
 
-    else:
-        pass
+    club_model = ClubModel.objects.get(code=clubname)
+    now = timezone.localtime()
+    if now < club_model.form_start or club_model.form_end < now:
+        data['error'] = "지원서 제출 기간이 아닙니다."
+        return render(request, 'form/form.html', data)
 
     if request.POST:
         submit = []
@@ -52,7 +56,6 @@ def form(request, clubname):
         FormModel(number=user_id, club=ClubModel.objects.get(code=clubname), section=submit).save()
         return redirect('/')
 
-    club_model = ClubModel.objects.get(code=clubname)
     data['clubname'] = clubname
     data['form_data'] = club_model.form_data
     # data['form_data'] = form_data
@@ -75,6 +78,14 @@ def club(request, clubname):
         return render(request, 'form/form.html', data)
 
     if request.POST:
+
+        # 지원 기간 확인
+        club_model = ClubModel.objects.get(code=clubname)
+        now = timezone.localtime()
+        if now < club_model.form_start or club_model.form_end < now:
+            data['error'] = "지원서 제출 기간이 끝나, 지원서를 삭제할 수 없습니다."
+            return render(request, 'form/form.html', data)
+
         if 'delete_form' in request.POST:  # 지원 취소
             submit = FormModel.objects.get(number=user_id, club=clubname, archive=False)
             submit.archive = True
