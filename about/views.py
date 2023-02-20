@@ -1,5 +1,6 @@
 from datetime import datetime
 
+import pytz
 from django.shortcuts import render, redirect
 from django.utils import timezone
 
@@ -63,8 +64,8 @@ def leader(request):
 
         club.save()
 
-    data['club_form_start'] = club.form_start.strftime("%Y-%m-%dT%H:%M:%S")
-    data['club_form_end'] = club.form_end.strftime("%Y-%m-%dT%H:%M:%S")
+    data['club_form_start'] = club.form_start.astimezone(pytz.timezone('Asia/Seoul')).strftime("%Y-%m-%dT%H:%M:%S")
+    data['club_form_end'] = club.form_end.astimezone(pytz.timezone('Asia/Seoul')).strftime("%Y-%m-%dT%H:%M:%S")
 
     return render(request, 'about/leader.html', data)
 
