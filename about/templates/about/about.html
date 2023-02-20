@@ -65,7 +65,7 @@
                         <template>
                             <link rel="stylesheet" href="{% static 'about/markdown.css' %}?v=1">
                         </template>
-                        <script type="text/markdown">{{ club.about_text }}</script>
+                        <script type="text/markdown">{{ club.about_text|safe }}</script>
                     </zero-md>
                 </div>
             </div>
