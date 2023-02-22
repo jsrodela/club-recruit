@@ -61,10 +61,10 @@ def logout(request):
 
 @csrf_exempt
 def api(request):
-    print(request.POST)
-    if request.POST:
-        _id = request.POST.get('id')
-        _pw = request.POST.get('pw')
+    if request.method == "POST":
+        body = json.loads(request.body)
+        _id = body.get('id')
+        _pw = body.get('pw')
         user = auth.authenticate(id=_id, password=_pw)
         if user:
             return HttpResponse(json.dumps({
