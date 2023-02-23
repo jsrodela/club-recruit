@@ -162,6 +162,7 @@
                 <input type="submit" value="지원 취소" name="delete_form" onclick="return confirm('지원서를 삭제하고 동아리 지원을 취소할까요?')" class="w-btn w-btn-green">
             {% elif form_data.items|length == 0 %}
             {% elif leader_view %}
+                <input type="submit" value="지원서 목록으로 돌아가기" onclick="location.href = '/leader/view_forms'; return false;" class="w-btn w-btn-green">
             {% else %}
                 <br><br>
                 <input type="submit" value="제출하기" onclick="location.href='survey_fin.html'" class="w-btn w-btn-green">
