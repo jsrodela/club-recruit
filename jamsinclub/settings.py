@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'form',
     'index',
     'jamsinclub',
+    'leader',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",

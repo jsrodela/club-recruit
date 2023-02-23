@@ -93,8 +93,39 @@ def club(request, clubname):
             return redirect('/')
 
     data['submit'] = json.dumps(form_submit.section)
+    data['delete_form'] = True
 
     club_model = ClubModel.objects.get(code=clubname)
     data['clubname'] = clubname
     data['form_data'] = club_model.form_data
+    return render(request, 'form/form.html', data)
+
+
+# 동아리 부장이 확인
+def leader_view(request, form_id):
+    data = get_data(request)
+
+    if 'user' not in data or data['user'].leader_of is None:
+        return redirect('/')
+
+    user = data['user']
+
+    if user.leader_of is None:
+        return redirect('/')
+
+    try:
+        form_submit = FormModel.objects.get(id=form_id, archive=False)
+    except FormModel.DoesNotExist:
+        data['error'] = '지원서를 찾을 수 없습니다.'
+        return render(request, 'form/form.html', data)
+
+    if form_submit.club != user.leader_of:
+        return redirect('/')
+
+    data['submit'] = json.dumps(form_submit.section)
+    data['leader_view'] = True
+
+    data['clubname'] = user.leader_of.name
+    data['form_data'] = user.leader_of.form_data
+
     return render(request, 'form/form.html', data)

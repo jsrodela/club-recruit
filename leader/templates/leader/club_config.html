@@ -3,12 +3,12 @@
 
 {% block style %}
     {{ block.super }}
-    <link rel="stylesheet" href="{% static 'about/leader.css' %}?v=1">
+    <link rel="stylesheet" href="{% static 'leader/club_config.css' %}?v=1">
 {% endblock %}
 
 {% block module %}
     {{ block.super }}
-    <script src="{% static 'about/leader.js' %}?v=1"></script>
+    <script src="{% static 'leader/club_config.js' %}?v=1"></script>
 {% endblock %}
 
 {% block content %}
@@ -16,6 +16,7 @@
         <h1>동아리 설정 : {{ club.code }}</h1>
         <p>이 페이지는 동아리 부장 및 관계자만 접근 가능합니다.<br>권한 추가는 동아리 부장이 로델라 부장에게 직접 요청해주세요.</p>
         <p>한번에 하나의 설정만 변경할 수 있습니다. 하나씩 변경 후 적용 버튼을 눌러주세요.</p>
+        <p><a href="/leader/view_forms">지원서 보러 가기</a></p>
         <hr>
 
         <h3>홍보에 도움되는 내용</h3>
