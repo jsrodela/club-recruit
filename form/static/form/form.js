@@ -13,7 +13,6 @@ if (is_submit) {
         };
         let type = question_type[id];
         let value = item.answer;
-        console.log(id, value);
 
         switch (type) {
             case "MULTIPLE_CHOICE":
