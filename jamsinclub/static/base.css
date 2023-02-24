@@ -59,7 +59,7 @@ header img {
 
 footer {
     /* 전체 레이아웃 */
-    flex-grow 3;
+    flex-grow: 3;
     text-align: center;
 
     /* 글씨 회색 */
@@ -160,7 +160,8 @@ nav ul li {
     font-weight: 500;
 
     /* 단어 기준 줄바꿈 */
-    word-break: keep-all;
+    /* word-break: keep-all; */
+
 }
 
 /* 홈 버튼 */
@@ -198,6 +199,9 @@ nav ul li img {
 nav ul li p {
     /* 여백 너무 큼 */
     margin: 0;
+
+    /* 줄바꿈 안함 */
+    white-space: nowrap;
 }
 
 nav ul li.club p {
@@ -284,6 +288,12 @@ nav ul li:active {
 
 /* 모바일 레이아웃 */
 @media screen and (max-width: 768px) {
+    header {
+        padding: 0;
+    }
+    footer {
+        padding: 0.3rem;
+    }
     .mainwrap {
         flex-direction: column-reverse;
         flex-basis: 1;
@@ -292,6 +302,8 @@ nav ul li:active {
     nav {
         width: 100%;
         display: flex;
+        padding-top: 0;
+        padding-bottom: 0;
     }
     nav ul {
         display: flex;
@@ -300,7 +312,7 @@ nav ul li:active {
     }
 
     nav ul li {
-        display; flex;
+        display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;

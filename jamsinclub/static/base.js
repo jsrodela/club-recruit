@@ -24,12 +24,9 @@ function changeNav(code, link) {
                 wrapper.innerHTML = "";
                 wrapper.appendChild(fetched_wrapper);
 
-                console.log(fetched_wrapper)
-
                 markdown_script = fetched_wrapper.querySelector("script[type='text/markdown']");
                 if (markdown_script != undefined) {
                     fetched_wrapper.querySelector('zero-md').appendChild(markdown_script);
-                    console.log(markdown_script)
                 }
 
                 for (let script of fetched_wrapper.querySelectorAll("script:not([type='text/markdown'])")) {
@@ -40,7 +37,6 @@ function changeNav(code, link) {
                     }
                     else newscript.innerHTML = script.innerHTML;  // <script>...</script>
                     wrapper.appendChild(newscript);
-                    console.log(newscript);
                 }
                 /*
                 document.querySelector('.wrapper2').innerHTML = fetched_wrapper.innerHTML;
