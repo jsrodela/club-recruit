@@ -8,8 +8,7 @@
 
 {% block module %}
     {{ block.super }}
-
-    <script src="{% static 'form/form.js' %}?v=3" ></script>
+    <script src="{% static 'form/form.js' %}?v=4" ></script>
 {% endblock %}
 
 {% block content %}
@@ -32,6 +31,7 @@
     {% else %}
         <script>
             var is_submit = false;
+            var required = [];
         </script>
     {% endif %}
 
@@ -154,6 +154,12 @@
                     <script>
                         question_type['{{ question.id }}'] = "{{ question.type }}";
                     </script>
+                {% else %}
+                    {% if question.extra.required %}
+                        <script>
+                            required.push("{{ question.id }}");
+                        </script>
+                    {% endif %}
                 {% endif %}
 
             {% endfor %}
@@ -165,7 +171,7 @@
                 <input type="submit" value="지원서 목록으로 돌아가기" onclick="location.href = '/leader/view_forms'; return false;" class="w-btn w-btn-green">
             {% else %}
                 <br><br>
-                <input type="submit" value="제출하기" onclick="location.href='survey_fin.html'" class="w-btn w-btn-green">
+                <input type="submit" value="제출하기" class="w-btn w-btn-green">
 
                 <br><br>
             {% endif %}
