@@ -10,4 +10,4 @@ class FormModelAdmin(admin.ModelAdmin):
     readonly_fields = ['submit_at']
 
 
-admin.site.register(FormModel)
+admin.site.register(FormModel, FormModelAdmin)
