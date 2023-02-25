@@ -51,13 +51,13 @@ def club_config(request):
                 club.form_data = form_data.reload_form(club.code)
                 club.kakao_url = ""
         if 'form_start' in submit:
-            club.form_start = datetime.fromisoformat(submit.get('form_start') + "+09:00")
-            club.form_end = datetime.fromisoformat(submit.get('form_end') + "+09:00")
+            club.form_start = datetime.fromisoformat(submit.get('form_start') + ":00+09:00")
+            club.form_end = datetime.fromisoformat(submit.get('form_end') + ":00+09:00")
 
         club.save()
 
-    data['club_form_start'] = club.form_start.astimezone(pytz.timezone('Asia/Seoul')).strftime("%Y-%m-%dT%H:%M:%S")
-    data['club_form_end'] = club.form_end.astimezone(pytz.timezone('Asia/Seoul')).strftime("%Y-%m-%dT%H:%M:%S")
+    data['club_form_start'] = club.form_start.astimezone(pytz.timezone('Asia/Seoul')).strftime("%Y-%m-%dT%H:%M")
+    data['club_form_end'] = club.form_end.astimezone(pytz.timezone('Asia/Seoul')).strftime("%Y-%m-%dT%H:%M")
 
     return render(request, 'leader/club_config.html', data)
 
