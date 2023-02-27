@@ -5,6 +5,7 @@ from django.utils import timezone
 
 from about.models import ClubModel
 from account.base import get_data
+from account.models import User
 from .form_data import form_data
 from .models import FormModel
 
@@ -93,6 +94,7 @@ def club(request, clubname):
             return redirect('/')
 
     data['submit'] = json.dumps(form_submit.section)
+    data['submit_user'] = User.objects.get(id=form_submit.number)
     data['delete_form'] = True
 
     club_model = ClubModel.objects.get(code=clubname)
@@ -122,6 +124,8 @@ def leader_view(request, form_id):
     if form_submit.club != user.leader_of:
         return redirect('/')
 
+    data['submit_id'] = form_submit.id
+    data['submit_user'] = User.objects.get(id=form_submit.number)
     data['submit'] = json.dumps(form_submit.section)
     data['leader_view'] = True
 

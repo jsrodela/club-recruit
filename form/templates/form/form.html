@@ -43,6 +43,13 @@
                 <h1>
                     {{ form_data.title }}
                 </h1>
+                {% if leader_view %}
+                    <h3>지원자: {{ submit_user.id }} {{ submit_user.name }} (#{{ submit_id }})</h3>
+                {% elif submit %}
+                    <h3>지원자: {{ submit_user.id }} {{ submit_user.name }}</h3>
+                {% else %}
+                    <h3>지원자: {{ user.id }} {{ user.name }} {% if leader_view %}(#{{ submit_id }}){% endif %}</h3>
+                {% endif %}
                 <p>
                     {{ form_data.description }}
                 </p>
