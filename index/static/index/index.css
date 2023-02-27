@@ -40,8 +40,10 @@ button {
     aspect-ratio: 16 / 9; */
 }
 .inner_banner strong {
-    color: #000000;
-    font-size: 60px;
+    /* color: #000000; */
+    color: var(--clubname-color);
+    font-size: 3.5rem;
+    padding: 0.5rem 0;
     letter-spacing: -1px;
 }
 .inner_banner p {
@@ -53,6 +55,7 @@ button {
     border-radius: 2rem;
     padding: 0.5rem 1rem;
     color: white;
+    margin: 0 0.3rem;
 }
 .inner_banner p span {
     /* color: rgba(95, 119, 219, 1);*/
