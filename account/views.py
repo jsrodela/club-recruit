@@ -8,6 +8,7 @@ from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 
 from .base import get_data
+from .models import User
 
 UserModel = auth.get_user_model()
 
@@ -40,7 +41,7 @@ def register(request):
         _pw = form.get('pw')
 
         if UserModel.objects.filter(id=_id).exists():
-            data['invalid'] = f"학번이 {_id}인 계정이 이미 존재합니다."
+            data['invalid'] = f"학번이 {_id}인 계정이 이미 존재합니다. <a href='https://pf.kakao.com/_xnUKNxj' target='_blank' style='color: var(--main-color);'>[문의하기]</a>"
         else:
             try:
                 validate_password(_pw)
@@ -87,5 +88,6 @@ def password(request):
     if request.POST:
         _id = request.POST.get('id')
         _pw = request.POST.get('pw')
+        target = User.objects.get(id=_id)
 
 

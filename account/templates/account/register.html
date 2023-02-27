@@ -11,7 +11,7 @@
             {% csrf_token %}
             <h2 class="login_title">회원가입</h2>
             {% if invalid %}
-                <div class="invalid">{{ invalid }}</div>
+                <div class="invalid">{{ invalid|safe }}</div>
             {% endif %}
             <div class="input_wrapper">
                 <h4>학번</h4>
