@@ -3,6 +3,7 @@
 
 {% block style %}
     {{ block.super }}
+    <link rel="stylesheet" href="{% static 'form/time.css' %}?v=1">
 {% endblock %}
 
 {% block module %}
@@ -10,8 +11,38 @@
 {% endblock %}
 
 {% block content %}
-
-    <script>
-        selectNav('club_{{ clubname }}');
-    </script>
+    <h1>면접 예약</h1>
+    <hr>
+    <div class = 'outer_interview_time'> <!-- '면접 예약' 제외 모든 내용 묶음 -->
+        <h2>3/12</h2>
+        <div class = 'interview_time'> <!-- 시간대, 인원수 적은 상자들 묶음 -->
+            <div class = 'inner_it'> <!-- it = interview_time, 상자별 구분 -->
+                <p>16:00 ~ 17:00</p>
+                <p>3/4</p>
+            </div>
+            <div class = 'inner_it'>
+                <p>17:00 ~ 18:00</p>
+                <p>4/4</p>
+            </div>
+            <div class = 'inner_it'>
+                <p>18:00 ~ 19:00</p>
+                <p>2/4</p>
+            </div>
+        </div>
+        <h2>3/13</h2>
+        <div class = 'interview_time'>
+            <div class = 'inner_it'>
+                <p>16:00 ~ 17:00</p>
+                <p>3/4</p>
+            </div>
+            <div class = 'inner_it'>
+                <p>17:00 ~ 18:00</p>
+                <p>4/4</p>
+            </div>
+            <div class = 'inner_it'>
+                <p>18:00 ~ 19:00</p>
+                <p>2/4</p>
+            </div>
+        </div>
+    </div>
 {% endblock %}

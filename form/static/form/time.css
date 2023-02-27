@@ -1,0 +1,20 @@
+.interview_time {
+    display: flex;   /* 상자들 가로로 정렬 */
+
+}
+.inner_it {
+    width: 10%;
+    border: 0.2rem solid rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+    padding: 10px;
+    margin: 0 30px;  /* 상자와 상자 간 간격 설정 */
+}
+.inner_it p {
+    font-weight: 700;
+}
+h1 {  /* '면접 예약'(제목) 디자인 */
+    font-size: 40px;
+    color: rgb(95, 119, 219,2);
+    border-top: 3px solid rgb(95, 119, 219,2);
+    border-bottom: 3px solid rgb(95, 119, 219,2);
+}
