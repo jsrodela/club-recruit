@@ -3,7 +3,7 @@
 
 {% block style %}
     {{ block.super }}
-    <link rel="stylesheet" href="{% static 'index/index.css' %}?v=1">
+    <link rel="stylesheet" href="{% static 'index/index.css' %}?v=2">
 {% endblock %}
 
 {% block content %}
@@ -12,6 +12,9 @@
         <style>
             #banner {
                 --background-image-url: url("{{ banner_club.index_banner_image.image.url }}")
+            }
+            .inner_banner strong {
+                --clubname-color: {{ banner_club.index_banner_color }};
             }
         </style>
         <div class = 'inner_banner' onclick="return changeNav('club_{{ banner_club.code }}', '/about/{{ banner_club.code }}');">

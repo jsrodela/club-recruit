@@ -43,16 +43,27 @@
         <hr>
 
         <form method="post">
-            <h3>메인 화면 배너 한줄소개</h3>
+            <h3>메인 화면 배너 - 한줄소개</h3>
             <input type="text" name="index_banner_description" value="{{ club.index_banner_description }}">
             <input type="submit" value="적용">
             {% csrf_token %}
         </form>
         <form method="post" enctype="multipart/form-data">
-            <h3>메인 화면 배너 배경이미지</h3>
+            <h3>메인 화면 배너 - 배경이미지</h3>
             <img src="{{ club.index_banner_image.image.url }}" width="100">
             <br>
             <input type="file" name="index_banner_image" accept="image/*">
+            <input type="submit" value="적용">
+            {% csrf_token %}
+        </form>
+        <form method="post">
+            <h3>메인 화면 베너 - 동아리 이름 색깔</h3>
+            <input type="radio" name="index_banner_color" value="#000000"> Black
+            <input type="radio" name="index_banner_color" value="#FFFFFF"> White
+            <script>
+                console.log("{{ club.index_banner_color }}");
+                document.querySelector('input[name="index_banner_color"][value="{{ club.index_banner_color }}"]').checked = true;
+            </script>
             <input type="submit" value="적용">
             {% csrf_token %}
         </form>
@@ -61,7 +72,7 @@
         <hr>
 
         <form method="post" enctype="multipart/form-data">
-            <h3>소개 화면 배경이미지</h3>
+            <h3>소개 화면 - 배경이미지</h3>
             <img src="{{ club.about_background.image.url }}" width="100">
             <br>
             <input type="file" name="about_background" accept="image/*">
@@ -69,14 +80,14 @@
             {% csrf_token %}
         </form>
         <form method="post" enctype="multipart/form-data">
-            <h3>소개 화면 동아리 사진 *추가*</h3>
+            <h3>소개 화면 - 동아리 사진 *추가*</h3>
             <br>
             <input type="file" name="about_image_add" accept="image/*">
             <input type="submit" value="적용">
             {% csrf_token %}
         </form>
         <form method="post" enctype="multipart/form-data">
-            <h3>소개 화면 동아리 사진 *제거*</h3>
+            <h3>소개 화면 - 동아리 사진 *제거*</h3>
             {% for image in club.about_images.all %}
                 <input type="checkbox" name="about_image_remove" value="{{ image.id }}">
                 <img src="{{ image.image.url }}" width="100">
@@ -86,7 +97,7 @@
             {% csrf_token %}
         </form>
         <form method="post">
-            <h3>소개 화면 소개글</h3>
+            <h3>소개 화면 - 소개글</h3>
             <p>마크다운 문법을 사용합니다. <a href="https://bskyvision.com/entry/%EC%9E%90%EC%A3%BC-%EC%82%AC%EC%9A%A9%ED%95%98%EB%8A%94-%EB%A7%88%ED%81%AC%EB%8B%A4%EC%9A%B4markdown-%EB%AC%B8%EB%B2%95-%EC%A0%95%EB%A6%AC" target="_blank">[설명서]</a> / <a href="https://github.com/RoDeLa6/club-recruit/blob/main/account/docs/rodela.md" target="_blank">[활용 예시]</a></p>
                 <textarea name="about_text" oninput="textarea_resize(this);">{{ club.about_text }}</textarea>
             <input type="submit" value="적용">

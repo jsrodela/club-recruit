@@ -33,10 +33,11 @@ class ClubModel(models.Model):
     form_start = models.DateTimeField(default=datetime.now)
     form_end = models.DateTimeField(default=datetime.now)
 
-    # 메인페이지 배너 이미지와 설영
+    # 메인페이지 배너 이미지와 설영, 이름 색깔
     index_banner_image = models.ForeignKey(ImageModel, related_name='index_banner_image+',
                                            on_delete=models.SET_NULL, null=True, blank=True)
     index_banner_description = models.TextField(default="동아리 소개 준비중")
+    index_banner_color = models.CharField(max_length=7, default="#000000")
 
     # 소개페이지 배경, 사진들, 소개글 (마크다운 문법)
     about_background = models.ForeignKey(ImageModel, related_name='about_background+',

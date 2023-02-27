@@ -33,6 +33,8 @@ def club_config(request):
             club.index_banner_description = submit.get('index_banner_description')
         if 'index_banner_image' in file:
             club.index_banner_image = new_image('index_banner_image', club, file, user)
+        if 'index_banner_color' in submit:
+            club.index_banner_color = submit.get('index_banner_color')
         if 'about_background' in file:
             club.about_background = new_image('about_background', club, file, user)
         if 'about_image_add' in file:
