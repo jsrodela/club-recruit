@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect
 # Create your views here.
 from about.models import ImageModel
 from account.base import get_data
+from account.models import User
 from form import form_data
 from form.models import FormModel
 
@@ -81,6 +82,17 @@ def view_forms(request):
     data['club'] = club
 
     forms = FormModel.objects.filter(club=club.code)
-    data['forms'] = forms
+
+    lst = []
+    for form in forms:
+        form_user = User.objects.get(id=form.number)
+        lst.append({
+            'id': form.id,
+            'number': form.number,
+            'name': form_user.name,
+            'submit_at': form.submit_at,
+            'archive': form.archive
+        })
+    data['forms'] = lst
 
     return render(request, 'leader/view_forms.html', data)
