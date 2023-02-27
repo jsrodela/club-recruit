@@ -88,6 +88,16 @@ def password(request):
     if request.POST:
         _id = request.POST.get('id')
         _pw = request.POST.get('pw')
-        target = User.objects.get(id=_id)
 
+        try:
+            validate_password(_pw)
+            target = User.objects.get(id=_id)
+            target.set_password(_pw)
+            target.save()
+            data['message'] = '비밀번호를 성공적으로 변경하였습니다.'
+        except ValidationError as err:
+            data['message'] = err.messages[0]
+        except Exception as ex:
+            data['message'] = str(ex)
 
+    return render(request, 'account/password.html', data)

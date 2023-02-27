@@ -12,9 +12,9 @@
         </script>
     {% endif %}
      <div class="wrap">
-        {% if invalid %}
+        <!--{% if invalid %}
          <p>일치하는 회원이 없습니다.</p>
-        {% endif %}
+        {% endif %}-->
         <form class="login" method="post" action="/account/login/">
             {% csrf_token %}
             <h2 class="login_title">로그인</h2>
