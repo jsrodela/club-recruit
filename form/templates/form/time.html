@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+    {{ block.super }}
+{% endblock %}
+
+{% block module %}
+    {{ block.super }}
+{% endblock %}
+
+{% block content %}
+
+    <script>
+        selectNav('club_{{ clubname }}');
+    </script>
+{% endblock %}

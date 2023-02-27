@@ -129,3 +129,8 @@ def leader_view(request, form_id):
     data['form_data'] = user.leader_of.form_data
 
     return render(request, 'form/form.html', data)
+
+
+def time(request):
+    data = get_data(request)
+    return render(request, 'form/time.html', data)
