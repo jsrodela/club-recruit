@@ -111,11 +111,11 @@ After=network.target
 User=rodela
 Group=rodela
 WorkingDirectory=/home/rodela/club-recruit
-ExecStart=/home/rodela/club-recruit/.venv/bin/gunicorn
-    --capture-output --enable-stdio-inheritance
-    --access-logfile /var/log/gunicorn.access.log
-    --error-logfile /var/log/gunicorn.error.log
-    --bind unix:/run/gunicorn.sock
+ExecStart=/home/rodela/club-recruit/.venv/bin/gunicorn \
+    --capture-output --enable-stdio-inheritance \
+    --access-logfile /var/log/gunicorn.access.log \
+    --error-logfile /var/log/gunicorn.error.log \
+    --bind unix:/run/gunicorn.sock \
     jamsinclub.wsgi:application
     
 [Install]
@@ -157,7 +157,7 @@ nginx -v
 
 2. nginx 설정
 ```shell
-sudo nano /etc/hosts
+sudo nano /etc/nginx/sites-available/jamsinclub.conf
 ```
 아래 내용을 입력한다.
 ```
@@ -203,7 +203,7 @@ sudo systemctl restart nginx
 ### SSL(https) 설정
 ```shell
 # 업데이트
-sudo snap update core
+sudo snap install core
 sudo snap refresh core
 
 # certbot 설치
