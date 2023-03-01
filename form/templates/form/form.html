@@ -41,7 +41,7 @@
 
             <div class="T">
                 <h1>
-                    {{ form_data.title }}
+                    {{ form_data.title |linebreaksbr|safe }}
                 </h1>
                 {% if leader_view %}
                     <h3>지원자: {{ submit_user.id }} {{ submit_user.name }} (#{{ submit_id }})</h3>
@@ -51,7 +51,7 @@
                     <h3>지원자: {{ user.id }} {{ user.name }} {% if leader_view %}(#{{ submit_id }}){% endif %}</h3>
                 {% endif %}
                 <p>
-                    {{ form_data.description }}
+                    {{ form_data.description |linebreaksbr }}
                 </p>
             </div>
             <hr>
@@ -63,10 +63,10 @@
                 {% if question.type == "SECTION_HEADER" %}
                 <div class="sectionheader">
                         <h2>
-                            {{ question.title }}
+                            {{ question.title |linebreaksbr }}
                         </h2>
                         <p>
-                            {{ question.helpText }}
+                            {{ question.helpText |linebreaksbr }}
                         </p>
                     <!--
                         @TODO:
@@ -79,8 +79,8 @@
 
                 {% if question.type == "CHECKBOX" %}
                 <div>
-                    <h3 class="question">{{ question.title }}</h3>
-                    <p>{{ question.helpText }}</p>
+                    <h3 class="question">{{ question.title |linebreaksbr }}</h3>
+                    <p>{{ question.helpText |linebreaksbr }}</p>
                     <br><br>
                         {% for choice in question.extra.choices %}
                             <input type="checkbox" name = "{{ question.id }}" value="{{choice.value}}"> {{choice.value}}
@@ -101,8 +101,8 @@
 
                 {% if question.type == "MULTIPLE_CHOICE" %}
                     <div>
-                        <h3 class="question">{{ question.title }}</h3>
-                        <p>{{ question.helpText }}</p>
+                        <h3 class="question">{{ question.title |linebreaksbr }}</h3>
+                        <p>{{ question.helpText |linebreaksbr }}</p>
                         <br><br>
                             {% for choice in question.extra.choices %}
                                 <input type="radio" name = "{{ question.id }}" value="{{choice.value}}"> {{choice.value}}
@@ -120,8 +120,8 @@
                 {% endif %}
 
                 {% if question.type == 'LIST' %}
-                    <h3 class="question">{{ question.title }}</h3>
-                    <p>{{ question.helpText }}</p>
+                    <h3 class="question">{{ question.title |linebreaksbr }}</h3>
+                    <p>{{ question.helpText |linebreaksbr }}</p>
                     <br><br>
                     <select name="{{ question.id }}">
                         {% for choice in question.extra.choices %}
@@ -134,8 +134,8 @@
 
                 {% if question.type == "TEXT" %}
                     <div>
-                        <h3 class="question">{{ question.title }}</h3>
-                        <p>{{ question.helpText }}</p>
+                        <h3 class="question">{{ question.title |linebreaksbr }}</h3>
+                        <p>{{ question.helpText |linebreaksbr }}</p>
                         <br><br>
                         <input type = "text" name = "{{ question.id }}" value = "" >
                         <br><br><hr>
@@ -147,8 +147,8 @@
 
                 {% if question.type == "PARAGRAPH_TEXT" %}
                     <div>
-                        <h3 class="question">{{ question.title }}</h3>
-                        <p>{{ question.helpText }}</p>
+                        <h3 class="question">{{ question.title |linebreaksbr }}</h3>
+                        <p>{{ question.helpText |linebreaksbr }}</p>
                         <br><br>
                         <textarea class="long" rows="5" oninput="textarea_resize(this);" name="{{ question.id }}"></textarea>
                         <br><br><hr>
