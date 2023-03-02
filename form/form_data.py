@@ -70,7 +70,7 @@ form_data = {
                     }
                 ],
                 "hasOtherOption": True,
-                "required": False
+                "required": True
             }
         },
         {
