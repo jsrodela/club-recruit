@@ -81,12 +81,12 @@ else {
         }
     }
 
-    for (let require of required) {
-        let elements = document.querySelectorAll(`input[name="${require}"`)
-        for (let element of elements) {
-            element.required = true;
-        }
-    }
+//    for (let require of required) {
+//        let elements = document.querySelectorAll(`input[name="${require}"]`)
+//        for (let element of elements) {
+//            element.required = true;
+//        }
+//    }
 }
 
 /* textarea height */
