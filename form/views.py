@@ -130,8 +130,8 @@ def leader_view(request, form_id):
     data['leader_view'] = True
 
     data['clubname'] = user.leader_of.name
-    # data['form_data'] = user.leader_of.form_data
-    data['form_data'] = form_data
+    data['form_data'] = user.leader_of.form_data
+    # data['form_data'] = form_data
 
     return render(request, 'form/form.html', data)
 
