@@ -12,6 +12,13 @@
 {% endblock %}
 
 {% block content %}
+
+    {% if error %}
+        <script>
+            alert("{{ error }}")
+        </script>
+    {% endif %}
+
     <div class="wrap">
         <h1>동아리 설정 : {{ club.code }}</h1>
         <p>이 페이지는 동아리 부장 및 관계자만 접근 가능합니다.<br>권한 추가는 동아리 부장이 로델라 부장에게 직접 요청해주세요.</p>
@@ -127,6 +134,28 @@
             <input type="datetime-local" name="form_start" value="{{ club_form_start }}">
             <p>제출 마감:</p>
             <input type="datetime-local" name="form_end" value="{{ club_form_end }}">
+            <input type="submit" value="적용">
+            {% csrf_token %}
+        </form>
+        <hr>
+
+        <h2>부원 관리</h2>
+        <p>동아리 부원들은 제출된 지원서를 확인하고, 면접 시간을 조회할 수 있습니다.</p>
+        <ul>
+            {% for member_id in club.members %}
+            <li>{{ member_id }}</li>
+            {% endfor %}
+        </ul>
+
+        <form method="post">
+            <h3>부원 *추가*</h3>
+            <input type="number" name="member_add" value="" min="10101" max="21040">
+            <input type="submit" value="적용">
+            {% csrf_token %}
+        </form>
+        <form method="post">
+            <h3>부원 *제거*</h3>
+            <input type="number" name="member_remove" value="" min="10101" max="21040">
             <input type="submit" value="적용">
             {% csrf_token %}
         </form>

@@ -107,12 +107,16 @@ def club(request, clubname):
 def leader_view(request, form_id):
     data = get_data(request)
 
-    if 'user' not in data or data['user'].leader_of is None:
+    if 'user' not in data:
         return redirect('/')
 
     user = data['user']
 
-    if user.leader_of is None:
+    if user.leader_of:
+        leader_club = user.leader_of
+    elif user.member_of:
+        leader_club = user.member_of
+    else:
         return redirect('/')
 
     try:
@@ -121,7 +125,7 @@ def leader_view(request, form_id):
         data['error'] = '지원서를 찾을 수 없습니다.'
         return render(request, 'form/form.html', data)
 
-    if form_submit.club != user.leader_of:
+    if form_submit.club != leader_club:
         return redirect('/')
 
     data['submit_id'] = form_submit.id
@@ -129,8 +133,8 @@ def leader_view(request, form_id):
     data['submit'] = json.dumps(form_submit.section)
     data['leader_view'] = True
 
-    data['clubname'] = user.leader_of.name
-    data['form_data'] = user.leader_of.form_data
+    data['clubname'] = leader_club.name
+    data['form_data'] = leader_club.form_data
     # data['form_data'] = form_data
 
     return render(request, 'form/form.html', data)

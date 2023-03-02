@@ -56,6 +56,34 @@ def club_config(request):
         if 'form_start' in submit:
             club.form_start = datetime.fromisoformat(submit.get('form_start') + ":00+09:00")
             club.form_end = datetime.fromisoformat(submit.get('form_end') + ":00+09:00")
+        if 'member_add' in submit:
+            member_id = submit.get('member_add')
+            try:
+                member = User.objects.get(id=member_id)
+                if member.member_of:  # if already member in another club
+                    data['error'] = f'{member_id} 학생은 이미 다른 동아리의 부원입니다.'
+                else:
+                    member.member_of = club
+                    member.save()
+                    club.members.append(member_id)
+            except User.DoesNotExist:
+                data['error'] = f'{member_id} 계정을 찾을 수 없어요.'
+
+        if 'member_remove' in submit:
+            member_id = submit.get('member_remove')
+            if member_id in club.members:
+                try:
+                    member = User.objects.get(id=member_id)
+                    if member.member_of.code != club.code:
+                        data['error'] = f'{member_id} 학생은 이 동아리의 부원이 아니에요. 데이터가 꼬인 것 같은데, 로델라 부장에게 전해주세요.'
+                    else:
+                        member.member_of = None
+                        member.save()
+                        club.members.remove(member_id)
+                except User.DoesNotExist:
+                    data['error'] = f'{member_id} 계정을 찾을 수 없어요.'
+            else:
+                data['error'] = f'{member_id} 학생은 이 동아리의 부원이 아니에요.'
 
         club.save()
 
@@ -75,11 +103,16 @@ def new_image(name, club, file, user):
 def view_forms(request):
     data = get_data(request)
 
-    if 'user' not in data or data['user'].leader_of is None:
+    if 'user' not in data:
         return redirect('/')
 
     user = data['user']
-    club = user.leader_of
+    if data['user'].leader_of:
+        club = user.leader_of
+    elif data['user'].member_of:
+        club = user.member_of
+    else:
+        return redirect('/')
 
     data['club'] = club
 
