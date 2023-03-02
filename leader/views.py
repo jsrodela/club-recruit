@@ -92,6 +92,7 @@ def view_forms(request):
             'id': form.id,
             'number': form.number,
             'name': form_user.name,
+            "phone": form_user.phone,
             'submit_at': form.submit_at,
             'archive': form.archive
         })

@@ -16,12 +16,14 @@
         <p>이 페이지는 동아리 부장 및 부원들만 열람할 수 있습니다.</p>
         <hr>
 
+        <h3>지원서 {{ forms|length }}개</h3>
         <table>
             <thead>
                 <tr>
                     <th>#</th>
                     <th>학번</th>
                     <th>이름</th>
+                    <th>전화번호</th>
                     <th>지원서 보기</th>
                     <th>지원 시각</th>
                 </tr>
@@ -32,6 +34,7 @@
                         <th>{{ form.id }}</th>
                         <td>{{ form.number }}</td>
                         <td>{{ form.name }}</td>
+                        <td>{{ form.phone }}</td>
                         <td>
                             {% if form.archive %}
                             (취소됨)
