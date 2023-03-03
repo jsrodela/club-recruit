@@ -1,7 +1,6 @@
 /*
     사용되는 HTML:
-    - account/login.html
-    - account/register.html
+    - about/about.html
 */
 
 .background {
@@ -16,6 +15,7 @@
 .mobile-bg {
     display: none;
     z-index: 0;
+    transform: translate3d(0, 0, 200px);
 }
 
 .background, .mobile-bg {
