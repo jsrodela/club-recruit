@@ -29,7 +29,8 @@ function change_image(delta) {
 }
 
 function generate_image_style(animation_name) {
-    return 'animation-name: ' + animation_name + '; --photo-url: url("' + images[image_num] + '");'
+    // animation_fill_mode가 처음부터 들어가면 Safari에서 안보이는듯
+    return 'animation-name: ' + animation_name + '; --photo-url: url("' + images[image_num] + '"); animation-fill-mode: forwards;'
 }
 
 change_image(0);

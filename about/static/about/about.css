@@ -56,7 +56,6 @@
     background-size : cover;
     animation-duration: 0.5s;
     background-position: center;
-    animation-fill-mode: forwards;
 }
 
 .left_area, .right_area {
@@ -195,7 +194,7 @@
     }
 
     zero-md {
-
+        background-color: white;
     }
 }
 
