@@ -2,7 +2,7 @@
 
 
 setInterval(function() {
-    var upper_container = document.querySelector('.upper-container');
+    var upper_container = document.querySelector('.upper_container');
     var banner = document.querySelector('#banner');
 
     var internal_banner = banner.cloneNode(true);
@@ -14,19 +14,19 @@ setInterval(function() {
 
     internal_banner.style = `margin-left: -${upper_container.offsetWidth}px;`;
 
-    banner.style = `transition-duration: 2s; margin-left: ${upper_container.offsetWidth}px;`;
+    banner.style = `transition-duration: 0.5s; margin-left: ${upper_container.offsetWidth}px;`;
 
-    internal_banner.style = `transition-duration: 2s; margin-left: 0px;`;
+    internal_banner.style = `transition-duration: 0.5s; margin-left: 0px;`;
 
     setTimeout(function(){
         banner.remove();
-    }, 2000);
+    }, 500);
     /*setTimeout(function(){
         internal_banner.id="banner";
         banner.remove();
     }, 2000);*/
     //setTimeout(function() {$("#banner").load(location.href + " #banner");}, 1000)
-}, 5000);
+}, 7000);
 
 
 
