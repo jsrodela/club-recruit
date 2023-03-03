@@ -10,12 +10,12 @@
     align-items: center;
     justify-content: center;
     z-index: 1;
+    -webkit-transform: translate3d(0,0,0);
 }
 
 .mobile-bg {
     display: none;
     z-index: 0;
-    transform: translate3d(0, 0, 0);
 }
 
 .background, .mobile-bg {
