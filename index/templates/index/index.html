@@ -6,20 +6,28 @@
     <link rel="stylesheet" href="{% static 'index/index.css' %}?v=2">
 {% endblock %}
 
+{% block module %}
+    {{ block.super }}
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <script src="{% static 'index/index.js' %}?v=1"></script>
+{% endblock %}
+
 {% block content %}
-    <div id="banner">
-        <!--<img src = "{% static 'index/북극여우.jpg' %}" class = 'north_fox'>-->
-        <style>
-            #banner {
-                --background-image-url: url("{{ banner_club.index_banner_image.image.url }}")
-            }
-            .inner_banner strong {
-                --clubname-color: {{ banner_club.index_banner_color }};
-            }
-        </style>
-        <div class = 'inner_banner' onclick="return changeNav('club_{{ banner_club.code }}', '/about/{{ banner_club.code }}');">
-            <strong>{{ banner_club.name }}</strong>
-            <p>{{ banner_club.index_banner_description }}</p>
+    <div class="upper_container">
+        <div id="banner">
+            <!--<img src = "{% static 'index/북극여우.jpg' %}" class = 'north_fox'>-->
+            <style>
+                #banner {
+                    --background-image-url: url("{{ banner_club.index_banner_image.image.url }}")
+                }
+                .inner_banner strong {
+                    --clubname-color: {{ banner_club.index_banner_color }};
+                }
+            </style>
+            <div class = 'inner_banner' onclick="return changeNav('club_{{ banner_club.code }}', '/about/{{ banner_club.code }}');">
+                <strong>{{ banner_club.name }}</strong>
+                <p>{{ banner_club.index_banner_description }}</p>
+            </div>
         </div>
     </div>
 
