@@ -10,10 +10,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 1;
 }
 
 .mobile-bg {
     display: none;
+    z-index: 0;
 }
 
 .background, .mobile-bg {
@@ -178,7 +180,7 @@
     }
 
     .left, .right {
-        padding: 0.5rem 0rem
+        padding: 0.5rem 0rem;
     }
 
     .submitpage {
