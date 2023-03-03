@@ -3,7 +3,7 @@
 
 {% block style %}
     {{ block.super }}
-    <link rel="stylesheet" href="{% static 'about/about.css' %}?v=1">
+    <link rel="stylesheet" href="{% static 'about/about.css' %}?v=2">
 {% endblock %}
 
 {% block module %}
@@ -14,10 +14,11 @@
 {% endblock %}
 
 {% block content %}
-    <div class="background">
 
+    <div class="mobile-bg"></div>
+    <div class="background">
         <style>
-            .background {
+            .background, .mobile-bg {
                 --background-image-url: url("{{ club.about_background.image.url }}")
             }
         </style>

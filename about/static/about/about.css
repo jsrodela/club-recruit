@@ -10,9 +10,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.mobile-bg {
+    display: none;
+}
+
+.background, .mobile-bg {
     background-image: var(--background-image-url);
     background-repeat : no-repeat;
     background-size : cover;
+    background-position: center;
 }
 
 .entire {
@@ -35,8 +43,8 @@
 }
 
 .photo {
-    max-width: 100%;
-    min-height: 100%;
+    width: 100%;
+    max-height: 100%;
     aspect-ratio: 1 / 1;
     background-color: white;
     display: flex;
@@ -48,7 +56,7 @@
     background-size : cover;
     animation-duration: 0.5s;
     background-position: center;
-
+    animation-fill-mode: forwards;
 }
 
 .left_area, .right_area {
@@ -129,17 +137,23 @@
 }
 
 /* 모바일 레이아웃 */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {
 
     .background {
-        width: 100%;
-        height: fit-content;
         display: flex;
-        align-items: center;
-        justify-content: center;
-        background-image: var(--background-image-url);
-        background-repeat : no-repeat;
-        background-size : cover;
+        background: transparent;
+        height: fit-content;
+    }
+
+    .mobile-bg {
+        display: block;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        /*height: 100vh;
+        height: fill-available;
+        height: -moz-available; /* FireFox */
+        /*height: -webkit-fill-available; /* Chrome, Safari */
     }
 
     .entire {
@@ -162,7 +176,6 @@
 
     .right {
         width: 100%;
-        max-height: 80vh;
     }
 
     .left, .right {
@@ -177,13 +190,12 @@
     }
 
     .text {
-        height: 100%;
         overflow-y: scroll;
         display: block;
     }
 
     zero-md {
-        height: 100%;
+
     }
 }
 

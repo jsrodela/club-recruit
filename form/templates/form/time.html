@@ -20,8 +20,8 @@
             <div class = 'interview_time'> <!-- 시간대, 인원수 적은 상자들 묶음 -->
                 {% for j in '123456789'|make_list %}
                     <button class = 'inner_it'> <!-- it = interview_time, 상자별 구분 -->
-                        <p class="time">1{{j}}:00 ~ 1{{j}}:00</p>
-                        <p class="people">3/4</p>
+                        <span class="time">1{{j}}:00 ~ 1{{j}}:00</span>
+                        <span class="people">3/4</span>
                     </button>
                 {% endfor %}
             </div>
