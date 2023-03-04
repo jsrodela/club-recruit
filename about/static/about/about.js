@@ -25,7 +25,7 @@ function change_image(delta) {
 
         photo.style = generate_image_style(animation_type + '_in')
     }, 500)
-    console.log(images[image_num])
+//    console.log(images[image_num])
 }
 
 function generate_image_style(animation_name) {
