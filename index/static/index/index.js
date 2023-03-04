@@ -14,6 +14,42 @@ function get_random_banner() {
     return banners[random_number];
 }
 
+function change_banner() {
+    var new_banner = get_random_banner();
+    new_banner.style = `transition-duration: 0s; transition-duration: 0.5s; margin-left: ${upper_container.offsetWidth}px;`; // 왼쪽으로 옮기고
+    current_banner.style = `transition-duration: 0.5s; margin-left: -${upper_container.offsetWidth}px;`; // 오른쪽으로 애니메이션
+    new_banner.style = `transition-duration: 0.5s; margin-left: 0px;`; // 가운데로 애니메이션
+
+    setTimeout(function() {
+        current_banner.style = "display: none;"
+        current_banner = new_banner;
+    }, 500)
+
+    /*var banner = document.querySelector('#banner');
+
+    var internal_banner = banner.cloneNode(true);
+    upper_container.appendChild(internal_banner);
+    internal_banner.id="internal_banner";
+    $("#internal_banner").load(location.href + " #banner");
+    internal_banner.id="banner";
+
+
+    internal_banner.style = `margin-left: -${upper_container.offsetWidth}px;`;
+
+    banner.style = `transition-duration: 0.5s; margin-left: ${upper_container.offsetWidth}px;`;
+
+    internal_banner.style = `transition-duration: 0.5s; margin-left: 0px;`;
+
+    setTimeout(function(){
+        banner.remove();
+    }, 500);*/
+    /*setTimeout(function(){
+        internal_banner.id="banner";
+        banner.remove();
+    }, 2000);*/
+    //setTimeout(function() {$("#banner").load(location.href + " #banner");}, 1000)
+}
+
 current_banner = get_random_banner();
 current_banner.style = 'display: block;'
 
@@ -24,7 +60,7 @@ var params = new Proxy(new URLSearchParams(window.location.search), {
 console.log(params.banner_club)
 if (params.banner_club) {
     let new_banner = document.querySelector(`.banner-${params.banner_club}`)
-    console.log(new_banner);
+//    console.log(new_banner);
     if (new_banner != undefined) {
         current_banner.style = 'display: none;'
         current_banner = new_banner;
@@ -32,40 +68,9 @@ if (params.banner_club) {
     }
 }
 else {
-    setInterval(function() {
-
-        var new_banner = get_random_banner();
-        new_banner.style = `transition-duration: 0s; transition-duration: 0.5s; margin-left: ${upper_container.offsetWidth}px;`; // 왼쪽으로 옮기고
-        current_banner.style = `transition-duration: 0.5s; margin-left: -${upper_container.offsetWidth}px;`; // 오른쪽으로 애니메이션
-        new_banner.style = `transition-duration: 0.5s; margin-left: 0px;`; // 가운데로 애니메이션
-
-        setTimeout(function() {
-            current_banner.style = "display: none;"
-            current_banner = new_banner;
-        }, 500)
-
-        /*var banner = document.querySelector('#banner');
-
-        var internal_banner = banner.cloneNode(true);
-        upper_container.appendChild(internal_banner);
-        internal_banner.id="internal_banner";
-        $("#internal_banner").load(location.href + " #banner");
-        internal_banner.id="banner";
-
-
-        internal_banner.style = `margin-left: -${upper_container.offsetWidth}px;`;
-
-        banner.style = `transition-duration: 0.5s; margin-left: ${upper_container.offsetWidth}px;`;
-
-        internal_banner.style = `transition-duration: 0.5s; margin-left: 0px;`;
-
-        setTimeout(function(){
-            banner.remove();
-        }, 500);*/
-        /*setTimeout(function(){
-            internal_banner.id="banner";
-            banner.remove();
-        }, 2000);*/
-        //setTimeout(function() {$("#banner").load(location.href + " #banner");}, 1000)
-    }, 5000);
+    // remove previous interval if exists
+    if (typeof current_interval !== 'undefined') {
+        clearInterval(current_interval)
+    }
+    var current_interval = setInterval(change_banner, 5000);
 }
