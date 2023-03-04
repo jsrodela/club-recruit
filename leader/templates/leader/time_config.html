@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'leader/time_config.css' %}?v=1">
+{% endblock %}
+
+{% block module %}
+    {{ block.super }}
+{% endblock %}
+
+{% block content %}
+
+    {% if error %}
+        <script>
+            alert("{{ error }}")
+        </script>
+    {% endif %}
+
+    <div class="wrap">
+        <h1>2차 면접시간 설정 : {{ club.code }}</h1>
+        <p>이 페이지는 동아리 부장만 접근 가능합니다.</p>
+        <hr>
+
+        <form method="post">
+            <h3>2차 면접시간 선택 기능 사용</h3>
+            <input type="radio" name="time_use" value="False"> 사용 안 함
+            <input type="radio" name="time_use" value="True"> 사용
+
+            <div class="use">
+                <h3>면접 일정 추가하기</h3>
+                <div class="add">
+                    ① <input type="datetime-local"> 부터 <br>
+                    ② <input type="datetime-local"> 까지 <br>
+                    ③ <input type="number"> 명이 신청 가능하도록 <br>
+                    ④ <input type="number"> 개 일정 연달아 추가하기 <br>
+                    <button>추가</button>
+                </div>
+                <br>
+                <input type="checkbox"> 면접 미참가 선택지 사용
+            </div>
+            <input type="submit" value="적용">
+            {% csrf_token %}
+        </form>
+        <script>
+            document.querySelector("input[name='time_use'][value='{{ club.time_use }}']").checked = true
+            if ('{{ club.time_use }}' == 'True') {
+                console.log("asdf")
+            }
+        </script>
+    </div>
+
+    <script>
+        selectNav('club_{{ club.code }}');
+    </script>
+{% endblock %}
