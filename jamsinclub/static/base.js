@@ -82,7 +82,7 @@ function selectNav(code) {
     }
     let target = document.querySelector('nav > ul > li.' + code)
     target.classList.add('selected');
-    target.scrollIntoView()
+    target.scrollIntoView({block: "nearest", inline: "nearest"})
 
 }
 
