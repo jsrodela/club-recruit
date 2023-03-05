@@ -14,9 +14,7 @@
     <div class="wrap">
         <h1>RoDeLa 면접 시간</h1>
 
-        <h2>
-            지원자: {{ submit_user.id }} {{ submit_user.name }}
-        </h2>
+        <h2>지원자: {{ submit_user.id }} {{ submit_user.name }}</h2>
         <hr>
 
         <div class = 'outer_interview_time'> <!-- '면접 예약' 제외 모든 내용 묶음 -->
@@ -29,8 +27,8 @@
                         <br>
                         <span class="people">3/4명</span>
                     </button>
-                    <br>
                 {% endfor %}
+                <br>
             </div>
             <hr>
             {% endfor %}

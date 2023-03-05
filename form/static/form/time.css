@@ -5,6 +5,7 @@
 }
 .date {
     text-align: center;
+
 }
 .interview_time {
     display: flex;   /* 상자들 가로로 정렬 */
@@ -13,7 +14,6 @@
     margin: 1rem 0;
     display: flex;
     flex-direction: row;
-    flex-wrap: nowrap;
     justify-content: center;
 }
 .inner_it {
@@ -24,7 +24,6 @@
     margin: 0.5rem 1rem;  /* 상자와 상자 간 간격 설정 */
     cursor: pointer;
     background-color: transparent;
-
 }
 .inner_it:hover {
     border-color: var(--main-color-accent);
@@ -32,19 +31,19 @@
 .inner_it:active {
     opacity: 60%;
 }
-.inner_it p {
+.inner_it span {
     margin: 0.5rem;
     white-space: nowrap;
 }
-.inner_it p.time {
+.inner_it span.time {
     font-weight: 700;
     font-size: 1.2rem;
 }
 h1 {  /* '면접 예약'(제목) 디자인 */
     font-size: 40px;
-    color: rgb(95, 119, 219,2);
-    border-top: 3px solid rgb(95, 119, 219,2);
-    border-bottom: 3px solid rgb(95, 119, 219,2);
+    color: var(--main-color);
+    border: solid var(--main-color);
+    border-width: 3px 0;
     text-align: center;
 }
 hr {

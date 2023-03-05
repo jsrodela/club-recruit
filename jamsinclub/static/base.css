@@ -142,6 +142,7 @@ nav {
     /* FireFox 스크롤바 숨기기 */
     /*scrollbar-width: none;*/
 
+    /* 여백 고려해서 사이즈 계산되도록 설정 */
     box-sizing: border-box;
 }
 
