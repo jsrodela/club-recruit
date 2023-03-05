@@ -18,40 +18,24 @@ button {
 .w-btn {
     position: relative;
     border: none;
-    display: inline-block;
+    /* display: inline-block; */
     padding: 15px 30px;
     border-radius: 15px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    /*box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);*/
     text-decoration: none;
     font-weight: 600;
     transition: 0.25s;
 }
 .w-btn-green {
     background-color: rgb(95, 119, 219, 0.9);
-    color: #d7fff1;
-}
-.w-btn-green-outline {
-    border: 3px solid rgb(95, 119, 219, 0.9);
-    color: darkgray;
-}
-.w-btn-green-outline:hover {
-    background-color: rgb(95, 119, 219, 0.9);
-    color: #d7fff1;
+    color: white;
 }
 .w-btn:hover {
     letter-spacing: 2px;
     transform: scale(1.2);
     cursor: pointer;
 }
-.w-btn-outline:hover {
-    letter-spacing: 2px;
-    transform: scale(1.2);
-    cursor: pointer;
-}
 .w-btn:active {
-    transform: scale(1.5);
-}
-.w-btn-outline:active {
     transform: scale(1.5);
 }
 
