@@ -7,15 +7,15 @@
     display: flex;
     justify-content: space-around;
     margin-top: 60px;
+    align-items: flex-start;
 }
 button {
     /* 생략 */
-    margin: 0;
+    margin: 0.25rem 0 0 0;
     padding: 0.5rem 1rem;
 
-    font-family: "Noto Sans KR", sans-serif;
-    font-size: 1rem;
-    font-weight: 400;
+    font-size: 0.8rem;
+    font-weight: 600;
     text-align: center;
     text-decoration: none;
 
@@ -23,7 +23,10 @@ button {
     width: auto;
 
     border: none;
-    border-radius: 4px;
+    border-radius: 1rem;
+    cursor: pointer;
+    background-color: transparent;
+    border: 0.1rem solid var(--main-color);
 }
 
 .upper_container {
@@ -93,8 +96,29 @@ button {
 }
 
 h2 {
-    color: rgba(95, 119, 219, 1);
+    color: var(--main-color);
     text-align: center;
+}
+
+.submits {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    text-align: center;
+    padding: 0 0.5rem;
+}
+
+.submit {
+    margin: 1rem 0.5rem;
+}
+
+.submit h3, .submit p {
+    margin: 0.25rem;
+}
+
+.submit button {
+    padding: 0.5rem 1rem;
+    white-space: nowrap;
 }
 
 .dong_ari {
@@ -116,6 +140,7 @@ h2 {
     border: 0.1rem solid rgba(0, 0, 0, 0.1);
     border-radius: 0.5rem;
     padding: 10px;
+    text-align: center;
 }
 
 .login_wrapper {
