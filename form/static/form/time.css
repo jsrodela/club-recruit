@@ -1,6 +1,7 @@
 
 .wrap {
     padding: 1rem;
+    text-align: center;
 }
 .date {
     text-align: center;
@@ -48,6 +49,9 @@ h1 {  /* '면접 예약'(제목) 디자인 */
 }
 hr {
     border-color: rgba(0, 0, 0, 0.1);
+}
+.h2{
+    margin: 0.3rem 0;
 }
 
 @media screen and (max-width: 768px) {
