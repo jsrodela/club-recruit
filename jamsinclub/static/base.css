@@ -141,6 +141,8 @@ nav {
 
     /* FireFox 스크롤바 숨기기 */
     /*scrollbar-width: none;*/
+
+    box-sizing: border-box;
 }
 
 /* 왼쪽메뉴 스크롤바 */
