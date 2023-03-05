@@ -8,6 +8,7 @@
 
 {% block module %}
     {{ block.super }}
+    <script src="{% static 'leader/time_config.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -31,10 +32,11 @@
             <div class="use">
                 <h3>면접 일정 추가하기</h3>
                 <div class="add">
-                    ① <input type="datetime-local"> 부터 <br>
-                    ② <input type="datetime-local"> 까지 <br>
-                    ③ <input type="number"> 명이 신청 가능하도록 <br>
-                    ④ <input type="number"> 개 일정 연달아 추가하기 <br>
+                    ① <input id="add_start" type="datetime-local" value=""> 부터 <br>
+                    ② <input id="add_end" type="datetime-local"> 까지 <br>
+                    ③ <input id="add_number" type="number" min="1" value="1"> 명이 신청 가능하도록, <br>
+                    ④ 위의 규칙으로 <input id="add_repeat" type="number" min="1" max="100" value="1"> 개 일정 추가하기<br>
+                    (추가되는 마지막 일정: <input id="add_last" type="datetime-local" disabled> 까지)
                     <button>추가</button>
                 </div>
                 <br>
