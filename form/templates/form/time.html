@@ -12,8 +12,8 @@
 
 {% block content %}
     <div class="wrap">
-        <h1>면접 시간 선택: RoDeLa</h1>
-        <hr>
+        <h1>RoDeLa 면접 시간</h1>
+
         <div class = 'outer_interview_time'> <!-- '면접 예약' 제외 모든 내용 묶음 -->
             {% for i in '123456789'|make_list %}
             <h2 class="date">3/1{{i}}</h2>
@@ -21,11 +21,12 @@
                 {% for j in '123456789'|make_list %}
                     <button class = 'inner_it'> <!-- it = interview_time, 상자별 구분 -->
                         <span class="time">1{{j}}:00 ~ 1{{j}}:00</span>
-                        <span class="people">3/4</span>
+                        <br>
+                        <span class="people">3/4명</span>
                     </button>
+                    <br>
                 {% endfor %}
             </div>
-            <hr>
             {% endfor %}
         </div>
     </div>

@@ -10,6 +10,10 @@
     width: 100%;
     flex-wrap: wrap;
     margin: 1rem 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
 }
 .inner_it {
     width: 10rem;
@@ -40,6 +44,7 @@ h1 {  /* '면접 예약'(제목) 디자인 */
     color: rgb(95, 119, 219,2);
     border-top: 3px solid rgb(95, 119, 219,2);
     border-bottom: 3px solid rgb(95, 119, 219,2);
+    text-align: center;
 }
 hr {
     border-color: rgba(0, 0, 0, 0.1);
@@ -47,7 +52,10 @@ hr {
 
 @media screen and (max-width: 768px) {
     .interview_time {
-        flex-wrap: nowrap;
-        overflow-x: scroll;
+        flex-wrap: wrap;
+    }
+    .inner_it{
+        width: 100%;
+        border-radius: 0.8rem;
     }
 }
