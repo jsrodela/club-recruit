@@ -80,7 +80,10 @@ function selectNav(code) {
     for (let element of document.querySelectorAll('nav > ul > li.selected')) {
         element.classList.remove('selected');
     }
-    document.querySelector('nav > ul > li.' + code).classList.add('selected')
+    let target = document.querySelector('nav > ul > li.' + code)
+    target.classList.add('selected');
+    target.scrollIntoView({block: "nearest", inline: "nearest"})
+
 }
 
 function register_onclick() {

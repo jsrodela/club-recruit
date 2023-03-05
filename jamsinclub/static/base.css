@@ -35,7 +35,7 @@ header, main, footer {
 header, footer, nav {
     z-index: 99;
     background-color: white;
-    -webkit-transform: translate3d(0,0,0);
+    -webkit-transform: translate3d(0,0,0); /* Safari z-index support */
 }
 
 header {
@@ -141,6 +141,8 @@ nav {
 
     /* FireFox 스크롤바 숨기기 */
     /*scrollbar-width: none;*/
+
+    box-sizing: border-box;
 }
 
 /* 왼쪽메뉴 스크롤바 */
