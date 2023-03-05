@@ -132,3 +132,16 @@ def view_forms(request):
     data['forms'] = lst
 
     return render(request, 'leader/view_forms.html', data)
+
+
+def time_config(request):
+    data = get_data(request)
+
+    if 'user' not in data or data['user'].leader_of is None:
+        return redirect('/')
+
+    user = data['user']
+    club = user.leader_of
+
+    data['club'] = club
+    return render(request, "leader/time_config.html", data)

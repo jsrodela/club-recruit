@@ -41,7 +41,7 @@ def register(request):
         _pw = form.get('pw')
 
         if UserModel.objects.filter(id=_id).exists():
-            data['invalid'] = f"학번이 {_id}인 계정이 이미 존재합니다. <a href='https://pf.kakao.com/_xnUKNxj' target='_blank' style='color: var(--main-color);'>[문의하기]</a>"
+            data['invalid'] = f"학번이 {_id}인 계정이 이미 존재합니다. <a href='https://github.com/RoDeLa6/club-recruit/blob/main/account/docs/contact.md' target='_blank' style='color: var(--main-color);'>[문의하기]</a>"
         else:
             try:
                 validate_password(_pw)
