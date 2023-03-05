@@ -116,7 +116,12 @@ def view_forms(request):
 
     data['club'] = club
 
-    forms = FormModel.objects.filter(club=club.code)
+    if 'show_archive' in request.GET:
+        forms = FormModel.objects.filter(club=club.code)
+        data['show_archive'] = True
+    else:
+        forms = FormModel.objects.filter(club=club.code, archive=False)
+        data['show_archive'] = False
 
     lst = []
     for form in forms:
