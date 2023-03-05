@@ -13,7 +13,8 @@
 {% block content %}
     <div class="wrap">
         <h1>RoDeLa 면접 시간</h1>
-
+        <br>
+        <hr>
         <div class = 'outer_interview_time'> <!-- '면접 예약' 제외 모든 내용 묶음 -->
             {% for i in '123456789'|make_list %}
             <h2 class="date">3/1{{i}}</h2>
@@ -27,6 +28,7 @@
                     <br>
                 {% endfor %}
             </div>
+            <hr>
             {% endfor %}
         </div>
     </div>
