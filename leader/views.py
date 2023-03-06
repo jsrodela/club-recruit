@@ -191,6 +191,7 @@ def first_result(request):
                     'id': form.id,
                     'number': form.number,
                     'name': form_user.name,
+                    'phone': form_user.phone,
                 })
                 pass_phone.append(phone)
             elif form.first_result == 'F':
@@ -216,3 +217,32 @@ def first_result(request):
 
     data['club'] = club
     return render(request, "leader/first_result.html", data)
+
+
+def every_forms(request):
+    data = get_data(request)
+
+    if 'user' not in data or data['user'].leader_of is None:
+        return redirect('/')
+
+    user = data['user']
+    club = user.leader_of
+
+    forms = FormModel.objects.filter(club=club.code, archive=False)
+    lst = []
+    for form in forms:
+        form_user = User.objects.get(id=form.number)
+        submit = form.section
+        print(submit)
+        lines = [f'{form_user.id} {form_user.name} (#{form.id})']
+        for obj in submit:
+            if obj['answer'] == '--etc--':
+                continue
+            elif '--etc--' in obj['answer']:
+                obj['answer'].remove('--etc--')
+            lines.append(str(obj['answer']))
+        lst.append(" /\n".join(lines))
+
+    data['submits'] = "\n\n-----\n\n".join(lst)
+    data['club'] = club
+    return render(request, "leader/every_forms.html", data)

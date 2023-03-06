@@ -6,4 +6,5 @@ urlpatterns = [
     path("view_forms", views.view_forms),
     path("time_config", views.time_config),
     path("first_result", views.first_result),
+    path("every_forms", views.every_forms),
 ]
