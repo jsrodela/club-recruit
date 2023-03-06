@@ -3,7 +3,7 @@
 
 {% block style %}
     {{ block.super }}
-    <link rel="stylesheet" href="{% static 'index/index.css' %}?v=5">
+    <link rel="stylesheet" href="{% static 'index/index.css' %}?v=6">
 {% endblock %}
 
 {% block module %}
@@ -45,7 +45,13 @@
                         {% for form in forms %}
                             <div class="submit">
                                 <h3>{{ form.club.name }}</h3>
-                                <p style="color: grey;">1차 합격 대기중</p>
+                                {% if form.first_result == 'P' %}
+                                    <p class="pass">1차 불합격</p>
+                                {% elif form.first_result == 'F' %}
+                                    <p class="fail">1차 탈락</p>
+                                {% else %}
+                                    <p class="wait">1차 합격 대기중</p>
+                                {% endif %}
                                 <button onclick="return changeNav('club_{{ form.club.code }}', '/form/views/{{ form.club.code }}');">지원서 보기</button>
                             </div>
                         {% endfor %}

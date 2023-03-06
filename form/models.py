@@ -21,3 +21,9 @@ class FormModel(models.Model):
     submit_at = models.DateTimeField(auto_now_add=True)
 
     archive = models.BooleanField(default=False)
+
+    RESULTS = [('W', 'WAIT'), ('P', 'PASS'), ('F', 'FAIL')]
+
+    first_result = models.CharField(max_length=1, choices=RESULTS, default='W')
+
+    time = models.CharField(max_length=100, default='', blank=True)
