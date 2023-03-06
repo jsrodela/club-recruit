@@ -109,6 +109,7 @@ def view_forms(request):
     user = data['user']
     if data['user'].leader_of:
         club = user.leader_of
+        data['is_leader'] = True
     elif data['user'].member_of:
         club = user.member_of
     else:
@@ -150,3 +151,68 @@ def time_config(request):
 
     data['club'] = club
     return render(request, "leader/time_config.html", data)
+
+
+def first_result(request):
+    data = get_data(request)
+
+    if 'user' not in data or data['user'].leader_of is None:
+        return redirect('/')
+
+    user = data['user']
+    club = user.leader_of
+
+    if request.POST:
+        print(request.POST)
+        for key in dict(request.POST):
+            if key == 'csrfmiddlewaretoken':
+                continue
+
+            target = FormModel.objects.get(id=key)
+            target.first_result = 'P'
+            target.save()
+
+        fails = FormModel.objects.filter(club=club.code, archive=False, first_result='W')
+        for fail in fails:
+            fail.first_result = 'F'
+            fail.save()
+
+    passes = FormModel.objects.filter(club=club.code, archive=False, first_result='P')
+    if passes.exists():
+        lst = []
+        all_phone, pass_phone, fail_phone = [], [], []
+
+        for form in FormModel.objects.filter(club=club.code, archive=False).order_by('number'):
+            form_user = User.objects.get(id=form.number)
+            phone = form_user.phone.as_national
+            all_phone.append(phone)
+            if form.first_result == 'P':
+                lst.append({
+                    'id': form.id,
+                    'number': form.number,
+                    'name': form_user.name,
+                })
+                pass_phone.append(phone)
+            elif form.first_result == 'F':
+                fail_phone.append(phone)
+
+        data['all_phone'] = ",".join(all_phone)
+        data['pass_phone'] = ", ".join(pass_phone)
+        data['fail_phone'] = ", ".join(fail_phone)
+
+    else:
+        data['not_done'] = True
+        forms = FormModel.objects.filter(club=club.code, archive=False)
+
+        lst = []
+        for form in forms:
+            form_user = User.objects.get(id=form.number)
+            lst.append({
+                'id': form.id,
+                'number': form.number,
+                'name': form_user.name,
+            })
+    data['forms'] = lst
+
+    data['club'] = club
+    return render(request, "leader/first_result.html", data)

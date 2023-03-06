@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'leader/view_forms.css' %}?v=1">
+{% endblock %}
+
+{% block module %}
+    {{ block.super }}
+    <script src="{% static 'leader/first_result.js' %}?v=1"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="wrap">
+        {% if not_done %}
+            <h1>1차 합격자 등록: {{ club.code }}</h1>
+            <p>이 페이지는 동아리 부장만 열람할 수 있습니다.</p>
+            <p>1차 합격 대상자를 모두 선택한 후, 아래의 '등록' 버튼을 눌러주세요.</p>
+        {% else %}
+            <h1>1차 합격자 목록: {{ club.code }}</h1>
+            <p>이 페이지는 동아리 부장 및 부원만 열람할 수 있습니다.</p>
+        {% endif %}
+        <hr>
+
+        {% if not_done %}
+            <button id="check_all">전체 선택하기</button>
+            <button id="uncheck_all">전체 선택 해제하기</button>
+        {% else %}
+            <div class="phones">
+                <h3>모든 지원자 전화번호</h3>
+                <textarea id="all_phone" readonly>{{ all_phone }}</textarea>
+                <button id="copy_all_phone">복사</button>
+                <h3>모든 합격자 전화번호</h3>
+                <textarea id="pass_phone" readonly>{{ pass_phone }}</textarea>
+                <button id="copy_pass_phone">복사</button>
+                <h3>모든 탈락자 전화번호</h3>
+                <textarea id="fail_phone" readonly>{{ fail_phone }}</textarea>
+                <button id="copy_fail_phone">복사</button>
+            </div>
+            <hr>
+        {% endif %}
+        <form method="post">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>학번</th>
+                        <th>이름</th>
+                        <th>지원서</th>
+                        {% if not_done %}
+                            <th>합격</th>
+                        {% else %}
+                            <th>전화번호</th>
+                        {% endif %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for form in forms %}
+                        <tr>
+                            <th>{{ form.id }}</th>
+                            <td>{{ form.number }}</td>
+                            <td>{{ form.name }}</td>
+                            {% if not_done %}
+                                <td><a href="/form/leader/{{ form.id }}" target="_blank">보기</a></td>
+                                <td><input type="checkbox" name="{{ form.id }}" class="is_pass"></td>
+                            {% else %}
+                                <td><a href="/form/leader/{{ form.id }}">보기</a></td>
+                                <td>{{ form.phone }}</td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% if not_done %}
+                <input type="submit" value="등록" onclick="return confirm('1차 합격자는 등록 이후 수정이 불가능합니다. 합격자를 등록하시겠습니까?');">
+                {% csrf_token %}
+            {% endif %}
+        </form>
+    </div>
+
+    <script>
+        selectNav('club_{{ club.code }}');
+        {% if not_done %}
+            var not_done = true;
+        {% else %}
+            var not_done = false;
+        {% endif %}
+    </script>
+{% endblock %}

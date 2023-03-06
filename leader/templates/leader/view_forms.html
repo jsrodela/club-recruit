@@ -19,6 +19,9 @@
         {% else %}
             <a href="?show_archive=true">취소된 지원서도 보기</a>
         {% endif %}
+        {% if is_leader %}
+            <span> | </span><a href="/leader/first_result" target="_blank" style="font-weight: bold;">1차 합격자 결정하기</a>
+        {% endif %}
         <hr>
 
         <h3>지원서 {{ forms|length }}개</h3>
