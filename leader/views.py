@@ -234,7 +234,7 @@ def every_forms(request):
         form_user = User.objects.get(id=form.number)
         submit = form.section
         print(submit)
-        lines = [f'{form_user.id} {form_user.name} (#{form.id})']
+        lines = [f'{form_user.id} {form_user.name} (#{form.id}) {form_user.phone}']
         for obj in submit:
             if obj['answer'] == '--etc--':
                 continue
