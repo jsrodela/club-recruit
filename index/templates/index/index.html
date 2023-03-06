@@ -46,11 +46,11 @@
                             <div class="submit">
                                 <h3>{{ form.club.name }}</h3>
                                 {% if form.first_result == 'P' %}
-                                    <p class="pass">1차 불합격</p>
+                                    <p class="pass">1차 합격</p>
                                 {% elif form.first_result == 'F' %}
-                                    <p class="fail">1차 탈락</p>
+                                    <p class="fail">1차 불합격</p>
                                 {% else %}
-                                    <p class="wait">1차 합격 대기중</p>
+                                    <p class="wait">1차 결과 대기중</p>
                                 {% endif %}
                                 <button onclick="return changeNav('club_{{ form.club.code }}', '/form/views/{{ form.club.code }}');">지원서 보기</button>
                             </div>
