@@ -8,7 +8,7 @@
 
 {% block module %}
     {{ block.super }}
-    <script src="{% static 'leader/time_config.js' %}"></script>
+    <script src="{% static 'leader/time_config.js' %}?v=1"></script>
 {% endblock %}
 
 {% block content %}
@@ -21,36 +21,70 @@
 
     <div class="wrap">
         <h1>2차 면접시간 설정 : {{ club.code }}</h1>
-        <p>이 페이지는 동아리 부장만 접근 가능합니다.</p>
+        <p>이 페이지는 동아리 부장만 접근 가능합니다.<br>지원 기능을 사용하지 않으려면 아무것도 적용하지 마세요!</p>
         <hr>
 
-        <form method="post">
-            <h3>2차 면접시간 선택 기능 사용</h3>
-            <input type="radio" name="time_use" value="False"> 사용 안 함
-            <input type="radio" name="time_use" value="True"> 사용
+        <table id="viewTable">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>날짜</th>
+                    <th>시작</th>
+                    <th>종료</th>
+                    <th>인원</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for time in club.time_data %}
+                    <tr>
+                        <td>.</td>
+                        <td>{{ time.date }}</td>
+                        <td>{{ time.start }}</td>
+                        <td>{{ time.end }}</td>
+                        <td>{{ time.number }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
 
-            <div class="use">
-                <h3>면접 일정 추가하기</h3>
-                <div class="add">
-                    ① <input id="add_start" type="datetime-local" value=""> 부터 <br>
-                    ② <input id="add_end" type="datetime-local"> 까지 <br>
-                    ③ <input id="add_number" type="number" min="1" value="1"> 명이 신청 가능하도록, <br>
-                    ④ 위의 규칙으로 <input id="add_repeat" type="number" min="1" max="100" value="1"> 개 일정 추가하기<br>
-                    (추가되는 마지막 일정: <input id="add_last" type="datetime-local" disabled> 까지)
-                    <button>추가</button>
-                </div>
-                <br>
-                <input type="checkbox"> 면접 미참가 선택지 사용
+        <form method="post">
+            <h3>시간 선택 페이지 오픈 시간</h3>
+            <input type="datetime-local" name="time_start" value="{{ time_start }}">
+            <hr>
+            <h3>면접 일정 추가하기</h3>
+            <p>첫번째와 두번째 시간만 입력하면, 세번째 시간부터는 자동으로 위 두 시간의 규칙을 따라 생성됩니다.<br>
+            꼭 시간이 순서대로일 필요는 없어요!</p>
+            <p>면접시간 수정 후, 아래의 '적용' 버튼을 꼭 눌러주세요.</p>
+            <!--<div class="add">
+                ① <input id="add_start" type="datetime-local" value=""> 부터 <br>
+                ② <input id="add_end" type="datetime-local"> 까지 <br>
+                ③ <input id="add_number" type="number" min="1" value="1"> 명이 신청 가능하도록, <br>
+                ④ 위의 규칙으로 <input id="add_repeat" type="number" min="1" max="100" value="1"> 개 일정 추가하기<br>
+                (추가되는 마지막 일정: <input id="add_last" type="datetime-local" disabled> 까지)
+                <button>추가</button>
+            </div>-->
+            <div class="tableDiv">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>날짜</th>
+                            <th>시작</th>
+                            <th>종료</th>
+                            <th>인원</th>
+                        </tr>
+                    </thead>
+                    <tbody id="timetable">
+                    </tbody>
+                </table>
             </div>
-            <input type="submit" value="적용">
+            <button id="add_time">시간 추가</button>
+            <br><br>
+
+            <input type="hidden" name="time_data" id="time_data">
+            <input type="submit" value="적용" onclick="return on_submit();">
             {% csrf_token %}
         </form>
-        <script>
-            document.querySelector("input[name='time_use'][value='{{ club.time_use }}']").checked = true
-            if ('{{ club.time_use }}' == 'True') {
-                console.log("asdf")
-            }
-        </script>
     </div>
 
     <script>

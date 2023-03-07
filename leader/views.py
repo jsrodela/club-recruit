@@ -1,3 +1,4 @@
+import json
 from datetime import datetime
 
 import pytz
@@ -149,7 +150,20 @@ def time_config(request):
     user = data['user']
     club = user.leader_of
 
+    if request.POST:
+        print(club.code)
+        print(request.POST)
+        post_data = request.POST
+        club.time_use = True
+
+        club.time_start = datetime.fromisoformat(post_data.get('time_start') + ":00+09:00")
+
+        time_data = json.loads(post_data.get('time_data'))
+        club.time_data.extend(time_data)
+        club.save()
+
     data['club'] = club
+    data['time_start'] = club.time_start.astimezone(pytz.timezone('Asia/Seoul')).strftime("%Y-%m-%dT%H:%M")
     return render(request, "leader/time_config.html", data)
 
 
