@@ -160,6 +160,7 @@ def time_config(request):
 
         time_data = json.loads(post_data.get('time_data'))
         club.time_data.extend(time_data)
+        club.time_data.sort(key=lambda x: (x['date'], x['start'], x['end']))
         club.save()
 
     data['club'] = club
