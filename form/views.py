@@ -140,6 +140,80 @@ def leader_view(request, form_id):
     return render(request, 'form/form.html', data)
 
 
-def time(request):
+def time(request, clubname):
     data = get_data(request)
+
+    if 'user' not in data:
+        data['error'] = '로그인 후 면접 시간을 선택할 수 있습니다.'
+        return render(request, 'form/time.html', data)
+
+    user = data['user']
+
+    try:
+        apply = FormModel.objects.get(number=user.id, club=clubname, archive=False, first_result='P')
+    except FormModel.DoesNotExist:
+        data['error'] = '이 동아리에 합격하지 못했습니다.'
+        return render(request, 'form/time.html', data)
+
+    club = apply.club
+
+    if club.time_start > timezone.localtime():
+        data['error'] = '아직 면접시간 선택이 시작되지 않았어요.'
+        return render(request, 'form/time.html', data)
+
+    if request.POST:
+        time_value = request.POST.get('time_value')
+        time_date = time_value[0:2] + '-' + time_value[3:5]
+        time_start = time_value[6:11]
+
+        time_data = club.time_data
+        print(time_value)
+        for i in range(len(time_data)):
+            obj = time_data[i]
+            print(obj, time_date, time_start)
+
+            if obj['date'].endswith(time_date) and obj['start'] == time_start:
+                if obj['current'] >= int(obj['number']):
+                    data['alert'] = '해당 시간 정원이 꽉 찼습니다.'
+                    break
+                else:
+                    obj['current'] += 1
+                    time_data[i] = obj
+                    club.time_data = time_data
+                    club.save()
+
+                    apply.time = time_value
+                    apply.save()
+                    return redirect('/')
+            else:
+                print(i)
+
+    time_data = sorted(club.time_data, key=lambda x: (x['date'], x['start'], x['end']))
+    prev_date = ''
+    lst = []
+    times = []
+    for obj in time_data:
+        # print(obj)
+        if obj['date'] != prev_date:
+            if times:
+                lst.append({
+                    'date': prev_date[5:7] + "/" + prev_date[8:10],
+                    'times': times
+                })
+            prev_date = obj['date']
+            times = []
+        times.append({
+            'start': obj['start'],
+            'end': obj['end'],
+            'number': obj['number'],
+            'current': obj['current'],
+        })
+    if times:
+        lst.append({
+            'date': prev_date[5:7] + "/" + prev_date[8:10],
+            'times': times
+        })
+
+    data['time_data'] = lst
+    data['club'] = club
     return render(request, 'form/time.html', data)

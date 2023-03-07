@@ -76,7 +76,7 @@ document.getElementById('add_time').onclick = function() {
     this_end = toTimeString(this_end)
 
     timetable.insertAdjacentHTML('beforeend',
-    `<tr><td>${number}</td><td><input type='date' name='date' value='${this_date}'></td><td><input type='time' name='start' value='${this_start}'></td><td><input type='time' name='end' value='${this_end}'></td><td><input type='number' name='number' min='0' style='width: 50px;' value='${this_number}'></td></tr>`)
+    `<tr><td><input type="hidden" name="current" value="0">${number}</td><td><input type='date' name='date' value='${this_date}'></td><td><input type='time' name='start' value='${this_start}'></td><td><input type='time' name='end' value='${this_end}'></td><td><input type='number' name='number' min='0' style='width: 50px;' value='${this_number}'></td></tr>`)
     } catch (e) {
         console.error(e)
     }

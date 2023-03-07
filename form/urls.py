@@ -5,5 +5,5 @@ urlpatterns = [
     path("submit/<str:clubname>", views.form),
     path("views/<str:clubname>", views.club),
     path("leader/<int:form_id>", views.leader_view),
-    path("time/", views.time)
+    path("time/<str:clubname>", views.time)
 ]
