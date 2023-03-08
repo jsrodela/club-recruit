@@ -181,7 +181,7 @@ def time(request, clubname):
                 obj['number'] = int(obj['number'])
                 if obj['current'] >= obj['number']:
                     data['alert'] = '정원이 꽉 찼습니다. 다른 시간을 선택해주세요.'
-                    break
+                    continue
                 else:
                     obj['current'] += 1
                     time_data[i] = obj
@@ -196,6 +196,8 @@ def time(request, clubname):
                     apply.time = time_value
                     apply.save()
                     return redirect('/')
+
+        data['alert'] = '오류가 발생했습니다. 오류가 지속되면 문의하기를 눌러 알려주세요.'
 
     time_data = sorted(club.time_data, key=lambda x: (x['date'], x['start'], x['end']))
     prev_date = ''
