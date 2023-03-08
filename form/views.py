@@ -162,7 +162,7 @@ def time(request, clubname):
         return render(request, 'form/time.html', data)
 
     if apply.time:
-        data['error'] = '이미 면접 시간을 선택했어요. 변경을 원하시면 하단의 "문의하기"를 눌러 문의해주세요. '
+        data['error'] = '이미 면접 시간을 선택했어요. 변경을 원하시면 하단의 문의하기를 눌러 문의해주세요. '
         return render(request, 'form/time.html', data)
 
     if request.POST:
