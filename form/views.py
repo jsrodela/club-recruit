@@ -177,7 +177,7 @@ def time(request, clubname):
             # print(obj, time_date, time_start)
 
             if obj['date'].endswith(time_date) and obj['start'] == time_start:
-                if obj['current'] >= int(obj['number']):
+                if int(obj['current']) >= int(obj['number']):
                     data['alert'] = '정원이 꽉 찼습니다. 다른 시간을 선택해주세요.'
                     break
                 else:
