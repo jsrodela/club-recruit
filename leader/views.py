@@ -261,3 +261,45 @@ def every_forms(request):
     data['submits'] = "\n\n-----\n\n".join(lst)
     data['club'] = club
     return render(request, "leader/every_forms.html", data)
+
+
+def view_time(request):
+
+    data = get_data(request)
+
+    if 'user' not in data:
+        return redirect('/')
+
+    user = data['user']
+    if data['user'].leader_of:
+        club = user.leader_of
+        # data['is_leader'] = True
+    elif data['user'].member_of:
+        club = user.member_of
+    else:
+        return redirect('/')
+
+    data['club'] = club
+
+    forms = FormModel.objects.filter(club=club, archive=False, first_result='P').order_by('time', 'number')
+
+    lst = []
+    lst_blank = []
+    for form in forms:
+        target_user = User.objects.get(id=form.number)
+        obj = {
+            'time': form.time,
+            'number': target_user.id,
+            'name': target_user.name,
+            'id': form.id,
+            'phone': target_user.phone
+        }
+
+        if form.time:
+            lst.append(obj)
+        else:  # blank
+            lst_blank.append(obj)
+
+    lst.extend(lst_blank)
+    data['forms'] = lst
+    return render(request, 'leader/view_time.html', data)
