@@ -172,6 +172,10 @@ h2 {
     justify-content: center;
 }
 
+.interview_club {
+    margin-bottom: 0.5rem;
+}
+
 
 /* 모바일 레이아웃 */
 @media screen and (max-width: 768px) {

@@ -3,7 +3,7 @@
 
 {% block style %}
     {{ block.super }}
-    <link rel="stylesheet" href="{% static 'index/index.css' %}?v=6">
+    <link rel="stylesheet" href="{% static 'index/index.css' %}?v=7">
 {% endblock %}
 
 {% block module %}
@@ -38,6 +38,31 @@
 
     {% if user.is_authenticated %}
         <div class="outer-container">
+            <div class = 'interview'>
+                <h2>면접 시간</h2>
+                <ul>
+                    {% for form in forms %}
+                        {% if form.first_result == 'P' %}
+                            <li class="interview_club"><b>{{ form.club.name }}</b>:
+                                <br>
+                                {% if form.club.time_use %}
+                                    <a href="/form/time/{{ form.club.code }}">
+                                        {% if form.time %}
+                                            {{ form.time }}
+                                        {% else %}
+                                            시간 선택하기
+                                        {% endif %}
+                                    </a>
+                                {% else %}
+                                    <span style="color: grey;">별도 안내 예정</span>
+                                {% endif %}
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+                <p style="color: grey; text-align: center;">1차 합격된 동아리에서 면접 안내 문자를 받지 못했다면, 해당 동아리에 문의해보세요.</p>
+
+            </div>
             <div class = 'dong_ari'>
                 <h2>지원한 동아리</h2>
                 {% if forms|length > 0 %}
@@ -61,25 +86,7 @@
                 {% endif %}
             </div>
 
-            <div class = 'interview'>
-                <h2>면접 시간</h2>
-                <ul>
-                    {% for form in forms %}
-                        {% if form.first_result == 'P' %}
-                        <li><b>{{ form.club.name }}</b>:
-                            <br>
-                            <a href="/form/time/{{ form.club.code }}">
-                                {% if form.time %}
-                                    {{ form.time }}
-                                {% else %}
-                                    면접 시간 선택하기
-                                {% endif %}
-                            </a>
-                        </li>
-                        {% endif %}
-                    {% endfor %}
-                </ul>
-            </div>
+
 
             <div class = 'my_info'>
                 <h2>내 정보</h2>
