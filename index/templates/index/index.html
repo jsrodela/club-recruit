@@ -63,7 +63,22 @@
 
             <div class = 'interview'>
                 <h2>면접 시간</h2>
-                <p style="color: grey; text-align: center;">1차 지원 진행중</p>
+                <ul>
+                    {% for form in forms %}
+                        {% if form.first_result == 'P' %}
+                        <li><b>{{ form.club.name }}</b>:
+                            <br>
+                            <a href="/form/time/{{ form.club.code }}">
+                                {% if form.time %}
+                                    {{ form.time }}
+                                {% else %}
+                                    면접 시간 선택하기
+                                {% endif %}
+                            </a>
+                        </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
             </div>
 
             <div class = 'my_info'>
