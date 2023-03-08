@@ -161,20 +161,24 @@ def time(request, clubname):
         data['error'] = '아직 면접시간 선택이 시작되지 않았어요.'
         return render(request, 'form/time.html', data)
 
+    if apply.time:
+        data['error'] = '이미 면접 시간을 선택했어요. 변경을 원하시면 하단의 "문의하기"를 눌러 문의해주세요. '
+        return render(request, 'form/time.html', data)
+
     if request.POST:
         time_value = request.POST.get('time_value')
         time_date = time_value[0:2] + '-' + time_value[3:5]
         time_start = time_value[6:11]
 
         time_data = club.time_data
-        print(time_value)
+        # print(time_value)
         for i in range(len(time_data)):
             obj = time_data[i]
-            print(obj, time_date, time_start)
+            # print(obj, time_date, time_start)
 
             if obj['date'].endswith(time_date) and obj['start'] == time_start:
                 if obj['current'] >= int(obj['number']):
-                    data['alert'] = '해당 시간 정원이 꽉 찼습니다.'
+                    data['alert'] = '정원이 꽉 찼습니다. 다른 시간을 선택해주세요.'
                     break
                 else:
                     obj['current'] += 1
@@ -182,11 +186,14 @@ def time(request, clubname):
                     club.time_data = time_data
                     club.save()
 
+                    # if apply.time:
+                    #     prev_time = apply.time
+                    #     prev_date = prev_time[0:2] + '-' + prev_time[3:5]
+                    #     prev_start = prev_time[6:11]
+
                     apply.time = time_value
                     apply.save()
                     return redirect('/')
-            else:
-                print(i)
 
     time_data = sorted(club.time_data, key=lambda x: (x['date'], x['start'], x['end']))
     prev_date = ''
