@@ -58,7 +58,7 @@ document.getElementById('add_time').onclick = function() {
 //        console.log(last_next_end)
 
         this_start = new Date(last_next_start.getTime() + (last_next_start.getTime() - last_prev_start.getTime()))
-        this_end = new Date(last_next_end.getTime() + (last_next_end.getTime() - last_next_start.getTime()))
+        this_end = new Date(this_start.getTime() + (last_next_end.getTime() - last_next_start.getTime()))
 
         this_number = last_next.childNodes[4].childNodes[0].value
         this_date = last_next.childNodes[1].childNodes[0].value

@@ -8,7 +8,7 @@
 
 {% block module %}
     {{ block.super }}
-    <script src="{% static 'leader/time_config.js' %}?v=1"></script>
+    <script src="{% static 'leader/time_config.js' %}?v=2"></script>
 {% endblock %}
 
 {% block content %}
@@ -48,7 +48,7 @@
         </table>
 
         <form method="post">
-            <h3>시간 선택 페이지 오픈 시간</h3>
+            <h3>면접시간 선택 페이지 활성화 시각</h3>
             <input type="datetime-local" name="time_start" value="{{ time_start }}">
             <hr>
             <h3>면접 일정 추가하기</h3>
