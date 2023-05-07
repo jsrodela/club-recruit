@@ -1,225 +1,51 @@
 # club-recruit
-2023년 상설동아리 모집 사이트입니다.
+2023년 잠신고등학교 상설동아리 모집 사이트입니다.
 
 By RoDeLa 6.0
 
 * 개발 환경 설정: [DEV_SETUP.md](DEV_SETUP.md)
-* asdf
+* 서버 설정: [PRODUCTION.md](PRODUCTION.md)
 
-settings.json
-```json
-{
-  "extform_url": "https://script.google.com/macros/s/.../exec",
-  "secret_key": "django-insecure-=jwym+hlrxql772fu&(*^20cyt%_8t4wu$^dw__v^ugbm*=+ha",
-  "allowed_hosts": ["localhost", "127.0.0.1"],
-  "production": false
-}
-```
+=== 보고서 작성중 ===
 
-### 가상머신 설정
+## 1. 서론
+작년에 1학년으로써 동아리에 지원하는 입장이었던 우리는, 인스타그램을 통한 동아리 홍보의 단점을 느꼈다. 올해는 2학년으로써 동아리 부원을 선발하는 위치에 서게 되었고, 작년 방식의 한계점을 극복하기 위해 동아리 통합 지원 사이트를 직접 제작하여 운영하기로 하였다.
 
-1. 업데이트
-```shell
-sudo apt update
-sudo apt upgrade
-```
+## 2. 사전 조사
 
-2. git clone
-```shell
-git clone https://github.com/RoDeLa6/club-recruit.git
-cd club-recruit
-```
-
-3. 필요 프로그램 설치
-```shell
-# 파이썬 3.9 설치
-sudo apt install python3.9
-alias python=python3.9
-
-# 가상환경 생성
-sudo apt install python3.9-venv
-python -m venv .venv
-. .venv/bin/activate
-
-# 의존 모듈 설치
-pip install -r requirements.txt
-```
-
-4. settings.json 설정
-```shell
-nano settings.json
-```
-```json
-{
-  "extform_url": "https://script.google.com/macros/s/.../exec",
-  "secret_key": "django-insecure-=jwym+hlrxql772fu&(*^20cyt%_8t4wu$^dw__v^ugbm*=+ha",
-  "allowed_hosts": ["localhost", "127.0.0.1"],
-  "production": false
-}
-```
-* extform_url: [ExtForm](https://github.com/ExtForm/ExtForm)에 연결된 Google Apps Script 웹앱 링크
-* secret_key: 암호화에 사용될 키 (예제에 있는 키는 자동생성, [여기](https://randomkeygen.com/)서 따와도 좋음)
-* allowed_hosts: 장고 접속에 사용될 서버 주소
-* production: 실제 서버인지 (true이면 개발용 디버그 모드 꺼짐)
-
-수정 끝났으면 Ctrl+X -> Y -> 엔터 눌러서 나오기
-
-5. 장고 설정
-```shell
-python manage.py makemigrations
-python manage.py migrate
-python manage.py collectstatic
-```
-
-6. 서버 실행
-```shell
-python manage.py runserver
-```
-이제 `서버주소:8000`으로 접속해서 접속이 잘 되는지 확인한다. Azure의 네트워크 탭에서 포트 허용은 필수.
-
-테스트가 완료되었다면 Ctrl+C를 눌러 서버를 닫아준다.
-
-### Gunicorn 설정
-
-1. Gunicorn 설치
-```shell
-# Gunicorn 설치
-pip install gunicorn
-
-# Gunicorn 테스트
-gunicorn --bind 0:8000 jamsinclub.wsgi:aplication
-````
-테스트에 성공하면 Ctrl+C로 서버를 닫아준다.
+### 2-1. 기존 진행 방식
+2022년 잠신고에서는 연초에 상설동아리 부원을 모집할 때, 각각 동아리에서 지원 서류(구글 설문지 등)를 만들고, 전용 인스타그램에 올리는 홍보 포스터에 지원 서류 링크로 이동하는 QR코드를 탑재하는 방식으로 진행했다. 
 
 
-```shell
-# 로그 파일 생성 (rodela 부분을 사용자 이름으로 바꿔서 실행)
-sudo touch /var/log/gunicorn.access.log
-sudo chown rodela:rodela /var/log/gunicorn.access.log
-sudo touch /var/log/gunicorn.error.log
-sudo chown rodela:rodela /var/log/gunicorn.error.log
+## 5. 사이트 운영
+### 5-1. 준비 (2023. 02. 18. ~ 2023. 03. 01.)
+2월 18일, 상설동아리 부장 톡방을 생성하고, 부장들에게 사이트를 통한 모집 계획을 안내하며 협조를 부탁했다. 물론 처음 해보는 시도인 만큼 부장들 간 약간의 혼란이 있었지만, 서로 의견을 조율하며 각 동아리의 소개페이지와 지원 서류를 꾸렸다. 미리 교장선생님과 창의체험부 부장 선생님께 사이트 이용 허락을 받고, 예비소집일 동아리 홍보 시간에도 1학년 학생들에게 사이트를 안내했다.
 
-# 호스트 등록
-sudo nano /etc/systemd/system/gunicorn.service
-# 아래 내용 입력
-[Unit]
-Description=gunicorn daemon
-Requires=gunicorn.socket
-After=network.target
+### 5-2. 1차 지원 (2023. 03. 02. ~ 2023. 03. 14.)
+교실 앞 게시판, 중앙현관 게시판, 정보관 앞 게시판 등 학교 곳곳에 동아리 홍보 포스터를 부착하고, 동아리 지원 사이트에서 지원할 수 있다는 내용을 포함했다. 모든 동아리가 사이트에 소개글을 올리고 지원서 제출을 활성화했으며, 학생들은 각자의 학번으로 가입하여 자신이 원하는 동아리를 살펴보고 지원하였다.
 
-[Service]
-User=rodela
-Group=rodela
-WorkingDirectory=/home/rodela/club-recruit
-ExecStart=/home/rodela/club-recruit/.venv/bin/gunicorn \
-    --capture-output --enable-stdio-inheritance \
-    --access-logfile /var/log/gunicorn.access.log \
-    --error-logfile /var/log/gunicorn.error.log \
-    --bind unix:/run/gunicorn.sock \
-    jamsinclub.wsgi:application
-    
-[Install]
-WantedBy=multi-user.target
-# 여기까지, 모든 rodela 부분을 사용자 이름으로 바꿔준다.
-# 입력 끝났으면 Ctrl+X -> Y -> 엔터 로 나온다.
+### 5-3. 2차 면접 (2023. 03. 08. ~ 2023. 03. 13.)
 
-sudo nano /etc/systemd/system/gunicorn.socket
-# 아래 내용 입력
-[Unit]
-Description=gunicorn socket
+### 5-4. 운영 종료 (2023. 03. 19. ~ )
+모든 상설동아리 모집이 종료되어, 개인정보 보호 및 해킹 방지를 위해 서버 운영을 마무리하였다. 기존 사이트 형식에 맞춰 운영 종료 안내 페이지를 만들고, 해킹 위험이 있는 가상머신 대신 Github Pages를 이용하여 정적 페이지를 호스팅하였다. 서버의 모든 데이터를 안전한 장소로 옮긴 후 서버를 종료했다. 운영 종료를 알리는 페이지를 제작하여, Github Pages를 이용하여 호스팅하였다.
 
-[Socket]
-ListenStream=/run/gunicorn.sock
-Socketuser=www-data
 
-[Install]
-WantedBy=sockets.target
-# 입력 끝났으면 Ctrl+X -> Y -> 엔터 로 나온다.
+## 7. 개선점
 
-# 시스템 이벤트 등록
-sudo systemctl daemon-reload
-sudo systemctl enable --now gunicorn.socket
-systemctl status gunicorn.socket
+### 7-1. 면접시간 선택 시스템 구조 개선
+**내년에도 이 시스템을 사용할 경우, 반드시 개선해야 할 사항이다.**
 
-# 접속 테스트
-sudo -u www-data curl --unix-socket /run/gunicorn.sock http
-# ALLOWED_HOSTS에서 걸리기 때문에, 오류가 뜨는 것이 정상이다.
-```
+현재 면접시간 선택 시스템의 구조는 동기화 문제가 일어날 여지가 있다. 지금 구조에서는 각 학생의 `FormModel`과 동아리의 `ClubModel`에 지원 시간이 따로 저장되며, DB상에서 둘이 연결되지 않는다. 만약 두 학생이 같은 시각을 동시에 선택하면, 2개의 `FormModel`에 시간이 기록되지만 `ClubModel`에는 학생 수 카운트가 1만 올라갈 수 있다.
 
-### Nginx 설정
+추가로 면접시간을 잘못 선택했을 때를 대비하여, 선택을 수정할 수 있는 시스템을 구축할 필요가 있다. 실제 운영에서는 관리자에게 따로 연락하여 선택한 시간을 취소하는 방법을 사용했는데, 약 30명의 학생이 문의하여 처리가 쉽지 않았다.
 
-1. nginx 설치
-```shell
-sudo apt install nginx
-nginx -v
-```
-서버에 접속해서 nginx가 설치되었는지 확인해보자. (포트 입력은 안해도 됨, Azure에서는 80번하고 443번 포트 열어놓기)
+하나의 개선 방법으로, 면접 시간에 관한 데이터를 담는 새로운 모델(예:`TimeModel`)을 생성하여, `FormModel`에는 `ForeignKey`로, `ClubModel`에는 `ManyToManyField`로 연결해주는 것을 제안한다. 이렇게 하면 새 `TimeModel`을 생성하고 `FormModel`과 `ClubModel`에 동시에 연결되므로, 동기화 문제뿐만 아니라 선택 취소 기능을 구현하기도 훨씬 수월할 것이다.
 
-2. nginx 설정
-```shell
-sudo nano /etc/nginx/sites-available/jamsinclub.conf
-```
-아래 내용을 입력한다.
-```
-server {
-  listen 80;
-  server_name jamsin.ga;
-  charset utf-8;
-  client_max_body_size 128M;
+### 7-2. 
 
-  location /media {
-    alias /home/rodela/club-recruit/media;
-  }
+### 7-?. 기타 사항
+- 지원 마감 기한을 소개페이지에 표기 (동아리 부장이 설정한 시간으로)
+- Safari 브라우저에서 1차 서류 화면의 '지원하기' 버튼이 너무 작아짐
 
-  location /static {
-    alias /home/rodela/club-recruit/static;
-  }
 
-  location /robots.txt {
-    return 200 "User-agent: *\nDisallow: /";
-  }
-
-  location / {
-    include proxy_params;
-    proxy_pass http://unix:/run/gunicorn.sock;
-    proxy_buffering off;
-  }
-}
-```
-
-3. 설정 적용
-```shell
-# 설정 연동
-sudo ln -s /etc/nginx/sites-available/jamsinclub.conf /etc/nginx/sites-enabled/
-
-# 설정 테스트
-sudo nginx -t
-
-# 설정 적용
-sudo systemctl restart nginx
-```
-이제 서버주소로 접속하면 페이지가 로드될 것이다.
-
-### SSL(https) 설정
-```shell
-# 업데이트
-sudo snap install core
-sudo snap refresh core
-
-# certbot 설치
-sudo snap install --classic certbot
-sudo ln -s /snap/bin/certbot /usr/bin/certbot
-
-# 인증서 발급
-sudo certbot --nginx
-```
-이후 절차대로 진행. 설정 끝!
-
-### 유용한 명령어
-```shell
-# 관리자 계정 생성
-python manage.py createsuperuser
-
-# 장고 출력 보기
-nano /var/log/gunicorn.error.log
-```
+### 9. 활동 소감

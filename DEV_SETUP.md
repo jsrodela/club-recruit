@@ -48,7 +48,10 @@ pip install -r requirements.txt
 `settings-example.json`을 복사하여 `settings.json`로 이름을 바꾸고, 내용을 알맞게 수정해주세요.
 ```json
 {
-  "asdf": "asdf"
+  "extform_url": "https://script.google.com/macros/s/.../exec",
+  "secret_key": "django-insecure-=jwym+hlrxql772fu&(*^20cyt%_8t4wu$^dw__v^ugbm*=+ha",
+  "allowed_hosts": ["localhost", "127.0.0.1"],
+  "production": false
 }
 ```
 그리고 아래 명령어를 통해 서버 DB를 동기화한 후, 서버를 열어줍니다.
