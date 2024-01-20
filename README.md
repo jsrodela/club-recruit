@@ -99,7 +99,7 @@
 |time_use| 2차 면접 시간선택 기능 사용 여부 (기본 비활성화, 시간 설정 시 활성화)               | BooleanField                 ||
 |time_start| 2차 면접 시간선택 시작 시각| DateTimeField                ||
 |time_data|2차 면접 시간 데이터| list 형식                      |
-> `form_data` 형식은 [ExtForm](https://github.com/ExtForm/ExtForm)을 참고하세요.
+> `form_data` 형식은 [ExtForm](https://github.com/ExtForm/ExtForm)을 참고하세요. [`form/form_data.py`](form/form_data.py) 파일에 샘플 데이터 형식이 있습니다.
 > 
 > `members` 형식은 숫자로 이루어진 리스트입니다. (ex. [10000, 10001, 20124])
 > 
