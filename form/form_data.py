@@ -20,9 +20,10 @@ def reload_form(name):
     return result
 
 
+# https://forms.gle/ro1Mo6yds7CSHiM19 <- 이 설문지로부터 들어오는 데이터
 form_data = {
     "title": "한국어 예시 설문지",
-    "description": "이건 설명이에요! / Extform by HURDOO",
+    "description": "이건 설명이에요! / Extform by HURDOO\n**마크다운** ~~문법도~~ __지원__*합니다*!",
     "items": [
         {
             "title": "섹션 제목",
@@ -33,7 +34,7 @@ form_data = {
         },
         {
             "title": "객관식 질문",
-            "helpText": "asdfasdf",
+            "helpText": "",
             "id": 984420844,
             "type": "MULTIPLE_CHOICE",
             "extra": {
@@ -54,7 +55,7 @@ form_data = {
         },
         {
             "title": "체크박스",
-            "helpText": "asdfasdf",
+            "helpText": "",
             "id": 527425354,
             "type": "CHECKBOX",
             "extra": {
@@ -70,7 +71,7 @@ form_data = {
                     }
                 ],
                 "hasOtherOption": True,
-                "required": True
+                "required": False
             }
         },
         {
@@ -95,7 +96,7 @@ form_data = {
         },
         {
             "title": "단답형",
-            "helpText": "asdfsdaf",
+            "helpText": "",
             "id": 2042360110,
             "type": "TEXT",
             "extra": {
@@ -104,7 +105,7 @@ form_data = {
         },
         {
             "title": "장문형 (5글자 이상)",
-            "helpText": "adsfadsf",
+            "helpText": "",
             "id": 40010923,
             "type": "PARAGRAPH_TEXT",
             "extra": {
@@ -215,11 +216,11 @@ form_data = {
             "id": 1845279172,
             "type": "IMAGE",
             "extra": {
-                "image": "###",
+                "image": "(이미지 데이터 - base64/ 형식 표시자 없이 바로 raw data부터 시작함)",
                 "imageType": "image/png",
                 "alignment": "LEFT"
             }
         }
     ],
-    "token": "2f40bdf9-04cf-41a0-bbd5-96a513dc1b8a"
+    "token": "6e47a452-cf14-404a-9f63-7b3617b34275"
 }
