@@ -52,7 +52,12 @@ def register(request):
             except ValidationError as err:
                 data['invalid'] = err.messages[0]
 
-    return render(request, 'account/register.html', data)
+    # 체크박스 동의 여부 확인
+    consent_given = form.get('consent') == 'on'
+    if not consent_given:
+        data['invalid'] = "개인정보 수집 및 이용에 동의해야 회원가입이 가능합니다."
+        return render(request, 'account/register.html', data)
+
 
 
 def logout(request):
