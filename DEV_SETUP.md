@@ -61,3 +61,4 @@ python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver
 ```
+서버가 정상적으로 열렸다면 웹브라우저에서 `127.0.0.1:8000` 으로 접속하여 실행된 상태를 볼 수 있습니다.
