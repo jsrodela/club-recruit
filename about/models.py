@@ -64,7 +64,7 @@ class ClubModel(models.Model):
     # 2차 면접 시간 선택 사용 여부
     time_use = models.BooleanField(default=False)
 
-    time_start = models.DateTimeField(default='2024-03-02T00:00:00+09:00')
+    time_start = models.DateTimeField(default=datetime.now, blank=True)
 
     # 2차 면접 시간 데이터
     time_data = models.JSONField(encoder=json.JSONEncoder, decoder=json.JSONDecoder, default=list)
