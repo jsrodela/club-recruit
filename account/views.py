@@ -12,7 +12,6 @@ from .models import User
 
 UserModel = auth.get_user_model()
 
-
 def login(request):
     data = get_data(request)
     if request.POST:
@@ -28,7 +27,6 @@ def login(request):
         else:
             data['invalid'] = True
     return render(request, 'account/login.html', data)
-
 
 def register(request):
     data = get_data(request)
@@ -58,12 +56,9 @@ def register(request):
         data['invalid'] = "개인정보 수집 및 이용에 동의해야 회원가입이 가능합니다."
         return render(request, 'account/register.html', data)
 
-
-
 def logout(request):
     auth.logout(request)
     return redirect('/')
-
 
 @csrf_exempt
 def api(request):
@@ -82,7 +77,6 @@ def api(request):
             }))
 
     return redirect('/')
-
 
 def password(request):
     data = get_data(request)
