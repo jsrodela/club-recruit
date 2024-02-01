@@ -62,7 +62,7 @@ header {
 header img {
     /* 이미지 작게 */
     height: 50%;
-
+  /*width: 100px; 어느정도일지 모름... 하나하나 해보자*/
     /* 클릭 가능하게 표시 */
     cursor: pointer;
 }
