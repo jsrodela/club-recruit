@@ -19,11 +19,11 @@ cd club-recruit
 3. 필요 프로그램 설치
 ```shell
 # 파이썬 3.9 설치
-sudo apt install python3.9
-alias python=python3.9
+sudo apt install python3.10.12
+alias python=python3.10.12
 
 # 가상환경 생성
-sudo apt install python3.9-venv
+sudo apt install python3.10.12-venv
 python -m venv .venv
 . .venv/bin/activate
 
