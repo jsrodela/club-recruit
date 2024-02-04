@@ -2,62 +2,81 @@
 {% load static %}
 
 {% block style %}
-    <link rel="stylesheet" href="{% static 'account/login.css' %}?v=1">
-    <style>
-        .terms-of-service {
-            height: 200px; /* 조절 가능한 높이 */
-            overflow-y: scroll;
-            border: 1px solid #ccc;
-            margin-bottom: 10px;
-            padding: 10px;
-        }
-        .terms-checkbox {
-            margin-bottom: 20px;
-        }
-    </style>
+<link rel="stylesheet" href="{% static 'account/login.css' %}?v=1">
+<style>
+    .terms-of-service {
+        height: 200px; /* 조절 가능한 높이 */
+        overflow-y: scroll;
+        border: 1px solid #ccc;
+        margin-bottom: 10px;
+        padding: 10px;
+    }
+
+    .terms-checkbox {
+        margin-bottom: 20px;
+    }
+</style>
 {% endblock %}
 
 {% block content %}
-    <div class="wrap">
-        <form class="register" method="post">
-            {% csrf_token %}
-            <h2 class="login_title">회원가입</h2>
-            {% if invalid %}
-                <div class="invalid">{{ invalid|safe }}</div>
-            {% endif %}
-            <!-- 기존 입력 필드들... -->
+<div class="wrap">
+    <form class="register" method="post">
+        {% csrf_token %}
+        <h2 class="login_title">회원가입</h2>
+        {% if invalid %}
+        <div class="invalid">{{ invalid|safe }}</div>
+        {% endif %}
+        <!-- 기존 입력 필드들... -->
+        <div class="input_wrapper">
+            <h4>학번</h4>
+            <input type="number" name="id" id="id" placeholder="ex) 10001" min="10101" max="31040" required>
+        </div>
+        <div class="input_wrapper">
+            <h4>이름</h4>
+            <input type="text" name="name" id="name" placeholder="이름을 입력하세요" required>
+        </div>
+        <div class="input_wrapper">
+            <h4>전화번호</h4>
+            <input type="tel" name="phone" id="phone" placeholder="ex) 010-1234-5678" required>
+        </div>
+        <div class="input_wrapper">
+            <h4>비밀번호</h4>
+            <input type="password" name="pw" id="pw" placeholder="********" required>
+        </div>
+        <!-- 이용 약관 텍스트 박스 -->
+        <div class="terms-of-service">
+            <strong>개인정보 수집 및 이용에 관한 동의서</strong><br><br>
+            <strong>수집하는 개인정보의 항목</strong><br>
+            본 동의서에 따라 다음과 같은 개인정보를 수집합니다.<br>
+            - 이름<br>
+            - 연락처<br>
+            - 학번<br><br>
+            <strong>개인정보의 수집 및 이용 목적</strong><br>
+            수집된 개인정보는 다음의 목적을 위해 사용됩니다.<br>
+            - 서비스 제공을 위한 본인 확인<br>
+            - 문의 및 불만 처리<br>
+            - 기타 원활한 서비스 제공을 위한 목적<br><br>
+            <strong>개인정보의 보유 및 이용 기간</strong><br>
+            귀하의 개인정보는 본 동의서에 명시된 목적을 위해 수집 시점으로부터 1년간 보유 및 이용됩니다. 다만, 관련 법령에 따라 보존할 필요가 있는 경우 해당 기간 동안 보유할 수
+            있습니다.<br><br>
+            <strong>동의 거부권 및 동의 거부 시 불이익</strong><br>
+            귀하는 본 개인정보 수집 및 이용에 대한 동의를 거부할 권리가 있습니다. 다만, 개인정보 수집 및 이용에 동의하지 않을 경우 서비스 제공에 제한이 있을 수 있습니다.<br><br>
+            <strong>개인정보의 파기</strong><br>
+            개인정보 보유 기간이 경과하거나 처리 목적이 달성된 경우, 해당 개인정보는 지체 없이 파기됩니다. 파기 방법은 전자적 파일 형태의 정보는 기록을 재생할 수 없는 기술적 방법을 사용하여 삭제하고,
+            종이 문서에 기록된 개인정보는 분쇄하거나 소각합니다.<br><br>
+            <strong>동의 선언</strong><br>
+            본인은 위 내용에 대해 충분히 이해하였으며, 개인정보 수집 및 이용에 동의합니다.
+        </div>
 
-            <!-- 이용 약관 텍스트 박스 -->
-            <div class="terms-of-service">
-                <strong>개인정보 수집 및 이용에 관한 동의서</strong><br><br>
-                <strong>수집하는 개인정보의 항목</strong><br>
-                본 동의서에 따라 다음과 같은 개인정보를 수집합니다.<br>
-                - 이름<br>
-                - 연락처<br>
-                - 학번<br><br>
-                <strong>개인정보의 수집 및 이용 목적</strong><br>
-                수집된 개인정보는 다음의 목적을 위해 사용됩니다.<br>
-                - 서비스 제공을 위한 본인 확인<br>
-                - 문의 및 불만 처리<br>
-                - 기타 원활한 서비스 제공을 위한 목적<br><br>
-                <strong>개인정보의 보유 및 이용 기간</strong><br>
-                귀하의 개인정보는 본 동의서에 명시된 목적을 위해 수집 시점으로부터 1년간 보유 및 이용됩니다. 다만, 관련 법령에 따라 보존할 필요가 있는 경우 해당 기간 동안 보유할 수 있습니다.<br><br>
-                <strong>동의 거부권 및 동의 거부 시 불이익</strong><br>
-                귀하는 본 개인정보 수집 및 이용에 대한 동의를 거부할 권리가 있습니다. 다만, 개인정보 수집 및 이용에 동의하지 않을 경우 서비스 제공에 제한이 있을 수 있습니다.<br><br>
-                <strong>개인정보의 파기</strong><br>
-                개인정보 보유 기간이 경과하거나 처리 목적이 달성된 경우, 해당 개인정보는 지체 없이 파기됩니다. 파기 방법은 전자적 파일 형태의 정보는 기록을 재생할 수 없는 기술적 방법을 사용하여 삭제하고, 종이 문서에 기록된 개인정보는 분쇄하거나 소각합니다.<br><br>
-                <strong>동의 선언</strong><br>
-                본인은 위 내용에 대해 충분히 이해하였으며, 개인정보 수집 및 이용에 동의합니다.
-            </div>
+        <!-- 동의 체크박스 -->
+        <div class="terms-checkbox">
 
-            <!-- 동의 체크박스 -->
-            <div class="terms-checkbox">
-                <input type="checkbox" id="termsOfService" name="terms_of_service">
-                <label for="termsOfService">이용 약관에 동의합니다.</label>
-            </div>
+            <input type="checkbox" id="termsOfService" name="terms_of_service">
+            <label for="termsOfService">이용 약관에 동의합니다.</label>
+        </div>
 
-            <!-- 제출 버튼 -->
-            <button type="submit">회원가입</button>
-        </form>
-    </div>
+        <!-- 제출 버튼 -->
+        <button type="submit">회원가입</button>
+    </form>
+</div>
 {% endblock %}
