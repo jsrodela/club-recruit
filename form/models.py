@@ -3,7 +3,8 @@ import json
 from django.db import models
 
 # Create your models here.
-from about.models import TimeModel
+
+# from about.models import TimeModel
 from about.models import ClubModel
 
 
@@ -27,4 +28,4 @@ class FormModel(models.Model):
 
     first_result = models.CharField(max_length=1, choices=RESULTS, default='W')
 
-    time = models.ForeignKey(TimeModel)
+    time = models.CharField(max_length=100, default='', blank=True)

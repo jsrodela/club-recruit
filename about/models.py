@@ -22,9 +22,9 @@ class ImageModel(models.Model):
     uploaded_by = models.IntegerField()
 
 
-class TimeModel(models.Model):
+'''class TimeModel(models.Model):
     # 2차 면접 시간 데이터
-    time_data = models.JSONField(encoder=json.JSONEncoder, decoder=json.JSONDecoder, default=list)
+    time_data = models.JSONField(encoder=json.JSONEncoder, decoder=json.JSONDecoder, default=list)'''
 
 
 class ClubModel(models.Model):
@@ -73,4 +73,4 @@ class ClubModel(models.Model):
     time_start = models.DateTimeField(default=datetime.now)
 
     # 2차 면접 시간 데이터 - TimeModel 에서 동기화
-    time_data = models.ManyToManyField(TimeModel)
+    time_data = models.JSONField(encoder=json.JSONEncoder, decoder=json.JSONDecoder, default=list)
