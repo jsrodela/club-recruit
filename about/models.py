@@ -22,6 +22,11 @@ class ImageModel(models.Model):
     uploaded_by = models.IntegerField()
 
 
+class TimeModel(models.Model):
+    # 2차 면접 시간 데이터
+    time_data = models.JSONField(encoder=json.JSONEncoder, decoder=json.JSONDecoder, default=list)
+
+
 class ClubModel(models.Model):
     # 동아리 이름 (표시용 이름)
     name = models.CharField(max_length=100, default='테스트_동아리')
@@ -64,8 +69,8 @@ class ClubModel(models.Model):
     # 2차 면접 시간 선택 사용 여부
     time_use = models.BooleanField(default=False)
 
-
+    # 2차 면접 시작 시간
     time_start = models.DateTimeField(default=datetime.now)
 
-    # 2차 면접 시간 데이터
-    time_data = models.JSONField(encoder=json.JSONEncoder, decoder=json.JSONDecoder, default=list)
+    # 2차 면접 시간 데이터 - TimeModel 에서 동기화
+    time_data = models.ManyToManyField(TimeModel)

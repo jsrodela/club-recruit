@@ -3,6 +3,7 @@ import json
 from django.shortcuts import render, redirect
 from django.utils import timezone
 
+from about.models import TimeModel
 from about.models import ClubModel
 from account.base import get_data
 from account.models import User
@@ -204,6 +205,86 @@ def time(request, clubname):
     lst = []
     times = []
     for obj in time_data:
+        # print(obj)
+        if obj['date'] != prev_date:
+            if times:
+                lst.append({
+                    'date': prev_date[5:7] + "/" + prev_date[8:10],
+                    'times': times
+                })
+            prev_date = obj['date']
+            times = []
+        times.append({
+            'start': obj['start'],
+            'end': obj['end'],
+            'number': obj['number'],
+            'current': obj['current'],
+        })
+    if times:
+        lst.append({
+            'date': prev_date[5:7] + "/" + prev_date[8:10],
+            'times': times
+        })
+
+    data['time_data'] = lst
+    data['club'] = club
+    return render(request, 'form/time.html', data)
+
+
+def cancel(request, clubname): # 미완성임, def time 기반
+    data = get_data(request)
+
+    if 'user' not in data:
+        data['error'] = '로그인 후 면접 시간을 취소할 수 있습니다.'
+        return render(request, 'form/time.html', data)
+
+    user = data['user']
+
+    try:
+        apply = FormModel.objects.get(number=user.id, club=clubname, archive=False, first_result='P')
+    except FormModel.DoesNotExist:
+        data['error'] = '이 동아리에 합격하지 못했습니다.'
+        return render(request, 'form/time.html', data)
+
+    club = apply.club
+
+    if club.time_start > timezone.localtime():
+        data['error'] = '아직 면접시간 선택이 시작되지 않았어요.'
+        return render(request, 'form/time.html', data)
+
+    if request.POST:
+        cancel_value = request.POST.get('cancel_value')
+        cancel_date = cancel_value[0:2] + '-' + cancel_value[3:5]
+        cancel_start = cancel_value[6:11]
+
+        cancel_data = club.time_data
+        # print(time_value)
+        for i in range(len(cancel_data)):
+            obj = cancel_data[i]
+            # print(obj, time_date, time_start)
+
+            if obj['date'].endswith(cancel_date) and obj['start'] == cancel_start:
+                obj['current'] = int(obj['current'])
+                obj['number'] = int(obj['number'])
+                obj['current'] -= 1
+                cancel_data[i] = obj
+                club.time_data = cancel_data
+                club.save()
+                # if apply.time:
+                #     prev_time = apply.time
+                #     prev_date = prev_time[0:2] + '-' + prev_time[3:5]
+                #     prev_start = prev_time[6:11]
+                apply.time = cancel_value
+                apply.save()
+                return redirect('/')
+
+        data['alert'] = '오류가 발생했습니다. 오류가 지속되면 문의하기를 눌러 알려주세요.'
+
+    cancel_data = sorted(club.time_data, key=lambda x: (x['date'], x['start'], x['end']))
+    prev_date = ''
+    lst = []
+    times = []
+    for obj in cancel_data:
         # print(obj)
         if obj['date'] != prev_date:
             if times:

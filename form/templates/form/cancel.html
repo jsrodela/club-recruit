@@ -1,0 +1,37 @@
+<!--time.html 복붙함, 미완성-->
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'form/time.css' %}?v=1">
+{% endblock %}
+
+{% block module %}
+{{ block.super }}
+<script src="{% static 'form/time.js' %}?v=2"></script>
+{% endblock %}
+
+{% block content %}
+{% if error %}
+<script>
+    alert('{{ error }}');
+    location.href = '/';
+</script>
+{% endif %}
+{% if alert %}
+<script>alert('{{ alert }}');</script>
+{% endif %}
+<div class="wrap">
+    <h1>{{ club.name }} 면접</h1>
+
+    <h2>지원자: {{ user.id }} {{ user.name }}</h2>
+    <hr>
+
+    <form method="post" id="time_form">
+        <input type="hidden" name="time_value" id="time_value">
+        {% csrf_token %}
+    </form>
+</div>
+{% endblock %}
