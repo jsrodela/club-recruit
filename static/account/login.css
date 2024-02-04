@@ -1,0 +1,123 @@
+/*
+    사용되는 HTML:
+    -
+*/
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+li {
+  list-style: none;
+}
+
+.wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background: rgba(0, 0, 0, 0.1); */
+  padding: 2rem 0;
+}
+
+form {
+  min-width: 500px;
+  width: 30%;
+  height: 100%;
+  background: white;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.register {
+  height: 100%;
+  justify-content: start;
+}
+
+.login_title {
+  /* color: tomato; */
+  color: var(--main-color);
+  font-size: 2em;
+}
+
+.input_wrapper {
+  margin-top: 20px;
+  width: 80%;
+}
+
+.input_wrapper input {
+  width: 90%;
+  height: 50px;
+  border-radius: 30px;
+  margin-top: 10px;
+  padding: 0px 20px;
+  border: 1px solid lightgray;
+  outline: none;
+}
+
+.login_etc {
+  padding: 10px;
+  width: 80%;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+}
+
+.submit {
+  margin: 50px 0;
+  width: 80%;
+}
+
+.submit input {
+  width: 100%;
+  height: 50px;
+  border: 0;
+  outline: none;
+  border-radius: 40px;
+  /* background: linear-gradient(to left, rgb(255, 77, 46), rgb(255, 155, 47)); */
+  background-color: var(--main-color-accent);
+  color: white;
+  font-size: 1.2em;
+  letter-spacing: 2px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.privacy {
+    text-decoration: underline solid var(--main-color);
+}
+
+.invalid {
+    background-color: rgba(255, 0, 0, 0.1);
+    padding: 1rem 2rem;
+    border: 0.01rem solid rgba(255, 0, 0, 0.3);
+    border-radius: 3rem;
+}
+
+
+/* Hide arrows (spinner) from <input type="number"> */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* 모바일 레이아웃 */
+@media screen and (max-width: 768px) {
+    form {
+        min-width: 0;
+        width: 95%;
+    }
+}

@@ -1,0 +1,253 @@
+/*
+    사용되는 HTML:
+    - about/about.html
+*/
+
+.background {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    -webkit-transform: translate3d(0,0,0); /* Safari z-index support */
+}
+
+.mobile-bg {
+    display: none;
+    z-index: 0;
+}
+
+.background, .mobile-bg {
+    background-image: var(--background-image-url);
+    background-repeat : no-repeat;
+    background-size : cover;
+    background-position: center;
+}
+
+.entire {
+    display: flex;
+    width: 90%;
+    height: 90%;
+    border: 0.1rem solid rgba(0, 0, 0, 0.05);
+    border-radius: 1rem;
+    padding: 0.2rem;
+    justify-content: space-evenly;
+    /*background-color: rgba(0, 0, 0, 0.);*/
+    backdrop-filter: blur(15px);
+}
+
+.left {
+    display: flex;
+    align-items: center;
+    width: 60%;
+    padding: 0.5rem;
+}
+
+.photo {
+    width: 100%;
+    max-height: 100%;
+    aspect-ratio: 1 / 1;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    border: 0;
+    border-radius: 2rem;
+    background-image: var(--photo-url);
+    background-repeat : no-repeat;
+    background-size : cover;
+    animation-duration: 0.5s;
+    background-position: center;
+}
+
+.left_area, .right_area {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+}
+
+.left_area {
+    justify-content: left;
+}
+
+.right_area {
+    justify-content: right;
+}
+
+.arrow_button {
+    opacity:50%;
+    display: table-cell;
+    vertical-align:middle;
+    border-radius: 100px;
+    height: 3rem;
+    cursor: pointer;
+}
+
+.arrow_button:hover {
+    opacity: 30%;
+}
+
+.right {
+    width: 40%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.text {
+    width: 100%;
+    flex-basis: 90%;
+    background-color: white;
+    text-align: left;
+    display: inline-block;
+    border: 3px solid #ddd;
+    border-radius: 1rem;
+    overflow-y: scroll;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.submitpage {
+    width: 100%;
+    flex-basis: 10%;
+    transparent: 50%;
+    font-size: 2.5em;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    border: 0;
+    border-radius: 5rem;
+    background-color: var(--main-color-accent);
+    color: white;
+    opacity: 1;
+}
+
+.submitpage:hover {
+   opacity: 90%;
+   cursor: pointer;
+}
+
+.arrow {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+}
+
+/* 모바일 레이아웃 */
+@media screen and (max-width: 1024px) {
+
+    .background {
+        display: flex;
+        background: transparent;
+        height: fit-content;
+    }
+
+    .mobile-bg {
+        display: block;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        /*height: 100vh;
+        height: fill-available;
+        height: -moz-available; /* FireFox */
+        /*height: -webkit-fill-available; /* Chrome, Safari */
+    }
+
+    .entire {
+        display: block;
+        text-align: center;
+        height: fit-content;
+    }
+
+    .photo {
+        text-align: center;
+        width:100%;
+        height: 100%;
+     }
+
+    .left {
+        width: 100%;
+        text-align: center;
+        aspect-ratio: 1 / 1;
+    }
+
+    .right {
+        width: 100%;
+    }
+
+    .left, .right {
+        padding: 0.5rem 0rem;
+    }
+
+    .submitpage {
+        width: 100%;
+        height: 20%;
+        font-size: 2rem;
+        padding: 0.5rem;
+    }
+
+    .text {
+        overflow-y: scroll;
+        display: block;
+    }
+
+    zero-md {
+        background-color: white;
+    }
+}
+
+/* 오른쪽 버튼 누르면: 왼쪽으로 나감 */
+@keyframes right_out {
+    0% {
+        transform: translate(0, 0);
+        opacity: 100%;
+    }
+
+    100% {
+        transform: translate(-30%, 0);
+        opacity: 0%;
+    }
+}
+
+/* 오른쪽 버튼 누르면: 오른쪽에서 들어옴 */
+@keyframes right_in {
+    0% {
+        transform: translate(30%, 0);
+        opacity: 0%;
+    }
+
+    100% {
+        transform: translate(0, 0);
+        opacity: 100%;
+    }
+}
+
+/* 왼쪽 버튼 누르면: 오른쪽으로 나감 */
+@keyframes left_out {
+    0% {
+        transform: translate(0, 0);
+        opacity: 100%;
+    }
+
+    100% {
+        transform: translate(30%, 0);
+        opacity: 0%;
+    }
+}
+
+/* 왼쪽 버튼 누르면: 왼쪽에서 들어옴 */
+@keyframes left_in {
+    0% {
+        transform: translate(-30%, 0);
+        opacity: 0%;
+    }
+
+    100% {
+        transform: translate(0, 0);
+        opacity: 100%;
+    }
+}

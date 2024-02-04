@@ -1,0 +1,10 @@
+/*
+    사용되는 HTML:
+    - base.html
+*/
+
+:root {
+    --main-color: rgba(95, 119, 219, 1);
+    --main-color-bright: rgba(95, 119, 219, 0.3);
+    --main-color-accent: rgba(95, 119, 219, 0.8);
+}

@@ -1,0 +1,218 @@
+/*
+    사용되는 HTML:
+    - index/index.html
+*/
+
+.outer-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 60px;
+    align-items: flex-start;
+}
+button {
+    /* 생략 */
+    margin: 0.25rem 0 0 0;
+    padding: 0.5rem 1rem;
+
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+
+    display: inline-block;
+    width: auto;
+
+    border: none;
+    border-radius: 1rem;
+    cursor: pointer;
+    background-color: transparent;
+    border: 0.1rem solid var(--main-color);
+}
+
+.upper_container {
+    width: 100%;
+    height: 250px;
+    /*margin-top: 15px;*/
+  /*  background-color: #ddd;
+    text-align: center;
+    /*background-image: var(--background-image-url);*/
+/*    background-repeat: no-repeat;
+    background-size: cover;
+    cursor: pointer;
+    /* width: 40%;
+    aspect-ratio: 16 / 9; */
+    position: relative;
+}
+
+.banner {
+    width: 100%;
+    height: 250px;
+    /*margin-top: 15px;*/
+    background-color: #ddd;
+    text-align: center;
+    /* background-image: var(--background-image-url); */
+    background-repeat: no-repeat;
+    background-size: cover;
+    cursor: pointer;
+    /* width: 40%;
+    aspect-ratio: 16 / 9; */
+    position: absolute;
+}
+
+.inner_banner strong {
+    /* color: #000000; */
+    /* color: var(--clubname-color); */
+    font-size: 3.5rem;
+    padding: 0.5rem 0;
+    letter-spacing: -1px;
+}
+.inner_banner p {
+    color: #fff;
+    margin-top: 20px;
+    font-size: 20px;
+
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 2rem;
+    padding: 0.5rem 1rem;
+    color: white;
+    margin: 0 0.3rem;
+}
+.inner_banner p span {
+    /* color: rgba(95, 119, 219, 1);*/
+    font-weight: 700;
+}
+.inner_banner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 250px;
+    backdrop-filter: blur(2px);
+}
+.north_fox {
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+}
+
+h2 {
+    color: var(--main-color);
+    text-align: center;
+}
+
+.submits {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    text-align: center;
+    padding: 0 0.5rem;
+}
+
+.submit {
+    margin: 1rem 0.5rem;
+}
+
+.submit h3, .submit p {
+    margin: 0.25rem;
+}
+
+.pass {
+    font-weight: 600;
+    color: green;
+}
+
+.fail {
+    font-weight: 600;
+    color: red;
+}
+
+.wait {
+    color: grey;
+}
+
+.submit button {
+    padding: 0.5rem 1rem;
+    white-space: nowrap;
+}
+
+.submit button:hover {
+    opacity: 75%;
+}
+
+.submit button:active {
+    opacity: 50%;
+}
+
+.dong_ari {
+    width: 25%;
+    border: 0.1rem solid rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+    padding: 10px;
+}
+
+.interview {
+    width: 25%;
+    border: 0.1rem solid rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+    padding: 10px;
+}
+
+.my_info {
+    width: 25%;
+    border: 0.1rem solid rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+    padding: 10px;
+    text-align: center;
+}
+
+.login_wrapper {
+    width: 100%;
+    flex-basis: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.interview_club {
+    margin-bottom: 0.5rem;
+}
+
+
+/* 모바일 레이아웃 */
+@media screen and (max-width: 768px) {
+    #banner {
+        margin-top: 0;
+    }
+    .outer-container {
+        flex-direction: column;
+        overflow-x: hidden;
+        align-items: center;
+    }
+    .dong_ari, .interview, .my_info {
+        width: 75%;
+        margin-bottom: 50px;
+        /*margin: 0 100px 0 100px;*/
+    }
+    /* 사이사이 마진 넣으려고 했는데 밑에도 넣는 게 이쁨
+    .dong_ari, .interview {
+        margin-bottom: 50px;
+    } */
+}
+
+
+
+/* Hide arrows (spinner) from <input type="number"> */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+
+
+
+

@@ -1,0 +1,108 @@
+/*
+    사용되는 HTML:
+    - form/form.html
+*/
+
+@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap");
+
+
+
+.aa {
+    padding: 30px 50px 40px 40px;
+}
+
+button {
+    margin: 20px;
+}
+
+.w-btn {
+    position: relative;
+    border: none;
+    /* display: inline-block; */
+    padding: 15px 30px;
+    border-radius: 15px;
+    /*box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);*/
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+}
+.w-btn-green {
+    background-color: rgb(95, 119, 219, 0.9);
+    color: white;
+}
+.w-btn:hover {
+    letter-spacing: 2px;
+    transform: scale(1.2);
+    cursor: pointer;
+}
+.w-btn:active {
+    transform: scale(1.5);
+}
+
+input[type=text] {
+    width: 30%;
+    height: 32px;
+    font-size: 15px;
+    border: 0;
+    border-radius: 15px;
+    outline: none;
+    padding-left: 10px;
+    background-color: rgba(0,0,0,0.05);
+}
+.long{
+    width: 500px;
+    min-height: 100px;
+    font-size: 15px;
+    border: 0;
+    border-radius: 15px;
+    outline: none;
+    padding-left: 10px;
+    background-color: rgba(0,0,0,0.05);
+    font-family: inherit;
+    font-size: inherit;
+
+}
+
+.fin_h1{
+    color: #77af9c;
+    align-items: center;
+}
+
+h1 {
+  font-size: 40px;
+  color: rgb(95, 119, 219,2);
+  border-top: 3px solid rgb(95, 119, 219,2);
+  border-bottom: 3px solid rgb(95, 119, 219,2);
+}
+
+h2, h3, p {
+    margin: 0.3rem 0;
+}
+
+.sectionheader {
+    padding: 0.7rem;
+    border-left: 5px solid #848484;
+    background: #F2F2F2;
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+}
+
+.question {
+  font-size: 1.2rem;
+}
+
+/* 모바일 레이아웃 */
+@media screen and (max-width: 768px) {
+    .aa {
+        padding: 20px 20px 20px 20px;
+        text-align: center;
+    }
+
+    input[type=text] {
+        width: 90%;
+    }
+
+    .long{
+        width: 90%;
+    }
+}

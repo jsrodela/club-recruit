@@ -1,0 +1,23 @@
+/*
+    사용되는 HTML:
+    - about/leader.html
+*/
+
+.wrap {
+    padding: 1rem;
+}
+
+input[type=text] {
+    width: 50%;
+}
+
+textarea {
+    width: 100%;
+    max-height: 90%;
+}
+
+@media screen and (max-width: 768px) {
+    input[type=text] {
+        width: 100%;
+    }
+}
