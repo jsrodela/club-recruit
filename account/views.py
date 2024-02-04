@@ -37,9 +37,14 @@ def register(request):
         _name = form.get('name')
         _phone = form.get('phone')
         _pw = form.get('pw')
-
+        
+        # 체크박스 동의 여부 확인
+        consent_given = form.get('termsOfService')
+        
         if UserModel.objects.filter(id=_id).exists():
             data['invalid'] = f"학번이 {_id}인 계정이 이미 존재합니다. <a href='https://github.com/RoDeLa6/club-recruit/blob/main/account/docs/contact.md' target='_blank' style='color: var(--main-color);'>[문의하기]</a>"
+        elif consent_given != 'on':
+            data['invalid'] = "개인정보 수집 및 이용에 동의해야 회원가입이 가능합니다."
         else:
             try:
                 validate_password(_pw)
@@ -48,12 +53,8 @@ def register(request):
                 auth.login(request, user)
                 return redirect('/')
             except ValidationError as err:
-                data['invalid'] = err.messages[0]
+                data['invalid'] = "비밀번호 인증 오류입니다. 다시 시도해 주세요."
 
-    # 체크박스 동의 여부 확인
-        consent_given = form.get('consent') == 'on'
-        if not consent_given:
-            data['invalid'] = "개인정보 수집 및 이용에 동의해야 회원가입이 가능합니다."
     return render(request, 'account/register.html', data)
 
 def logout(request):
@@ -95,7 +96,7 @@ def password(request):
             target.save()
             data['message'] = '비밀번호를 성공적으로 변경하였습니다.'
         except ValidationError as err:
-            data['message'] = err.messages[0]
+            data['message'] = '비밀번호 인증 오류입니다. 다시 시도해 주세요.'
         except Exception as ex:
             data['message'] = str(ex)
 
