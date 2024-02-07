@@ -212,3 +212,7 @@
 - 문의하기 링크 및 정보 변경
 - TimeModel 데이터 구조 신설 (면접 시간용)
 - 면접 시간 취소 기능 벡엔드 제작중
+
+2024/02/27
+- TimeModel 데이터 구조 확장 및 ClubModel, FormModel과 연결
+- DateTimeField default를 timezone.now에서 django.utils의 now로 변경

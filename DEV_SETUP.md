@@ -62,3 +62,5 @@ python manage.py migrate
 python manage.py runserver
 ```
 서버가 정상적으로 열렸다면 웹브라우저에서 `127.0.0.1:8000` 으로 접속하여 실행된 상태를 볼 수 있습니다.
+
+> 동아리가 2개 이상 존재하지 않으면 무한 로딩이 걸리는 버그가 있습니다. `python manage.py createsuperuser`로 관리자 계정을 생성하고, /admin 주소로 접속하여 동아리를 2개 추가해주세요.

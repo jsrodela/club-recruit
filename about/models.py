@@ -1,9 +1,7 @@
 import json
-from datetime import datetime
 
 from django.db import models
-
-
+from django.utils.timezone import now
 # Create your models here.
 
 
@@ -22,11 +20,6 @@ class ImageModel(models.Model):
     uploaded_by = models.IntegerField()
 
 
-'''class TimeModel(models.Model):
-    # 2차 면접 시간 데이터
-    time_data = models.JSONField(encoder=json.JSONEncoder, decoder=json.JSONDecoder, default=list)'''
-
-
 class ClubModel(models.Model):
     # 동아리 이름 (표시용 이름)
     name = models.CharField(max_length=100, default='테스트_동아리')
@@ -35,8 +28,8 @@ class ClubModel(models.Model):
     code = models.CharField(max_length=10, default='test_club', unique=True, primary_key=True)  # always english lowercase
 
     # 지원 시작 ~ 종료 시간
-    form_start = models.DateTimeField(default=datetime.now)
-    form_end = models.DateTimeField(default=datetime.now)
+    form_start = models.DateTimeField(default=now)
+    form_end = models.DateTimeField(default=now)
 
     # 메인페이지 배너 이미지와 설영, 이름 색깔
     index_banner_image = models.ForeignKey(ImageModel, related_name='index_banner_image+',
@@ -70,7 +63,10 @@ class ClubModel(models.Model):
     time_use = models.BooleanField(default=False)
 
     # 2차 면접 시작 시간
-    time_start = models.DateTimeField(default=datetime.now)
+    time_start = models.DateTimeField(default=now)
 
     # 2차 면접 시간 데이터 - TimeModel 에서 동기화
-    time_data = models.JSONField(encoder=json.JSONEncoder, decoder=json.JSONDecoder, default=list)
+    # 모델명 문자열로 써도 ㄱㅊ - circular import 피하려고 이렇게 해둔거
+    times = models.ManyToManyField('form.TimeModel', related_name='times+', blank=True)
+
+    # time_data = models.JSONField(encoder=json.JSONEncoder, decoder=json.JSONDecoder, default=list)

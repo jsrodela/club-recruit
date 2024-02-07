@@ -135,6 +135,7 @@
 - 지원 마감 기한을 소개페이지에 표기 (동아리 부장이 설정한 시간으로)
 - Safari 브라우저에서 1차 서류 화면의 '지원하기' 버튼이 너무 작아짐
 - 지원서 삭제기능 말고 수정 기능도 넣기
+- 모델 간 연결할 때 ForeignKey나 ManyToManyField를 사용하지 않는 것들이 간혹 있음. (account가 아니라 학번으로 저장해둔다던지...) 시간날때 ForeignKey or ManyToManyField로 변경해두면 통일성도 있고, 오류날 확률도 적을듯.
 
 ## 6. 활동 일지
 [CHANGES.txt](CHANGES.txt) 참고
