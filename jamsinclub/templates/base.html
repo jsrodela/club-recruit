@@ -14,8 +14,6 @@
         <meta property="og:description" content="잠신고등학교 학생들을 위한 상설동아리 지원 사이트입니다. 원하는 동아리에 지원해보세요! by RoDeLa 7.0">
     {% endblock %}
     <link rel="icon" type="image/x-icon" href="{% static 'favicon.svg' %}" />
-    <img src="{% static 'jamsinclub/static/info.png' %}" id="info-icon" alt="Info" onclick="loadClubRelation();">
-    <div id="content">
 <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 <!--    <script src="{% static 'fontawesome-free-6.4.2-web/js/all.min.js' %}"></script>-->
@@ -35,6 +33,7 @@
         </ul>-->
 <!--        <h2>잠신고 상설동아리 지원 플랫폼</h2>-->
         <img src="{% static 'logo_bg.svg' %}" style="display: none;">
+        <img src="{% static 'info.png' %}" id="info-icon" alt="Info" style="float: left; margin-right: 10px;" onclick="loadClubRelation();">
         <img src="{% static 'logo.svg' %}" onclick="changeNav('home', '/');" width="300" height="auto">
         <!--<h2>동아리</h2>-->
     </header>

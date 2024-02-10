@@ -206,12 +206,9 @@ nav ul li.home {
 
 /* 서브페이지 아이콘 */
 #info-icon {
+    float: left;
+    margin-right: 10px;
     cursor: pointer;
-
-    display: flex;
-    justify-content: start;
-    /* 해보고 안이쁘면 align-items: center; 로 아래 코드 변경 */
-    align-items: stretch;
 }
 
 #info-icon:hover {
