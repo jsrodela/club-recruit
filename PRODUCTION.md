@@ -18,7 +18,7 @@ cd club-recruit
 
 3. 필요 프로그램 설치
 ```shell
-# 파이썬 3.9 설치
+# 파이썬 3.10 설치
 sudo apt install python3.10.12
 alias python=python3.10.12
 
