@@ -1,0 +1,44 @@
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: repeat(5, 1fr);
+            gap: 1px;
+            height: 100vh;
+            justify-items: center;
+            align-items: center;
+        }
+
+        .cell {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            width: calc(20% - 1px);
+            height: calc(20% - 1px);
+            position: relative;
+        }
+
+        .cell img {
+            width: 300px;
+            height: 150px;
+        }
+
+        .empty-cell {
+            font-size: 100px;
+        }
+
+        .center-text {
+            position: absolute;
+            text-align: center;
+            font-size: 80px;
+            color: #333;
+        }
+
+        .merged-cell {
+            grid-column: span 5;
+            grid-row: span 5;
+            width: calc(100% - 4px);
+        }

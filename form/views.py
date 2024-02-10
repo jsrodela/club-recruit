@@ -3,12 +3,12 @@ import json
 from django.shortcuts import render, redirect
 from django.utils import timezone
 
-#from about.models import TimeModel
 from about.models import ClubModel
 from account.base import get_data
 from account.models import User
 from .form_data import form_data
-from .models import FormModel
+from .models import FormModel, TimeModel
+from django.http import HttpResponse
 
 
 def form(request, clubname):
