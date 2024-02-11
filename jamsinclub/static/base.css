@@ -57,6 +57,8 @@ header {
 
     /* 배경 진파랑 */
     background-color: var(--main-color);
+
+    height: 100px;
 }
 
 header img {
