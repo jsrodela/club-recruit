@@ -1,16 +1,16 @@
-<!--time.html 복붙함, 미완성-->
+<!-- 미완성 -->
 
 {% extends 'base.html' %}
 {% load static %}
 
 {% block style %}
 {{ block.super }}
-<link rel="stylesheet" href="{% static 'form/time.css' %}?v=1">
+<link rel="stylesheet" href="{% static 'form/cancel.css' %}?v=1">
 {% endblock %}
 
 {% block module %}
 {{ block.super }}
-<script src="{% static 'form/time.js' %}?v=2"></script>
+<script src="{% static 'form/cancel.js' %}?v=2"></script>
 {% endblock %}
 
 {% block content %}
@@ -24,7 +24,7 @@
 <script>alert('{{ alert }}');</script>
 {% endif %}
 <div class="wrap">
-    <h1>{{ club.name }} 면접</h1>
+    <h1>{{ club.name }} 면접 취소</h1>
 
     <h2>지원자: {{ user.id }} {{ user.name }}</h2>
     <hr>

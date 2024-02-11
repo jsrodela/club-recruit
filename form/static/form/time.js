@@ -1,5 +1,5 @@
 function onTimeClick(element) {
-    if (!confirm(element.name + ' 으로 선택할까요? 시간을 한번 선택하면 다시 변경할 수 없어요.')) {
+    if (!confirm(element.name + ' 으로 선택할까요?')) {
         return false;
     }
 

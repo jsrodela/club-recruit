@@ -1,1 +1,43 @@
 /* 디자인해주실분 해주셈 */
+/* 일단 to */
+.inner_it:hover {
+    border-color: var(--main-color-accent);
+}
+.inner_it:active {
+    opacity: 60%;
+}
+.inner_it span {
+    margin: 0.5rem;
+    white-space: nowrap;
+}
+.inner_it span.time {
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+h1 {  /* '면접 예약'(제목) 디자인 */
+    font-size: 40px;
+    color: var(--main-color);
+    border: solid var(--main-color);
+    border-width: 3px 0;
+    text-align: center;
+}
+hr {
+    border-color: rgba(0, 0, 0, 0.1);
+}
+.h2{
+    margin: 0.3rem 0;
+}
+
+#time_form {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .interview_time {
+        flex-wrap: wrap;
+    }
+    .inner_it{
+        width: 100%;
+        border-radius: 0.8rem;
+    }
+}
