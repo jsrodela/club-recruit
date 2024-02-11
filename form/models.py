@@ -29,7 +29,7 @@ class FormModel(models.Model):
     first_result = models.CharField(max_length=1, choices=RESULTS, default='W')
     # time = models.CharField(max_length=100, default='', blank=True)
 
-    time_data = models.DateTimeField(default=now)
+    time_data = models.DateTimeField(null=True, blank=True)
 
 '''
     동아리 부장이 TimeModel을 생성하여 시간을 지정하고,
@@ -56,8 +56,8 @@ class TimeModel(models.Model):
     time_start = models.DateTimeField(default=now)  # 면접 시작시간
     time_end = models.DateTimeField(default=now)    # 면접 종료시간
 
-    current = models.IntegerField() # 현재 면접 예약 인원수
-    number = models.IntegerField()  # 시간당 면접 정원
+    current = models.IntegerField(default=0) # 현재 면접 예약 인원수
+    number = models.IntegerField(default=10)  # 시간당 면접 정원
 
     form = models.ForeignKey(FormModel, related_name='time_form+', on_delete=models.SET_NULL, null=True, blank=True)
 

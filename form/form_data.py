@@ -20,7 +20,7 @@ def reload_form(name):
     return result
 
 
-# https://forms.gle/ro1Mo6yds7CSHiM19 <- 이 설문지로부터 들어오는 데이터
+# https://forms.gle/ro1Mo6yds7CSHiM19 <- 이 설문지로부터 들어오는 데이터 (더미)
 form_data = {
     "title": "한국어 예시 설문지",
     "description": "이건 설명이에요! / Extform by HURDOO\n**마크다운** ~~문법도~~ __지원__*합니다*!",
