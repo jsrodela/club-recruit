@@ -204,6 +204,18 @@ nav ul li.home {
     padding: 2rem 0rem;
 }
 
+/* 서브페이지 아이콘 */
+#info-icon {
+    float: left;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+#info-icon:hover {
+    /* 클릭 가능하게 표시 */
+    opacity: 75%;
+}
+
 nav ul li i, nav ul li img  {
     /* 글자 사이에 여백 */
     margin-right: 1rem;
@@ -315,7 +327,7 @@ nav ul li:active {
     }
     .mainwrap {
         flex-direction: column-reverse;
-        flex-basis: 1;
+        flex-basis: 1px; /* 일단 1px으로 버그삭제해놓음. 원래는 flex-basis: 1;였음 */
         overflow-x: hidden;
     }
     nav {
