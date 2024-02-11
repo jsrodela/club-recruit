@@ -157,10 +157,9 @@ def time_config(request):
         club.time_use = True
 
         club.time_start = datetime.fromisoformat(post_data.get('time_start') + ":00+09:00")
+        club.time_end = datetime.fromisoformat(post_data.get('time_end') + ":00+09:00")
+        club.number = int(post_data.get('number'))
 
-        time_data = json.loads(post_data.get('time_data'))
-        club.time_data.extend(time_data)
-        club.time_data.sort(key=lambda x: (x['date'], x['start'], x['end']))
         club.save()
 
     data['club'] = club
@@ -288,14 +287,14 @@ def view_time(request):
     for form in forms:
         target_user = User.objects.get(id=form.number)
         obj = {
-            'time': form.time,
+            'time': form.time_data,
             'number': target_user.id,
             'name': target_user.name,
-            'id': form.id,
+            'id': target_user.id,
             'phone': target_user.phone
         }
 
-        if form.time:
+        if form.time_data:
             lst.append(obj)
         else:  # blank
             lst_blank.append(obj)

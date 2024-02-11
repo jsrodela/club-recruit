@@ -63,7 +63,7 @@ class ClubModel(models.Model):
     time_use = models.BooleanField(default=False)
 
     # 2차 면접 시작 시간
-    time_start = models.DateTimeField(default=now)
+    # time_start = models.DateTimeField(default=now)
 
     # 2차 면접 시간 데이터 - TimeModel 에서 동기화
     # 모델명 문자열로 써도 ㄱㅊ - circular import 피하려고 이렇게 해둔거
