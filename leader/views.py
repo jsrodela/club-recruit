@@ -88,9 +88,6 @@ def club_config(request):
 
         club.save()
 
-    data['club_form_start'] = club.form_start.astimezone(pytz.timezone('Asia/Seoul')).strftime("%Y-%m-%dT%H:%M")
-    data['club_form_end'] = club.form_end.astimezone(pytz.timezone('Asia/Seoul')).strftime("%Y-%m-%dT%H:%M")
-
     return render(request, 'leader/club_config.html', data)
 
 
@@ -156,14 +153,16 @@ def time_config(request):
         post_data = request.POST
         club.time_use = True
 
-        club.time_start = datetime.fromisoformat(post_data.get('time_start') + ":00+09:00")
-        club.time_end = datetime.fromisoformat(post_data.get('time_end') + ":00+09:00")
-        club.number = int(post_data.get('number'))
+        club.time_start = datetime.fromisoformat(post_data.get('time_start')) # 면접 시간 선택 오픈
+
+        club.times.all().time_start = datetime.fromisoformat(post_data.get('date') + " " + post_data.get('start')) # 면접 시작 시간
+        club.times.all().time_end = datetime.fromisoformat(post_data.get('date') + " " + post_data.get('start')) # 면접 종료 시간
+        club.times.all().number = int(post_data.get('number')) # 면접 정원
 
         club.save()
 
     data['club'] = club
-    data['time_start'] = club.time_start.astimezone(pytz.timezone('Asia/Seoul')).strftime("%Y-%m-%dT%H:%M")
+    # data['time_start'] = club.times.all().time_start.astimezone(pytz.timezone('Asia/Seoul')).strftime("%Y-%m-%dT%H:%M")
     return render(request, "leader/time_config.html", data)
 
 
@@ -280,7 +279,7 @@ def view_time(request):
 
     data['club'] = club
 
-    forms = FormModel.objects.filter(club=club, archive=False, first_result='P').order_by('time', 'number')
+    forms = FormModel.objects.filter(club=club, archive=False, first_result='P').order_by('time_data', 'number')
 
     lst = []
     lst_blank = []
