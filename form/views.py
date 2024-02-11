@@ -166,7 +166,7 @@ def time(request, clubname):
         data['error'] = '이미 면접 시간을 선택했어요. 변경을 원하시면 하단의 문의하기를 눌러 문의해주세요. '
         return render(request, 'form/time.html', data)
 
-    if request.POST:
+    if request.POST: # timemodel 대응 수정 필요
         time_value = request.POST.get('time_value')
         time_data = club.times
         # print(time_value)
@@ -226,7 +226,7 @@ def time(request, clubname):
     return render(request, 'form/time.html', data)
 
 
-def cancel(request, clubname): # 미완성임, def time 기반
+def cancel(request, clubname): # 미완성임, Timemode 대응 수정 필요
     data = get_data(request)
 
     if 'user' not in data:

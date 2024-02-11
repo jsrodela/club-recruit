@@ -138,7 +138,7 @@ def view_forms(request):
     return render(request, 'leader/view_forms.html', data)
 
 
-def time_config(request):
+def time_config(request): # timemodel 대응 수정 필요
     data = get_data(request)
 
     if 'user' not in data or data['user'].leader_of is None:
@@ -261,7 +261,7 @@ def every_forms(request):
     return render(request, "leader/every_forms.html", data)
 
 
-def view_time(request):
+def view_time(request): # timemodel 대응 수정 필요
 
     data = get_data(request)
 
