@@ -58,7 +58,10 @@ header {
     /* 배경 진파랑 */
     background-color: var(--main-color);
 
-    max-height: 100px;
+    max-height: 180px;
+
+    position: relative; /* header가 정의된 위치를 가지도록 설정 */
+    width: 100%;
 }
 
 header img {
@@ -207,12 +210,16 @@ nav ul li.home {
 }
 
 /* 서브페이지 아이콘 */
+
 #info-icon {
-    float: left;
+    position: absolute;
+    left: 0; /* 왼쪽 끝에 정렬 */
+    top: 50%; /* 수직 중앙에 위치 */
+    transform: translateY(-50%); /* 정확한 중앙 정렬을 위해 조정 */
     margin-right: 10px;
     cursor: pointer;
-
 }
+
 
 #info-icon:hover {
     /* 클릭 가능하게 표시 */
