@@ -166,42 +166,39 @@ def time(request, clubname):
         data['error'] = '이미 면접 시간을 선택했어요. 변경을 원하시면 하단의 문의하기를 눌러 문의해주세요. '
         return render(request, 'form/time.html', data)
 
-    if request.POST: # timemodel 대응 수정 필요
+    if request.POST: # timemodel 대응 수정 중
         time_value = request.POST.get('time_value')
-        time_data = club.times
+        club_time = club.times.all()
         # print(time_value)
-        for i in range(len(time_data)):
-            obj = time_data[i]
-            # print(obj, time_date, time_start)
-            obj['current'] = int(obj['current'])
-            obj['number'] = int(obj['number'])
-            if obj['current'] >= obj['number']:
-                data['alert'] = '정원이 꽉 찼습니다. 다른 시간을 선택해주세요.'
-                continue
-            else:
-                obj['current'] += 1
-                time_data[i] = obj
-                club.times = time_data
-                club.save()
-
-                # if apply.time:
-                #     prev_time = apply.time
-                #     prev_date = prev_time[0:2] + '-' + prev_time[3:5]
-                #     prev_start = prev_time[6:11]
-
-                apply.time_data = time_value
-                apply.save()
-                return redirect('/')
+        if club_time.current >= club_time.number:
+            data['alert'] = '정원이 꽉 찼습니다. 다른 시간을 선택해주세요.'
+            return render(request, 'form/time.html', data)
+        else:
+            apply.time_data = time_value
+            club_time.current += 1
+            apply.save()
+            club.save()
+            return redirect('/')
 
         data['alert'] = '오류가 발생했습니다. 오류가 지속되면 문의하기를 눌러 알려주세요.'
 
-    time_data = sorted(club.times, key=lambda x: (x['date'], x['start'], x['end']))
-    prev_date = ''
+    time_data = club.times.all()
+    # prev_date = ''
     lst = []
     times = []
     for obj in time_data:
         # print(obj)
-        if obj['date'] != prev_date:
+        times.append({
+            'start': time_data.time_start.strftime('%H/%M'),
+            'end': time_data.time_end.strftime('%H/%M'),
+            'number': time_data.number,
+            'current': time_data.current
+        })
+        lst.append({
+            'date': time_data.time_start.strftime('%m/%d'),
+            'times': times
+        })
+        '''if obj.time != prev_date:
             if times:
                 lst.append({
                     'date': prev_date[5:7] + "/" + prev_date[8:10],
@@ -219,14 +216,14 @@ def time(request, clubname):
         lst.append({
             'date': prev_date[5:7] + "/" + prev_date[8:10],
             'times': times
-        })
+        })'''
 
     data['time_data'] = lst
     data['club'] = club
     return render(request, 'form/time.html', data)
 
 
-def cancel(request, clubname): # 미완성임, Timemode 대응 수정 필요
+def cancel(request, clubname): # 미완성임, Timemode 대응 수정 중
     data = get_data(request)
 
     if 'user' not in data:
@@ -249,55 +246,30 @@ def cancel(request, clubname): # 미완성임, Timemode 대응 수정 필요
 
     if request.POST:
         cancel_value = request.POST.get('cancel_value')
-        cancel_date = cancel_value[0:2] + '-' + cancel_value[3:5]
-        cancel_start = cancel_value[6:11]
-
-        cancel_data = club.time_data
+        club_time = club.times
         # print(time_value)
-        for i in range(len(cancel_data)):
-            obj = cancel_data[i]
-            # print(obj, time_date, time_start)
-
-            if obj['date'].endswith(cancel_date) and obj['start'] == cancel_start:
-                obj['current'] = int(obj['current'])
-                obj['number'] = int(obj['number'])
-                obj['current'] -= 1
-                cancel_data[i] = obj
-                club.time_data = cancel_data
-                club.save()
-                # if apply.time:
-                #     prev_time = apply.time
-                #     prev_date = prev_time[0:2] + '-' + prev_time[3:5]
-                #     prev_start = prev_time[6:11]
-                apply.time = cancel_value
-                apply.save()
-                return redirect('/')
+        apply.time_data.delete()
+        club_time.current -= 1
+        apply.save()
+        club.save()
+        return redirect('/')
 
         data['alert'] = '오류가 발생했습니다. 오류가 지속되면 문의하기를 눌러 알려주세요.'
 
-    cancel_data = sorted(club.time_data, key=lambda x: (x['date'], x['start'], x['end']))
-    prev_date = ''
+    time_data = apply.time_data
+    # prev_date = ''
     lst = []
     times = []
-    for obj in cancel_data:
+    for obj in time_data:
         # print(obj)
-        if obj['date'] != prev_date:
-            if times:
-                lst.append({
-                    'date': prev_date[5:7] + "/" + prev_date[8:10],
-                    'times': times
-                })
-            prev_date = obj['date']
-            times = []
         times.append({
-            'start': obj['start'],
-            'end': obj['end'],
-            'number': obj['number'],
-            'current': obj['current'],
+            'start': time_data.time_start.strftime('%H/%M'),
+            'end': time_data.time_end.strftime('%H/%M'),
+            'number': time_data.number,
+            'current': time_data.current
         })
-    if times:
         lst.append({
-            'date': prev_date[5:7] + "/" + prev_date[8:10],
+            'date': time_data.time_start.strftime('%m/%d'),
             'times': times
         })
 

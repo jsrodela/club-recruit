@@ -148,8 +148,8 @@ def time_config(request): # timemodel 대응 수정 필요
     club = user.leader_of
 
     if request.POST:
-        print(club.code)
-        print(request.POST)
+        # print(club.code)
+        # print(request.POST)
         post_data = request.POST
         club.time_use = True
 
