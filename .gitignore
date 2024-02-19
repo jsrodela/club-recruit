@@ -6,3 +6,4 @@ media
 settings.json
 .git
 __pycache__/
+static
