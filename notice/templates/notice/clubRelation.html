@@ -4,7 +4,7 @@
 
 {% block content %}
     {% for club in clubs %}
-    <div class="cell"><img src="{{ club.logo_url }}" width="50"></div>
+    <div class="cell"><img src="{{ club.logo_url }}" width="400" onclick="changeNav('club_{{ club.code }}', '/about/{{ club.code }}');"></div>
     {% endfor %}
         <div class="cell empty-cell merged-cell">
         <div class="center-text"><b>잠신고 동아리 지원 누리집</b><br>운영기간: 02/20 ~ 03/22</div>
