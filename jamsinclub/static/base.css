@@ -218,6 +218,7 @@ nav ul li.home {
     transform: translateY(-50%); /* 정확한 중앙 정렬을 위해 조정 */
     margin-right: 10px;
     cursor: pointer;
+    width: 100px;
 }
 
 

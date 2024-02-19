@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'index',
     'jamsinclub',
     'leader',
+    'notice',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",

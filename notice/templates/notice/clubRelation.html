@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+    {% for club in clubs %}
+    <div class="cell"><img src="{{ club.logo_url }}" width="50"></div>
+    {% endfor %}
+        <div class="cell empty-cell merged-cell">
+        <div class="center-text"><b>잠신고 동아리 지원 누리집</b><br>운영기간: 02/20 ~ 03/22</div>
+    </div>
+{% endblock %}

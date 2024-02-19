@@ -99,16 +99,6 @@ function register_onclick() {
     }
 }
 
-function loadClubRelation() {
-    var xhr = new XMLHttpRequest();
-    xhr.onload = function() {
-        if (xhr.status >= 200 && xhr.status < 300) {
-            document.getElementById('content').innerHTML = xhr.responseText;
-        }
-    };
-    xhr.open('GET', '/jamsinclub/templates/clubRelation.html');
-    xhr.send();
-}
 
 // On page loaded
 window.addEventListener('load', function() {
