@@ -62,6 +62,7 @@ header {
 
     position: relative; /* header가 정의된 위치를 가지도록 설정 */
     width: 100%;
+    padding: 0;
 }
 
 header img {
