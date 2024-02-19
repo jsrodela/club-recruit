@@ -213,13 +213,12 @@ nav ul li.home {
 
 #info-icon {
     position: absolute;
-    left: 0; /* 왼쪽 끝에 정렬 */
+    left: 0rem; /* 왼쪽 끝에 정렬 */
     top: 50%; /* 수직 중앙에 위치 */
     transform: translateY(-50%); /* 정확한 중앙 정렬을 위해 조정 */
-    margin-right: 10px;
+    margin: 0 10px;
     cursor: pointer;
-    width: 100px;
-    height: 100px;
+    height: 50%;
 }
 
 
