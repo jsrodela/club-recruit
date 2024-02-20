@@ -30,7 +30,7 @@
             <tbody>
                 {% for form in forms %}
                     <tr>
-                        <td>{{ form.time }}</td>
+                        <td>{% if form.time is None %}미선택{% else %}{{ form.time }}{% endif %}</td>
                         <td>{{ form.number }}</td>
                         <td>{{ form.name }}</td>
                         <td><a href="/form/leader/{{ form.id }}">보기</a></td>

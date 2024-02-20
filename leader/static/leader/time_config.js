@@ -64,10 +64,10 @@ document.getElementById('add_time').onclick = function() {
         this_date = last_next.childNodes[1].childNodes[0].value
     }
     else {
-        this_start = new Date()
-        this_end = new Date()
+        this_start = new Date();
+        this_end = new Date();
         this_number = 1
-        this_date = '2023-03-01'
+        this_date = new Date().toISOString().split('T')[0];
     }
 
 //    console.log(this_date)
