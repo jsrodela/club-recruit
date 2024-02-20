@@ -91,6 +91,7 @@ else {
 
 /* textarea height */
 function textarea_resize(element) {
+    element.style.width = "";
     element.style.height = "";
     element.style.height = element.scrollHeight + "px"
 }
