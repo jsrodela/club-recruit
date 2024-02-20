@@ -176,6 +176,11 @@ h2 {
     margin-bottom: 0.5rem;
 }
 
+.infotext {
+    color: grey;
+    text-align: center;
+}
+
 
 /* 모바일 레이아웃 */
 @media screen and (max-width: 768px) {
