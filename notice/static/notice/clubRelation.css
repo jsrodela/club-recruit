@@ -55,6 +55,7 @@
     font-size: 1.3rem;
     font-weight: 200;
     padding-bottom: 50px;
+    color: white;
 }
 
 @-webkit-keyframes gradient {
@@ -91,7 +92,11 @@
         margin: 0.3rem;
     }
 
+}
+
+@media screen and (max-width: 512px) {
     .mobile {
         display: block;
     }
+
 }
