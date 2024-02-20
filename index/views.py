@@ -24,4 +24,4 @@ def index(request):
 
 def club_relation(request):
     data = get_data(request)
-    return render(request, 'notice/clubRelation.html', data)
+    return render(request, 'index/clubRelation.html', data)
