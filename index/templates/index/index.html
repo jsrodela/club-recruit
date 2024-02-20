@@ -35,6 +35,8 @@
         </style>
         {% endfor %}
     </div>
+    <h2 class="status">지금은 <span class="current">{{ status.get_current_display }}!</span></h2>
+
 
     {% if user.is_authenticated %}
         <div class="outer-container">
