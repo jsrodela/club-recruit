@@ -3,13 +3,13 @@
 
 {% block style %}
     {{ block.super }}
-    <link rel="stylesheet" href="{% static 'notice/clubRelation.css' %}?v=1">
+    <link rel="stylesheet" href="{% static 'notice/clubRelation.css' %}?v=2">
 {% endblock %}
 
 {% block content %}
     <div class="bg">
         <div class="title">
-            <h3>잠신고 동아리 지원 누리집</h3>
+            <h3>잠신고 동아리 <br class="mobile">지원 누리집</h3>
             <p>운영 기간: 02.20 ~ 03.22</p>
         </div>
         <h4 class="with">모든 상설 동아리와 함께합니다.</h4>
@@ -18,5 +18,6 @@
                 <img class="logo" style="" src="{{ club.logo_url }}" onclick="changeNav('club_{{ club.code }}', '/about/{{ club.code }}');">
             {% endfor %}
         </div>
+        <h4 class="by">누리집 개발: 공학동아리 로델라<br>담당: 창의체험부</h4>
     </div>
 {% endblock %}

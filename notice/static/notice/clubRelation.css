@@ -50,6 +50,13 @@
     cursor: pointer;
 }
 
+.by {
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: 200;
+    padding-bottom: 50px;
+}
+
 @-webkit-keyframes gradient {
 	0% {
 		background-position: 0% 50%;
@@ -74,9 +81,17 @@
 	}
 }
 
+.mobile {
+    display: none;
+}
+
 @media screen and (max-width: 768px) {
     .logo {
         width: 7rem;
         margin: 0.3rem;
+    }
+
+    .mobile {
+        display: block;
     }
 }
