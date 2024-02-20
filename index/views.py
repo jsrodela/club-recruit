@@ -20,3 +20,8 @@ def index(request):
     data['banner_clubs'] = ClubModel.objects.all()
 
     return render(request, 'index/index.html', data)
+
+
+def club_relation(request):
+    data = get_data(request)
+    return render(request, 'notice/clubRelation.html', data)
