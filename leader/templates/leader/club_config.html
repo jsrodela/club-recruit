@@ -64,12 +64,15 @@
         </form>
         <form method="post">
             <h3>메인 화면 베너 - 동아리 이름 색깔</h3>
+            <input type="color" name="index_banner_color" value="{{ club.index_banner_color }}">
+            <!--
             <input type="radio" name="index_banner_color" value="#000000"> Black
             <input type="radio" name="index_banner_color" value="#FFFFFF"> White
             <script>
                 console.log("{{ club.index_banner_color }}");
                 document.querySelector('input[name="index_banner_color"][value="{{ club.index_banner_color }}"]').checked = true;
             </script>
+            -->
             <input type="submit" value="적용">
             {% csrf_token %}
         </form>
@@ -119,7 +122,7 @@
                 <input type="hidden" name="form_change">
                 <input type="submit" value="적용">
                 <p>지원서 미사용 시 카카오톡 오픈채팅 주소 (지원서 사용 시 비워두기)</p>
-                <input type="url" name="kakao_url" value="{{ club.kakao_url }}">
+                <input type="url" name="kakao_url" value="{% if club.kakao_url is not None %}{{ club.kakao_url }}{% endif %}">
             {% else %}
                 <p>[ 양식 수정 링크가 정해지지 않았어요. 로델라 부장에게 이 메세지가 보인다는 사실을 알려주세요. 로델라 일해라!!! ]</p>
             {% endif %}
@@ -130,9 +133,9 @@
         <form method="post">
             <h3>1차 서류 제출 기한</h3>
             <p>제출 시작:</p>
-            <input type="datetime-local" name="form_start" value="{{ club_form_start }}">
+            <input type="datetime-local" name="form_start" value="{{ club.form_start|date:'Y-m-d H:i' }}">
             <p>제출 마감:</p>
-            <input type="datetime-local" name="form_end" value="{{ club_form_end }}">
+            <input type="datetime-local" name="form_end" value="{{ club.form_end|date:'Y-m-d H:i' }}">
             <input type="submit" value="적용">
             {% csrf_token %}
         </form>

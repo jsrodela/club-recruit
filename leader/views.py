@@ -1,5 +1,6 @@
 import json
 from datetime import datetime
+from django.utils.timezone import make_aware
 
 import pytz
 from django.shortcuts import render, redirect
@@ -55,8 +56,8 @@ def club_config(request):
                 club.form_data = form_data.reload_form(club.code)
                 club.kakao_url = ""
         if 'form_start' in submit:
-            club.form_start = datetime.fromisoformat(submit.get('form_start'))
-            club.form_end = datetime.fromisoformat(submit.get('form_end'))
+            club.form_start = make_aware(datetime.fromisoformat(submit.get('form_start')))
+            club.form_end = make_aware(datetime.fromisoformat(submit.get('form_end')))
         if 'member_add' in submit:
             member_id = submit.get('member_add')
             try:
