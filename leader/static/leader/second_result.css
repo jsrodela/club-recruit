@@ -1,0 +1,24 @@
+.wrap {
+    padding: 1rem;
+}
+
+.tableDiv {
+    width: 100%;
+    overflow: scroll;
+}
+
+table {
+    width: 100%;
+}
+
+input[type='date'] {
+    width: 120px;
+}
+
+input[type='time'] {
+    width: 100px;
+}
+
+table {
+    text-align: center;
+}

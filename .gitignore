@@ -6,5 +6,7 @@ media
 settings.json
 .git
 __pycache__/
-static
+/static
 .DS_Store
+db2.sqlite3
+db3.sqlite3
