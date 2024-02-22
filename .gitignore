@@ -7,3 +7,4 @@ settings.json
 .git
 __pycache__/
 static
+.DS_Store
