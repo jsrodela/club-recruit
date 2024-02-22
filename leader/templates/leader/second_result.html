@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'leader/second_result.css' %}?v=1">
+{% endblock %}
+
+{% block module %}
+    {{ block.super }}
+    <script src="{% static 'leader/second_result.js' %}?v=1"></script>
+{% endblock %}
+
+{% block content %}
+
+    <div class="wrap">
+        <h1>합격자 입력 : {{ club.code }}</h1>
+        <p>이 페이지는 <b>동아리 부장</b>만 접근 가능합니다.</p>
+        <hr>
+
+        <h2>최초 합격자 명단 작성</h2>
+        <p>정확한 확인을 위해, 대상자의 학번과 이름을 직접 입력한 후 '등록' 버튼을 눌러주세요.</p>
+        <form id="init_form">
+            <input type="number" id="init_user_id" placeholder="학번">
+            <input type="text" id="init_user_name" placeholder="이름">
+            <input type="submit" id="init_submit" value="등록">
+        </form>
+        <br>
+        <table id="init_table">
+            <thead>
+                <tr>
+                    <th>학번</th>
+                    <th>이름</th>
+                    <th>지원서</th>
+                    <th>삭제</th>
+                </tr>
+            </thead>
+            <tbody id="init_tbody"></tbody>
+        </table>
+    </div>
+
+    <script>
+        selectNav('club_{{ club.code }}');
+    </script>
+{% endblock %}

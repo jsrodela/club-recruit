@@ -1,9 +1,12 @@
 import json
 from datetime import datetime
+
+from django.http import HttpResponse
 from django.utils.timezone import make_aware
 
 import pytz
 from django.shortcuts import render, redirect
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 from about.models import ImageModel
@@ -287,7 +290,7 @@ def view_time(request): # timemodel 대응 수정 필요
             'time': form.time_data,
             'number': target_user.id,
             'name': target_user.name,
-            'id': target_user.id,
+            'id': form.id,
             'phone': target_user.phone
         }
 
@@ -299,3 +302,54 @@ def view_time(request): # timemodel 대응 수정 필요
     lst.extend(lst_blank)
     data['forms'] = lst
     return render(request, 'leader/view_time.html', data)
+
+
+def second_result(request):
+    data = get_data(request)
+    if 'user' not in data or data['user'].leader_of is None:
+        return redirect('/')
+    data['club'] = data['user'].leader_of
+    return render(request, 'leader/second_result.html', data)
+
+
+# second_result에서 사용됨
+@csrf_exempt
+def second_result_check_user(request):
+    data = get_data(request)
+
+    if 'user' not in data or data['user'].leader_of is None:
+        return redirect('/')
+
+    club = data['user'].leader_of
+
+    if request.method == 'POST':
+        print(request.body)
+        body = json.loads(request.body)
+        user_id = body['user_id']
+        user_name = body['user_name']
+        try:
+            user = User.objects.get(id=user_id, name=user_name)
+            form = FormModel.objects.get(number=user.id, club=club, archive=False)
+
+            if form.first_result != 'P':
+                return HttpResponse(json.dumps({
+                    'error': f'\'{user_id} {user_name}\' 학생은 1차 서류지원 합격자가 아닙니다.'
+                }))
+
+            # TimeModel 체크? (면접 봤는지) - 면접 따로 잡아서 봤을수도...
+
+            return HttpResponse(json.dumps({
+                'user_id': user.id,
+                'user_name': user.name,
+                'form_id': form.id
+            }))
+        except User.DoesNotExist:
+            return HttpResponse(json.dumps({
+                'error': f'\'{user_id} {user_name}\' 학생을 찾을 수 없습니다.'
+            }))
+        except FormModel.DoesNotExist:
+            return HttpResponse(json.dumps({
+                'error': f'\'{user_id} {user_name}\' 학생은 이 동아리에 지원하지 않았습니다.'
+            }))
+
+    return redirect('/')

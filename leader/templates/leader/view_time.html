@@ -15,6 +15,10 @@
     <div class="wrap">
         <h1>면접시간 보기 : {{ club.code }}</h1>
         <p>이 페이지는 <b>동아리 부장 및 부원</b>만 접근 가능합니다.</p>
+        {% if user.leader_of %}
+            <a href="/leader/time_config">면접 시간 선택하기</a>
+            <span> | </span><a href="/leader/second_result" target="_blank" style="font-weight: bold;">2차 합격자 결정하기</a>
+        {% endif %}
         <hr>
 
         <table id="viewTable">

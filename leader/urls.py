@@ -8,4 +8,6 @@ urlpatterns = [
     path("first_result", views.first_result),
     path("every_forms", views.every_forms),
     path("view_time", views.view_time),
+    path("second_result", views.second_result),
+    path("second_result_check_user", views.second_result_check_user),
 ]
