@@ -34,6 +34,7 @@
                 <div class = 'interview_time'> <!-- 시간대, 인원수 적은 상자들 묶음 -->
                     {% for time in date.times %}
                         <button class = 'inner_it' name="{{ date.date }} {{ time.start }} ~ {{ time.end }}" onclick="return onTimeClick(this);"> <!-- it = interview_time, 상자별 구분 -->
+                            <span class="date">{{ date.date }}</span> <!-- 날짜 추가 -->
                             <span class="time">{{ time.start }} ~ {{ time.end }}</span>
                             <br>
                             <span class="people">{{ time.current }} / {{ time.number }}명</span>
