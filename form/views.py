@@ -11,6 +11,7 @@ from .models import FormModel, TimeModel
 from django.http import HttpResponse
 
 
+# 지원서 제출
 def form(request, clubname):
     data = get_data(request)
 
@@ -64,6 +65,7 @@ def form(request, clubname):
     return render(request, 'form/form.html', data)
 
 
+# 지원서 확인 (지원자용)
 def club(request, clubname):
     data = get_data(request)
 

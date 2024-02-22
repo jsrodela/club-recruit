@@ -3,7 +3,7 @@
 
 {% block style %}
     {{ block.super }}
-    <link rel="stylesheet" href="{% static 'index/index.css' %}?v=7">
+    <link rel="stylesheet" href="{% static 'index/index.css' %}?v=8">
 {% endblock %}
 
 {% block module %}
@@ -35,34 +35,12 @@
         </style>
         {% endfor %}
     </div>
+    <h2 class="status">지금은 <span class="current">{{ status.get_current_display }}!</span></h2>
+
 
     {% if user.is_authenticated %}
         <div class="outer-container">
-            <div class = 'interview'>
-                <h2>면접 시간</h2>
-                <ul>
-                    {% for form in forms %}
-                        {% if form.first_result == 'P' %}
-                            <li class="interview_club"><b>{{ form.club.name }}</b>:
-                                <br>
-                                {% if form.club.time_use %}
-                                    <a href="/form/time/{{ form.club.code }}">
-                                        {% if form.time %}
-                                            {{ form.time }}
-                                        {% else %}
-                                            시간 선택하기
-                                        {% endif %}
-                                    </a>
-                                {% else %}
-                                    <span style="color: grey;">별도 안내 예정</span>
-                                {% endif %}
-                            </li>
-                        {% endif %}
-                    {% endfor %}
-                </ul>
-                <p style="color: grey; text-align: center;">1차 합격된 동아리에서 면접 안내 문자를 받지 못했다면, 해당 동아리에 문의해보세요.</p>
 
-            </div>
             <div class = 'dong_ari'>
                 <h2>지원한 동아리</h2>
                 {% if forms|length > 0 %}
@@ -82,30 +60,59 @@
                         {% endfor %}
                     </div>
                 {% else %}
-                    <p style="color: grey; text-align: center;">동아리에 지원해보세요!</p>
+                    <p class="infotext">동아리에 지원해보세요!</p>
                 {% endif %}
             </div>
 
+            <div class = 'interview'>
+                <h2>면접 시간</h2>
+                <div class="submits">
+                    {% for form in forms %}
+                        {% if form.first_result == 'P' %}
 
+                            <div class="submit">
+                                <h3>{{ form.club.name }}</h3>
+                                {% if form.club.time_use %}
+                                    {% if form.time %}
+                                        <-- 시간 취소 기능 추가 ->
+                                        <p>{{ form.time }}</p>
+                                    {% else %}
+                                        <button style="color: green;" onclick="changeNav('club_{{ form.club.code }}', '/form/time/{{ form.club.code }});">시간 선택하기</button>
+                                    {% endif %}
+                                {% else %}
+                                    <span style="color: grey;">별도 안내 예정</span>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <p class="infotext">1차 서류지원 진행중</p>
+<!--            <p style="color: grey; text-align: center;">1차 합격된 동아리에서 면접 안내 문자를 받지 못했다면, 해당 동아리에 문의해보세요.</p>-->
+            </div>
 
             <div class = 'my_info'>
                 <h2>내 정보</h2>
                 <strong>{{ user.id }} {{ user.name }}</strong>
                 <p>{{ user.phone }}</p>
-                <a href="/account/logout">로그아웃</a>
+                <button onclick="location.href = '/account/logout'">로그아웃</button>
 
-                {% if user.leader_of %}
-                    <br>
-                    <a href="/leader/club_config">동아리 관리</a>
-                    <br>
-                    <a href="/leader/time_config">면접 시간 관리</a>
-                {% endif %}
 
                 {% if user.leader_of or user.member_of %}
+                    <br><br>
+                    <span><b>부원 전용 메뉴:</b></span>
                     <br>
                     <a href="/leader/view_forms">지원서 보러 가기</a>
                     <br>
                     <a href="/leader/view_time">면접시간 보러 가기</a>
+                {% endif %}
+
+                {% if user.leader_of %}
+                    <br><br>
+                    <span><b>부장 전용 메뉴:</b></span>
+                    <br>
+                    <a href="/leader/club_config">동아리 관리</a>
+                    <br>
+                    <a href="/leader/time_config">면접 시간 관리</a>
                 {% endif %}
             </div>
         </div>

@@ -5,6 +5,7 @@ from django.shortcuts import render
 from about.models import ClubModel
 from account.base import get_data
 from form.models import FormModel
+from index.models import StatusModel
 
 
 def index(request):
@@ -19,4 +20,11 @@ def index(request):
     #     data['banner_club'] = random.choice(list(ClubModel.objects.all()))
     data['banner_clubs'] = ClubModel.objects.all()
 
+    data['status'] = StatusModel.objects.get_or_create()[0]
+
     return render(request, 'index/index.html', data)
+
+
+def club_relation(request):
+    data = get_data(request)
+    return render(request, 'index/clubRelation.html', data)

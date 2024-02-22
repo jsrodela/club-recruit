@@ -8,7 +8,7 @@
 
 {% block module %}
     {{ block.super }}
-    <script src="{% static 'leader/time_config.js' %}?v=2"></script>
+    <script src="{% static 'leader/time_config.js' %}?v=3"></script>
 {% endblock %}
 
 {% block content %}
@@ -21,7 +21,7 @@
 
     <div class="wrap">
         <h1>2차 면접시간 설정 : {{ club.code }}</h1>
-        <p>이 페이지는 동아리 부장만 접근 가능합니다.<br>지원 기능을 사용하지 않으려면 아무것도 적용하지 마세요!</p>
+        <p>이 페이지는 <b>동아리 부장</b>만 접근 가능합니다.<br>지원 기능을 사용하지 않으려면 아무것도 적용하지 마세요!</p>
         <hr>
 
         <table id="viewTable">

@@ -1,5 +1,6 @@
 import json
 from datetime import datetime
+from django.utils.timezone import make_aware
 
 import pytz
 from django.shortcuts import render, redirect
@@ -57,8 +58,8 @@ def club_config(request):
                 club.form_data = form_data.reload_form(club.code)
                 club.kakao_url = ""
         if 'form_start' in submit:
-            club.form_start = datetime.fromisoformat(submit.get('form_start'))
-            club.form_end = datetime.fromisoformat(submit.get('form_end'))
+            club.form_start = make_aware(datetime.fromisoformat(submit.get('form_start')))
+            club.form_end = make_aware(datetime.fromisoformat(submit.get('form_end')))
         if 'member_add' in submit:
             member_id = submit.get('member_add')
             try:
@@ -68,27 +69,24 @@ def club_config(request):
                 else:
                     member.member_of = club
                     member.save()
-                    club.members.append(member_id)
             except User.DoesNotExist:
                 data['error'] = f'{member_id} 계정을 찾을 수 없어요.'
 
         if 'member_remove' in submit:
             member_id = submit.get('member_remove')
-            if member_id in club.members:
-                try:
-                    member = User.objects.get(id=member_id)
-                    if member.member_of.code != club.code:
-                        data['error'] = f'{member_id} 학생은 이 동아리의 부원이 아니에요. 데이터가 꼬인 것 같은데, 로델라 부장에게 전해주세요.'
-                    else:
-                        member.member_of = None
-                        member.save()
-                        club.members.remove(member_id)
-                except User.DoesNotExist:
-                    data['error'] = f'{member_id} 계정을 찾을 수 없어요.'
-            else:
-                data['error'] = f'{member_id} 학생은 이 동아리의 부원이 아니에요.'
+            try:
+                member = User.objects.get(id=member_id)
+                if member.member_of is None or member.member_of != club:
+                    data['error'] = f'{member_id} 학생은 이 동아리의 부원이 아니에요.'
+                else:
+                    member.member_of = None
+                    member.save()
+            except User.DoesNotExist:
+                data['error'] = f'{member_id} 계정을 찾을 수 없어요.'
 
         club.save()
+
+    data['club_members'] = User.objects.filter(member_of=club)
 
     return render(request, 'leader/club_config.html', data)
 

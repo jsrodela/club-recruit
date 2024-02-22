@@ -24,9 +24,10 @@ class FormModel(models.Model):
 
     archive = models.BooleanField(default=False)
 
-    RESULTS = [('W', 'WAIT'), ('P', 'PASS'), ('F', 'FAIL')]
-
+    RESULTS = [('W', 'WAIT'), ('P', 'PASS'), ('F', 'FAIL'), ('A', 'ADDITION_PASS')]
     first_result = models.CharField(max_length=1, choices=RESULTS, default='W')
+    second_result = models.CharField(max_length=1, choices=RESULTS, default='W')
+
     # time = models.CharField(max_length=100, default='', blank=True)
 
     time_data = models.DateTimeField(null=True, blank=True)

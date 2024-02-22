@@ -94,15 +94,11 @@
 |form_data| 구글폼에서 받아온 1차 지원서 양식 (수동 동기화 필요)                          | JSONField                    | dict 형식                                                              |
 |form_edit_url| 구글폼 수정 바로가기 링크                                           | URLField                     | Nullable, Blankable                                                  |
 |kakao_url| 지원서 기능 미사용 시, 오픈채팅 등 지원 가능한 외부 링크 (이 값이 존재하면 지원서 기능 비활성화) | URLField                     | Nullable, Blankable                                                  |
-|members| 멤버 목록 (지원서, 면접시간 확인 권한) - `User`과 자동 동기화 안됨              | JSONField                    | list 형식                                                              |
 ||
 |time_use| 2차 면접 시간선택 기능 사용 여부 (기본 비활성화, 시간 설정 시 활성화)               | BooleanField                 ||
 |time_start| 2차 면접 시간선택 시작 시각| DateTimeField                ||
 |time_data|2차 면접 시간 데이터| list 형식                      |
 > `form_data` 형식은 [ExtForm](https://github.com/ExtForm/ExtForm)을 참고하세요. [`form/form_data.py`](form/form_data.py) 파일에 샘플 데이터 형식이 있습니다.
-> 
-> `members` 형식은 숫자로 이루어진 리스트입니다. (ex. [10000, 10001, 20124])
-> 
 
 ## 4. 사이트 운영
 ### 4-1. 준비 (2023. 02. 18. ~ 2023. 03. 01.)
