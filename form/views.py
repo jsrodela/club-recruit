@@ -163,19 +163,22 @@ def time(request, clubname):
         return render(request, 'form/time.html', data)
 
     if apply.time_data:
-        data['error'] = '이미 면접 시간을 선택했어요. 변경을 원하시면 하단의 문의하기를 눌러 문의해주세요. '
+        data['error'] = '이미 면접 시간을 선택했어요. 변경을 원하시면 면접시간 취소하기를 이용해 주세요'
         return render(request, 'form/time.html', data)
 
     if request.POST: # timemodel 대응 수정 중
         time_value = request.POST.get('time_value')
         club_time = club.times.all()
+        
         # print(time_value)
         if club_time.current >= club_time.number:
             data['alert'] = '정원이 꽉 찼습니다. 다른 시간을 선택해주세요.'
             return render(request, 'form/time.html', data)
         else:
             apply.time_data = time_value
-            club_time.current += 1
+            time_model = ClubModel.objects.get(code=club.code)
+            time_model.count += 1
+            time_model.form = apply
             apply.save()
             club.save()
             return redirect('/')
@@ -246,10 +249,10 @@ def cancel(request, clubname): # 미완성임, Timemode 대응 수정 중
 
     if request.POST:
         cancel_value = request.POST.get('cancel_value')
-        club_time = club.times
         # print(time_value)
-        apply.time_data.delete()
-        club_time.current -= 1
+        time_model = ClubModel.objects.get(code=club.code)
+        time_model.count -= 1
+        time_model.form.delete()
         apply.save()
         club.save()
         return redirect('/')
@@ -275,4 +278,4 @@ def cancel(request, clubname): # 미완성임, Timemode 대응 수정 중
 
     data['time_data'] = lst
     data['club'] = club
-    return render(request, 'form/time.html', data)
+    return render(request, 'form/cancel.html', data)
