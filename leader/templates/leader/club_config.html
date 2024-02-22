@@ -141,8 +141,8 @@
         <h2>부원 관리</h2>
         <p>동아리 부원들은 제출된 지원서를 확인하고, 면접 시간을 조회할 수 있습니다.</p>
         <ul>
-            {% for member_id in club.members %}
-            <li>{{ member_id }}</li>
+            {% for member in club_members %}
+            <li>{{ member.id }}</li>
             {% endfor %}
         </ul>
 

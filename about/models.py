@@ -56,9 +56,6 @@ class ClubModel(models.Model):
     # 설문지 미사용 시 카카오톡 링크
     kakao_url = models.URLField(null=True, blank=True, default="")
 
-    # 멤버 목록 (지원서 및 면접시간 확인 가능)
-    members = models.JSONField(encoder=json.JSONEncoder, decoder=json.JSONDecoder, default=list)
-
     # 2차 면접 시간 선택 사용 여부
     time_use = models.BooleanField(default=False)
 
