@@ -32,7 +32,6 @@ class FormModel(models.Model):
     additional_result = models.CharField(max_length=1, choices=RESULTS, default='W')
     # time = models.CharField(max_length=100, default='', blank=True)
 
-    global time_data
     time_data = models.DateTimeField(null=True, blank=True)
 
 
@@ -57,19 +56,13 @@ class FormModel(models.Model):
 
 
 class TimeModel(models.Model):
-    time_data_list = json.loads(time_data)
-    for time_data in time_data_list:
-        time_start = datetime.strptime(f"{time_data['date']} {time_data['start']}", "%Y-%m-%d %H:%M")
-        time_end = datetime.strptime(f"{time_data['date']} {time_data['end']}", "%Y-%m-%d %H:%M")
-        number = time_data["number"]
-        current = time_data["current"]
-        # TimeModel 인스턴스 생성
+    time_start = models.DateTimeField(default=now)  # 면접 시작시간
+    time_end = models.DateTimeField(default=now)  # 면접 종료시간
 
-
-
+    current = models.IntegerField(default=0)  # 현재 면접 예약 인원수
+    number = models.IntegerField(default=10)  # 시간당 면접 정원
 
     form = models.ForeignKey(FormModel, related_name='time_form+', on_delete=models.SET_NULL, null=True, blank=True)
-
 
     # 2차 면접 시간 데이터
     # time_data = models.JSONField(encoder=json.JSONEncoder, decoder=json.JSONDecoder, default=list)
