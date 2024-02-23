@@ -25,12 +25,22 @@ class FormModel(models.Model):
     archive = models.BooleanField(default=False)
 
     RESULTS = [('W', 'WAIT'), ('P', 'PASS'), ('F', 'FAIL'), ('A', 'ADDITION_PASS')]
+
     first_result = models.CharField(max_length=1, choices=RESULTS, default='W')
     second_result = models.CharField(max_length=1, choices=RESULTS, default='W')
-
+    additional_result = models.CharField(max_length=1, choices=RESULTS, default='W')
     # time = models.CharField(max_length=100, default='', blank=True)
 
     time_data = models.DateTimeField(null=True, blank=True)
+    for key in time_data:
+        try:
+            time_start = key["start"]
+            time_end = key["end"]
+            time_date = key["date"]
+            time_number = key["number"]
+        except:
+            break
+
 
 '''
     동아리 부장이 TimeModel을 생성하여 시간을 지정하고,
@@ -61,6 +71,7 @@ class TimeModel(models.Model):
     number = models.IntegerField(default=10)  # 시간당 면접 정원
 
     form = models.ForeignKey(FormModel, related_name='time_form+', on_delete=models.SET_NULL, null=True, blank=True)
+
 
     # 2차 면접 시간 데이터
     # time_data = models.JSONField(encoder=json.JSONEncoder, decoder=json.JSONDecoder, default=list)
