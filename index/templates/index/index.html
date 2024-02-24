@@ -75,9 +75,10 @@
                                 {% if form.club.time_use %}
                                     {% if form.time %}
                                         <-- 시간 취소 기능 추가 ->
+                                        <button style="color: red;" onclick="return changeNav('club_{{ form.club.code }}', '/form/cancel/{{ form.club.code }}')";>시간 취소하기</button>
                                         <p>{{ form.time }}</p>
                                     {% else %}
-                                        <button style="color: green;" onclick="changeNav('club_{{ form.club.code }}', '/form/time/{{ form.club.code }});">시간 선택하기</button>
+                                        <button style="color: green;" onclick="return changeNav('club_{{ form.club.code }}', '/form/time/{{ form.club.code }}')";>시간 선택하기</button>
                                     {% endif %}
                                 {% else %}
                                     <span style="color: grey;">별도 안내 예정</span>

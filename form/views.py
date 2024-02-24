@@ -170,7 +170,9 @@ def time(request, clubname):
 
     if request.POST: # timemodel 대응 수정 중
         time_value = request.POST.get('time_value')
-        club_time = TimeModel.objects.get(club=club, time_start=time_value.time_start)
+        time_date = time_value[0:2] + '-' + time_value[3:5]
+        time_start = time_value[6:11]
+        club_time = TimeModel.objects.get(club=club, time_start=time_date+"T"+time_start)
         # print(time_value)
         if club_time.current >= club_time.number:
             data['alert'] = '정원이 꽉 찼습니다. 다른 시간을 선택해주세요.'
@@ -178,7 +180,7 @@ def time(request, clubname):
         else:
             apply.time_data = time_value
             club_time.form = apply
-            club_time.count += 1
+            club_time.current += 1
             apply.save()
             club_time.save()
             return redirect('/')
@@ -192,16 +194,16 @@ def time(request, clubname):
     for obj in time_data:
         # print(obj)
         times.append({
-            'start': time_data.time_start.strftime('%H/%M'),
-            'end': time_data.time_end.strftime('%H/%M'),
-            'number': time_data.number,
-            'current': time_data.current
+            'start': obj.time_start.strftime('%H/%M'),
+            'end': obj.time_end.strftime('%H/%M'),
+            'number': obj.number,
+            'current': obj.current
         })
-        lst.append({
-            'date': time_data.time_start.strftime('%m/%d'),
-            'times': times
-        })
-        '''if obj.time != prev_date:
+    lst.append({
+        'date': obj.time_start.strftime('%m/%d'),
+        'times': times
+    })
+    '''if obj.time != prev_date:
             if times:
                 lst.append({
                     'date': prev_date[5:7] + "/" + prev_date[8:10],
@@ -271,10 +273,10 @@ def cancel(request, clubname): # 미완성임, Timemode 대응 수정 중
             'number': time_data.number,
             'current': time_data.current
         })
-        lst.append({
-            'date': time_data.time_start.strftime('%m/%d'),
-            'times': times
-        })
+    lst.append({
+        'date': time_data.time_start.strftime('%m/%d'),
+        'times': times
+    })
 
     data['time_data'] = lst
     data['club'] = club
