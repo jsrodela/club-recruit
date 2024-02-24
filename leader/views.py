@@ -313,6 +313,14 @@ def second_result(request):
     data = get_data(request)
     if 'user' not in data or data['user'].leader_of is None:
         return redirect('/')
+
+    if request.POST:
+        passes = request.POST.get('passes')
+        add_first = request.POST.get('add_first')
+        add_second = request.POST.get('add_second')
+        print(passes, add_first, add_second)
+        # @TODO: JS에서 passes 1,2학년 나눠서 인원수 세기
+
     data['club'] = data['user'].leader_of
     return render(request, 'leader/second_result.html', data)
 

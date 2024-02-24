@@ -9,6 +9,7 @@
 
 table {
     width: 100%;
+    text-align: center;
 }
 
 input[type='date'] {
@@ -19,6 +20,29 @@ input[type='time'] {
     width: 100px;
 }
 
-table {
+form {
     text-align: center;
+    align-items: center;
+}
+
+form * {
+    text-align: center;
+}
+
+input[type='number'] {
+    width: 100px;
+}
+
+table, form {
+    max-width: 500px;
+}
+
+#send input[type='submit'] {
+    background-color: green;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 16pt;
+    font-weight: bold;
+    cursor: pointer;
 }
