@@ -154,35 +154,17 @@ def time_config(request): # timemodel 대응 수정 필요
         # print(club.code)
         # print(request.POST)
         post_data = request.POST
-        times = ClubModel.objects.get(code=user.leader_of.code).times
         club.time_use = True
-
         club.time_start = post_data.get('time_activate') # 면접 시간 선택 오픈
 
-        for time in post_data.get('time_data'):
+        for time in json.loads(post_data.get('time_data')):
             time_model = TimeModel()
-            time_model.time_start = time.start
-            time_model.time_end = time.end
-            time_model.number = time.number
-
-        """
-        asdf = [
-            {
-                "time_start": "123",
-                "time_end": "asdf",
-                "count":"asdf",
-            }
-            ,
-            {
+            time_model.time_start = time['date'] + "T" + time['start']
+            time_model.time_end = time['date'] + "T" + time['end']
+            time_model.number = time['number']
+            time_model.club = club
+            time_model.save()
             
-            }
-        ]
-        """
-
-        times.time_start = datetime.fromisoformat(post_data.get('date') + " " + post_data.get('start')) # 면접 시작 시간
-        times.time_end = datetime.fromisoformat(post_data.get('date') + " " + post_data.get('start')) # 면접 종료 시간
-        times.number = int(post_data.get('number')) # 면접 정원
-
         club.save()
 
     data['club'] = club

@@ -64,6 +64,5 @@ class ClubModel(models.Model):
 
     # 2차 면접 시간 데이터 - TimeModel 에서 동기화
     # 모델명 문자열로 써도 ㄱㅊ - circular import 피하려고 이렇게 해둔거
-    times = models.ManyToManyField('form.TimeModel', related_name='times+', blank=True)
 
     # time_data = models.JSONField(encoder=json.JSONEncoder, decoder=json.JSONDecoder, default=list)

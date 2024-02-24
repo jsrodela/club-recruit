@@ -63,6 +63,7 @@ class TimeModel(models.Model):
     number = models.IntegerField(default=10)  # 시간당 면접 정원
 
     form = models.ForeignKey(FormModel, related_name='time_form+', on_delete=models.SET_NULL, null=True, blank=True)
+    club = models.ForeignKey(ClubModel, related_name='time_club+', on_delete=models.SET_NULL, null=True)
 
     # 2차 면접 시간 데이터
     # time_data = models.JSONField(encoder=json.JSONEncoder, decoder=json.JSONDecoder, default=list)

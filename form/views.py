@@ -170,24 +170,22 @@ def time(request, clubname):
 
     if request.POST: # timemodel 대응 수정 중
         time_value = request.POST.get('time_value')
-        club_time = club.times.all()
-        
+        club_time = TimeModel.objects.get(club=club, time_start=time_value.time_start)
         # print(time_value)
         if club_time.current >= club_time.number:
             data['alert'] = '정원이 꽉 찼습니다. 다른 시간을 선택해주세요.'
             return render(request, 'form/time.html', data)
         else:
             apply.time_data = time_value
-            time_model = ClubModel.objects.get(code=club.code)
-            time_model.count += 1
-            time_model.form = apply
+            club_time.form = apply
+            club_time.count += 1
             apply.save()
-            club.save()
+            club_time.save()
             return redirect('/')
 
         data['alert'] = '오류가 발생했습니다. 오류가 지속되면 문의하기를 눌러 알려주세요.'
 
-    time_data = club.times.all()
+    time_data = TimeModel.objects.filter(club=club)
     # prev_date = ''
     lst = []
     times = []
