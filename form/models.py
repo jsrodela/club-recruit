@@ -25,11 +25,14 @@ class FormModel(models.Model):
 
     archive = models.BooleanField(default=False)
 
-    RESULTS = [('W', 'WAIT'), ('P', 'PASS'), ('F', 'FAIL'), ('A', 'ADDITION_PASS')]
-
+    # 추가합격은 additional, 추가모집은 extra라 명명합시다.
+    # GIVE_UP은 '입부 포기'입니다.
+    RESULTS = [('W', 'WAIT'), ('P', 'PASS'), ('F', 'FAIL'), ('A', 'ADDITIONAL_PASS'), ('G', 'GIVE_UP')]
     first_result = models.CharField(max_length=1, choices=RESULTS, default='W')
     second_result = models.CharField(max_length=1, choices=RESULTS, default='W')
-    additional_result = models.CharField(max_length=1, choices=RESULTS, default='W')
+
+    # 추가모집 지원서일 경우 - 추가모집 결과는 SECOND_RESULT에 저장
+    is_extra = models.BooleanField(default=False)
     # time = models.CharField(max_length=100, default='', blank=True)
 
     time_data = models.DateTimeField(null=True, blank=True)

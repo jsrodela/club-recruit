@@ -66,3 +66,6 @@ class ClubModel(models.Model):
     # 모델명 문자열로 써도 ㄱㅊ - circular import 피하려고 이렇게 해둔거
 
     # time_data = models.JSONField(encoder=json.JSONEncoder, decoder=json.JSONDecoder, default=list)
+
+    # 모집 종료
+    end = models.BooleanField(default=False)
