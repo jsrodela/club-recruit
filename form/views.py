@@ -9,6 +9,7 @@ from account.models import User
 from .form_data import form_data
 from .models import FormModel, TimeModel
 from django.http import HttpResponse
+from datetime import datetime, timedelta
 
 
 # 지원서 제출
@@ -168,17 +169,18 @@ def time(request, clubname):
         data['error'] = '이미 면접 시간을 선택했어요. 변경을 원하시면 면접시간 취소하기를 이용해 주세요'
         return render(request, 'form/time.html', data)
 
-    if request.POST: # timemodel 대응 수정 중
+    if request.POST:
         time_value = request.POST.get('time_value')
         time_date = time_value[0:2] + '-' + time_value[3:5]
         time_start = time_value[6:11]
-        club_time = TimeModel.objects.get(club=club, time_start=time_date+"T"+time_start)
+        # print(str(datetime.today().year)+"-"+time_date+" "+time_start)
+        club_time = TimeModel.objects.get(club=club, time_start=str(datetime.today().year)+"-"+time_date+" "+time_start)
         # print(time_value)
         if club_time.current >= club_time.number:
             data['alert'] = '정원이 꽉 찼습니다. 다른 시간을 선택해주세요.'
             return render(request, 'form/time.html', data)
         else:
-            apply.time_data = time_value
+            apply.time_data = str(datetime.today().year)+"-"+time_date+" "+time_start
             club_time.form = apply
             club_time.current += 1
             apply.save()
@@ -191,93 +193,43 @@ def time(request, clubname):
     # prev_date = ''
     lst = []
     times = []
+    first_date = True
+    chkdate = ""
     for obj in time_data:
-        # print(obj)
-        times.append({
-            'start': obj.time_start.strftime('%H/%M'),
-            'end': obj.time_end.strftime('%H/%M'),
+        if first_date:
+            chkdate = obj.time_start.strftime('%m/%d')
+            first_date = False
+        times.append({ # KST 보정 적용
+            'start': (obj.time_start+timedelta(hours=9)).strftime('%H:%M'),
+            'end': (obj.time_end+timedelta(hours=9)).strftime('%H:%M'),
             'number': obj.number,
             'current': obj.current
         })
-    lst.append({
-        'date': obj.time_start.strftime('%m/%d'),
-        'times': times
-    })
-    '''if obj.time != prev_date:
-            if times:
-                lst.append({
-                    'date': prev_date[5:7] + "/" + prev_date[8:10],
-                    'times': times
-                })
-            prev_date = obj['date']
+        if chkdate != obj.time_start.strftime('%m/%d'):
+            lst.append({
+                'date': obj.time_start.strftime('%m/%d'),
+                'times': times
+            })
+            chkdate = obj.time_start.strftime('%m/%d')
             times = []
-        times.append({
-            'start': obj['start'],
-            'end': obj['end'],
-            'number': obj['number'],
-            'current': obj['current'],
-        })
-    if times:
-        lst.append({
-            'date': prev_date[5:7] + "/" + prev_date[8:10],
-            'times': times
-        })'''
+    lst.append({
+                'date': obj.time_start.strftime('%m/%d'),
+                'times': times
+            })
 
     data['time_data'] = lst
     data['club'] = club
     return render(request, 'form/time.html', data)
 
-
-def cancel(request, clubname): # 미완성임, Timemode 대응 수정 중
+def cancel(request, clubname):
     data = get_data(request)
-
-    if 'user' not in data:
-        data['error'] = '로그인 후 면접 시간을 취소할 수 있습니다.'
-        return render(request, 'form/time.html', data)
-
-    user = data['user']
-
-    try:
-        apply = FormModel.objects.get(number=user.id, club=clubname, archive=False, first_result='P')
-    except FormModel.DoesNotExist:
-        data['error'] = '이 동아리에 합격하지 못했습니다.'
-        return render(request, 'form/time.html', data)
-
-    club = apply.club
-
-    if club.time_start > timezone.localtime():
-        data['error'] = '아직 면접시간 선택이 시작되지 않았어요.'
-        return render(request, 'form/time.html', data)
-
-    if request.POST:
-        cancel_value = request.POST.get('cancel_value')
-        # print(time_value)
-        time_model = ClubModel.objects.get(code=club.code)
-        time_model.count -= 1
-        time_model.form.delete()
-        apply.save()
-        club.save()
-        return redirect('/')
-
-        data['alert'] = '오류가 발생했습니다. 오류가 지속되면 문의하기를 눌러 알려주세요.'
-
-    time_data = apply.time_data
-    # prev_date = ''
-    lst = []
-    times = []
-    for obj in time_data:
-        # print(obj)
-        times.append({
-            'start': time_data.time_start.strftime('%H/%M'),
-            'end': time_data.time_end.strftime('%H/%M'),
-            'number': time_data.number,
-            'current': time_data.current
-        })
-    lst.append({
-        'date': time_data.time_start.strftime('%m/%d'),
-        'times': times
-    })
-
-    data['time_data'] = lst
-    data['club'] = club
-    return render(request, 'form/cancel.html', data)
+    user_id = data['user'].id
+    club = ClubModel.objects.get(name=clubname)
+    form = FormModel.objects.get(number=user_id, club=club, archive=False)
+    time = TimeModel.objects.get(form=form, club=club)
+    form.time_data = None
+    time.form = None
+    time.current-=1
+    form.save()
+    time.save()
+    return redirect('/')

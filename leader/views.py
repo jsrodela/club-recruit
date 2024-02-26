@@ -159,15 +159,18 @@ def time_config(request): # timemodel 대응 수정 필요
 
         for time in json.loads(post_data.get('time_data')):
             time_model = TimeModel()
-            time_model.time_start = time['date'] + "T" + time['start']
-            time_model.time_end = time['date'] + "T" + time['end']
+            time_model.time_start = time['date'] + " " + time['start'] + "+09:00"
+            time_model.time_end = time['date'] + " " + time['end'] + "+09:00"
             time_model.number = time['number']
             time_model.club = club
+            print(time_model.time_start)
             time_model.save()
             
         club.save()
 
     data['club'] = club
+    time_exists = TimeModel.objects.filter(club=club)
+    data['time_exists'] = time_exists
     # data['time_start'] = club.times.all().time_start.astimezone(pytz.timezone('Asia/Seoul')).strftime("%Y-%m-%dT%H:%M")
     return render(request, "leader/time_config.html", data)
 

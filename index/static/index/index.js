@@ -50,6 +50,13 @@ function change_banner() {
     //setTimeout(function() {$("#banner").load(location.href + " #banner");}, 1000)
 }
 
+function CancelAlert(club_code) {
+    if (!confirm("정말로 면접시간 선택을 취소하시겠어요?")) {
+        return false
+    }
+    location.href = '/form/cancel/' + club_code
+}
+
 current_banner = get_random_banner();
 current_banner.style = 'display: block;'
 

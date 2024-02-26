@@ -27,20 +27,16 @@
         <table id="viewTable">
             <thead>
                 <tr>
-                    <th>#</th>
-                    <th>날짜</th>
                     <th>시작</th>
                     <th>종료</th>
                     <th>인원</th>
                 </tr>
             </thead>
             <tbody>
-                {% for time in club.time_data %}
+                {% for time in time_exists %}
                     <tr>
-                        <td>.</td>
-                        <td>{{ time.date }}</td>
-                        <td>{{ time.start }}</td>
-                        <td>{{ time.end }}</td>
+                        <td>{{ time.time_start }}</td>
+                        <td>{{ time.time_end }}</td>
                         <td>{{ time.number }}</td>
                     </tr>
                 {% endfor %}

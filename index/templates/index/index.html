@@ -69,14 +69,13 @@
                 <div class="submits">
                     {% for form in forms %}
                         {% if form.first_result == 'P' %}
-
                             <div class="submit">
                                 <h3>{{ form.club.name }}</h3>
                                 {% if form.club.time_use %}
-                                    {% if form.time %}
-                                        <-- 시간 취소 기능 추가 ->
-                                        <button style="color: red;" onclick="return changeNav('club_{{ form.club.code }}', '/form/cancel/{{ form.club.code }}')";>시간 취소하기</button>
-                                        <p>{{ form.time }}</p>
+                                    {% if form.time_data %}
+                                        <!-- 시간 취소 기능 추가 -->
+                                        <button style="color: red;" onclick="CancelAlert('{{ form.club.name }}')">시간 취소하기</button>
+                                        <p>{{ form.time_data }}</p>
                                     {% else %}
                                         <button style="color: green;" onclick="return changeNav('club_{{ form.club.code }}', '/form/time/{{ form.club.code }}')";>시간 선택하기</button>
                                     {% endif %}
@@ -87,7 +86,6 @@
                         {% endif %}
                     {% endfor %}
                 </div>
-                <p class="infotext">1차 서류지원 진행중</p>
 <!--            <p style="color: grey; text-align: center;">1차 합격된 동아리에서 면접 안내 문자를 받지 못했다면, 해당 동아리에 문의해보세요.</p>-->
             </div>
 
