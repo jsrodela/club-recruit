@@ -10,3 +10,4 @@ __pycache__/
 .DS_Store
 db2.sqlite3
 db3.sqlite3
+/media
