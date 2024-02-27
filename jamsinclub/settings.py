@@ -136,6 +136,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+if not os.path.exists(BASE_DIR / 'logs'):
+    os.makedirs(BASE_DIR / 'logs')
 
 # https://stackoverflow.com/questions/21943962/how-to-see-details-of-django-errors-with-gunicorn
 LOGGING = {
@@ -153,7 +155,10 @@ LOGGING = {
         'django.server': {
             '()': 'django.utils.log.ServerFormatter',
             'format': '[%(server_time)s] %(message)s',
-        }
+        },
+        'standard': {
+            'format': '%(asctime)s [%(levelname)s] %(name)s: %(message)s'
+        },
     },
     'handlers': {
         'console': {
@@ -178,10 +183,28 @@ LOGGING = {
         #     'filters': ['require_debug_false'],
         #     'class': 'django.utils.log.AdminEmailHandler'
         # }
+        'file': {
+            'level': 'INFO',
+            'filters': ['require_debug_false'],
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': BASE_DIR / 'logs/general.log',
+            'maxBytes': 1024*1024*5,  # 5 MB
+            'backupCount': 100,
+            'formatter': 'standard',
+        },
+        'file_debug': {
+            'level': 'DEBUG',
+            'filters': ['require_debug_true'],
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': BASE_DIR / 'logs/debug.log',
+            'maxBytes': 1024*1024*5,  # 5 MB
+            'backupCount': 5,
+            'formatter': 'standard',
+        }
     },
     'loggers': {
         'django': {
-            'handlers': ['console', 'console_on_not_debug'],
+            'handlers': ['console', 'console_on_not_debug', 'file'],
             'level': 'INFO',
         },
         'django.server': {
@@ -189,5 +212,10 @@ LOGGING = {
             'level': 'INFO',
             'propagate': False,
         },
+        '': {
+            'handlers': ['file', 'file_debug'],
+            'level': 'INFO',
+            'propagate': False
+        }
     }
 }

@@ -11,3 +11,4 @@ __pycache__/
 db2.sqlite3
 db3.sqlite3
 /media
+/logs

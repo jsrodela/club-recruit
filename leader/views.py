@@ -369,3 +369,6 @@ def second_result_check_user(request):
             }))
 
     return redirect('/')
+
+
+# @TODO: Add log

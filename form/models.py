@@ -68,6 +68,10 @@ class TimeModel(models.Model):
     form = models.ForeignKey(FormModel, related_name='time_form+', on_delete=models.SET_NULL, null=True, blank=True)
     club = models.ForeignKey(ClubModel, related_name='time_club+', on_delete=models.SET_NULL, null=True)
 
+    # @TODO: 생각해보니 하나의 TimeModel에 여러 FormModel이 연결될 수 있음. ManyToMany로 바꿔야 할듯.
+    # 그리고 FormModel에서 time_data 없애고, ManyToManyField의 related_name 속성 이용해서 연결하기.
+    # 이왕 하는김에 다른 데이터들도 related_name으로 다 바꿔두면 좋은...데 시간이 없넹ㅎ
+
     # 2차 면접 시간 데이터
     # time_data = models.JSONField(encoder=json.JSONEncoder, decoder=json.JSONDecoder, default=list)
 

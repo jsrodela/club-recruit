@@ -1,4 +1,5 @@
 import json
+import logging
 
 from django.shortcuts import render, redirect
 from django.utils import timezone
@@ -10,6 +11,8 @@ from .form_data import form_data
 from .models import FormModel, TimeModel
 from django.http import HttpResponse
 from datetime import datetime, timedelta
+
+logger = logging.getLogger(__name__)
 
 
 # 지원서 제출
@@ -28,27 +31,23 @@ def form(request, clubname):
     now = timezone.localtime()
     if now < club_model.form_start or club_model.form_end < now:
         data['error'] = "지원서 제출 기간이 아닙니다."
+        if request.POST:
+            logger.warning(f"User {data['user'].id} tried to submit form to '{clubname}' after valid time; "
+                           f"Form Data: {dict(request.POST)}")
         return render(request, 'form/form.html', data)
 
     if request.POST:
         submit = []
         user_id = data['user'].id
 
-        print(request.POST)
-
         submit_data = dict(request.POST)
-
         for key in submit_data:
-
-            print(key)
 
             if key == 'csrfmiddlewaretoken':  # ignore csrf token
                 continue
 
             answer = submit_data[key]  # ["answer"]
-            print('answer is ', answer)
             if len(answer) == 1:
-                print(answer, 'is', answer[0])
                 answer = answer[0]  # "answer"
 
             submit.append({
@@ -56,8 +55,9 @@ def form(request, clubname):
                 "answer": answer
             })
 
-        print(submit)
-        FormModel(number=user_id, club=ClubModel.objects.get(code=clubname), section=submit).save()
+        form_model = FormModel(number=user_id, club=ClubModel.objects.get(code=clubname), section=submit)
+        form_model.save()
+        logger.info(f"User {user_id} submitted form to '{clubname}': this is #{form_model.pk}")
         return redirect('/')
 
     data['clubname'] = clubname
@@ -80,6 +80,7 @@ def club(request, clubname):
         form_submit = FormModel.objects.get(number=user_id, club=clubname, archive=False)
     except FormModel.DoesNotExist:
         data['error'] = "지원서를 찾을 수 없습니다."
+        logger.error(f"User {user_id} failed to find its form to '{clubname}'")
         return render(request, 'form/form.html', data)
 
     if request.POST:
@@ -95,6 +96,7 @@ def club(request, clubname):
             submit = FormModel.objects.get(number=user_id, club=clubname, archive=False)
             submit.archive = True
             submit.save()
+            logger.info(f"User {user_id} archived its form #{submit.pk}, which is to '{clubname}'")
             return redirect('/')
 
     data['submit'] = json.dumps(form_submit.section)
@@ -127,9 +129,11 @@ def leader_view(request, form_id):
         form_submit = FormModel.objects.get(id=form_id, archive=False)
     except FormModel.DoesNotExist:
         data['error'] = '지원서를 찾을 수 없습니다.'
+        logger.error(f"Leader/member {user.id} failed to find form #{form_id}")
         return render(request, 'form/form.html', data)
 
     if form_submit.club != leader_club:
+        logger.warning(f"User {user.id} falsely tried to open form #{form_id}.")
         return redirect('/')
 
     data['submit_id'] = form_submit.id
@@ -142,6 +146,7 @@ def leader_view(request, form_id):
     # data['form_data'] = form_data
 
     return render(request, 'form/form.html', data)
+
 
 # 면접 시간 선택
 def time(request, clubname):
@@ -157,16 +162,18 @@ def time(request, clubname):
         apply = FormModel.objects.get(number=user.id, club=clubname, archive=False, first_result='P')
     except FormModel.DoesNotExist:
         data['error'] = '이 동아리에 합격하지 못했습니다.'
+        logger.warning(f"From time selection page, cannot find PASSED form of {user.id} from '{clubname}'")
         return render(request, 'form/time.html', data)
 
-    club = apply.club
+    apply_club = apply.club
 
-    if club.time_start > timezone.localtime():
+    if apply_club.time_start > timezone.localtime():
         data['error'] = '아직 면접시간 선택이 시작되지 않았어요.'
         return render(request, 'form/time.html', data)
 
     if apply.time_data:
         data['error'] = '이미 면접 시간을 선택했어요. 변경을 원하시면 면접시간 취소하기를 이용해 주세요'
+        logger.warning(f'User {user.id} tried to RE-select time of form #{apply}')
         return render(request, 'form/time.html', data)
 
     if request.POST:
@@ -174,22 +181,25 @@ def time(request, clubname):
         time_date = time_value[0:2] + '-' + time_value[3:5]
         time_start = time_value[6:11]
         # print(str(datetime.today().year)+"-"+time_date+" "+time_start)
-        club_time = TimeModel.objects.get(club=club, time_start=str(datetime.today().year)+"-"+time_date+" "+time_start)
+        club_time = TimeModel.objects.get(club=apply_club,
+                                          time_start=str(datetime.today().year) + "-" + time_date + " " + time_start)
         # print(time_value)
         if club_time.current >= club_time.number:
             data['alert'] = '정원이 꽉 찼습니다. 다른 시간을 선택해주세요.'
-            return render(request, 'form/time.html', data)
+            logger.info(
+                f"User {user.id} tried to select time #{club_time.pk} which is full ({club_time.current}/{club_time.number})")
+            # return render(request, 'form/time.html', data)
         else:
-            apply.time_data = str(datetime.today().year)+"-"+time_date+" "+time_start
+            apply.time_data = str(datetime.today().year) + "-" + time_date + " " + time_start
             club_time.form = apply
             club_time.current += 1
             apply.save()
             club_time.save()
+            logger.info(
+                f"User {user.id} selected time #{club_time.pk} of form #{apply.pk}. The time data is '{apply.time_data}'")
             return redirect('/')
 
-        data['alert'] = '오류가 발생했습니다. 오류가 지속되면 문의하기를 눌러 알려주세요.'
-
-    time_data = TimeModel.objects.filter(club=club)
+    time_data = TimeModel.objects.filter(club=apply_club)
     # prev_date = ''
     lst = []
     times = []
@@ -199,9 +209,9 @@ def time(request, clubname):
         if first_date:
             chkdate = obj.time_start.strftime('%m/%d')
             first_date = False
-        times.append({ # KST 보정 적용
-            'start': (obj.time_start+timedelta(hours=9)).strftime('%H:%M'),
-            'end': (obj.time_end+timedelta(hours=9)).strftime('%H:%M'),
+        times.append({  # KST 보정 적용
+            'start': (obj.time_start + timedelta(hours=9)).strftime('%H:%M'),
+            'end': (obj.time_end + timedelta(hours=9)).strftime('%H:%M'),
             'number': obj.number,
             'current': obj.current
         })
@@ -213,23 +223,42 @@ def time(request, clubname):
             chkdate = obj.time_start.strftime('%m/%d')
             times = []
     lst.append({
-                'date': obj.time_start.strftime('%m/%d'),
-                'times': times
-            })
+        'date': obj.time_start.strftime('%m/%d'),
+        'times': times
+    })
 
     data['time_data'] = lst
-    data['club'] = club
+    data['club'] = apply_club
     return render(request, 'form/time.html', data)
+
 
 def cancel(request, clubname):
     data = get_data(request)
     user_id = data['user'].id
-    club = ClubModel.objects.get(name=clubname)
-    form = FormModel.objects.get(number=user_id, club=club, archive=False)
-    time = TimeModel.objects.get(form=form, club=club)
-    form.time_data = None
-    time.form = None
-    time.current-=1
-    form.save()
-    time.save()
+    apply_club = ClubModel.objects.get(name=clubname)
+
+    try:
+        apply = FormModel.objects.get(number=user_id, club=apply_club, archive=False, first_result='P')
+    except FormModel.DoesNotExist:
+        logger.warning(f"From time cancel page, cannot find form of {user_id} from '{clubname}'")
+        return redirect('/')
+
+    if apply.time_data is None or not apply.time_data:  # 시간 데이터 없다면
+        logger.warning(f"From time cancel page, no time selection at form #{apply.pk}")
+        return redirect('/')
+
+    try:
+        apply_time = TimeModel.objects.get(form=apply, club=apply_club)
+    except TimeModel.DoesNotExist:
+        logger.warning(f"From time cancel page, cannot find TimeModel which is related to #{apply.pk}. "
+                       f"The form has time_data of '{apply.time_data}'")
+        return redirect('/')
+
+    apply.time_data = None
+    apply_time.form = None
+    apply_time.current -= 1
+    apply.save()
+    apply_time.save()
+
+    logger.info(f"User {user_id} cancelled time #{apply_time.pk} of form #{apply.pk}")
     return redirect('/')

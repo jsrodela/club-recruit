@@ -1,3 +1,4 @@
+import logging
 import random
 
 from django.shortcuts import render
@@ -7,6 +8,8 @@ from account.base import get_data
 from form.models import FormModel
 from index.models import StatusModel
 
+
+logger = logging.getLogger(__name__)
 
 def index(request):
     data = get_data(request)
