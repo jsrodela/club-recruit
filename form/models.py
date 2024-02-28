@@ -65,7 +65,7 @@ class TimeModel(models.Model):
     current = models.IntegerField(default=0)  # 현재 면접 예약 인원수
     number = models.IntegerField(default=10)  # 시간당 면접 정원
 
-    form = models.ForeignKey(FormModel, related_name='time_form+', on_delete=models.SET_NULL, null=True, blank=True)
+    form = models.ManyToManyField('FormModel', related_name='time_form+', through='FormtoTime' ,blank=True)
     club = models.ForeignKey(ClubModel, related_name='time_club+', on_delete=models.SET_NULL, null=True)
 
     # @TODO: 생각해보니 하나의 TimeModel에 여러 FormModel이 연결될 수 있음. ManyToMany로 바꿔야 할듯.
@@ -76,3 +76,7 @@ class TimeModel(models.Model):
     # time_data = models.JSONField(encoder=json.JSONEncoder, decoder=json.JSONDecoder, default=list)
 
     # clubmodel 은 timemodel, timemodel 은 formmodel 참조
+
+class FormtoTime(models.Model):
+    form = models.ForeignKey(FormModel, on_delete=models.SET_NULL, null=True, blank=True)
+    time = models.ForeignKey(TimeModel, on_delete=models.SET_NULL, null=True, blank=True)

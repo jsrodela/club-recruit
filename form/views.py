@@ -191,7 +191,7 @@ def time(request, clubname):
             # return render(request, 'form/time.html', data)
         else:
             apply.time_data = str(datetime.today().year) + "-" + time_date + " " + time_start
-            club_time.form = apply
+            club_time.form.set([apply])
             club_time.current += 1
             apply.save()
             club_time.save()
@@ -255,7 +255,7 @@ def cancel(request, clubname):
         return redirect('/')
 
     apply.time_data = None
-    apply_time.form = None
+    apply_time.form.set([None])
     apply_time.current -= 1
     apply.save()
     apply_time.save()
