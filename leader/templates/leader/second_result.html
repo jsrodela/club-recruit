@@ -18,15 +18,15 @@
         <p>이 페이지는 <b>동아리 부장</b>만 접근 가능합니다.<br>대상자를 모두 입력한 후, 맨 아래의 '최종 등록하기' 버튼을 눌러야 합격자 등록이 완료됩니다.</p>
         <hr>
 
-        <h2>면접 합격자 명단 작성</h2>
+        <h2>1학년 합격자 명단 작성</h2>
         <p>정확한 확인을 위해, 대상자의 학번과 이름을 직접 입력한 후 '등록' 버튼을 눌러주세요.</p>
-        <form id="init_form">
-            <input type="number" id="init_user_id" placeholder="학번">
-            <input type="text" id="init_user_name" placeholder="이름">
-            <input type="submit" id="init_submit" value="등록">
+        <form id="pass1_form">
+            <input type="number" id="pass1_user_id" placeholder="학번">
+            <input type="text" id="pass1_user_name" placeholder="이름">
+            <input type="submit" id="pass1_submit" value="등록">
         </form>
         <br>
-        <table id="init_table">
+        <table id="pass1_table">
             <thead>
                 <tr>
                     <th>학번</th>
@@ -35,21 +35,43 @@
                     <th>취소</th>
                 </tr>
             </thead>
-            <tbody id="init_tbody"></tbody>
+            <tbody id="pass1_tbody"></tbody>
+        </table>
+
+        <br><hr>
+
+        <h2>2학년 합격자 명단 작성</h2>
+        <p>정확한 확인을 위해, 대상자의 학번과 이름을 직접 입력한 후 '등록' 버튼을 눌러주세요.</p>
+        <form id="pass2_form">
+            <input type="number" id="pass2_user_id" placeholder="학번">
+            <input type="text" id="pass2_user_name" placeholder="이름">
+            <input type="submit" id="pass2_submit" value="등록">
+        </form>
+        <br>
+        <table id="pass2_table">
+            <thead>
+                <tr>
+                    <th>학번</th>
+                    <th>이름</th>
+                    <th>지원서</th>
+                    <th>취소</th>
+                </tr>
+            </thead>
+            <tbody id="pass2_tbody"></tbody>
         </table>
 
         <br><hr>
 
         <h2>1학년 추가합격 대상자 작성</h2>
         <p>1학년 추가합격 대상자를 순위와 함께 입력해주세요. 순위는 1번부터 차례대로 입력해주세요.</p>
-        <form id="first_form">
-            <input type="number" id="first_rank" placeholder="순위" value="1">
-            <input type="number" id="first_user_id" placeholder="학번">
-            <input type="text" id="first_user_name" placeholder="이름">
-            <input type="submit" id="first_submit" value="등록">
+        <form id="add1_form">
+            <input type="number" id="add1_rank" placeholder="순위" value="1">
+            <input type="number" id="add1_user_id" placeholder="학번">
+            <input type="text" id="add1_user_name" placeholder="이름">
+            <input type="submit" id="add1_submit" value="등록">
         </form>
         <br>
-        <table id="first_table">
+        <table id="add1_table">
             <thead>
                 <tr>
                     <th>순위</th>
@@ -59,21 +81,21 @@
                     <th>취소</th>
                 </tr>
             </thead>
-            <tbody id="first_tbody"></tbody>
+            <tbody id="add1_tbody"></tbody>
         </table>
 
         <br><hr>
 
         <h2>2학년 추가합격 대상자 작성</h2>
         <p>2학년 추가합격 대상자를 순위와 함께 입력해주세요. 순위는 1번부터 차례대로 입력해주세요.</p>
-        <form id="second_form">
-            <input type="number" id="second_rank" placeholder="순위" value="1">
-            <input type="number" id="second_user_id" placeholder="학번">
-            <input type="text" id="second_user_name" placeholder="이름">
-            <input type="submit" id="second_submit" value="등록">
+        <form id="add2_form">
+            <input type="number" id="add2_rank" placeholder="순위" value="1">
+            <input type="number" id="add2_user_id" placeholder="학번">
+            <input type="text" id="add2_user_name" placeholder="이름">
+            <input type="submit" id="add2_submit" value="등록">
         </form>
         <br>
-        <table id="second_table">
+        <table id="add2_table">
             <thead>
                 <tr>
                     <th>순위</th>
@@ -83,16 +105,14 @@
                     <th>취소</th>
                 </tr>
             </thead>
-            <tbody id="second_tbody"></tbody>
+            <tbody id="add2_tbody"></tbody>
         </table>
 
         <br><hr>
 
         <form id="send" method="post">
             {% csrf_token %}
-            <input type="hidden" name="passes">
-            <input type="hidden" name="add_first">
-            <input type="hidden" name="add_second">
+            <input type="hidden" name="result_data">
             <input type="submit" onclick="return send_submit();" value="최종 등록하기">
         </form>
     </div>

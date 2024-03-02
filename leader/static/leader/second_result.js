@@ -1,5 +1,5 @@
 
-let titles = ['init', 'first', 'second'];
+let titles = ['pass1', 'pass2', 'add1', 'add2'];
 
 for (let title of titles) {
     let form = document.getElementById(title + '_form');
@@ -67,7 +67,7 @@ function check_tables(number) {
     for (let title of titles) {
         let table = document.getElementById(title + '_table');
         for (let row of table.rows) {
-            if (title == 'init') {
+            if (title.includes('pass')) {
                 let val = row.cells[0].innerHTML;
                 if (number == val) return true;
             }
@@ -121,42 +121,34 @@ function sort_table(table) {
 
 function send_submit() {
 
-    let passes = collect_datas('init');
-    let add_first = collect_datas('first');
-    let add_second = collect_datas('second');
+    let data = [];
+    for (let title of titles) {
+        data.push(collect_datas(title));
+    }
 
-    if (!passes.length) {
+    if (!data[0].length) {
         alert('합격자 명단이 입력되지 않았습니다.');
         return false;
     }
 
-    let msg = "※ 확인 버튼을 누르고 난 뒤에는 명단을 수정할 수 없습니다. 명단을 다시 한 번 정확히 확인하세요.\n\n";
+    let msg = "※ 확인 버튼을 누르고 난 뒤에는 명단을 수정할 수 없습니다. 명단을 다시 한 번 정확히 확인하세요.\n";
 
-    msg += '● 최초 합격자: ' + passes.length + '명\n'
-    for (let obj of passes) {
-        msg += `- ${obj['user_id']} ${obj['user_name']}\n`;
-    }
 
-    msg += '\n● 1학년 추가합격 명단 (순위순): ' + add_first.length + '명\n'
-    for (let obj of add_first) {
-        msg += `- ${obj['user_id']} ${obj['user_name']}\n`;
-    }
+    for (let i=0;i<4;i++) {
+        if (i <= 1) msg += '\n● ' + (i+1) + '학년 합격자: ' + data[i].length + '명\n'
+        else msg += '\n● ' + (i-1) + '학년 추가합격 명단 (순위순): ' + data[i].length + '명\n'
 
-    msg += '\n● 2학년 추가합격 명단 (순위순): ' + add_second.length + '명\n'
-    for (let obj of add_second) {
-        msg += `- ${obj['user_id']} ${obj['user_name']}\n`;
+        for (let obj of data[i]) {
+            msg += `- ${obj['user_id']} ${obj['user_name']}\n`;
+        }
     }
 
     msg += '\n위 명단이 확실한가요?\n명단에 오류가 있다면 취소 버튼을 누른 뒤 수정해주세요.\n확인 버튼을 누르고 난 뒤에는 명단을 수정할 수 없습니다.\n명단을 확정하려면 확인 버튼을 눌러주세요.'
 
     if (!confirm(msg)) return false;
-    console.log(passes, add_first, add_second);
 
-    let lst = [['passes', passes], ['add_first', add_first], ['add_second', add_second]];
-    for (let obj of lst) {
-        let element = document.querySelector(`input[name=${obj[0]}]`)
-        element.value = JSON.stringify(obj[1]);
-    }
+    console.log(data);
+    document.querySelector('input[name="result_data"]').value = JSON.stringify(data);
 
     return true;
 }

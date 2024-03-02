@@ -155,7 +155,7 @@ def time_config(request): # timemodel 대응 수정 필요
         # print(request.POST)
         post_data = request.POST
         club.time_use = True
-        club.time_start = post_data.get('time_activate') # 면접 시간 선택 오픈
+        club.time_start = make_aware(datetime.fromisoformat(post_data.get('time_activate')))  # 면접 시간 선택 오픈
 
         for time in json.loads(post_data.get('time_data')):
             time_model = TimeModel()
@@ -317,14 +317,29 @@ def second_result(request):
     if 'user' not in data or data['user'].leader_of is None:
         return redirect('/')
 
-    if request.POST:
-        passes = request.POST.get('passes')
-        add_first = request.POST.get('add_first')
-        add_second = request.POST.get('add_second')
-        print(passes, add_first, add_second)
-        # @TODO: JS에서 passes 1,2학년 나눠서 인원수 세기
+    club = data['user'].leader_of
 
-    data['club'] = data['user'].leader_of
+    if request.POST:
+        result_data = request.POST.get('result_data')
+        print(result_data)
+
+        for pass_user in result_data[0] + result_data[1]:
+            user_id = pass_user['user_id']
+            form = FormModel.objects.get(number=user_id, club=club, first_result='P', archive=False)
+            form.second_result = 'P'
+            form.save()
+
+        # @TODO: 추가합격 form 처리, 동아리별 최대 추합 인원 저장
+
+        for fail_user in result_data[2] + result_data[3]:
+            user_id = fail_user['user_id']
+            form = FormModel.objects.get(number=user_id, club=club, first_result='P', archive=False)
+            form.second_result = 'F'
+            form.save()
+
+        return redirect('/')
+
+    data['club'] = club
     return render(request, 'leader/second_result.html', data)
 
 
@@ -339,7 +354,6 @@ def second_result_check_user(request):
     club = data['user'].leader_of
 
     if request.method == 'POST':
-        print(request.body)
         body = json.loads(request.body)
         user_id = body['user_id']
         user_name = body['user_name']

@@ -64,7 +64,7 @@
                             <td>{{ form.name }}</td>
                             {% if not_done %}
                                 <td><a href="/form/leader/{{ form.id }}" target="_blank">보기</a></td>
-                                <td><input type="checkbox" name="{{ form.id }}" class="is_pass"></td>
+                                <td><input type="checkbox" name="{{ form.id }}" class="is_pass" checked></td>
                             {% else %}
                                 <td><a href="/form/leader/{{ form.id }}">보기</a></td>
                                 <td>{{ form.phone }}</td>
