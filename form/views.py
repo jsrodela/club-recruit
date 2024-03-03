@@ -217,13 +217,13 @@ def time(request, clubname):
         })
         if chkdate != (obj.time_start + timedelta(hours=9)).strftime('%m/%d'):
             lst.append({
-                'date': (obj.time_start + timedelta(hours=9)).strftime('%m/%d'),
+                'date': chkdate,
                 'times': times
             })
             chkdate = (obj.time_start + timedelta(hours=9)).strftime('%m/%d')
             times = []
     lst.append({
-        'date': (obj.time_start + timedelta(hours=9)).strftime('%m/%d'),
+        'date': chkdate,
         'times': times
     })
 
