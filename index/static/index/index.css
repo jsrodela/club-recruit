@@ -184,6 +184,7 @@ h2 {
 .status {
     font-size: 1.75rem;
     font-weight: 300;
+    cursor: pointer;
 }
 
 .current {

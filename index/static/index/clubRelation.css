@@ -10,11 +10,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 300px;
+    padding: 4rem 0 1rem 0;
     color: white;
 }
 
-.title h3 {
+.title h1 {
     text-align: center;
     font-size: 3rem;
     margin: 1rem 0.1rem;
@@ -56,6 +56,45 @@
     font-weight: 200;
     padding-bottom: 50px;
     color: white;
+}
+
+hr {
+    margin: 20px 10% 3rem 10%;
+}
+
+.period_info {
+    font-weight: 700;
+    text-align: center;
+    font-size: 2rem;
+    color: white;
+}
+
+.period {
+    text-align: center;
+    color: white;
+    h4 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin: 0;
+
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        background-image: #D3CCE3;  /* fallback for old browsers */
+        background-image: -webkit-linear-gradient(to right, #E9E4F0, #D3CCE3);  /* Chrome 10-25, Safari 5.1-6 */
+        background-image: linear-gradient(to right, #E9E4F0, #D3CCE3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    }
+    h5 {
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin: 0.5rem 0 1rem 0;
+    }
+    p {
+        font-size: 1.1rem;
+        margin: 0.5rem 0;
+    }
+    margin: 3rem 10%;
 }
 
 @-webkit-keyframes gradient {
