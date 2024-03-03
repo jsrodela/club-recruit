@@ -205,16 +205,10 @@ def time(request, clubname):
     times = []
     first_date = True
     chkdate = ""
-    for obj in time_data:
+    for obj in time_data: # KST 보정 적용
         if first_date:
             chkdate = (obj.time_start + timedelta(hours=9)).strftime('%m/%d')
             first_date = False
-        times.append({  # KST 보정 적용
-            'start': (obj.time_start + timedelta(hours=9)).strftime('%H:%M'),
-            'end': (obj.time_end + timedelta(hours=9)).strftime('%H:%M'),
-            'number': obj.number,
-            'current': obj.current
-        })
         if chkdate != (obj.time_start + timedelta(hours=9)).strftime('%m/%d'):
             lst.append({
                 'date': chkdate,
@@ -222,6 +216,12 @@ def time(request, clubname):
             })
             chkdate = (obj.time_start + timedelta(hours=9)).strftime('%m/%d')
             times = []
+        times.append({
+            'start': (obj.time_start + timedelta(hours=9)).strftime('%H:%M'),
+            'end': (obj.time_end + timedelta(hours=9)).strftime('%H:%M'),
+            'number': obj.number,
+            'current': obj.current
+        })
     lst.append({
         'date': chkdate,
         'times': times
