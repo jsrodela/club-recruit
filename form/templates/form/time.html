@@ -8,7 +8,7 @@
 
 {% block module %}
     {{ block.super }}
-    <script src="{% static 'form/time.js' %}?v=2"></script>
+    <script src="{% static 'form/time.js' %}?v=3"></script>
 {% endblock %}
 
 {% block content %}
@@ -33,7 +33,7 @@
                 <h2 class="date">{{ date.date }}</h2>
                 <div class = 'interview_time'> <!-- 시간대, 인원수 적은 상자들 묶음 -->
                     {% for time in date.times %}
-                        <button class = 'inner_it' name="{{ date.date }} {{ time.start }} ~ {{ time.end }}" onclick="return onTimeClick(this);"> <!-- it = interview_time, 상자별 구분 -->
+                        <button class = 'inner_it' name="{{ time.id }}" onclick="return onTimeClick(this, '{{ date.date }} {{ time.start }} ~ {{ time.end }}');"> <!-- it = interview_time, 상자별 구분 -->
                             <span class="date">{{ date.date }}</span> <!-- 날짜 추가 -->
                             <span class="time">{{ time.start }} ~ {{ time.end }}</span>
                             <br>
@@ -45,23 +45,9 @@
                 <hr>
             {% endfor %}
 
-<!--            {% for i in '123456789'|make_list %}-->
-<!--            <h2 class="date">3/1{{i}}</h2>-->
-<!--            <div class = 'interview_time'> &lt;!&ndash; 시간대, 인원수 적은 상자들 묶음 &ndash;&gt;-->
-<!--                {% for j in '123456789'|make_list %}-->
-<!--                    <button class = 'inner_it'> &lt;!&ndash; it = interview_time, 상자별 구분 &ndash;&gt;-->
-<!--                        <span class="time">1{{j}}:00 ~ 1{{j}}:00</span>-->
-<!--                        <br>-->
-<!--                        <span class="people">3/4명</span>-->
-<!--                    </button>-->
-<!--                {% endfor %}-->
-<!--                <br>-->
-<!--            </div>-->
-<!--            <hr>-->
-<!--            {% endfor %}-->
         </div>
         <form method="post" id="time_form">
-            <input type="hidden" name="time_value" id="time_value">
+            <input type="hidden" name="time_id" id="time_id">
             {% csrf_token %}
         </form>
     </div>

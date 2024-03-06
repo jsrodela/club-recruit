@@ -1,6 +1,7 @@
 import json
 import logging
 
+from django.db import transaction
 from django.shortcuts import render, redirect
 from django.utils import timezone
 
@@ -148,7 +149,8 @@ def leader_view(request, form_id):
     return render(request, 'form/form.html', data)
 
 
-# 면접 시간 선택
+# 면접 시간 선택: 요청 순차적으로 처리 (동기 방식)
+@transaction.atomic
 def time(request, clubname):
     data = get_data(request)
 
@@ -177,24 +179,21 @@ def time(request, clubname):
         return render(request, 'form/time.html', data)
 
     if request.POST:
-        time_value = request.POST.get('time_value')
-        time_date = time_value[0:2] + '-' + time_value[3:5]
-        time_start = time_value[6:11]
-        # print(str(datetime.today().year)+"-"+time_date+" "+time_start)
-        club_time = TimeModel.objects.get(club=apply_club,
-                                          time_start=str(datetime.today().year) + "-" + time_date + " " + time_start)
+        time_id = request.POST.get('time_id')
+        club_time = TimeModel.objects.select_for_update().get(club=apply_club, pk=time_id)
         # print(time_value)
         if club_time.current >= club_time.number:
             data['alert'] = '정원이 꽉 찼습니다. 다른 시간을 선택해주세요.'
             logger.info(
                 f"User {user.id} tried to select time #{club_time.pk} which is full ({club_time.current}/{club_time.number})")
-            # return render(request, 'form/time.html', data)
+            return render(request, 'form/time.html', data)
         else:
-            apply.time_data = str(datetime.today().year) + "-" + time_date + " " + time_start
+            apply.time_data = (club_time.time_start + timedelta(hours=9)).strftime('%Y-%m-%d %H:%M')
             club_time.form.set([apply])
             club_time.current += 1
             apply.save()
             club_time.save()
+
             logger.info(
                 f"User {user.id} selected time #{club_time.pk} of form #{apply.pk}. The time data is '{apply.time_data}'")
             return redirect('/')
@@ -205,7 +204,7 @@ def time(request, clubname):
     times = []
     first_date = True
     chkdate = ""
-    for obj in time_data: # KST 보정 적용
+    for obj in time_data:  # KST 보정 적용
         if first_date:
             chkdate = (obj.time_start + timedelta(hours=9)).strftime('%m/%d')
             first_date = False
@@ -220,7 +219,8 @@ def time(request, clubname):
             'start': (obj.time_start + timedelta(hours=9)).strftime('%H:%M'),
             'end': (obj.time_end + timedelta(hours=9)).strftime('%H:%M'),
             'number': obj.number,
-            'current': obj.current
+            'current': obj.current,
+            'id': obj.pk
         })
     lst.append({
         'date': chkdate,
