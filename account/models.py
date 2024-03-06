@@ -51,6 +51,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     leader_of = models.ForeignKey(ClubModel,  related_name='leader_of+', on_delete=models.SET_NULL, null=True, blank=True)
     member_of = models.ForeignKey(ClubModel,  related_name='member_of+', on_delete=models.SET_NULL, null=True, blank=True)
 
+    end = models.BooleanField(default=False, null=False, blank=False)
+
     username = None
     first_name = None
     last_name = None

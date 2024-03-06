@@ -26,12 +26,13 @@ class FormModel(models.Model):
     archive = models.BooleanField(default=False)
 
     # 추가합격은 additional, 추가모집은 extra라 명명합시다.
-    # GIVE_UP은 '입부 포기'입니다.
-    RESULTS = [('W', 'WAIT'), ('P', 'PASS'), ('F', 'FAIL'), ('A', 'ADDITIONAL_PASS'), ('G', 'GIVE_UP')]
+    # A = 추가합격 대상자 (대기) / V = 추가합격 대상자 (표시) / S = 동아리 입부 선택 / G = 입부 포기
+    RESULTS = [('W', 'WAIT'), ('P', 'PASS'), ('F', 'FAIL'),
+               ('A', 'ADDITIONAL_PASS'), ('V', 'ADDITIONAL_PASS_VISIBLE'), ('S', 'SELECTED'), ('G', 'GIVE_UP')]
     first_result = models.CharField(max_length=1, choices=RESULTS, default='W')
     second_result = models.CharField(max_length=1, choices=RESULTS, default='W')
 
-    # 추가모집 지원서일 경우 - 추가모집 결과는 SECOND_RESULT에 저장
+    # 추가모집 지원서일 경우 - 추가모집 결과는 FIRST_RESULT에 저장
     is_extra = models.BooleanField(default=False)
     # time = models.CharField(max_length=100, default='', blank=True)
 
@@ -65,7 +66,7 @@ class TimeModel(models.Model):
     current = models.IntegerField(default=0)  # 현재 면접 예약 인원수
     number = models.IntegerField(default=10)  # 시간당 면접 정원
 
-    form = models.ManyToManyField('FormModel', related_name='time_form+', through='FormtoTime' ,blank=True)
+    form = models.ManyToManyField('FormModel', related_name='time_form+', through='FormtoTime',blank=True)
     club = models.ForeignKey(ClubModel, related_name='time_club+', on_delete=models.SET_NULL, null=True)
 
     # @TODO: 생각해보니 하나의 TimeModel에 여러 FormModel이 연결될 수 있음. ManyToMany로 바꿔야 할듯.
