@@ -54,6 +54,10 @@
                                     <p class="pass">1차 합격</p>
                                 {% elif form.first_result == 'F' %}
                                     <p class="fail">1차 불합격</p>
+                                {% elif form.second_result == 'F' %}
+                                    <p class="fail">최초 불합격</p>
+                                {% elif form.second_result == 'P' %}
+                                    <p class="fail">최초 합격</p>
                                 {% else %}
                                     <p class="wait">1차 결과 대기중</p>
                                 {% endif %}
