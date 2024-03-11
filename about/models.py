@@ -60,7 +60,7 @@ class ClubModel(models.Model):
     time_use = models.BooleanField(default=False)
 
     # 동아리 면접 장소
-    location = models.CharField(max_length=100)
+    location = models.CharField(max_length=100, default='ex)학생회실')
 
     # 2차 면접 선택 시작 시간
     time_start = models.DateTimeField(default=now)
