@@ -141,6 +141,13 @@
         </form>
         <hr>
 
+        <form method="post">
+            <h3>동아리 면접 장소</h3>
+            <input type="text" name="location" value="{{ club.location }}">
+            <input type="submit" value="적용">
+            {% csrf_token %}
+        </form>
+
         <h2>부원 관리</h2>
         <p>동아리 부원들은 제출된 지원서를 확인하고, 면접 시간을 조회할 수 있습니다.</p>
         <ul>
