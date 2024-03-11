@@ -63,6 +63,10 @@ def club_config(request):
         if 'form_start' in submit:
             club.form_start = make_aware(datetime.fromisoformat(submit.get('form_start')))
             club.form_end = make_aware(datetime.fromisoformat(submit.get('form_end')))
+
+        if 'add_location' in submit:
+            club.location = submit.get('location')
+
         if 'member_add' in submit:
             member_id = submit.get('member_add')
             try:
@@ -127,7 +131,11 @@ def view_forms(request):
 
     lst = []
     for form in forms:
-        form_user = User.objects.get(id=form.number)
+        try:
+            form_user = User.objects.get(id=form.number)
+        except FormModel.DoesNotExist:
+            data['error'] = "데이터에 문제가 발생했어요. 로델라 부장에게 이 오류를 보고해 주세요"
+            return render(request, 'leader/view_forms.html', data)
         lst.append({
             'id': form.id,
             'number': form.number,
@@ -141,7 +149,7 @@ def view_forms(request):
     return render(request, 'leader/view_forms.html', data)
 
 
-def time_config(request): # timemodel 대응 수정 필요
+def time_config(request): # timemodel 대응 수정 완료
     data = get_data(request)
 
     if 'user' not in data or data['user'].leader_of is None:
@@ -240,7 +248,6 @@ def first_result(request):
     data['club'] = club
     return render(request, "leader/first_result.html", data)
 
-
 def every_forms(request):
     data = get_data(request)
 
@@ -270,7 +277,7 @@ def every_forms(request):
     return render(request, "leader/every_forms.html", data)
 
 
-def view_time(request): # timemodel 대응 수정 필요
+def view_time(request): # timemodel 대응 수정 완료
 
     data = get_data(request)
 
@@ -323,7 +330,7 @@ def second_result(request):
         result_data = request.POST.get('result_data')
         print(result_data)
 
-        for pass_user in result_data[0] + result_data[1]:
+        for pass_user in result_data[0] + result_data[1]: # 1학년 + 2학년
             user_id = pass_user['user_id']
             form = FormModel.objects.get(number=user_id, club=club, first_result='P', archive=False)
             form.second_result = 'P'
@@ -331,11 +338,16 @@ def second_result(request):
 
         # @TODO: 추가합격 form 처리, 동아리별 최대 추합 인원 저장
 
-        for fail_user in result_data[2] + result_data[3]:
-            user_id = fail_user['user_id']
+        for additonal_pass_user in result_data[2] + result_data[3]: 
+            user_id = additonal_pass_user['user_id']
             form = FormModel.objects.get(number=user_id, club=club, first_result='P', archive=False)
-            form.second_result = 'F'
+            form.second_result = 'A'
             form.save()
+
+        fail_form = FormModel.objects.filter(number=user_id, club=club, first_result='P', second_result='W', archive=False)
+        for fail_user in fail_form:
+            fail_user.second_result = 'F'
+            fail_user.save()
 
         return redirect('/')
 

@@ -59,6 +59,9 @@ class ClubModel(models.Model):
     # 2차 면접 시간 선택 사용 여부
     time_use = models.BooleanField(default=False)
 
+    # 동아리 면접 장소
+    location = models.CharField(max_length=100)
+
     # 2차 면접 선택 시작 시간
     time_start = models.DateTimeField(default=now)
 
