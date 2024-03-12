@@ -263,7 +263,7 @@ def cancel(request, clubname):
     logger.info(f"User {user_id} cancelled time #{apply_time.pk} of form #{apply.pk}")
     return redirect('/')
 
-def give_up(request, clubname):
+def select(request, clubname):
     data = get_data(request)
     user_id = data['user'].id
     apply_club = ClubModel.objects.get(name=clubname)
@@ -272,5 +272,5 @@ def give_up(request, clubname):
     except FormModel.DoesNotExist:
         data['error'] = '이 동아리에 합격하지 못했습니다.'
         return redirect('/')
-    form.RESULTS = 'G'
+    form.RESULTS = 'S'
     form.save()
