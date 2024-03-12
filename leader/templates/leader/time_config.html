@@ -27,6 +27,7 @@
         <table id="viewTable">
             <thead>
                 <tr>
+                    <th>#</th>
                     <th>시작</th>
                     <th>종료</th>
                     <th>인원</th>
@@ -35,6 +36,7 @@
             <tbody>
                 {% for time in time_exists %}
                     <tr>
+                        <td>{{ time.id }}</td>
                         <td>{{ time.time_start }}</td>
                         <td>{{ time.time_end }}</td>
                         <td>{{ time.number }}</td>

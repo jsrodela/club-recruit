@@ -198,7 +198,7 @@ def time(request, clubname):
                 f"User {user.id} selected time #{club_time.pk} of form #{apply.pk}. The time data is '{apply.time_data}'")
             return redirect('/')
 
-    time_data = TimeModel.objects.filter(club=apply_club)
+    time_data = TimeModel.objects.filter(club=apply_club).order_by('time_start')
     # prev_date = ''
     lst = []
     times = []
@@ -262,3 +262,15 @@ def cancel(request, clubname):
 
     logger.info(f"User {user_id} cancelled time #{apply_time.pk} of form #{apply.pk}")
     return redirect('/')
+
+def give_up(request, clubname):
+    data = get_data(request)
+    user_id = data['user'].id
+    apply_club = ClubModel.objects.get(name=clubname)
+    try:
+        form = FormModel.objects.get(number=user_id, club=apply_club)
+    except FormModel.DoesNotExist:
+        data['error'] = '이 동아리에 합격하지 못했습니다.'
+        return redirect('/')
+    form.RESULTS = 'G'
+    form.save()
