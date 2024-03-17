@@ -328,26 +328,20 @@ def second_result(request):
 
     if request.POST:
         result_data = request.POST.get('result_data')
-        print(result_data)
-
-        for pass_user in result_data[0] + result_data[1]: # 1학년 + 2학년
+        result_data = json.loads(result_data)
+        for pass_user in result_data[0] + result_data[1]:
             user_id = pass_user['user_id']
             form = FormModel.objects.get(number=user_id, club=club, first_result='P', archive=False)
             form.second_result = 'P'
             form.save()
 
-        # @TODO: 추가합격 form 처리, 동아리별 최대 추합 인원 저장
+        # @TODO: 추가합격 form 처리, 동아리별 최대 추합 인원 저장, 미선택 인원 탈락 처리
 
         for additonal_pass_user in result_data[2] + result_data[3]: 
             user_id = additonal_pass_user['user_id']
             form = FormModel.objects.get(number=user_id, club=club, first_result='P', archive=False)
             form.second_result = 'A'
             form.save()
-
-        fail_form = FormModel.objects.filter(number=user_id, club=club, first_result='P', second_result='W', archive=False)
-        for fail_user in fail_form:
-            fail_user.second_result = 'F'
-            fail_user.save()
 
         return redirect('/')
 

@@ -130,6 +130,16 @@ h2 {
     color: grey;
 }
 
+.select {
+    color: blue;
+    font-weight: 800;
+}
+
+.give_up {
+    color: grey;
+    font-weight: 600;
+}
+
 .submit button {
     padding: 0.5rem 1rem;
     white-space: nowrap;

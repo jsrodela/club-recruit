@@ -57,6 +57,16 @@ function CancelAlert(club_code) {
     location.href = '/form/cancel/' + club_code
 }
 
+function enterClub(club_code) {
+    if (!confirm("정말로 이 동아리로 선택하시겠어요?\n!!\ 선택 후 다른 동아리로 변경이 불가합니다!\ !!")) {
+        return false
+    }
+    if (!confirm("정말로 이 동아리로 선택하시겠어요?\n!!\ 지원한 다른 동아리들은 자동으로 포기 처리되며, 이후 되돌릴 수 없습니다!\ !!")) {
+        return false
+    }
+    location.href = 'form/select/' + club_code
+}
+
 current_banner = get_random_banner();
 current_banner.style = 'display: block;'
 

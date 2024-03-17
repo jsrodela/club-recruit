@@ -3,13 +3,13 @@
 
 {% block style %}
     {{ block.super }}
-    <link rel="stylesheet" href="{% static 'index/index.css' %}?v=9">
+    <link rel="stylesheet" href="{% static 'index/index.css' %}?v=10">
 {% endblock %}
 
 {% block module %}
     {{ block.super }}
     <!--<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>-->
-    <script src="{% static 'index/index.js' %}?v=1"></script>
+    <script src="{% static 'index/index.js' %}?v=2"></script>
 {% endblock %}
 
 {% block content %}
@@ -59,8 +59,12 @@
                                 {% endif %}
                                 {% if form.second_result == 'P' %}
                                     <p class="pass">최초 합격</p>
-                                {% elif form.second_result == 'P' %}
-                                    <p class="fail">최초 불합격</p>
+                                {% elif form.second_result == 'F' %}
+                                    <p class="fail">2차 불합격</p>
+                                {% elif form.second_result == 'S' %}
+                                    <p class="select">입부 확정</p>
+                                {% elif form.second_result == 'G' %}
+                                    <p class="give_up">입부 포기</p>
                                 {% else %}
                                     {% if form.first_result == 'F' %}
                                         <p>　</p>
@@ -69,7 +73,7 @@
                                     {% endif %}
                                 {% endif %}
                             {% if form.second_result == 'P'%}
-                                <button onclick="enterClub()">동아리 입부하기</button>
+                                <button style="color:blue; font-weight: 800;"  onclick="enterClub('{{ form.club.code }}')">동아리 입부하기</button>
                             {% else %}
                                 <button onclick="return changeNav('club_{{ form.club.code }}', '/form/views/{{ form.club.code }}');">지원서 보기</button>
                             {% endif %}

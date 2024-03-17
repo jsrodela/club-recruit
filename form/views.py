@@ -266,11 +266,24 @@ def cancel(request, clubname):
 def select(request, clubname):
     data = get_data(request)
     user_id = data['user'].id
-    apply_club = ClubModel.objects.get(name=clubname)
+    apply_club = ClubModel.objects.get(code=clubname)
     try:
-        form = FormModel.objects.get(number=user_id, club=apply_club)
+        form = FormModel.objects.get(number=user_id, club=apply_club, first_result = 'P', second_result = 'P')
     except FormModel.DoesNotExist:
         data['error'] = '이 동아리에 합격하지 못했습니다.'
         return redirect('/')
-    form.RESULTS = 'S'
+    form.second_result = 'S'
     form.save()
+    try:
+        other_form = FormModel.objects.filter(number=user_id, club=apply_club, first_result = 'P', second_result = 'P')
+        for give_up in other_form:
+            give_up.second_result = 'G'
+            give_up.save()
+    except FormModel.DoesNotExist:
+        pass
+    form.save()
+    logger.info(f"User {user_id} selected club {apply_club.name}")
+    data['alert'] = '동아리 가입이 완료되었습니다!'
+    return redirect ('/')
+
+
