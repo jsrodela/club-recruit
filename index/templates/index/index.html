@@ -9,7 +9,7 @@
 {% block module %}
     {{ block.super }}
     <!--<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>-->
-    <script src="{% static 'index/index.js' %}?v=2"></script>
+    <script src="{% static 'index/index.js' %}?v=3"></script>
 {% endblock %}
 
 {% block content %}
@@ -73,7 +73,7 @@
                                     {% endif %}
                                 {% endif %}
                             {% if form.second_result == 'P'%}
-                                <button style="color:blue; font-weight: 800;"  onclick="enterClub('{{ form.club.code }}')">동아리 가입하기</button>
+                                <button class="select" onclick="enterClub('{{ form.club.code }}', '{{ form.club.name }}')">동아리 가입하기</button>
                             {% else %}
                                 <button onclick="return changeNav('club_{{ form.club.code }}', '/form/views/{{ form.club.code }}');">지원서 보기</button>
                             {% endif %}
@@ -145,5 +145,7 @@
 
     <script>
         selectNav('home');
+        var user_id = '{{ user.id }}';
+        var user_name = '{{ user.name }}';
     </script>
 {% endblock %}

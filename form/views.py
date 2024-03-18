@@ -263,27 +263,32 @@ def cancel(request, clubname):
     logger.info(f"User {user_id} cancelled time #{apply_time.pk} of form #{apply.pk}")
     return redirect('/')
 
+
 def select(request, clubname):
     data = get_data(request)
     user_id = data['user'].id
     apply_club = ClubModel.objects.get(code=clubname)
+
     try:
-        form = FormModel.objects.get(number=user_id, club=apply_club, first_result = 'P', second_result = 'P', archive=False)
+        form = FormModel.objects.get(number=user_id, club=apply_club, first_result='P', second_result='P',
+                                     archive=False)
     except FormModel.DoesNotExist:
+        logger.warning(f"User {user_id} tried to select club {clubname}, which is not passed")
         data['error'] = '이 동아리에 합격하지 못했습니다.'
         return redirect('/')
+
     form.second_result = 'S'
     form.save()
-    try:
-        other_form = FormModel.objects.filter(number=user_id, first_result = 'P', second_result = 'P', archive=False)
+
+    other_form = FormModel.objects.filter(number=user_id, first_result='P', second_result='P', archive=False)
+    if other_form.exists():
         for give_up in other_form:
             give_up.second_result = 'G'
             give_up.save()
-    except FormModel.DoesNotExist:
-        pass
+
     form.save()
-    logger.info(f"User {user_id} selected club {apply_club.name}")
+
+    answer = request.GET.get('signature')
+    logger.info(f"User {user_id} selected club {apply_club.name}; signature: {answer}")
     data['alert'] = '동아리 가입이 완료되었습니다!'
     return redirect('/')
-
-
