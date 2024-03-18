@@ -68,13 +68,18 @@ function enterClub(club_code, club_name) {
     let signature = prompt(`학번, 이름, 동아리 이름을 아래와 일치하도록 정확하게 입력해주세요.\n\n ${expected}`);
 
     // 띄어쓰기 제거 및 소문자 치환
-    if (expected.replace(/ /g,'').toLowerCase() != signature.replace(/ /g,'').toLowerCase()) {
+    if (simplify(expected) != simplify(signature)) {
         alert(`가입 확인 입력이 잘못되었습니다. 가입 버튼을 다시 눌러주세요.\n\n올바른 입력: ${expected}\n사용자의 입력: ${signature}`);
         return false;
     }
 
     location.href = 'form/select/' + club_code + '?signature=' + signature;
     return true;
+}
+
+// 띄어쓰기., 제거, 소문자 변환
+function simplify(str) {
+    return str.replace(/[ \\.\\,\\n]/g,'').toLowerCase();
 }
 
 current_banner = get_random_banner();
