@@ -267,6 +267,11 @@ def cancel(request, clubname):
 def select(request, clubname):
     data = get_data(request)
     user_id = data['user'].id
+
+    if FormModel.objects.filter(number=user_id, second_result='S').exists():
+        logger.warning(f"User {user_id} tried to re-select club {clubname}")
+        return redirect('/')
+
     apply_club = ClubModel.objects.get(code=clubname)
 
     try:
@@ -274,7 +279,6 @@ def select(request, clubname):
                                      archive=False)
     except FormModel.DoesNotExist:
         logger.warning(f"User {user_id} tried to select club {clubname}, which is not passed")
-        data['error'] = '이 동아리에 합격하지 못했습니다.'
         return redirect('/')
 
     form.second_result = 'S'
@@ -290,5 +294,4 @@ def select(request, clubname):
 
     answer = request.GET.get('signature')
     logger.info(f"User {user_id} selected club {apply_club.name}; signature: {answer}")
-    data['alert'] = '동아리 가입이 완료되었습니다!'
-    return redirect('/')
+    return redirect(f'/?select={apply_club.name}')

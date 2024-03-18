@@ -101,3 +101,6 @@ else {
     }
     var current_interval = setInterval(change_banner, 5000);
 }
+if (params.select) {
+    alert('🎉 ' + params.select + ' 동아리 가입을 축하합니다! 추후 동아리 부장이 개별적으로 안내 문자를 발송할 예정입니다.');
+}
