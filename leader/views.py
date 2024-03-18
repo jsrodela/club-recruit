@@ -343,6 +343,14 @@ def second_result(request):
             form.second_result = 'A'
             form.save()
 
+        try:
+            others = FormModel.objects.filter(club=club, first_result = 'P', second_result= 'W', archive=False)
+            for fail_form in others:
+                fail_form.second_result = 'F'
+                fail_form.save()
+        except FormModel.DoesNotExist:
+            pass
+
         return redirect('/')
 
     data['club'] = club

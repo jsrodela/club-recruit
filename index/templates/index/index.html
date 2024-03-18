@@ -62,9 +62,9 @@
                                 {% elif form.second_result == 'F' %}
                                     <p class="fail">2차 불합격</p>
                                 {% elif form.second_result == 'S' %}
-                                    <p class="select">입부 확정</p>
+                                    <p class="select">가입 확정</p>
                                 {% elif form.second_result == 'G' %}
-                                    <p class="give_up">입부 포기</p>
+                                    <p class="give_up">가입 포기</p>
                                 {% else %}
                                     {% if form.first_result == 'F' %}
                                         <p>　</p>
@@ -73,7 +73,7 @@
                                     {% endif %}
                                 {% endif %}
                             {% if form.second_result == 'P'%}
-                                <button style="color:blue; font-weight: 800;"  onclick="enterClub('{{ form.club.code }}')">동아리 입부하기</button>
+                                <button style="color:blue; font-weight: 800;"  onclick="enterClub('{{ form.club.code }}')">동아리 가입하기</button>
                             {% else %}
                                 <button onclick="return changeNav('club_{{ form.club.code }}', '/form/views/{{ form.club.code }}');">지원서 보기</button>
                             {% endif %}
