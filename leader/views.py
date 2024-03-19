@@ -17,6 +17,7 @@ from form import form_data
 from form.models import FormModel
 from about.models import ClubModel
 from form.models import TimeModel
+from index.models import StatusModel
 
 
 
@@ -394,6 +395,7 @@ def additional_result(request):
     additional_user = request.POST.get('user_id')
     additional_form = FormModel.objects.get(number=additional_user, club=club, first_result='P', archive=False)
     additional_form.second_result = 'V'
+    additional_form.additional_rank = StatusModel.objects.get(id=1).additional_rank + 1
     additional_form.save()
 
     logger.info(f"Member {data['user'].id} issued additional_result: {additional_user}")
