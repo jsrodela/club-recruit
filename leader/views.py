@@ -326,6 +326,16 @@ def second_result(request):
 
     club = data['user'].leader_of
 
+    # 이미 2차 합격자를 선택한 경우 보기 페이지로
+    '''if FormModel.objects.filter(club=club, first_result='P', second_result='P', archive=False).exists():
+        return redirect('/leader/view_selection')
+    
+    if FormModel.objects.filter(club=club, first_result='P', second_result='S', archive=False).exists():
+        return redirect('/leader/view_selection')
+    
+    if FormModel.objects.filter(club=club, first_result='P', second_result='G', archive=False).exists():
+        return redirect('/leader/view_selection')'''
+
     if request.POST:
         result_data = request.POST.get('result_data')
         result_data = json.loads(result_data)
@@ -337,21 +347,21 @@ def second_result(request):
 
         # @TODO: 추가합격 form 처리, 동아리별 최대 추합 인원 저장, 미선택 인원 탈락 처리
 
-        for additonal_pass_user in result_data[2] + result_data[3]: 
+        '''for additonal_pass_user in result_data[2] + result_data[3]: 
             user_id = additonal_pass_user['user_id']
             rank = additonal_pass_user['rank']
             form = FormModel.objects.get(number=user_id, club=club, first_result='P', archive=False)
             form.second_result = 'A'
             form.additional_rank = rank
-            form.save()
+            form.save()'''
 
-        try:
+        '''try:
             others = FormModel.objects.filter(club=club, first_result = 'P', second_result= 'W', archive=False)
             for fail_form in others:
                 fail_form.second_result = 'F'
                 fail_form.save()
         except FormModel.DoesNotExist:
-            pass
+            pass'''
 
         return redirect('/')
 
@@ -380,6 +390,11 @@ def second_result_check_user(request):
             if form.first_result != 'P':
                 return HttpResponse(json.dumps({
                     'error': f'\'{user_id} {user_name}\' 학생은 1차 서류지원 합격자가 아닙니다.'
+                }))
+            
+            if form.second_result != 'W':
+                return HttpResponse(json.dumps({
+                    'error': f'\'{user_id} {user_name}\' 이미 합격/탈락자로 등록된 학생입니다.'
                 }))
 
             # TimeModel 체크? (면접 봤는지) - 면접 따로 잡아서 봤을수도...
@@ -423,7 +438,7 @@ def view_selection(request): # view_time 기반
     forms = FormModel.objects.filter(club=club, archive=False, first_result='P').order_by('number')
     lst = []
     for form in forms:
-        if form.second_result == 'F':
+        if form.second_result == 'F' or form.second_result == 'W':
             continue
         target_user = User.objects.get(id=form.number)
         obj = {
