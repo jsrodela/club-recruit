@@ -33,7 +33,15 @@
             {% for form in forms %}
             <tr>
                 <td>{{ form.id }}</td>
-                <td>{% if form.selection == 'S' %}가입 확정{% elif form.selection == 'G' %}가입 포기{% else %}선택 대기중{% endif %}</td>
+                <td>
+                    {% if form.selection == 'S' %}
+                        <span style="font-weight: bold; color: blue;">가입 확정</span>
+                    {% elif form.selection == 'G' %}
+                        <span style="color: red;">가입 포기</span>
+                    {% else %}
+                        <span style="color: grey;">선택 대기중</span>
+                    {% endif %}
+                </td>
                 <td>{{ form.number }}</td>
                 <td>{{ form.name }}</td>
                 <td><a href="/form/leader/{{ form.id }}">보기</a></td>
