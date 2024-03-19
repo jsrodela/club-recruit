@@ -263,19 +263,29 @@ def cancel(request, clubname):
     logger.info(f"User {user_id} cancelled time #{apply_time.pk} of form #{apply.pk}")
     return redirect('/')
 
+
 def select(request, clubname):
     data = get_data(request)
     user_id = data['user'].id
-    apply_club = ClubModel.objects.get(code=clubname)
-    try:
-        form = FormModel.objects.get(number=user_id, club=apply_club, first_result = 'P', second_result = 'P', archive=False)
-    except FormModel.DoesNotExist:
-        data['error'] = '이 동아리에 합격하지 못했습니다.'
+
+    if FormModel.objects.filter(number=user_id, second_result='S').exists():
+        logger.warning(f"User {user_id} tried to re-select club {clubname}")
         return redirect('/')
+
+    apply_club = ClubModel.objects.get(code=clubname)
+
+    try:
+        form = FormModel.objects.get(number=user_id, club=apply_club, first_result='P', second_result='P',
+                                     archive=False)
+    except FormModel.DoesNotExist:
+        logger.warning(f"User {user_id} tried to select club {clubname}, which is not passed")
+        return redirect('/')
+
     form.second_result = 'S'
     form.save()
-    try:
-        other_form = FormModel.objects.filter(number=user_id, first_result = 'P', second_result = 'P', archive=False)
+
+    other_form = FormModel.objects.filter(number=user_id, first_result='P', second_result='P', archive=False)
+    if other_form.exists():
         for give_up in other_form:
             give_up.second_result = 'G'
             for rank_up in FormModel.objects.filter(club=give_up.club, first_result = 'P', second_result = 'A', archive=False):
@@ -284,11 +294,9 @@ def select(request, clubname):
                 rank_up.additional_rank -= 1
                 rank_up.save()
             give_up.save()
-    except FormModel.DoesNotExist:
-        pass
+
     form.save()
-    logger.info(f"User {user_id} selected club {apply_club.name}")
-    data['alert'] = '동아리 가입이 완료되었습니다!'
-    return redirect('/')
 
-
+    answer = request.GET.get('signature')
+    logger.info(f"User {user_id} selected club {apply_club.name}; signature: {answer}")
+    return redirect(f'/?select={apply_club.name}')

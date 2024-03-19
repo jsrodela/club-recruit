@@ -57,14 +57,29 @@ function CancelAlert(club_code) {
     location.href = '/form/cancel/' + club_code
 }
 
-function enterClub(club_code) {
-    if (!confirm("정말로 이 동아리로 선택하시겠어요?\n!!\ 선택 후 다른 동아리로 변경이 불가합니다!\ !!")) {
+function enterClub(club_code, club_name) {
+    if (!confirm(`정말로 ${club_name} 동아리에 가입할까요?\n!! 선택 후 다른 동아리로 변경이 불가합니다! !!`)) {
         return false
     }
-    if (!confirm("정말로 이 동아리로 선택하시겠어요?\n!!\ 지원한 다른 동아리들은 자동으로 포기 처리되며, 이후 되돌릴 수 없습니다!\ !!")) {
+    if (!confirm(`정말로 ${club_name} 동아리를 선택할까요?\n!! 지원한 다른 동아리들은 자동으로 포기 처리되며, 이후 되돌릴 수 없습니다! !!`)) {
         return false
     }
-    location.href = 'form/select/' + club_code
+    let expected = `${user_id} ${user_name} ${club_name}`;
+    let signature = prompt(`학번, 이름, 동아리 이름을 아래와 일치하도록 정확하게 입력해주세요.\n\n ${expected}`);
+
+    // 띄어쓰기 제거 및 소문자 치환
+    if (simplify(expected) != simplify(signature)) {
+        alert(`가입 확인 입력이 잘못되었습니다. 가입 버튼을 다시 눌러주세요.\n\n올바른 입력: ${expected}\n사용자의 입력: ${signature}`);
+        return false;
+    }
+
+    location.href = 'form/select/' + club_code + '?signature=' + signature;
+    return true;
+}
+
+// 띄어쓰기., 제거, 소문자 변환
+function simplify(str) {
+    return str.replace(/[ \\.\\,\\n]/g,'').toLowerCase();
 }
 
 current_banner = get_random_banner();
@@ -90,4 +105,7 @@ else {
         clearInterval(current_interval)
     }
     var current_interval = setInterval(change_banner, 5000);
+}
+if (params.select) {
+    alert('🎉 ' + params.select + ' 동아리 가입을 축하합니다! 추후 동아리 부장이 개별적으로 안내 문자를 발송할 예정입니다.');
 }
