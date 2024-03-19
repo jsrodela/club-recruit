@@ -10,4 +10,5 @@ urlpatterns = [
     path("view_time", views.view_time),
     path("second_result", views.second_result),
     path("second_result_check_user", views.second_result_check_user),
+    path("view_selection", views.view_selection)
 ]

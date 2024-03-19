@@ -121,6 +121,11 @@ h2 {
     color: green;
 }
 
+.additional_pass {
+    font-weight: 600;
+    color: green;
+}
+
 .fail {
     font-weight: 600;
     color: red;

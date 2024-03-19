@@ -58,13 +58,15 @@
                                     <p class="wait">1차 결과 대기중</p>
                                 {% endif %}
                                 {% if form.second_result == 'P' %}
-                                    <p class="pass">최초 합격</p>
+                                    <p class="pass">2차 최초합격</p>
                                 {% elif form.second_result == 'F' %}
                                     <p class="fail">2차 불합격</p>
                                 {% elif form.second_result == 'S' %}
                                     <p class="select">가입 확정</p>
                                 {% elif form.second_result == 'G' %}
                                     <p class="give_up">가입 포기</p>
+                                {% elif form.second_result == 'V ' %}
+                                    <p class="additional_pass">2차 추가합격</p>
                                 {% else %}
                                     {% if form.first_result == 'F' %}
                                         <p>　</p>

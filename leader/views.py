@@ -339,8 +339,10 @@ def second_result(request):
 
         for additonal_pass_user in result_data[2] + result_data[3]: 
             user_id = additonal_pass_user['user_id']
+            rank = additonal_pass_user['rank']
             form = FormModel.objects.get(number=user_id, club=club, first_result='P', archive=False)
             form.second_result = 'A'
+            form.additional_rank = rank
             form.save()
 
         try:
@@ -400,3 +402,36 @@ def second_result_check_user(request):
 
 
 # @TODO: Add log
+
+def view_selection(request): # view_time 기반
+    data = get_data(request)
+
+    if 'user' not in data:
+        return redirect('/')
+
+    user = data['user']
+    if data['user'].leader_of:
+        club = user.leader_of
+        # data['is_leader'] = True
+    elif data['user'].member_of:
+        club = user.member_of
+    else:
+        return redirect('/')
+
+    data['club'] = club
+
+    forms = FormModel.objects.filter(club=club, archive=False, first_result='P').order_by('number')
+    lst = []
+    for form in forms:
+        target_user = User.objects.get(id=form.number)
+        obj = {
+            'selection': form.second_result,
+            'number': target_user.id,
+            'name': target_user.name,
+            'id': form.id,
+            'phone': target_user.phone
+        }
+        lst.append(obj)
+    data['forms'] = lst
+    return render(request, 'leader/view_selection.html', data)
+
