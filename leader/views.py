@@ -526,7 +526,7 @@ def final_stats(request):
     lst = []
 
     for club in ClubModel.objects.all().order_by('name'):
-        obj = {'clubname': club.name}
+        club_obj = {'clubname': club.name}
         forms = []
         for form in FormModel.objects.filter(Q(club=club, second_result='P') | Q(club=club, second_result='V') | Q(club=club, second_result='S') | Q(club=club, second_result='G')).order_by('number'):
             if form.second_result == 'F' or form.second_result == 'W':
@@ -540,8 +540,8 @@ def final_stats(request):
                 'phone': target_user.phone
             }
             forms.append(obj)
-        obj['forms'] = forms
-        lst.append(obj)
+        club_obj['forms'] = forms
+        lst.append(club_obj)
 
     data['lst'] = lst
     return render(request, 'leader/final_stats.html', data)
