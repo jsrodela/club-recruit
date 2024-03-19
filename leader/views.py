@@ -395,6 +395,8 @@ def additional_result(request):
     additional_form = FormModel.objects.get(number=additional_user, club=club, first_result='P', archive=False)
     additional_form.second_result = 'V'
     additional_form.save()
+
+    logger.info(f"Member {data['user'].id} issued additional_result: {additional_user}")
         
     return redirect('/leader/view_selection')
 
