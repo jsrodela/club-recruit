@@ -428,7 +428,7 @@ def second_result_check_user(request):
                     'error': f'\'{user_id} {user_name}\' 학생은 1차 서류지원 합격자가 아닙니다.'
                 }))
 
-            if form.second_result != 'W':
+            if form.second_result != 'W' and form.second_result != 'F':
                 return HttpResponse(json.dumps({
                     'error': f'\'{user_id} {user_name}\' 이미 합격/불합격자로 등록된 학생입니다.'
                 }))

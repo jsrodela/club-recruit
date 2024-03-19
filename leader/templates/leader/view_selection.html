@@ -3,11 +3,12 @@
 
 {% block style %}
 {{ block.super }}
-<link rel="stylesheet" href="{% static 'leader/time_config.css' %}?v=2">
+    <link rel="stylesheet" href="{% static 'leader/time_config.css' %}?v=2">
 {% endblock %}
 
 {% block module %}
 {{ block.super }}
+    <script src="{% static 'leader/view_selection.js' %}?v=1"></script>
 {% endblock %}
 
 {% block content %}
@@ -41,6 +42,14 @@
             {% endfor %}
         </tbody>
     </table>
+
+    <form action="/leader/additional_result" method="POST" id="form">
+        <h2>추가 합격자 등록</h2>
+        <p><b><a href="/club_relation" target="_blank">추합 시간</a>을 지켜서 등록해주세요.</b> 대상자의 학번과 이름을 직접 입력하여 추가합격자를 등록해주세요.</p>
+        <input type="number" placeholder="학번" name="user_id">
+        <input type="text" placeholder="이름" name="user_name">
+        <button value="추합 등록" id="submit_btn"></button>
+    </form>
 </div>
 
 <script>
