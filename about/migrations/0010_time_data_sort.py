@@ -3,20 +3,6 @@ from django.apps import apps
 from django.db import migrations
 
 
-def time_data_sort(a, b):
-    ClubModel = apps.get_model('about', 'ClubModel')
-    clubs = ClubModel.objects.all()
-
-    for club in clubs:
-        time_data = club.time_data
-        if time_data:
-            time_data.sort(key=lambda x: (x['date'], x['start'], x['end']))
-            for time in time_data:
-                time['current'] = 0
-            club.time_data = time_data
-            club.save()
-
-
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -24,5 +10,4 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RunPython(time_data_sort)
     ]
