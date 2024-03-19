@@ -30,7 +30,8 @@ for (let title of titles) {
             redirect: 'error',
             body: JSON.stringify({
                 'user_id': user_id.value,
-                'user_name': user_name.value
+                'user_name': user_name.value,
+                'rank': rank.value
             })
         })
             .then((response) => response.json())
