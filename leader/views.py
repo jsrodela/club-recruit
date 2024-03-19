@@ -392,7 +392,7 @@ def additional_result(request):
         return redirect('/')
     
     additional_user = request.POST.get('user_id')
-    additional_form = FormModel.objects.get(number=additional_user, club=club, first_result='P', archived=False)
+    additional_form = FormModel.objects.get(number=additional_user, club=club, first_result='P', archive=False)
     additional_form.second_result = 'V'
     additional_form.save()
         
