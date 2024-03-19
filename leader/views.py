@@ -376,16 +376,44 @@ def second_result(request):
     data['club'] = club
     return render(request, 'leader/second_result.html', data)
 
+def additional_result(request):
+    data = get_data(request)
+
+    if 'user' not in data:
+        return redirect('/')
+
+    user = data['user']
+    if data['user'].leader_of:
+        club = user.leader_of
+        # data['is_leader'] = True
+    elif data['user'].member_of:
+        club = user.member_of
+    else:
+        return redirect('/')
+    
+    additional_user = request.POST.get('user_id')
+    additional_form = FormModel.objects.get(number=additional_user, club=club, first_result='P', archived=False)
+    additional_form.second_result = 'V'
+    additional_form.save()
+        
+    return redirect('/leader/view_selection')
 
 # second_result에서 사용됨
 @csrf_exempt
 def second_result_check_user(request):
     data = get_data(request)
 
-    if 'user' not in data or data['user'].leader_of is None:
+    if 'user' not in data:
         return redirect('/')
 
-    club = data['user'].leader_of
+    user = data['user']
+    if data['user'].leader_of:
+        club = user.leader_of
+        # data['is_leader'] = True
+    elif data['user'].member_of:
+        club = user.member_of
+    else:
+        return redirect('/')
 
     if request.method == 'POST':
         body = json.loads(request.body)
