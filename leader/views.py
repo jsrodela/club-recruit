@@ -402,7 +402,7 @@ def second_result_check_user(request):
 
             if form.second_result != 'W':
                 return HttpResponse(json.dumps({
-                    'error': f'\'{user_id} {user_name}\' 이미 합격/탈락자로 등록된 학생입니다.'
+                    'error': f'\'{user_id} {user_name}\' 이미 합격/불합격자로 등록된 학생입니다.'
                 }))
 
             # TimeModel 체크? (면접 봤는지) - 면접 따로 잡아서 봤을수도...
