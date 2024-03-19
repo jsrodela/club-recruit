@@ -121,12 +121,6 @@ function send_submit() {
         return false;
     }
 
-    // only for 2024; have to be removed further
-    if (data[0].length != 8) {
-        alert('1학년 합격자가 8명이 아닙니다! 명수를 다시 한 번 확인해주세요.\n8명이 아닌 게 확실하다면, 로델라 부장에게 연락해주세요.')
-        return false;
-    }
-
     let msg = "※ 확인 버튼을 누르고 난 뒤에는 명단을 수정할 수 없습니다. 명단을 다시 한 번 정확히 확인하세요.\n";
 
 
