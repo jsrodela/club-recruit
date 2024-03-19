@@ -32,7 +32,7 @@ class FormModel(models.Model):
     first_result = models.CharField(max_length=1, choices=RESULTS, default='W')
     second_result = models.CharField(max_length=1, choices=RESULTS, default='W')
 
-    additional_rank = models.IntegerField(null=True, blank=True)
+    additional_rank = models.IntegerField(null=False, default=0)
 
     # 추가모집 지원서일 경우 - 추가모집 결과는 FIRST_RESULT에 저장
     is_extra = models.BooleanField(default=False)

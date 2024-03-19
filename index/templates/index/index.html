@@ -65,7 +65,7 @@
                                     <p class="select">가입 확정</p>
                                 {% elif form.second_result == 'G' %}
                                     <p class="give_up">가입 포기</p>
-                                {% elif form.second_result == 'V' %}
+                                {% elif form.second_result == 'V' and form.additional_rank <= status.additional_rank %}
                                     <p class="additional_pass">2차 추가합격</p>
                                 {% else %}
                                     {% if form.first_result == 'F' %}
