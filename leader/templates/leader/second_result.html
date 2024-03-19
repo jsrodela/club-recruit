@@ -8,16 +8,14 @@
 
 {% block module %}
     {{ block.super }}
-    <script src="{% static 'leader/second_result.js' %}?v=1"></script>
+    <script src="{% static 'leader/second_result.js' %}?v=2"></script>
 {% endblock %}
 
 {% block content %}
 
     <div class="wrap">
-        <h1>(추가) 합격자 입력 : {{ club.code }}</h1>
+        <h1>합격자 입력 : {{ club.code }}</h1>
         <p>이 페이지는 <b>동아리 부장</b>만 접근 가능합니다.<br>대상자를 모두 입력한 후, 맨 아래의 '최종 등록하기' 버튼을 눌러야 합격자 등록이 완료됩니다.</p>
-        <h2>안내: 자동 추가합격 시스템이 아직 미완성입니다. 추가합격 대상자를 작성하지 마시고 포기자가 나오면 예비자를 직접 합격자 명단에 추가로 넣어주세요.</h2>
-        <h6>(로델라가 미안해...)</h6>
         <hr>
 
         <h2>1학년 합격자 명단 작성</h2>
@@ -62,54 +60,6 @@
             <tbody id="pass2_tbody"></tbody>
         </table>
 
-        <br><hr>
-
-        <h2>1학년 추가합격 대상자 작성</h2>
-        <p>1학년 추가합격 대상자를 순위와 함께 입력해주세요. 순위는 1번부터 차례대로 입력해주세요. (동순위는 불가합니다)</p>
-        <form id="add1_form">
-            <input type="number" id="add1_rank" placeholder="순위" value="1">
-            <input type="number" id="add1_user_id" placeholder="학번">
-            <input type="text" id="add1_user_name" placeholder="이름">
-            <input type="submit" id="add1_submit" value="등록">
-        </form>
-        <br>
-        <table id="add1_table">
-            <thead>
-                <tr>
-                    <th>순위</th>
-                    <th>학번</th>
-                    <th>이름</th>
-                    <th>지원서</th>
-                    <th>취소</th>
-                </tr>
-            </thead>
-            <tbody id="add1_tbody"></tbody>
-        </table>
-
-        <br><hr>
-
-        <h2>2학년 추가합격 대상자 작성</h2>
-        <p>2학년 추가합격 대상자를 순위와 함께 입력해주세요. 순위는 1번부터 차례대로 입력해주세요. (동순위는 불가합니다)</p>
-        <form id="add2_form">
-            <input type="number" id="add2_rank" placeholder="순위" value="1">
-            <input type="number" id="add2_user_id" placeholder="학번">
-            <input type="text" id="add2_user_name" placeholder="이름">
-            <input type="submit" id="add2_submit" value="등록">
-        </form>
-        <br>
-        <table id="add2_table">
-            <thead>
-                <tr>
-                    <th>순위</th>
-                    <th>학번</th>
-                    <th>이름</th>
-                    <th>지원서</th>
-                    <th>취소</th>
-                </tr>
-            </thead>
-            <tbody id="add2_tbody"></tbody>
-        </table>
-    
         <br><hr>
 
         <form id="send" method="post">

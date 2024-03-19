@@ -1,9 +1,9 @@
 
-let titles = ['pass1', 'pass2', 'add1', 'add2'];
+let titles = ['pass1', 'pass2'];
 
 for (let title of titles) {
     let form = document.getElementById(title + '_form');
-    let rank = document.getElementById(title + '_rank');
+//    let rank = document.getElementById(title + '_rank');
     let user_id = document.getElementById(title + '_user_id');
     let user_name = document.getElementById(title + '_user_name');
     let submit  = document.getElementById(title + '_submit');
@@ -12,7 +12,6 @@ for (let title of titles) {
 
     form.onsubmit = function(event, form) {
         event.preventDefault();
-        if (rank && !rank.value.length) return false;
         if (!user_id.value.length || !user_name.value.length) return false;
 
         if (check_tables(user_id.value)) {
@@ -31,7 +30,6 @@ for (let title of titles) {
             body: JSON.stringify({
                 'user_id': user_id.value,
                 'user_name': user_name.value,
-                'rank': rank.value
             })
         })
             .then((response) => response.json())
@@ -42,11 +40,8 @@ for (let title of titles) {
                 }
                 else {
                     let value = `<tr><td>${result['user_id']}</td><td>${result['user_name']}</td><td><a href="/form/leader/${result['form_id']}" target="_blank">보기</a></td><td><button onclick="remove_row(this);">취소</button></td></tr>`;
-                    if (rank) value = value.slice(0, 4) + `<td>${rank.value}</td>` + value.slice(4);
                     tbody.insertAdjacentHTML('beforeend', value);
-                    sort_table(table);
-                    if (rank) rank.value = parseInt(rank.value)+1;
-                    user_id.value = "";
+                    sort_table(table); user_id.value = "";
                     user_name.value = "";
                     user_id.focus();
                 }
@@ -68,14 +63,8 @@ function check_tables(number) {
     for (let title of titles) {
         let table = document.getElementById(title + '_table');
         for (let row of table.rows) {
-            if (title.includes('pass')) {
-                let val = row.cells[0].innerHTML;
-                if (number == val) return true;
-            }
-            else {
-                let val = row.cells[1].innerHTML;
-                if (number == val) return true;
-            }
+            let val = row.cells[0].innerHTML;
+            if (number == val) return true;
         }
     }
     return false;
@@ -132,12 +121,17 @@ function send_submit() {
         return false;
     }
 
+    // only for 2024; have to be removed further
+    if (data[0].length != 8) {
+        alert('1학년 합격자가 8명이 아닙니다! 명수를 다시 한 번 확인해주세요.\n8명이 아닌 게 확실하다면, 로델라 부장에게 연락해주세요.')
+        return false;
+    }
+
     let msg = "※ 확인 버튼을 누르고 난 뒤에는 명단을 수정할 수 없습니다. 명단을 다시 한 번 정확히 확인하세요.\n";
 
 
-    for (let i=0;i<4;i++) {
-        if (i <= 1) msg += '\n● ' + (i+1) + '학년 합격자: ' + data[i].length + '명\n'
-        else msg += '\n● ' + (i-1) + '학년 추가합격 명단 (순위순): ' + data[i].length + '명\n'
+    for (let i=0;i<2;i++) {
+        msg += '\n● ' + (i+1) + '학년 합격자: ' + data[i].length + '명\n'
 
         for (let obj of data[i]) {
             msg += `- ${obj['user_id']} ${obj['user_name']}\n`;
@@ -159,12 +153,10 @@ function collect_datas(table_id) {
     let data = [];
     for (let i=1;i<table.rows.length;i++) {
         let row = table.rows[i];
-        let d = 1;
-        if (row.cells.length == 4) d=0;  // init
         // console.log(table_id, d);
         data.push({
-            'user_id': row.cells[d+0].innerHTML,
-            'user_name': row.cells[d+1].innerHTML
+            'user_id': row.cells[0].innerHTML,
+            'user_name': row.cells[1].innerHTML
         })
     }
     return data;

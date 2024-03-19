@@ -1,4 +1,5 @@
 import json
+import logging
 from datetime import datetime
 
 from django.http import HttpResponse
@@ -16,6 +17,10 @@ from form import form_data
 from form.models import FormModel
 from about.models import ClubModel
 from form.models import TimeModel
+
+
+
+logger = logging.getLogger(__name__)
 
 
 def club_config(request):
@@ -149,7 +154,7 @@ def view_forms(request):
     return render(request, 'leader/view_forms.html', data)
 
 
-def time_config(request): # timemodel 대응 수정 완료
+def time_config(request):  # timemodel 대응 수정 완료
     data = get_data(request)
 
     if 'user' not in data or data['user'].leader_of is None:
@@ -173,7 +178,7 @@ def time_config(request): # timemodel 대응 수정 완료
             time_model.club = club
             print(time_model.time_start)
             time_model.save()
-            
+
         club.save()
 
     data['club'] = club
@@ -248,6 +253,7 @@ def first_result(request):
     data['club'] = club
     return render(request, "leader/first_result.html", data)
 
+
 def every_forms(request):
     data = get_data(request)
 
@@ -277,7 +283,7 @@ def every_forms(request):
     return render(request, "leader/every_forms.html", data)
 
 
-def view_time(request): # timemodel 대응 수정 완료
+def view_time(request):  # timemodel 대응 수정 완료
 
     data = get_data(request)
 
@@ -327,14 +333,14 @@ def second_result(request):
     club = data['user'].leader_of
 
     # 이미 2차 합격자를 선택한 경우 보기 페이지로
-    '''if FormModel.objects.filter(club=club, first_result='P', second_result='P', archive=False).exists():
+    if FormModel.objects.filter(club=club, first_result='P', second_result='P', archive=False).exists():
         return redirect('/leader/view_selection')
-    
+
     if FormModel.objects.filter(club=club, first_result='P', second_result='S', archive=False).exists():
         return redirect('/leader/view_selection')
-    
+
     if FormModel.objects.filter(club=club, first_result='P', second_result='G', archive=False).exists():
-        return redirect('/leader/view_selection')'''
+        return redirect('/leader/view_selection')
 
     if request.POST:
         result_data = request.POST.get('result_data')
@@ -355,13 +361,15 @@ def second_result(request):
             form.additional_rank = rank
             form.save()'''
 
-        '''try:
-            others = FormModel.objects.filter(club=club, first_result = 'P', second_result= 'W', archive=False)
+        try:
+            others = FormModel.objects.filter(club=club, first_result='P', second_result='W', archive=False)
             for fail_form in others:
                 fail_form.second_result = 'F'
                 fail_form.save()
         except FormModel.DoesNotExist:
-            pass'''
+            pass
+
+        logger.info(f"Leader {data['user'].id} issued second_result: {result_data}")
 
         return redirect('/')
 
@@ -391,7 +399,7 @@ def second_result_check_user(request):
                 return HttpResponse(json.dumps({
                     'error': f'\'{user_id} {user_name}\' 학생은 1차 서류지원 합격자가 아닙니다.'
                 }))
-            
+
             if form.second_result != 'W':
                 return HttpResponse(json.dumps({
                     'error': f'\'{user_id} {user_name}\' 이미 합격/탈락자로 등록된 학생입니다.'
@@ -418,7 +426,7 @@ def second_result_check_user(request):
 
 # @TODO: Add log
 
-def view_selection(request): # view_time 기반
+def view_selection(request):  # view_time 기반
     data = get_data(request)
 
     if 'user' not in data:
@@ -451,4 +459,3 @@ def view_selection(request): # view_time 기반
         lst.append(obj)
     data['forms'] = lst
     return render(request, 'leader/view_selection.html', data)
-
