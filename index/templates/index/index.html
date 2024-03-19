@@ -77,7 +77,7 @@
                                         <p class="wait">면접 결과 대기중</p>
                                     {% endif %}
                                 {% endif %}
-                            {% if form.second_result == 'P' or 'V'%}
+                            {% if form.second_result == 'P' or form.second_result == 'V'%}
                                 <button class="select" onclick="enterClub('{{ form.club.code }}', '{{ form.club.name }}')">동아리 가입하기</button>
                             {% else %}
                                 <button onclick="return changeNav('club_{{ form.club.code }}', '/form/views/{{ form.club.code }}');">지원서 보기</button>
