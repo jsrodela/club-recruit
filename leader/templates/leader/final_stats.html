@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+{{ block.super }}
+    <link rel="stylesheet" href="{% static 'leader/time_config.css' %}?v=2">
+{% endblock %}
+
+{% block module %}
+{{ block.super }}
+{% endblock %}
+
+{% block content %}
+
+<div class="wrap">
+    <h1>최종 선택 한눈에 보기</h1>
+    <p>이 페이지는 <b>관리자</b>만 접근 가능합니다.</p>
+    <hr>
+
+    {% for club in lst %}
+    <h3>{{ club.clubname }}</h3>
+    <table id="viewTable">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>상태</th>
+                <th>학번</th>
+                <th>이름</th>
+                <th>지원서</th>
+                <th>전화번호</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for form in club.forms %}
+            <tr>
+                <td>{{ form.id }}</td>
+                <td>
+                    {% if form.selection == 'S' %}
+                        <span style="font-weight: bold; color: blue;">가입 확정</span>
+                    {% elif form.selection == 'G' %}
+                        <span style="color: red;">가입 포기</span>
+                    {% else %}
+                        <span style="color: grey;">선택 대기중</span>
+                    {% endif %}
+                </td>
+                <td>{{ form.number }}</td>
+                <td>{{ form.name }}</td>
+                <td><a href="/form/leader/{{ form.id }}">보기</a></td>
+                <td>{{ form.phone }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endfor %}
+</div>
+
+<script>
+    selectNav('club_{{ club.code }}');
+</script>
+{% endblock %}

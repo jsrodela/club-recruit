@@ -2,6 +2,7 @@ import json
 import logging
 from datetime import datetime
 
+from django.db.models import Q
 from django.http import HttpResponse
 from django.utils.timezone import make_aware
 
@@ -514,3 +515,33 @@ def give_up_all(request):
         return redirect('/')
 
     return render(request, 'leader/give_up_all.html', data)
+
+
+def final_stats(request):
+    data = get_data(request)
+
+    if not data['user'].is_superuser:
+        return redirect('/')
+
+    lst = []
+
+    for club in ClubModel.objects.all().order_by('name'):
+        obj = {'clubname': club.name}
+        forms = []
+        for form in FormModel.objects.filter(Q(club=club, second_result='P') | Q(club=club, second_result='V') | Q(club=club, second_result='S') | Q(club=club, second_result='G')).order_by('number'):
+            if form.second_result == 'F' or form.second_result == 'W':
+                continue
+            target_user = User.objects.get(id=form.number)
+            obj = {
+                'selection': form.second_result,
+                'number': target_user.id,
+                'name': target_user.name,
+                'id': form.id,
+                'phone': target_user.phone
+            }
+            forms.append(obj)
+        obj['forms'] = forms
+        lst.append(obj)
+
+    data['lst'] = lst
+    return render(request, 'leader/final_stats.html', data)

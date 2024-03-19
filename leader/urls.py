@@ -12,5 +12,6 @@ urlpatterns = [
     path("second_result_check_user", views.second_result_check_user),
     path("additional_result", views.additional_result),
     path("view_selection", views.view_selection),
-    path("give_up_all", views.give_up_all)
+    path("give_up_all", views.give_up_all),
+    path("final_stats", views.final_stats)
 ]
