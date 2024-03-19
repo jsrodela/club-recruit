@@ -3,7 +3,7 @@
 
 {% block style %}
     {{ block.super }}
-    <link rel="stylesheet" href="{% static 'index/index.css' %}?v=10">
+    <link rel="stylesheet" href="{% static 'index/index.css' %}?v=11">
 {% endblock %}
 
 {% block module %}
@@ -38,6 +38,9 @@
     <h2 class="status" onclick="return changeNav('home', '/club_relation')">
         지금은 <span class="current">{{ status.get_current_display }}!</span>
     </h2>
+    {% if status.notice %}
+        <h4 class="notice">※ {{ status.notice }}</h4>
+    {% endif %}
 
 
     {% if user.is_authenticated %}

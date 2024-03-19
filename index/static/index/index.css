@@ -226,6 +226,10 @@ h2 {
 
 }
 
+.notice {
+    text-align: center;
+}
+
 
 /* 모바일 레이아웃 */
 @media screen and (max-width: 768px) {
