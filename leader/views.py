@@ -489,3 +489,28 @@ def view_selection(request):  # view_time 기반
         lst.append(obj)
     data['forms'] = lst
     return render(request, 'leader/view_selection.html', data)
+
+
+def give_up_all(request):
+    data = get_data(request)
+    if not data['user'].is_superuser:
+        return redirect('/')
+
+    if request.POST:
+        lst = []
+        forms = FormModel.objects.filter(archive=False, second_result='P')
+        for form in forms:
+            form.second_result = 'G'
+            lst.append(form.pk)
+            form.save()
+
+        forms = FormModel.objects.filter(archive=False, second_result='V')
+        for form in forms:
+            form.second_result = 'G'
+            lst.append(form.pk)
+            form.save()
+
+        logger.info(f"Admin {data['user'].id} made every remaining forms give up. Effected forms: {lst}")
+        return redirect('/')
+
+    return render(request, 'leader/give_up_all.html', data)
