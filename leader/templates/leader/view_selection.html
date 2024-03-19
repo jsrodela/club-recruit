@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'leader/time_config.css' %}?v=2">
+{% endblock %}
+
+{% block module %}
+{{ block.super }}
+{% endblock %}
+
+{% block content %}
+
+<div class="wrap">
+    <h1>가입선택 현황 보기 : {{ club.code }}</h1>
+    <p>이 페이지는 <b>동아리 부장 및 부원</b>만 접근 가능합니다.</p>
+    <b>P: 2차 통과, 선택 대기중 | S: 우리 동아리 선택! | G: 우리 동아리 가입 포기... | 
+        A: 예비후보, 본인에게 미표시 | V: 예비후보, 본인에게 표시(선택 대기중)
+    </b>
+    <hr>
+
+    <table id="viewTable">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>상태</th>
+                <th>학번</th>
+                <th>이름</th>
+                <th>지원서</th>
+                <th>전화번호</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for form in forms %}
+            <tr>
+                <td>{{ form.id }}</td>
+                <td>{{ form.selection }}</td>
+                <td>{{ form.number }}</td>
+                <td>{{ form.name }}</td>
+                <td><a href="/form/leader/{{ form.id }}">보기</a></td>
+                <td>{{ form.phone }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<script>
+    selectNav('club_{{ club.code }}');
+</script>
+{% endblock %}

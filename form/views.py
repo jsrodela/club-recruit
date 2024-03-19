@@ -275,8 +275,7 @@ def select(request, clubname):
     apply_club = ClubModel.objects.get(code=clubname)
 
     try:
-        form = FormModel.objects.get(number=user_id, club=apply_club, first_result='P', second_result='P',
-                                     archive=False)
+        form = FormModel.objects.get(number=user_id, club=apply_club, first_result='P', second_result='P', archive=False)
     except FormModel.DoesNotExist:
         logger.warning(f"User {user_id} tried to select club {clubname}, which is not passed")
         return redirect('/')

@@ -423,6 +423,8 @@ def view_selection(request): # view_time 기반
     forms = FormModel.objects.filter(club=club, archive=False, first_result='P').order_by('number')
     lst = []
     for form in forms:
+        if form.second_result == 'F':
+            continue
         target_user = User.objects.get(id=form.number)
         obj = {
             'selection': form.second_result,
