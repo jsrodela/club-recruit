@@ -277,8 +277,11 @@ def select(request, clubname):
     try:
         form = FormModel.objects.get(number=user_id, club=apply_club, first_result='P', second_result='P', archive=False)
     except FormModel.DoesNotExist:
-        logger.warning(f"User {user_id} tried to select club {clubname}, which is not passed")
-        return redirect('/')
+        try:
+            form = FormModel.objects.get(number=user_id, club=apply_club, first_result='P', second_result='V', archive=False)
+        except FormModel.DoesNotExist:
+            logger.warning(f"User {user_id} tried to select club {clubname}, which is not passed")
+            return redirect('/')
 
     form.second_result = 'S'
     form.save()
@@ -287,11 +290,22 @@ def select(request, clubname):
     if other_form.exists():
         for give_up in other_form:
             give_up.second_result = 'G'
-            for rank_up in FormModel.objects.filter(club=give_up.club, first_result = 'P', second_result = 'A', archive=False):
+            '''for rank_up in FormModel.objects.filter(club=give_up.club, first_result = 'P', second_result = 'A', archive=False):
                 if rank_up.additional_rank == 1:
                     rank_up.second_result = 'V'
                 rank_up.additional_rank -= 1
-                rank_up.save()
+                rank_up.save()'''
+            give_up.save()
+
+    other_form = FormModel.objects.filter(number=user_id, first_result='P', second_result='V', archive=False)
+    if other_form.exists():
+        for give_up in other_form:
+            give_up.second_result = 'G'
+            '''for rank_up in FormModel.objects.filter(club=give_up.club, first_result = 'P', second_result = 'A', archive=False):
+                if rank_up.additional_rank == 1:
+                    rank_up.second_result = 'V'
+                rank_up.additional_rank -= 1
+                rank_up.save()'''
             give_up.save()
 
     form.save()
