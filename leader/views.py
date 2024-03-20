@@ -397,7 +397,7 @@ def additional_result(request):
     additional_form.second_result = 'V'
     additional_form.save()
 
-    logger.info(f"Member {data['user'].id} issued additional_result: {additional_user}")
+    logger.info(f"Member {data['user'].id} issued additional_result for club '{club.code}': {additional_user}")
         
     return redirect('/leader/view_selection')
 
@@ -433,10 +433,15 @@ def second_result_check_user(request):
 
             if form.second_result != 'W' and form.second_result != 'F':
                 return HttpResponse(json.dumps({
-                    'error': f'\'{user_id} {user_name}\' 이미 합격/불합격자로 등록된 학생입니다.'
+                    'error': f'\'{user_id} {user_name}\' 학생은 이미 이 동아리 합격/불합격 명단에 등록되었습니다.'
                 }))
 
             # TimeModel 체크? (면접 봤는지) - 면접 따로 잡아서 봤을수도...
+
+            if FormModel.objects.filter(number=user_id, second_result='S').exists():
+                return HttpResponse(json.dumps({
+                    'error': f'\'{user_id} {user_name}\' 학생은 이미 다른 동아리에 가입했습니다.'
+                }))
 
             return HttpResponse(json.dumps({
                 'user_id': user.id,
