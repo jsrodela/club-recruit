@@ -97,6 +97,16 @@ def club_config(request):
             except User.DoesNotExist:
                 data['error'] = f'{member_id} 계정을 찾을 수 없어요.'
 
+        if 'end' in submit:
+            is_end = submit.get('is_end')
+            if is_end:
+                club.end = True
+                print(True)
+            else:
+                club.end = False
+                print(False)
+            print(is_end)
+
         club.save()
 
     data['club_members'] = User.objects.filter(member_of=club)

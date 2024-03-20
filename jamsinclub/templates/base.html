@@ -20,7 +20,7 @@
 
 
     <link rel="stylesheet" href="{% static 'var.css' %}?v=3">
-    <link rel="stylesheet" href="{% static 'base.css' %}?v=4">
+    <link rel="stylesheet" href="{% static 'base.css' %}?v=5">
     <script src="{% static 'base.js' %}?v=3"></script>
 
 </head>
@@ -46,7 +46,7 @@
                 </ul>
                 <ul>
                     {% for club in clubs %}
-                        <li class="club club_{{ club.code }}" onclick="changeNav('club_{{ club.code }}', '/about/{{ club.code }}');"><img src="{{ club.logo_url }}" width="25"> <p>{{ club.name }}</p></li>
+                        <li class="club club_{{ club.code }} {% if club.end %}end{% endif %}" onclick="changeNav('club_{{ club.code }}', '/about/{{ club.code }}');"><img src="{{ club.logo_url }}" width="25"> <p>{{ club.name }}</p></li>
                     {% endfor %}
                     <!--
                     {% for i in '....................'|make_list %}

@@ -168,6 +168,14 @@
             <input type="submit" value="적용">
             {% csrf_token %}
         </form>
+
+        <form method="post">
+            <h3>모집 종료</h3>
+            <p>모집이 종료되면 지원하기 버튼이 비활성화되고, 동아리 목록에서 맨 밑으로 내려갑니다.</p>
+            <input type="checkbox" name="is_end" {% if club.end %} checked {% endif %}>
+            <input type="submit" value="적용" name="end">
+            {% csrf_token %}
+        </form>
     </div>
 
     <script>

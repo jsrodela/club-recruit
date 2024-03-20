@@ -284,6 +284,11 @@ nav ul li:active {
     opacity: 50%;
 }
 
+nav ul li.end {
+    color: grey;
+    opacity: 70%;
+}
+
 /* 표시되는 화면 */
 .wrapper {
     /* 높이 꽉차게 */

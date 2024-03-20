@@ -13,10 +13,11 @@ def get_data(request):
         pass
 
     clubs = []
-    for club in ClubModel.objects.all().order_by('name'):
+    for club in ClubModel.objects.all().order_by('end', 'name'):
         obj = {
             'name': club.name,
             'code': club.code,
+            'end': club.end
         }
         if club.logo_image is not None:
             obj['logo_url'] = club.logo_image.image.url

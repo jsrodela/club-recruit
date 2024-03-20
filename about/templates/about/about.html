@@ -3,7 +3,7 @@
 
 {% block style %}
     {{ block.super }}
-    <link rel="stylesheet" href="{% static 'about/about.css' %}?v=6">
+    <link rel="stylesheet" href="{% static 'about/about.css' %}?v=7">
 {% endblock %}
 
 {% block module %}
@@ -52,10 +52,12 @@
                 </div>
             </div>
             <div class="right">
-                {% if club.kakao_url %}
-                <button onclick="window.open('{{ club.kakao_url }}', '_blank');" class="submitpage">
-                    지원하기
-                </button>
+                {% if club.end %}
+                    <button class="submitpage end_submit" disabled>모집 종료</button>
+                {% elif club.kakao_url %}
+                    <button onclick="window.open('{{ club.kakao_url }}', '_blank');" class="submitpage">
+                        지원하기
+                    </button>
                 {% else %}
                     <button onclick="changeNav('club_{{ club.code }}', '/form/submit/{{ club.code }}');" class="submitpage">
                         지원하기
