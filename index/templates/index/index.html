@@ -63,7 +63,21 @@
                                 {% if form.second_result == 'P' %}
                                     <p class="pass">2차 합격</p>
                                 {% elif form.second_result == 'F' %}
-                                    <p class="fail">최초 불합격</p>
+                                    <p class="fail">
+                                    {% if status.current == 'SECOND_RESULT' %}
+                                        최초 불합격
+                                    {% elif status.current == 'ADD_FIRST_RESULT' %}
+                                        1차 추합 불합격
+                                    {% elif status.current == 'ADD_SECOND_RESULT' %}
+                                        2차 추합 불합격
+                                    {% elif status.current == 'ADD_THIRD_RESULT' %}
+                                        3차 추합 불합격
+                                    {% elif status.current == 'ADD_FOURTH_RESULT' %}
+                                        4차 추합 불합격
+                                    {% else %}
+                                        2차 불합격
+                                    {% endif %}
+                                    </p>
                                 {% elif form.second_result == 'S' %}
                                     <p class="select">가입 확정</p>
                                 {% elif form.second_result == 'G' %}
