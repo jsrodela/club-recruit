@@ -12,7 +12,7 @@ sudo apt upgrade
 
 2. git clone
 ```shell
-git clone https://github.com/RoDeLa6/club-recruit.git
+git clone https://github.com/jsrodela/club-recruit.git
 cd club-recruit
 ```
 
