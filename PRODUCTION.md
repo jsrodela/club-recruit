@@ -149,7 +149,7 @@ sudo nano /etc/nginx/sites-available/jamsinclub.conf
 ```
 server {
   listen 80;
-  server_name jamsin.ga;
+  server_name jamsin.ga; #jamsin.ga 대신 접속하는 주소를 넣어야한다.
   charset utf-8;
   client_max_body_size 128M;
 
@@ -177,6 +177,7 @@ server {
 ```shell
 # 설정 연동
 sudo ln -s /etc/nginx/sites-available/jamsinclub.conf /etc/nginx/sites-enabled/
+# -f 옵션을 사용하면 덮어쓰기 할 수 있다 (File exists 오류시 사용)
 
 # 설정 테스트
 sudo nginx -t
