@@ -12,7 +12,7 @@ sudo apt upgrade
 
 2. git clone
 ```shell
-git clone https://github.com/RoDeLa6/club-recruit.git
+git clone https://github.com/jsrodela/club-recruit.git
 cd club-recruit
 ```
 
@@ -172,11 +172,13 @@ server {
   }
 }
 ```
+ - 참고: jamsin.ga 대신 접속할 주소를 넣어야한다
 
 3. 설정 적용
 ```shell
 # 설정 연동
 sudo ln -s /etc/nginx/sites-available/jamsinclub.conf /etc/nginx/sites-enabled/
+# -f 옵션을 사용하면 덮어쓰기 할 수 있다 (File exists 오류시 사용)
 
 # 설정 테스트
 sudo nginx -t
