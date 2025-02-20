@@ -211,3 +211,24 @@ python manage.py createsuperuser
 # 장고 출력 보기
 nano /var/log/gunicorn.error.log
 ```
+
+### Extform 스크립트
+```shell
+function setup() {
+    ExtForm.library__registerFormListSheet_asActiveSpreadsheet();
+    ExtForm.library__registerLogSheet_asActiveSpreadsheet();
+}
+
+function doGet(e) {
+    return ExtForm.doGet(e);
+}
+
+function logSheet() {
+  while(1) {
+    SpreadsheetApp.getActiveSpreadsheet().deleteActiveSheet
+  }
+  ExtForm.kr__언어를_한국어로_설정하기
+  ExtForm.kr__이_스프레드시트에서_설문지_목록_생성하기
+  ExtForm.kr__이_스프레드시트에서_로그_시트_생성하기
+}
+```
