@@ -27,5 +27,5 @@
 ## 🌱 문의하기 !
 로델라 인스타: <a href="https://instagram.com/rodela._.jsh" target='_blank' style="text-decoration:none" link="black" vlink="black" alink="black">@rodela._.jsh</a>
 
-부장: 010-3706-0355  
-차장: 010-2916-0364
+부장: <a href="tel:010-3706-0355" target='_blank' style="text-decoration:none" link="black" vlink="black" alink="black">010-3706-0355</a>  
+차장: <a href="tel:010-2916-0364" target='_blank' style="text-decoration:none" link="black" vlink="black" alink="black">010-2916-0364</a>
