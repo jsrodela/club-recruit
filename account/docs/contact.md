@@ -2,8 +2,8 @@
 동아리 지원 사이트 이용과 관련하여 문의할 수 있습니다.
 
 ### 문의 방법
-* **인스타그램 DM**: 로델라 [@rodela._.jsh](https://www.instagram.com/rodela._.jsh)나 부장 개인 [@yhs08450](https://www.instagram.com/yhs08450)으로 디엠! (※ 개인디엠을 더 빨리봄!)
-* 혹은 등교일 중 **2학년 3반 송이현** 에게 찾아와주세요.
+* **인스타그램 DM**: 로델라 [@jsrodela](https://www.instagram.com/jsrodela)나 부장 개인 [@0h._shx](https://www.instagram.com/0h._shx)으로 디엠! 
+* 혹은 등교일 중 **2학년 2반 오성훈** 에게 찾아와주세요.
 
 
 ### 비밀번호를 잊어버렸나요?
